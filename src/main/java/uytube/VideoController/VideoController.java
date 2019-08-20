@@ -1,4 +1,4 @@
-package VideoController;
+package uytube.VideoController;
 
 public class VideoController implements IVideo{
 

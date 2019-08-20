@@ -1,4 +1,4 @@
-package ListaController;
+package uytube.ListaController;
 
 public interface ILista {
 

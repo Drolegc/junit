@@ -1,5 +1,5 @@
-package CategoriaController;
-import CategoriaController.ICategoria;
+package uytube.CategoriaController;
+import uytube.CategoriaController.ICategoria;
 public class CategoriaController implements ICategoria{
 
 	public void altaCategoria() {

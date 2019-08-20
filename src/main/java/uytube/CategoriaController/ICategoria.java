@@ -1,4 +1,4 @@
-package CategoriaController;
+package uytube.CategoriaController;
 
 public interface ICategoria {
 	

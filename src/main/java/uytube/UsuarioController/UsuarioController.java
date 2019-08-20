@@ -1,4 +1,4 @@
-package UsuarioController;
+package uytube.UsuarioController;
 
 public class UsuarioController implements IUsuario{
 

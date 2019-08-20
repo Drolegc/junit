@@ -1,4 +1,4 @@
-package VideoController;
+package uytube.VideoController;
 
 public interface IVideo {
 	public void altaVideo();
