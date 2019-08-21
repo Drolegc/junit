@@ -10,24 +10,8 @@ import uytube.CategoriaController.ICategoria;
 import uytube.models.Categoria;
 import uytube.models.Usuario;
 import java.util.List;
-import java.util.GregorianCalendar;
 public class app {
-	private static EntityManager manager;
-	private static EntityManagerFactory emf;
 	public static void main(String[] args) {
-		emf = Persistence.createEntityManagerFactory("uytube");
-		manager = emf.createEntityManager();
-		List<Usuario> usuarios = (List<Usuario>) manager.createQuery("From Usuario").getResultList();
-		System.out.println("hay" + usuarios.size() +" usuarios");
-		for(Usuario user:usuarios) {
-			System.out.println(user.getNombre());
-		}
-		
-		ICategoria controllerCat = new CategoriaController(); 
-		
-		controllerCat.altaCategoria("gente callendo");
-		controllerCat.listarCategoriasExistentes();
-		System.out.println("Fin");
 	}
 
 }

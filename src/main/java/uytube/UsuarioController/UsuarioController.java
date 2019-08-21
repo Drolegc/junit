@@ -1,5 +1,6 @@
 package uytube.UsuarioController;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -32,9 +33,10 @@ public class UsuarioController implements IUsuario{
 		
 	}
 
-	public void listaUsuarios() {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Usuario> listaUsuarios() {
+		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) manager.createQuery("From Usuario").getResultList();
+		System.out.println("hay" + usuarios.size() +" usuarios");
+		return usuarios;
 	}
 
 	public void seguirUsuario() {

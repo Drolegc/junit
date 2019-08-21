@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import uytube.views.Inicio;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -38,6 +41,10 @@ public class UserMain extends JPanel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		JButton btnNewButton = new JButton("Agregar usuario");
@@ -55,7 +62,25 @@ public class UserMain extends JPanel {
 		add(btnNewButton_2, "4, 12");
 		
 		JButton btnNewButton_1 = new JButton("Listar usuarios");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Listar listar = new Listar();
+				frame.setContentPane(listar);
+				frame.revalidate();				
+				
+			}
+		});
 		add(btnNewButton_1, "4, 14");
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inicio inicio = new Inicio(frame);
+				frame.setContentPane(inicio);
+				frame.revalidate();				
+			}
+		});
+		add(btnVolver, "4, 18");
 
 	}
 
