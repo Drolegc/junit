@@ -1,32 +1,34 @@
 package uytube;
 
+import java.util.GregorianCalendar;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 
+import Manager.Manager;
 import uytube.CategoriaController.CategoriaController;
 import uytube.CategoriaController.ICategoria;
-import uytube.models.Categoria;
+import uytube.UsuarioController.IUsuario;
+import uytube.UsuarioController.UsuarioController;
 import uytube.models.Usuario;
-import java.util.List;
-import java.util.GregorianCalendar;
+
 public class app {
-	private static EntityManager manager;
-	private static EntityManagerFactory emf;
+
 	public static void main(String[] args) {
-		emf = Persistence.createEntityManagerFactory("uytube");
-		manager = emf.createEntityManager();
-		List<Usuario> usuarios = (List<Usuario>) manager.createQuery("From Usuario").getResultList();
-		System.out.println("hay" + usuarios.size() +" usuarios");
-		for(Usuario user:usuarios) {
-			System.out.println(user.getNombre());
-		}
 		
-		ICategoria controllerCat = new CategoriaController(); 
+		/*List<Usuario> usuarios = (List<Usuario>) manager.createQuery("From Usuario").getResultList();*/
 		
-		controllerCat.altaCategoria("gente callendo");
+		Manager mdb = Manager.getInstance();
+		
+		ICategoria controllerCat = new CategoriaController();
+		IUsuario controllerUser = new UsuarioController();
+		
+		controllerCat.altaCategoria("Pistando como un campeon");
 		controllerCat.listarCategoriasExistentes();
+		
+		controllerUser.crearUsuario(new Usuario("drol33","leandro","gonz","d@gg",new GregorianCalendar(1997,2,27).getTime(),"drole.img"));
 		System.out.println("Fin");
 	}
 

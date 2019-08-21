@@ -7,20 +7,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+
+import Manager.Manager;
 import uytube.models.Usuario;
 
 public class UsuarioController implements IUsuario{
 	private static EntityManager manager;
 	private static EntityManagerFactory emf;
+	
 	public UsuarioController() {
-		emf = Persistence.createEntityManagerFactory("uytube");
-		manager = emf.createEntityManager();
 	}
+	
 	public void crearUsuario(Usuario usuario) {
 		try {
-			manager.getTransaction().begin();
-			manager.persist(usuario);
-			manager.getTransaction().commit();
+			Manager mng = Manager.getInstance();
+			mng.startTransaccion(usuario);
+			JOptionPane.showMessageDialog(null, "Usuario creado");
 			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "El usuario ya existe");
@@ -37,7 +39,7 @@ public class UsuarioController implements IUsuario{
 		
 	}
 
-	public void seguirUsuario() {
+	public void seguirUsuario(String name1,String name2) {
 		// TODO Auto-generated method stub
 		
 	}
