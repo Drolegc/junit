@@ -30,19 +30,11 @@ public class Usuario {
 	
 	@Column(name = "img")
 	private String img;
-	
+		
 	public Usuario() {
 		
 	}
 	
-	public Usuario (String nickname, String nombre, String apellido, String correo, Date fnacimiento, String img) {
-		this.nickname = nickname;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.correo = correo;
-		this.fnacimiento = fnacimiento;
-		this.img = img;
-	}
 
 	public String getNickname() {
 		return nickname;

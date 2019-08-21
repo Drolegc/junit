@@ -1,5 +1,7 @@
 package uytube.models;
 
+import java.util.List;
+
 import javax.persistence.*;
 @Entity
 @Table(name = "Lista")
@@ -12,7 +14,20 @@ public class Lista {
 	private Boolean privado;
 	@Column( name = "categoria")
 	private String categoria;
-	
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="nombre")
+	private List<Video> videos;	
+	public List<Video> getVideos() {
+		return videos;
+	}
+	public Lista(String nombre,boolean privado,String categoria) {
+		// TODO Auto-generated constructor stub
+	}
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
+	}
+
 	public Lista(String nombre,Boolean privado,String categoria) {
 		this.nombre = nombre;
 		this.privado = privado;
