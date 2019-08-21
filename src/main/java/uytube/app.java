@@ -28,7 +28,11 @@ public class app {
 		controllerCat.altaCategoria("Pistando como un campeon");
 		controllerCat.listarCategoriasExistentes();
 		
-		controllerUser.crearUsuario(new Usuario("drol33","leandro","gonz","d@gg",new GregorianCalendar(1997,2,27).getTime(),"drole.img"));
+//		controllerUser.crearUsuario(new Usuario("sa","leandro","gonz","d@gg",new GregorianCalendar(1997,2,27).getTime(),"drole.img"));
+//		controllerUser.seguirUsuario("drol33", "sa");
+		controllerUser.listUsuariosSeguidos("drol33");
+		controllerUser.dejarDeSeguir("drol33", "sa");
+		controllerUser.listUsuariosSeguidos("drol33");
 		System.out.println("Fin");
 	}
 
