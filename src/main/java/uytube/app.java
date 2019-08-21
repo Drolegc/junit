@@ -4,6 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+
+import uytube.CategoriaController.CategoriaController;
+import uytube.CategoriaController.ICategoria;
+import uytube.models.Categoria;
 import uytube.models.Usuario;
 import java.util.List;
 import java.util.GregorianCalendar;
@@ -18,6 +22,12 @@ public class app {
 		for(Usuario user:usuarios) {
 			System.out.println(user.getNombre());
 		}
+		
+		ICategoria controllerCat = new CategoriaController(); 
+		
+		controllerCat.altaCategoria("gente callendo");
+		controllerCat.listarCategoriasExistentes();
+		System.out.println("Fin");
 	}
 
 }
