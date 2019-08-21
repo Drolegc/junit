@@ -23,7 +23,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.awt.Window;
-import uytube.views.Inicio;
+import uytube.views.usuarios.UserMain;
 public class Alta extends JPanel {
 
 	private JTextField nickname;
@@ -33,9 +33,9 @@ public class Alta extends JPanel {
 	private JTextField correo;
 	private JDateChooser f_nac;
 	private JFrame frame;
-	Inicio inicio;
+	private UserMain Main;
 	public Alta(JFrame f) {
-		inicio = new Inicio(f);
+		Main = new UserMain(f);
 		this.frame = f;
 		setLayout(null);
 		nickname = new JTextField();
@@ -104,7 +104,7 @@ public class Alta extends JPanel {
 				UsuarioController Controlerusuario = new UsuarioController();
 				Controlerusuario.crearUsuario(modelUsuario);
 				JOptionPane.showMessageDialog(null, "Usuario creado");
-				frame.setContentPane(inicio);
+				frame.setContentPane(Main);
 				frame.revalidate();
 			}
 		});
@@ -114,7 +114,7 @@ public class Alta extends JPanel {
 		JButton btnCancelar = new JButton("cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.setContentPane(inicio);
+				frame.setContentPane(Main);
 				frame.revalidate();
 			}
 		});

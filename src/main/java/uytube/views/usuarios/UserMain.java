@@ -1,28 +1,24 @@
-package uytube.views;
+package uytube.views.usuarios;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-import uytube.models.Usuario;
-import uytube.views.usuarios.UserMain;
-public class Inicio extends JPanel {
+public class UserMain extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
 	JFrame frame;
-	public Inicio(JFrame f) {
+	public UserMain(JFrame f) {
+		frame = f;
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
@@ -40,28 +36,26 @@ public class Inicio extends JPanel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JButton btnUsuarios = new JButton("Usuarios");
-		btnUsuarios.addActionListener(new ActionListener() {
+		JButton btnNewButton = new JButton("Agregar usuario");
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserMain main = new UserMain(frame);
-				frame.setContentPane(main);
+				Alta alta = new Alta(frame);
+				frame.setContentPane(alta);
 				frame.revalidate();
 				
 			}
 		});
-		add(btnUsuarios, "4, 6");
+		add(btnNewButton, "4, 10");
 		
-		JButton btnVideos = new JButton("Videos");
-		add(btnVideos, "4, 8");
+		JButton btnNewButton_2 = new JButton("Consultar usuario");
+		add(btnNewButton_2, "4, 12");
 		
-		JButton btnCategorias = new JButton("Categorias");
-		add(btnCategorias, "4, 10");
-		
-		JButton btnListas = new JButton("Listas");
-		add(btnListas, "4, 12");
-		frame = f;
+		JButton btnNewButton_1 = new JButton("Listar usuarios");
+		add(btnNewButton_1, "4, 14");
 
 	}
 

@@ -13,10 +13,6 @@ public class app {
 	public static void main(String[] args) {
 		emf = Persistence.createEntityManagerFactory("uytube");
 		manager = emf.createEntityManager();
-		Usuario u = new Usuario("brunod","bruno","bruno","bruno", new GregorianCalendar(1996,2,27).getTime(),"bruno");
-		manager.getTransaction().begin();
-		manager.persist(u);
-		manager.getTransaction().commit();
 		List<Usuario> usuarios = (List<Usuario>) manager.createQuery("From Usuario").getResultList();
 		System.out.println("hay" + usuarios.size() +" usuarios");
 		for(Usuario user:usuarios) {
