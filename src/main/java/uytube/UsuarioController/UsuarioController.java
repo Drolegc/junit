@@ -8,25 +8,36 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
-
-import Manager.Manager;
+import org.hibernate.Transaction;
+import org.hibernate.Session;
 import uytube.models.Usuario;
-
+import uytube.models.HibernateUtil;
 public class UsuarioController implements IUsuario{
-	private Manager mng;
-	
+	private Session session;
+	private Transaction transaction;
 	public UsuarioController() {
-		mng = Manager.getInstance();
 	}
 	
 	public void crearUsuario(Usuario usuario) {
-		try {
-			mng.startTransaccion(usuario);
-			JOptionPane.showMessageDialog(null, "Usuario creado");
-			
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "El usuario ya existe");
-		}
+		this.session = null;
+		this.transaction = null;
+	    try {
+	        session = HibernateUtil.getSessionFactory().openSession();
+	        transaction = session.beginTransaction();
+	        if(!transaction.isActive())
+	        	transaction.begin();
+	        session.saveOrUpdate("Usuario", usuario);
+	        transaction.commit();
+	      } catch (Exception e) {
+	        if (transaction != null) {
+	          transaction.rollback();
+	        }
+	        e.printStackTrace();
+	      } finally {
+	        if (session != null) {
+	          session.close();
+	        }
+	      }		
 	}
 
 	public void consultaUsuario(String nickname) {
@@ -35,9 +46,40 @@ public class UsuarioController implements IUsuario{
 	}
 
 	public ArrayList<Usuario> listaUsuarios() {
-		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) manager.createQuery("From Usuario").getResultList();
-		System.out.println("hay" + usuarios.size() +" usuarios");
+		this.session = null;
+		ArrayList<Usuario> usuarios = null;
+	    try {
+	        session = HibernateUtil.getSessionFactory().openSession();
+	        usuarios = (ArrayList<Usuario>)session.createQuery("From Usuario").getResultList();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	      } finally {
+	        if (session != null) {
+	          session.close();
+	        }
+	      }		
 		return usuarios;
+	}
+	public void modificarUsuario(Usuario usuario) {
+		this.session = null;
+		this.transaction = null;
+	    try {
+	        session = HibernateUtil.getSessionFactory().openSession();
+	        transaction = session.beginTransaction();
+	        if(!transaction.isActive())
+	        	transaction.begin();
+	        session.saveOrUpdate("Usuario", usuario);
+	        transaction.commit();
+	      } catch (Exception e) {
+	        if (transaction != null) {
+	          transaction.rollback();
+	        }
+	        e.printStackTrace();
+	      } finally {
+	        if (session != null) {
+	          session.close();
+	        }
+	      }		
 	}
 
 	public void seguirUsuario(String name1,String name2) {

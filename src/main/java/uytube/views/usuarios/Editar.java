@@ -28,7 +28,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
-public class Alta extends JPanel {
+public class Editar extends JPanel {
 
 	private JTextField nickname;
 	private JTextField nombre;
@@ -37,9 +37,7 @@ public class Alta extends JPanel {
 	private JTextField correo;
 	private JDateChooser f_nac;
 	private JFrame frame;
-	private UserMain Main;
-	public Alta(JFrame f) {
-		Main = new UserMain(f);
+	public Editar(JFrame f, Usuario user) {
 		this.frame = f;
 		setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("30px"),
@@ -55,6 +53,8 @@ public class Alta extends JPanel {
 				RowSpec.decode("19px"),
 				FormSpecs.UNRELATED_GAP_ROWSPEC,
 				RowSpec.decode("13px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.UNRELATED_GAP_ROWSPEC,
 				RowSpec.decode("19px"),
 				FormSpecs.UNRELATED_GAP_ROWSPEC,
@@ -62,49 +62,58 @@ public class Alta extends JPanel {
 				FormSpecs.UNRELATED_GAP_ROWSPEC,
 				RowSpec.decode("19px"),
 				RowSpec.decode("52px"),
-				RowSpec.decode("21px"),}));
-		nickname = new JTextField();
-		add(nickname, "2, 8, fill, top");
-		nickname.setColumns(10);
-		
+				RowSpec.decode("21px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 		JLabel lblNickname = new JLabel("Nickname");
-		add(lblNickname, "2, 6, left, top");
-		
-		nombre = new JTextField();
-		add(nombre, "2, 4, fill, top");
-		nombre.setColumns(10);
-		
-		apellido = new JTextField();
-		apellido.setColumns(10);
-		add(apellido, "4, 4, 3, 1, fill, top");
-		
-		img = new JTextField();
-		img.setColumns(10);
-		add(img, "2, 12, fill, top");
-		
-		correo = new JTextField();
-		correo.setColumns(10);
-		add(correo, "4, 8, 3, 1, fill, top");
-		
-		JLabel lblNombre = new JLabel("Nombre");
-		add(lblNombre, "2, 2, left, top");
-		
-		JLabel label = new JLabel("Apellido");
-		add(label, "4, 2, left, top");
-		
-		JLabel label_1 = new JLabel("Img (Opcional)");
-		add(label_1, "2, 10, left, top");
+		add(lblNickname, "2, 2, left, top");
 		
 		JLabel label_2 = new JLabel("Correo");
-		add(label_2, "4, 6, left, top");
+		add(label_2, "4, 2, left, top");
+		this.nickname = new JTextField();
+		add(nickname, "2, 4, fill, top");
+		this.nickname.setColumns(10);
+		this.nickname.setEditable(false);
+		this.nickname.setText(user.getNickname());
+		
+		this.correo = new JTextField();
+		this.correo.setColumns(10);
+		this.correo.setText(user.getCorreo());
+		add(correo, "4, 4, 3, 1, fill, top");
+		
+		JLabel lblNombre = new JLabel("Nombre");
+		add(lblNombre, "2, 8, left, top");
+		
+		JLabel label = new JLabel("Apellido");
+		add(label, "4, 8, left, top");
+		
+		this.nombre = new JTextField();
+		add(nombre, "2, 10, fill, top");
+		this.nombre.setColumns(10);
+		this.nombre.setText(user.getNombre());
+		this.apellido = new JTextField();
+		this.apellido.setColumns(10);
+		add(apellido, "4, 10, 3, 1, fill, top");
+		this.apellido.setText(user.getApellido());
+		
+		this.img = new JTextField();
+		this.img.setColumns(10);
+		this.img.setText(user.getImg());
+		add(img, "2, 14, fill, top");
+		
+		JLabel label_1 = new JLabel("Img (Opcional)");
+		add(label_1, "2, 12, left, top");
 		
 		JLabel label_3 = new JLabel("F. Nacimiento");
-		add(label_3, "4, 10, left, top");
+		add(label_3, "4, 12, left, top");
 		
 		f_nac = new JDateChooser();
-		add(f_nac, "4, 12, 3, 1, fill, top");
+		f_nac.setDate(user.getFnacimiento());
+		add(f_nac, "4, 14, 3, 1, fill, top");
 		
-		JButton btnAgregar = new JButton("Agregar");
+		JButton btnAgregar = new JButton("Editar");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Usuario modelUsuario = new Usuario();
@@ -115,9 +124,10 @@ public class Alta extends JPanel {
 				modelUsuario.setFnacimiento(f_nac.getDate());
 				modelUsuario.setImg(img.getText());
 				UsuarioController Controlerusuario = new UsuarioController();
-				Controlerusuario.crearUsuario(modelUsuario);
-				JOptionPane.showMessageDialog(null, "Usuario creado");
-				frame.setContentPane(Main);
+				Controlerusuario.modificarUsuario(modelUsuario);
+				Listar listar = new Listar(frame);
+				JOptionPane.showMessageDialog(frame, "Usuario Editado");
+				frame.setContentPane(listar);
 				frame.revalidate();
 			}
 		});
@@ -125,13 +135,13 @@ public class Alta extends JPanel {
 		JButton btnCancelar = new JButton("cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.setContentPane(Main);
+				Listar listar = new Listar(frame);				
+				frame.setContentPane(listar);
 				frame.revalidate();
 			}
 		});
-		add(btnCancelar, "2, 14, default, top");
-		add(btnAgregar, "4, 14, 3, 1, default, top");
-
+		add(btnCancelar, "2, 16, default, top");
+		add(btnAgregar, "4, 16, 3, 1, default, top");
 	}
 
 }

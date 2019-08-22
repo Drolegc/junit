@@ -1,48 +1,64 @@
 package uytube;
 
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.CardLayout;
+import javax.swing.JButton;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.BoxLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.net.URL;
+import java.awt.event.ActionEvent;
 
-import Manager.Manager;
-import uytube.CategoriaController.CategoriaController;
-import uytube.CategoriaController.ICategoria;
-import uytube.ListaController.ILista;
-import uytube.ListaController.ListaController;
-import uytube.UsuarioController.IUsuario;
 import uytube.UsuarioController.UsuarioController;
-import uytube.models.Usuario;
+import uytube.views.Inicio;
+import uytube.views.Window;
 
-public class app {
-
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import com.toedter.calendar.JDateChooser;
+import uytube.views.usuarios.Alta;
+public class app extends JFrame{
+	private static EntityManager manager;
+	private static EntityManagerFactory emf;
 	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Window frame = new Window();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public app() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 500, 400);
+		Inicio inicio = new Inicio(this);
+		setResizable(false);
+		add(inicio);
+	}
+	public void goToinit() {
 		
-		/*List<Usuario> usuarios = (List<Usuario>) manager.createQuery("From Usuario").getResultList();*/
-		
-		Manager mdb = Manager.getInstance();
-		
-		ICategoria controllerCat = new CategoriaController();
-		IUsuario controllerUser = new UsuarioController();
-		ILista controllerList = new ListaController();
-		
-		
-		
-		controllerCat.altaCategoria("Pistando como un campeon");
-		controllerCat.listarCategoriasExistentes();
-		
-		
-		controllerUser.crearUsuario(new Usuario("lea","leandro","gonz","d@gg",new GregorianCalendar(1997,2,27).getTime(),"drole.img"));
-/*		controllerUser.seguirUsuario("drol33", "sa");
-		controllerUser.listUsuariosSeguidos("drol33");
-		controllerUser.dejarDeSeguir("drol33", "sa");
-		controllerUser.listUsuariosSeguidos("drol33");
-		*/
-		
-		controllerList.crearLista("Default");
-		System.out.println("Fin");
 	}
 
 }

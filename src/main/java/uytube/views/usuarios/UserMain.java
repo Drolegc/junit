@@ -64,7 +64,7 @@ public class UserMain extends JPanel {
 		JButton btnNewButton_1 = new JButton("Listar usuarios");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Listar listar = new Listar();
+				Listar listar = new Listar(frame);
 				frame.setContentPane(listar);
 				frame.revalidate();				
 				
