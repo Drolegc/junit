@@ -62,6 +62,22 @@ public class UsuarioController implements IUsuario{
 	      }		
 		return usuarios;
 	}
+	public ArrayList<Usuario> consultarUsuario(String nickname) {
+		this.session = null;
+		System.out.println(nickname);
+		ArrayList<Usuario> usuarios = null;
+	    try {
+	        session = HibernateUtil.getSessionFactory().openSession();
+	        usuarios = (ArrayList<Usuario>)session.createQuery("From Usuario where nickname=:nickname").setParameter("nickname", nickname).getResultList();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	      } finally {
+	        if (session != null) {
+	          session.close();
+	        }
+	      }		
+		return usuarios;
+	}	
 	public void modificarUsuario(Usuario usuario) {
 		this.session = null;
 		this.transaction = null;

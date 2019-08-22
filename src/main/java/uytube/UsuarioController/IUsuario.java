@@ -1,5 +1,6 @@
 package uytube.UsuarioController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uytube.models.Usuario;
@@ -7,7 +8,7 @@ import uytube.models.Usuario;
 public interface IUsuario {
 	
 	public void crearUsuario(Usuario usuario);
-	public void consultaUsuario(String nickname);
+	public ArrayList<Usuario> consultarUsuario(String nickname);
 	public List<Usuario> listaUsuarios();
 	
 	public void listUsuariosSeguidos(String name);

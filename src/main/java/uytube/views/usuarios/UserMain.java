@@ -59,6 +59,14 @@ public class UserMain extends JPanel {
 		add(btnNewButton, "4, 10");
 		
 		JButton btnNewButton_2 = new JButton("Consultar usuario");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Buscar buscar = new Buscar();
+				Frame.frame.setContentPane(buscar);
+				Frame.frame.revalidate();				
+				
+			}
+		});
 		add(btnNewButton_2, "4, 12");
 		
 		JButton btnNewButton_1 = new JButton("Listar usuarios");
