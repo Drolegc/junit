@@ -9,6 +9,8 @@
   	<class>uytube.models.Lista</class>
   	<class>uytube.models.Usuario</class>
   	<class>uytube.models.Video</class>
+  	<class>uytube.models.Comentario</class>
+  	<class>uytube.models.Canal</class>
     <properties>
         <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
         <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/test" />
