@@ -35,6 +35,9 @@ public class Usuario {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Usuario> usuariosSeguidos;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Canal canal;
+	
 	public Usuario() {
 		
 	}
@@ -46,6 +49,8 @@ public class Usuario {
 		this.correo = correo;
 		this.fnacimiento = fnacimiento;
 		this.img = img;
+		
+		this.canal = new Canal(nombre,"Mi primer canal");
 	}
 	
 	public List<Usuario> getusuariosSeguidos(){

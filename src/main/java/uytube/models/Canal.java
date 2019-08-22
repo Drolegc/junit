@@ -17,10 +17,13 @@ public class Canal {
 	@Id
 	@Column(name = "nombre")
 	private String nombre;
+	
 	@Column(name = "descripcion")
 	private String descripcion;
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Lista> listasReproduccion;
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -49,5 +52,10 @@ public class Canal {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.listasReproduccion = new ArrayList<Lista>();
+	}
+	
+	public void addLista(Lista l) {
+		this.listasReproduccion.add(l);
+		System.out.println("Nueva lista agregada");
 	}
 }
