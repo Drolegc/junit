@@ -23,7 +23,7 @@ public class Inicio extends JPanel {
 	 * Create the panel.
 	 */
 	JFrame frame;
-	public Inicio(JFrame f) {
+	public Inicio() {
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
@@ -46,9 +46,9 @@ public class Inicio extends JPanel {
 		JButton btnUsuarios = new JButton("Usuarios");
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserMain main = new UserMain(frame);
-				frame.setContentPane(main);
-				frame.revalidate();
+				UserMain main = new UserMain();
+				Frame.frame.setContentPane(main);
+				Frame.frame.revalidate();
 				
 			}
 		});
@@ -60,17 +60,15 @@ public class Inicio extends JPanel {
 		JButton btnCategorias = new JButton("Categorias");
 		btnCategorias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				main categorias = new main(frame);
-				frame.setContentPane(categorias);
-				frame.validate();				
+				main categorias = new main();
+				Frame.frame.setContentPane(categorias);
+				Frame.frame.validate();				
 			}
 		});
 		add(btnCategorias, "4, 10");
 		
 		JButton btnListas = new JButton("Listas");
 		add(btnListas, "4, 12");
-		frame = f;
-
 	}
 
 }

@@ -11,6 +11,7 @@ import com.toedter.calendar.JDateChooser;
 
 import uytube.UsuarioController.UsuarioController;
 import uytube.models.Usuario;
+import uytube.views.Frame;
 import uytube.views.Inicio;
 
 import java.awt.GridBagConstraints;
@@ -36,9 +37,7 @@ public class Editar extends JPanel {
 	private JTextField img;
 	private JTextField correo;
 	private JDateChooser f_nac;
-	private JFrame frame;
-	public Editar(JFrame f, Usuario user) {
-		this.frame = f;
+	public Editar(Usuario user) {
 		setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("30px"),
 				ColumnSpec.decode("148px"),
@@ -125,19 +124,19 @@ public class Editar extends JPanel {
 				modelUsuario.setImg(img.getText());
 				UsuarioController Controlerusuario = new UsuarioController();
 				Controlerusuario.modificarUsuario(modelUsuario);
-				Listar listar = new Listar(frame);
-				JOptionPane.showMessageDialog(frame, "Usuario Editado");
-				frame.setContentPane(listar);
-				frame.revalidate();
+				Listar listar = new Listar();
+				JOptionPane.showMessageDialog(Frame.frame, "Usuario Editado");
+				Frame.frame.setContentPane(listar);
+				Frame.frame.revalidate();
 			}
 		});
 		
 		JButton btnCancelar = new JButton("cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Listar listar = new Listar(frame);				
-				frame.setContentPane(listar);
-				frame.revalidate();
+				Listar listar = new Listar();				
+				Frame.frame.setContentPane(listar);
+				Frame.frame.revalidate();
 			}
 		});
 		add(btnCancelar, "2, 16, default, top");

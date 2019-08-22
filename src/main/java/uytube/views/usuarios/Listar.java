@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import uytube.models.Usuario;
+import uytube.views.Frame;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
@@ -36,15 +38,14 @@ public class Listar extends JPanel {
 	private JTable table_1;
 	private JFrame frame;
 	private Usuario user;
-	public Listar(JFrame f) {
+	public Listar() {
 		setLayout(null);
-		frame = f;
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserMain main = new UserMain(frame);
-				frame.setContentPane(main);
-				frame.revalidate();				
+				UserMain main = new UserMain();
+				Frame.frame.setContentPane(main);
+				Frame.frame.revalidate();				
 			}
 		});
 		btnVolver.setBounds(241, 269, 85, 21);
@@ -75,7 +76,7 @@ public class Listar extends JPanel {
 		JButton btnEditarUsuario = new JButton("Editar usuario");
 		btnEditarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Editar editar = new Editar(f, user);
+				Editar editar = new Editar(user);
 				frame.setContentPane(editar);
 				frame.revalidate();
 

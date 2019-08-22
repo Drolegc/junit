@@ -11,6 +11,7 @@ import com.toedter.calendar.JDateChooser;
 
 import uytube.UsuarioController.UsuarioController;
 import uytube.models.Usuario;
+import uytube.views.Frame;
 import uytube.views.Inicio;
 
 import java.awt.GridBagConstraints;
@@ -36,11 +37,9 @@ public class Alta extends JPanel {
 	private JTextField img;
 	private JTextField correo;
 	private JDateChooser f_nac;
-	private JFrame frame;
 	private UserMain Main;
-	public Alta(JFrame f) {
-		Main = new UserMain(f);
-		this.frame = f;
+	public Alta() {
+		Main = new UserMain();
 		setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("30px"),
 				ColumnSpec.decode("148px"),
@@ -117,16 +116,16 @@ public class Alta extends JPanel {
 				UsuarioController Controlerusuario = new UsuarioController();
 				Controlerusuario.crearUsuario(modelUsuario);
 				JOptionPane.showMessageDialog(null, "Usuario creado");
-				frame.setContentPane(Main);
-				frame.revalidate();
+				Frame.frame.setContentPane(Main);
+				Frame.frame.revalidate();
 			}
 		});
 		
 		JButton btnCancelar = new JButton("cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.setContentPane(Main);
-				frame.revalidate();
+				Frame.frame.setContentPane(Main);
+				Frame.frame.revalidate();
 			}
 		});
 		add(btnCancelar, "2, 14, default, top");

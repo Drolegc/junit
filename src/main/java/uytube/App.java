@@ -28,21 +28,21 @@ import java.awt.event.ActionEvent;
 
 import uytube.UsuarioController.UsuarioController;
 import uytube.models.HibernateUtil;
+import uytube.views.Frame;
 import uytube.views.Inicio;
-import uytube.views.Window;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
 import uytube.views.usuarios.Alta;
 import org.hibernate.Session;
-public class app extends JFrame{
+public class App extends JFrame{
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Window frame = new Window();
-					frame.setVisible(true);
+					App frame = new App();
+					frame.setVisible(true);					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,12 +53,13 @@ public class app extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public app() {
-		
+	public App() {
+		Frame.frame = this;		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
-		Inicio inicio = new Inicio(this);
+		Inicio inicio = new Inicio();
 		setResizable(false);
+		setVisible(true);
 		add(inicio);
 	}
 	public void goToinit() {

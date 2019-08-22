@@ -5,6 +5,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import uytube.views.Frame;
 import uytube.views.Inicio;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -15,14 +16,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class main extends JPanel {
- private JFrame controlFrame;
  private Inicio inicio;
 	/**
 	 * Create the panel.
 	 */
-	public main(JFrame f) {
-		inicio = new Inicio(f);
-		controlFrame = f;
+	public main() {
+		inicio = new Inicio();
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
@@ -66,8 +65,8 @@ public class main extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controlFrame.setContentPane(inicio);
-				controlFrame.validate();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
 			}
 		});
 		add(btnVolver, "2, 16");

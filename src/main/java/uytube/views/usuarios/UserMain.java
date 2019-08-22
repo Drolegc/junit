@@ -8,6 +8,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import uytube.views.Frame;
 import uytube.views.Inicio;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -20,8 +21,7 @@ public class UserMain extends JPanel {
 	 * Create the panel.
 	 */
 	JFrame frame;
-	public UserMain(JFrame f) {
-		frame = f;
+	public UserMain() {
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
@@ -50,9 +50,9 @@ public class UserMain extends JPanel {
 		JButton btnNewButton = new JButton("Agregar usuario");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Alta alta = new Alta(frame);
-				frame.setContentPane(alta);
-				frame.revalidate();
+				Alta alta = new Alta();
+				Frame.frame.setContentPane(alta);
+				Frame.frame.revalidate();
 				
 			}
 		});
@@ -64,9 +64,9 @@ public class UserMain extends JPanel {
 		JButton btnNewButton_1 = new JButton("Listar usuarios");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Listar listar = new Listar(frame);
-				frame.setContentPane(listar);
-				frame.revalidate();				
+				Listar listar = new Listar();
+				Frame.frame.setContentPane(listar);
+				Frame.frame.revalidate();				
 				
 			}
 		});
@@ -75,9 +75,9 @@ public class UserMain extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Inicio inicio = new Inicio(frame);
-				frame.setContentPane(inicio);
-				frame.revalidate();				
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.revalidate();				
 			}
 		});
 		add(btnVolver, "4, 18");

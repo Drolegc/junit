@@ -26,31 +26,16 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
 import uytube.views.usuarios.Alta;
-public class Window extends JFrame {
+public class Frame {
+	public static JFrame frame;
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Window frame = new Window();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Window() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 400);
-		Inicio inicio = new Inicio(this);
-		setResizable(false);
-		add(inicio);
-	}
-	public void goToinit() {
+	public Frame() {
 		
 	}
 }
