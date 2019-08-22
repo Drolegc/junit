@@ -42,14 +42,16 @@ public class HibernateUtil {
             .addAnnotatedClass(Usuario.class)
             .addAnnotatedClass(Categoria.class)
             .addAnnotatedClass(Video.class)
+            .addAnnotatedClass(Canal.class)
+            .addAnnotatedClass(Comentario.class)
             .addAnnotatedClass(Lista.class);
 
         Metadata metadata = sources.getMetadataBuilder().build();
 
         sessionFactory = metadata.getSessionFactoryBuilder().build();
       } catch (Exception e) {
-        System.out.println("SessionFactory creation failed");
-        if (registry != null) {
+    	  System.out.println(e);
+    	 if (registry != null) {
           StandardServiceRegistryBuilder.destroy(registry);
         }
       }

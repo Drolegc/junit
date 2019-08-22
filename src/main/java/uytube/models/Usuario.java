@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.*;
-
+import uytube.models.Canal;
 @Entity
 @Table(name = "Usuario")
 public class Usuario {

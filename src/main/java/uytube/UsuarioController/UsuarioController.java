@@ -15,6 +15,8 @@ import uytube.models.HibernateUtil;
 public class UsuarioController implements IUsuario{
 	private Session session;
 	private Transaction transaction;
+	private static EntityManager manager;
+	private static EntityManagerFactory emf;
 	public UsuarioController() {
 	}
 	
@@ -63,8 +65,8 @@ public class UsuarioController implements IUsuario{
 	public void modificarUsuario(Usuario usuario) {
 		this.session = null;
 		this.transaction = null;
-	    try {
-	        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
+		try {
 	        transaction = session.beginTransaction();
 	        if(!transaction.isActive())
 	        	transaction.begin();
@@ -84,19 +86,17 @@ public class UsuarioController implements IUsuario{
 
 	public void seguirUsuario(String name1,String name2) {
 		// TODO Auto-generated method stub
-		EntityManager em = this.mng.getEntityManager();
-		Usuario user1 = (Usuario)em
+			emf = Persistence.createEntityManagerFactory("uytube");
+			manager = this.emf.createEntityManager();
+		Usuario user1 = (Usuario)manager
 		.createQuery("From Usuario Where nickname = :nick")
 		.setParameter("nick", name1).getSingleResult();
 		
-		Usuario user2 = (Usuario)em
+		Usuario user2 = (Usuario)manager
 		.createQuery("From Usuario Where nickname = :nick")
 		.setParameter("nick", name2).getSingleResult();
 		
-		user1.addUsuario(user2);
-		
-		this.mng.startTransaccion(user1);
-		
+		user1.addUsuario(user2);		
 	}
 	
 	public void listUsuariosSeguidos(String name) {
@@ -109,8 +109,9 @@ public class UsuarioController implements IUsuario{
 	}
 
 	private Usuario getUser(String nick) {
-		EntityManager em = this.mng.getEntityManager();
-		Usuario user = (Usuario)em
+		emf = Persistence.createEntityManagerFactory("uytube");
+		manager = this.emf.createEntityManager();
+		Usuario user = (Usuario)manager
 		.createQuery("From Usuario Where nickname = :nick")
 		.setParameter("nick", nick).getSingleResult();
 		
@@ -124,7 +125,6 @@ public class UsuarioController implements IUsuario{
 		
 		user.getusuariosSeguidos().remove(user2);
 		
-		this.mng.startTransaccion(user);
 		
 	}
 

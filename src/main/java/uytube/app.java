@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.hibernate.Transaction;
+
 import java.awt.CardLayout;
 import javax.swing.JButton;
 import javax.persistence.EntityManager;
@@ -24,6 +27,7 @@ import java.net.URL;
 import java.awt.event.ActionEvent;
 
 import uytube.UsuarioController.UsuarioController;
+import uytube.models.HibernateUtil;
 import uytube.views.Inicio;
 import uytube.views.Window;
 
@@ -31,9 +35,8 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
 import uytube.views.usuarios.Alta;
+import org.hibernate.Session;
 public class app extends JFrame{
-	private static EntityManager manager;
-	private static EntityManagerFactory emf;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -51,6 +54,7 @@ public class app extends JFrame{
 	 * Create the frame.
 	 */
 	public app() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
 		Inicio inicio = new Inicio(this);
