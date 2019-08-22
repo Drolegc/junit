@@ -1,29 +1,44 @@
 package uytube.views.categorias;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
-import uytube.views.Frame;
-import uytube.views.Inicio;
-import uytube.views.usuarios.Alta;
+import uytube.CategoriaController.CategoriaController;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class main extends JPanel {
- private Inicio inicio;
-	/**
-	 * Create the panel.
-	 */
-	public main() {
-		inicio = new Inicio();
+public class listar extends JPanel {
+
+	//Ventana principal
+	private JFrame frame;
+	//para poder volver al menu principal de categorias
+	private main miMain;
+	//paso el frame principal por parametro
+	public listar(JFrame f) {
+		//lo cargo en miMain para poder ir y volver (navegabilidad)
+		miMain = new main(f);
+		this.frame = f;
 		setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -46,47 +61,23 @@ public class main extends JPanel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JButton btnNewButton_1 = new JButton("Consultar Categorias");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				consulta con = new consulta(controlFrame);
-				controlFrame.setContentPane(con);
-				controlFrame.revalidate();
-			}
-		});
-		
-		JButton btnNewButton = new JButton("Alta Categoria");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				alta alta = new alta(controlFrame);
-				controlFrame.setContentPane(alta);
-				controlFrame.revalidate();
-
-			}
-		});
-		add(btnNewButton, "2, 8");
-		add(btnNewButton_1, "2, 10");
-		
 		JButton btnListarCategorias = new JButton("Listar Categorias");
 		btnListarCategorias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				listar lista = new listar(controlFrame);
-				controlFrame.setContentPane(lista);
-				controlFrame.revalidate();
+				CategoriaController listar = new CategoriaController();
+				listar.listarCategoriasExistentes();
 			}
 		});
-		add(btnListarCategorias, "2, 12");
+		add(btnListarCategorias, "2, 8, left, default");
 		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Frame.frame.setContentPane(inicio);
-				Frame.frame.validate();
+				frame.setContentPane(miMain);
+				frame.validate();
 			}
 		});
-		add(btnVolver, "2, 16");
-
+		add(btnVolver, "2, 16, left, default");
 	}
 
 }
