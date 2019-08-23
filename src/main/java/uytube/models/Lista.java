@@ -14,10 +14,10 @@ public class Lista {
 	private Boolean privado;
 	
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "nombre",nullable=true)
 	private Categoria categoria;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="nombre")
 	private List<Video> videos;	
 	
 	@OneToOne(cascade = CascadeType.ALL)

@@ -32,18 +32,19 @@ public class ListaController implements ILista {
 		//Obtener canales
 		
 		if(Default) {
-			List<Canal> canales = (List<Canal>)mng.getSessionManager().createQuery("From Canal").getResultList();
-			mng.closeSession();
 			
-			Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", categoria).getSingleResult();
+			List<Canal> canales = (List<Canal>) mng.getSessionManager().createQuery("From Canal").getResultList();
 			mng.closeSession();
-			
+
+			System.out.println(canales.size());
 			for(Canal c: canales) {
-				Lista lista = new Lista(listaName,privado,null,c);
+				System.out.println("Lista default");
+				Lista lista = new Lista(listaName,privado,null,null);
 				mng.startTransaction("Lista", lista);
-				System.out.println("Lista agregada a " + cat.getNombre());
+				
 			}
 			
+			System.out.println("Listas default creadas");
 		}else {
 			
 			/*

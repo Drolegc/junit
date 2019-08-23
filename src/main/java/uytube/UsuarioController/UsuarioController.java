@@ -22,6 +22,7 @@ public class UsuarioController implements IUsuario{
 	private Transaction transaction;
 	private static EntityManager manager;
 	private static EntityManagerFactory emf;
+	
 	public UsuarioController() {
 		mng = Manager.getInstance();
 	}
@@ -29,6 +30,7 @@ public class UsuarioController implements IUsuario{
 	public void crearUsuario(Usuario usuario) {
 		this.session = null;
 		this.transaction = null;
+		
 	    try {
 	        session = HibernateUtil.getSessionFactory().openSession();
 	        transaction = session.beginTransaction();
@@ -46,6 +48,10 @@ public class UsuarioController implements IUsuario{
 	          session.close();
 	        }
 	      }		
+	    
+	    Canal canal = new Canal(usuario.getNombre(),"My first channel",usuario);
+	    mng.startTransaction("Canal", canal);
+	    
 	}
 
 	public void consultaUsuario(String nickname) {

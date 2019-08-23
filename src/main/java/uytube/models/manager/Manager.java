@@ -58,6 +58,7 @@ public class Manager {
 	
 	//Recordar cerrar session luego de pedirla y usarla
 	public Session getSessionManager() {
+		session = HibernateUtil.getSessionFactory().openSession();
 		return this.session;
 	}
 	
