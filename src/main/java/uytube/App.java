@@ -26,8 +26,10 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 import java.awt.event.ActionEvent;
 
+import uytube.UsuarioController.IUsuario;
 import uytube.UsuarioController.UsuarioController;
 import uytube.models.HibernateUtil;
+import uytube.models.Usuario;
 import uytube.views.Frame;
 import uytube.views.Inicio;
 
@@ -48,6 +50,12 @@ public class App extends JFrame{
 				}
 			}
 		});
+		
+		IUsuario controllerUser = new UsuarioController();
+		controllerUser.crearUsuario(new Usuario("user123", "user123", "user", "user", null,"path"));
+		for(Usuario u: controllerUser.listaUsuarios()) {
+			System.out.println(u.getNombre());
+		}
 	}
 
 	/**

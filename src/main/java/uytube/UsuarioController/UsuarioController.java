@@ -11,13 +11,19 @@ import javax.swing.JOptionPane;
 import org.hibernate.Transaction;
 import org.hibernate.Session;
 import uytube.models.Usuario;
+import uytube.models.manager.Manager;
+import uytube.models.Canal;
 import uytube.models.HibernateUtil;
 public class UsuarioController implements IUsuario{
+	
+	private Manager mng;
+	
 	private Session session;
 	private Transaction transaction;
 	private static EntityManager manager;
 	private static EntityManagerFactory emf;
 	public UsuarioController() {
+		mng = Manager.getInstance();
 	}
 	
 	public void crearUsuario(Usuario usuario) {
@@ -100,28 +106,32 @@ public class UsuarioController implements IUsuario{
 	      }		
 	}
 
-	public void seguirUsuario(String name1,String name2) {
-		// TODO Auto-generated method stub
-			emf = Persistence.createEntityManagerFactory("uytube");
-			manager = this.emf.createEntityManager();
-		Usuario user1 = (Usuario)manager
-		.createQuery("From Usuario Where nickname = :nick")
-		.setParameter("nick", name1).getSingleResult();
+	public void seguirUsuario(String nameUser,String nameCanal) {
+		// TODO Auto-generated method stub	
 		
-		Usuario user2 = (Usuario)manager
-		.createQuery("From Usuario Where nickname = :nick")
-		.setParameter("nick", name2).getSingleResult();
+		//Usuario sigue canales
 		
-		user1.addUsuario(user2);		
+		//Obtener el usuario y luego el canal
+		
+		Usuario user = (Usuario)mng.getSessionManager().createQuery("From Usuario where nombre = :nameUser").setParameter("nameUser", nameUser).getSingleResult();
+		mng.closeSession();
+		
+		Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombreCanal").setParameter("nombreCanal", nameCanal).getSingleResult();
+		mng.closeSession();
+		
+		user.addCanal(canal);
+		
+		mng.startTransaction("Usuario", user);
+		
 	}
 	
-	public void listUsuariosSeguidos(String name) {
+	public void listCanalesSeguidos(String name) {
 		
-		Usuario user = this.getUser(name);
-		
-		for(Usuario u:user.getusuariosSeguidos()) {
-			System.out.println(u.getNickname());
+		Usuario user = (Usuario) mng.getSessionManager().createQuery("From Usuario where nombre = :nombre").setParameter("nombre",name).getSingleResult();
+		for(Canal c:user.getCanalesSeguidos()) {
+			System.out.println(c.getNombre());
 		}
+		
 	}
 
 	private Usuario getUser(String nick) {
@@ -133,14 +143,19 @@ public class UsuarioController implements IUsuario{
 		
 		return user;
 	}
-	public void dejarDeSeguir(String nick1,String nick2) {
+	public void dejarDeSeguir(String nameUser,String nameCanal) {
 		// TODO Auto-generated method stub
+		Usuario user = (Usuario)mng.getSessionManager().createQuery("From Usuario where nombre = :nameUser").setParameter("nameUser", nameUser).getSingleResult();
+		mng.closeSession();
 		
-		Usuario user = this.getUser(nick1);
-		Usuario user2 = this.getUser(nick2);
+		Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombreCanal").setParameter("nombreCanal", nameCanal).getSingleResult();
+		mng.closeSession();
 		
-		user.getusuariosSeguidos().remove(user2);
+		if(user.getCanalesSeguidos().remove(canal)) {
+			System.out.println("Canal removido");
+		}
 		
+		mng.startTransaction("Usuario", user);
 		
 	}
 

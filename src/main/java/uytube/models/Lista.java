@@ -20,6 +20,9 @@ public class Lista {
 	@JoinColumn(name="nombre")
 	private List<Video> videos;	
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Canal canal;
+	
 	public List<Video> getVideos() {
 		return videos;
 	}
@@ -30,10 +33,11 @@ public class Lista {
 		this.videos = videos;
 	}
 
-	public Lista(String nombre,boolean privado,Categoria categoria) {
+	public Lista(String nombre,boolean privado,Categoria categoria,Canal canal) {
 		this.nombre = nombre;
 		this.privado = privado;
 		this.categoria = categoria;
+		this.canal = canal;
 	}
 
 	public String getNombre() {

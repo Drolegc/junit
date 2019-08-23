@@ -24,9 +24,25 @@ public class Video {
 	@Column(name = "url")
 	private String url;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="username")
-	Usuario usuario;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="nombre")
+	Canal canal;
+
+	public Canal getCanal() {
+		return canal;
+	}
+
+	public void setCanal(Canal canal) {
+		this.canal = canal;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="nombre", insertable = false, updatable = false)
