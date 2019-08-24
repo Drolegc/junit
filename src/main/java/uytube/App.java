@@ -67,13 +67,15 @@ public class App extends JFrame{
 		
 		ICategoria controllerCategoria = new CategoriaController();
 		controllerCategoria.altaCategoria("Zombies");
-		controllerCategoria.altaCategoria("Zombies");
+		controllerCategoria.altaCategoria("Monos");
 		
 		ILista controllerLista = new ListaController();
 		
 		//Lista default
 		controllerLista.crearLista("Ver mas tardes", null, null, true, true);
 		controllerLista.crearLista("listaPer", "Zombies", "user2", true, false);
+		controllerLista.listarListas("user2");
+		controllerLista.modificarLista(5,"Monos", false);
 		controllerLista.listarListas("user2");
 		System.out.println("Fin");
 	}
