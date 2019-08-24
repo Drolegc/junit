@@ -29,8 +29,7 @@ public class Usuario {
 	@Column(name = "img")
 	private String img;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "nombre",nullable=true)
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Canal> canalesSeguidos;
 
 	
@@ -46,7 +45,7 @@ public class Usuario {
 		this.correo = correo;
 		this.fnacimiento = fnacimiento;
 		this.img = img;
-		//canalesSeguidos = new ArrayList<Canal>();
+		canalesSeguidos = new ArrayList<Canal>();
 		
 	}
 

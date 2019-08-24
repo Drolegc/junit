@@ -129,6 +129,8 @@ public class UsuarioController implements IUsuario{
 		
 		mng.startTransaction("Usuario", user);
 		
+		System.out.println(user.getNickname()+" sigue a "+canal.getNombre());
+		
 	}
 	
 	public void listCanalesSeguidos(String name) {
