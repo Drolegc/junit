@@ -45,6 +45,7 @@ public class ListaController implements ILista {
 			}
 			
 			System.out.println("Listas default creadas");
+			
 		}else {
 			
 			/*
@@ -71,6 +72,7 @@ public class ListaController implements ILista {
 	public void modificarLista() {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 	public void consultarListas() {
@@ -86,6 +88,26 @@ public class ListaController implements ILista {
 	public void quitarVideo() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public List<Lista> listarListas(String userName) {
+		// TODO Auto-generated method stub
+		
+		List<Lista> listas = (List<Lista>)mng.getSessionManager().createQuery("From Lista").getResultList();
+		mng.closeSession();
+		
+		System.out.println("Listando listas");
+		for(Lista l: listas) {
+			if(l.getCanal()!=null) {
+				System.out.println(l.getNombre() + l.getCanal().getNombre());
+			}
+			else {
+				System.out.println(l.getNombre());
+			}
+				
+		}
+		
+		return listas;
 	}
 
 }
