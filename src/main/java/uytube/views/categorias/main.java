@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 public class main extends JPanel {
  private Inicio inicio;
 	/**
@@ -50,18 +51,18 @@ public class main extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				consulta con = new consulta(controlFrame);
-				controlFrame.setContentPane(con);
-				controlFrame.revalidate();
+				consulta con = new consulta();
+				Frame.frame.setContentPane(con);
+				Frame.frame.revalidate();
 			}
 		});
 		
 		JButton btnNewButton = new JButton("Alta Categoria");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				alta alta = new alta(controlFrame);
-				controlFrame.setContentPane(alta);
-				controlFrame.revalidate();
+				alta alta = new alta();
+				Frame.frame.setContentPane(alta);
+				Frame.frame.revalidate();
 
 			}
 		});
@@ -71,9 +72,9 @@ public class main extends JPanel {
 		JButton btnListarCategorias = new JButton("Listar Categorias");
 		btnListarCategorias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				listar lista = new listar(controlFrame);
-				controlFrame.setContentPane(lista);
-				controlFrame.revalidate();
+				listar lista = new listar();
+				Frame.frame.setContentPane(lista);
+				Frame.frame.revalidate();
 			}
 		});
 		add(btnListarCategorias, "2, 12");

@@ -12,6 +12,11 @@ import javax.persistence.*;
 public class Categoria {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id",insertable = false,updatable = false)
+	private int id;
+	
+	
 	@Column(name = "nombre")
 	private String nombre; 
 		
@@ -23,6 +28,12 @@ public class Categoria {
 		return nombre;
 	}
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}	

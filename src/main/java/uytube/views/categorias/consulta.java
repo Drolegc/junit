@@ -14,16 +14,15 @@ import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import uytube.views.Frame;
 public class consulta extends JPanel {
 	private JTextField txtNombreCategoria;
 	private String nombre;
 	private JFrame frame;
 	private main miMain;
 	
-	public consulta(JFrame f) {
-		miMain = new main(f);
-		this.frame = f;
+	public consulta() {
+		miMain = new main();		
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(74dlu;default)"),
@@ -79,8 +78,8 @@ public class consulta extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frame.setContentPane(miMain);
-				frame.validate();
+				Frame.frame.setContentPane(miMain);
+				Frame.frame.validate();
 			}
 		});
 		add(btnVolver, "2, 18, left, default");

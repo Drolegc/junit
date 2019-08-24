@@ -1,6 +1,7 @@
 package uytube.views.categorias;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import uytube.CategoriaController.CategoriaController;
@@ -13,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import uytube.views.Frame;
 public class alta extends JPanel {
 
 	private String nombre;
@@ -22,9 +23,8 @@ public class alta extends JPanel {
 	private JTextField txtIngresarCategoria;
 	
 	
-	public alta(JFrame f) {
-			miMain = new main(f);
-			this.frame = f;
+	public alta() {
+			miMain = new main();
 			setLayout(new FormLayout(new ColumnSpec[] {
 					FormSpecs.RELATED_GAP_COLSPEC,
 					ColumnSpec.decode("default:grow"),},
@@ -54,7 +54,8 @@ public class alta extends JPanel {
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					CategoriaController categoria = new CategoriaController();
-					categoria.altaCategoria(txtIngresarCategoria.getText());					
+					categoria.altaCategoria(txtIngresarCategoria.getText());
+					JOptionPane.showMessageDialog(null, "La Categoria: "+txtIngresarCategoria.getText()+" fue agregada con exito.");
 				}
 			});
 			
@@ -67,8 +68,8 @@ public class alta extends JPanel {
 			JButton btnNewButton = new JButton("Volver");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					frame.setContentPane(miMain);
-					frame.validate();
+					Frame.frame.setContentPane(miMain);
+					Frame.frame.validate();
 				}
 			});
 			add(btnNewButton, "2, 20, left, default");
