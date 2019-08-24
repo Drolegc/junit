@@ -30,7 +30,7 @@ public class Usuario {
 	private String img;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "nombre")
+	@JoinColumn(name = "nombre",nullable=true)
 	private List<Canal> canalesSeguidos;
 
 	

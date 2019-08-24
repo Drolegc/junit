@@ -31,12 +31,14 @@ public class UsuarioController implements IUsuario{
 		this.session = null;
 		this.transaction = null;
 		
+		Canal canal = new Canal(usuario.getNombre(),"My first channel",usuario);
+		
 	    try {
 	        session = HibernateUtil.getSessionFactory().openSession();
 	        transaction = session.beginTransaction();
 	        if(!transaction.isActive())
 	        	transaction.begin();
-	        session.saveOrUpdate("Usuario", usuario);
+	        session.saveOrUpdate("Canal", canal);
 	        transaction.commit();
 	      } catch (Exception e) {
 	        if (transaction != null) {
@@ -48,9 +50,7 @@ public class UsuarioController implements IUsuario{
 	          session.close();
 	        }
 	      }		
-	    
-	    Canal canal = new Canal(usuario.getNombre(),"My first channel",usuario);
-	    mng.startTransaction("Canal", canal);
+
 	    
 	}
 

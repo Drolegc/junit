@@ -21,6 +21,7 @@ public class Lista {
 	private List<Video> videos;	
 	
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "nombre")
 	private Canal canal;
 	
 	public List<Video> getVideos() {
