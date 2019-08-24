@@ -1,12 +1,9 @@
 package uytube.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.*;
 import uytube.models.Canal;
 @Entity
@@ -32,33 +29,32 @@ public class Usuario {
 	@Column(name = "img")
 	private String img;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Usuario> usuariosSeguidos;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Canal canal;
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private List<Canal> canalesSeguidos;
+
 	
 	public Usuario() {
 		
 	}
 
 	public Usuario(String nickname, String nombre, String apellido, String correo, Date fnacimiento, String img) {
+		
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.correo = correo;
 		this.fnacimiento = fnacimiento;
 		this.img = img;
+		canalesSeguidos = new ArrayList<Canal>();
 		
-		this.canal = new Canal(nombre,"Mi primer canal");
 	}
-	
-	public List<Usuario> getusuariosSeguidos(){
-		return this.usuariosSeguidos;
+
+	public List<Canal> getCanalesSeguidos() {
+		return canalesSeguidos;
 	}
-	
-	public void addUsuario(Usuario user) {
-		this.usuariosSeguidos.add(user);
+
+	public void addCanal(Canal c) {
+		this.canalesSeguidos.add(c);
 	}
 
 	public String getNickname() {

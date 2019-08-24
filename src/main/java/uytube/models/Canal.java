@@ -7,7 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,8 +23,8 @@ public class Canal {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Lista> listasReproduccion;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Usuario usuario;
 	
 	public String getNombre() {
 		return nombre;
@@ -36,26 +38,22 @@ public class Canal {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public List<Lista> getListasReproduccion() {
-		return listasReproduccion;
-	}
-	public void setListasReproduccion(List<Lista> listasReproduccion) {
-		this.listasReproduccion = listasReproduccion;
-	}
 	
 	public Canal() {
 		
 	}
 	
-	public Canal(String nombre, String descripcion) {
+	public Canal(String name,String descripcion,Usuario user) {
 		super();
-		this.nombre = nombre;
+		this.nombre = name;
 		this.descripcion = descripcion;
-		this.listasReproduccion = new ArrayList<Lista>();
+		this.usuario = user;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
-	public void addLista(Lista l) {
-		this.listasReproduccion.add(l);
-		System.out.println("Nueva lista agregada");
-	}
 }

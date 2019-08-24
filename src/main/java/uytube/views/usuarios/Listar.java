@@ -77,8 +77,8 @@ public class Listar extends JPanel {
 		btnEditarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Editar editar = new Editar(user);
-				frame.setContentPane(editar);
-				frame.revalidate();
+				Frame.frame.setContentPane(editar);
+				Frame.frame.revalidate();
 
 			}
 		});

@@ -24,10 +24,17 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
+import uytube.CategoriaController.CategoriaController;
+import uytube.CategoriaController.ICategoria;
+import uytube.ListaController.ILista;
+import uytube.ListaController.ListaController;
+import uytube.UsuarioController.IUsuario;
 import uytube.UsuarioController.UsuarioController;
 import uytube.models.HibernateUtil;
+import uytube.models.Usuario;
 import uytube.views.Frame;
 import uytube.views.Inicio;
 
@@ -48,6 +55,27 @@ public class App extends JFrame{
 				}
 			}
 		});
+
+		IUsuario controllerUser = new UsuarioController();
+		controllerUser.crearUsuario(new Usuario("user2", "user2", "user", "user",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("userSecond", "userSecond", "user", "user",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("lorenzo", "lorenzo", "user", "user",new Date(),"path"));
+		
+		controllerUser.seguirUsuario("user2","userSecond");
+		controllerUser.seguirUsuario("user2","lorenzo");
+		
+		
+		ICategoria controllerCategoria = new CategoriaController();
+		controllerCategoria.altaCategoria("Zombies");
+		controllerCategoria.altaCategoria("Zombies");
+		
+		ILista controllerLista = new ListaController();
+		
+		//Lista default
+		controllerLista.crearLista("Ver mas tardes", null, null, true, true);
+		controllerLista.crearLista("listaPer", "Zombies", "user2", true, false);
+		
+		System.out.println("Fin");
 	}
 
 	/**
