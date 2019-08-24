@@ -1,9 +1,14 @@
 package uytube.VideoController;
 
+import java.util.Date;
+
+import uytube.models.Video;
+
 public interface IVideo {
-	public void altaVideo();
+	public void altaVideo(Video vid, String usr);
 	public void modificarVideo();
-	public void consultaVideo();
+	public void consultaVideo(String titulito);
 	public void comentarVideo();
 	public void valorarVideo();
 }
+

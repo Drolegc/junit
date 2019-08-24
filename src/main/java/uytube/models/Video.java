@@ -48,7 +48,10 @@ public class Video {
 	@JoinColumn(name="nombre", insertable = false, updatable = false)
 	Categoria categoria;
 
-	
+
+	public Video() {
+		
+	}
 	public Video (String nombre, String descripcion, String duracion, Date fecha, String url) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;

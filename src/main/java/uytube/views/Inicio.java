@@ -17,6 +17,8 @@ import com.jgoodies.forms.layout.FormSpecs;
 
 import uytube.models.Usuario;
 import uytube.views.usuarios.UserMain;
+import uytube.views.videos.VideoMain;
+
 public class Inicio extends JPanel {
 
 	/**
@@ -55,6 +57,13 @@ public class Inicio extends JPanel {
 		add(btnUsuarios, "4, 6");
 		
 		JButton btnVideos = new JButton("Videos");
+		btnVideos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VideoMain videos = new VideoMain();
+				Frame.frame.setContentPane(videos);
+				Frame.frame.validate();
+			}
+		});
 		add(btnVideos, "4, 8");
 		
 		JButton btnCategorias = new JButton("Categorias");
