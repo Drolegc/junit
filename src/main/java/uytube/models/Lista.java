@@ -8,8 +8,13 @@ import javax.persistence.*;
 public class Lista {
 	
 	@Id
-	@Column( name = "nombre" )
-	private String nombre;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id",insertable = false,updatable = false)
+	private int id;
+	
+	@Column( name = "nombre_lista" )
+	private String nombre_lista;
+	
 	@Column( name = "privado ")
 	private Boolean privado;
 	
@@ -20,8 +25,7 @@ public class Lista {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Video> videos;	
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "nombre")
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Canal canal;
 	
 	public List<Video> getVideos() {
@@ -35,18 +39,18 @@ public class Lista {
 	}
 
 	public Lista(String nombre,boolean privado,Categoria categoria,Canal canal) {
-		this.nombre = nombre;
+		this.nombre_lista = nombre;
 		this.privado = privado;
 		this.categoria = categoria;
 		this.canal = canal;
 	}
 
 	public String getNombre() {
-		return nombre;
+		return nombre_lista;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombre_lista = nombre;
 	}
 
 	public Boolean getPrivado() {
@@ -61,6 +65,19 @@ public class Lista {
 		return categoria;
 	}
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public Canal getCanal() {
+		return canal;
+	}
+	public void setCanal(Canal canal) {
+		this.canal = canal;
+	}
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}

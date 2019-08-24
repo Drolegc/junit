@@ -1,4 +1,5 @@
 package uytube.CategoriaController;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -69,9 +70,9 @@ public void listarCategoriasExistentes() {
 		
 	}
 
-	public List<Categoria> listarCategorias() {
+	public ArrayList<Categoria> listarCategorias() {
 		
-		List<Categoria> categorias = (List<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();
+		ArrayList<Categoria> categorias = (ArrayList<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();
 		mng.closeSession();
 		
 		for(Categoria c:categorias) {
@@ -80,6 +81,11 @@ public void listarCategoriasExistentes() {
 		
 		return categorias;
 		
-	}	
+	}
+	
+	public void modificarCategoria(Categoria nuevoNombre) {
+				mng.startTransaction("Categoria", nuevoNombre);
+				System.out.println(nuevoNombre.getNombre()+" Editado Correctamente!");
+	}
 
 }

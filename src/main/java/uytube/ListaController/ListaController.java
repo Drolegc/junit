@@ -39,12 +39,13 @@ public class ListaController implements ILista {
 			System.out.println(canales.size());
 			for(Canal c: canales) {
 				System.out.println("Lista default");
-				Lista lista = new Lista(listaName,privado,null,null);
+				Lista lista = new Lista(listaName,privado,null,c);
 				mng.startTransaction("Lista", lista);
 				
 			}
 			
 			System.out.println("Listas default creadas");
+			
 		}else {
 			
 			/*
@@ -68,9 +69,21 @@ public class ListaController implements ILista {
 		
 	}
 
-	public void modificarLista() {
+	public void modificarLista(int id,String categoria,boolean privacidad) {
 		// TODO Auto-generated method stub
 		
+		//Obtener lista segun id
+		
+		Lista list = (Lista)mng.getSessionManager().createQuery("From Lista where id = :id").setParameter("id", id).getSingleResult();
+		mng.closeSession();
+		
+		Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", categoria).getSingleResult();
+		mng.closeSession();
+		
+		list.setCategoria(cat);
+		list.setPrivado(privacidad);
+		
+		mng.startTransaction("Lista", list);
 	}
 
 	public void consultarListas() {
@@ -86,6 +99,26 @@ public class ListaController implements ILista {
 	public void quitarVideo() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public List<Lista> listarListas(String userName) {
+		// TODO Auto-generated method stub
+		
+		List<Lista> listas = (List<Lista>)mng.getSessionManager().createQuery("From Lista").getResultList();
+		mng.closeSession();
+		
+		System.out.println("Listando listas");
+		for(Lista l: listas) {
+			if(l.getCategoria()!=null) {
+				System.out.println(l.getNombre() + " " + l.getCanal().getNombre()+" "+l.getId()+" "+l.getCategoria().getNombre());
+			}
+			else {
+				System.out.println(l.getNombre()+" "+l.getCanal().getNombre()+" "+l.getId());
+			}
+				
+		}
+		
+		return listas;
 	}
 
 }
