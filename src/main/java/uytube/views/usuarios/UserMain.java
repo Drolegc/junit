@@ -56,6 +56,18 @@ public class UserMain extends JPanel {
 				
 			}
 		});
+		
+		JButton btnSeguirUsuario = new JButton("Seguir usuario");
+		btnSeguirUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Seguir usuario panel");
+				Seguir seguir = new Seguir();
+				Frame.frame.setContentPane(seguir);
+				Frame.frame.revalidate();	
+				
+			}
+		});
+		add(btnSeguirUsuario, "4, 8");
 		add(btnNewButton, "4, 10");
 		
 		JButton btnNewButton_2 = new JButton("Consultar usuario");

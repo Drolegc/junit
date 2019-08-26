@@ -70,6 +70,7 @@ public class Listar extends JPanel {
 					}
 			);
 		}
+		
 		table.setModel(tablemodel);
 		scrollPane.setViewportView(table);
 		
