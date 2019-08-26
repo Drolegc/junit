@@ -159,14 +159,25 @@ public class UsuarioController implements IUsuario{
 		Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombreCanal").setParameter("nombreCanal", nameCanal).getSingleResult();
 		mng.closeSession();
 		
-		if(user.getCanalesSeguidos().remove(canal)) {
-			System.out.println("Canal removido");
-		}
+		user.dejarDeSeguir(nameCanal);
 		
 		mng.startTransaction("Usuario", user);
 		
+		
 	}
 
+	public void listarSeguidores(String nameUser) {
+		
+		Usuario user = (Usuario)mng.getSessionManager().createQuery("From Usuario where nombre = :nameUser").setParameter("nameUser", nameUser).getSingleResult();
+		mng.closeSession();
+		
+		System.out.println(" :: Siguiendo :: ");
+		for(Canal c:user.getCanalesSeguidos()) {
+			System.out.println(c.getNombre());
+		}
+		
+	}
+	
 	public void modificarDatos() {
 		// TODO Auto-generated method stub
 		

@@ -2,6 +2,7 @@ package uytube.models;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.*;
@@ -103,6 +104,26 @@ public class Usuario {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+	
+	public void dejarDeSeguir(String nameCanal) {
+		
+		/*
+		 * Para remover un objeto de la coleccion
+		 * lo mas conveniente es usar iteradores
+		 * */
+		
+		
+		Iterator<Canal> i = this.canalesSeguidos.iterator();
+		
+		while(i.hasNext()) {
+			Canal c = (Canal)i.next();
+			if(c.getNombre().equals(nameCanal)) {
+				System.out.println("Dejando se seguir a "+nameCanal);
+				canalesSeguidos.remove(c);
+			}
+			
+		}
 	}
 	
 	

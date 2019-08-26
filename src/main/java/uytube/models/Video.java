@@ -25,8 +25,13 @@ public class Video {
 	private String url;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="nombre")
 	Canal canal;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id",nullable = true)
+	Categoria categoria;
+
+
 
 	public Canal getCanal() {
 		return canal;
@@ -43,10 +48,6 @@ public class Video {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="nombre", insertable = false, updatable = false)
-	Categoria categoria;
 
 
 	public Video() {

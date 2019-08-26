@@ -33,6 +33,8 @@ import uytube.ListaController.ILista;
 import uytube.ListaController.ListaController;
 import uytube.UsuarioController.IUsuario;
 import uytube.UsuarioController.UsuarioController;
+import uytube.VideoController.IVideo;
+import uytube.VideoController.VideoController;
 import uytube.models.HibernateUtil;
 import uytube.models.Usuario;
 import uytube.views.Frame;
@@ -63,6 +65,7 @@ public class App extends JFrame{
 		
 		controllerUser.seguirUsuario("user2","userSecond");
 		controllerUser.seguirUsuario("user2","lorenzo");
+		controllerUser.dejarDeSeguir("user2", "userSecond");
 		
 		
 		ICategoria controllerCategoria = new CategoriaController();
@@ -75,8 +78,9 @@ public class App extends JFrame{
 		controllerLista.crearLista("Ver mas tardes", null, null, true, true);
 		controllerLista.crearLista("listaPer", "Zombies", "user2", true, false);
 		controllerLista.listarListas("user2");
-		controllerLista.modificarLista(5,"Monos", false);
+		controllerLista.modificarLista(6,"Monos", false);
 		controllerLista.listarListas("user2");
+		
 		System.out.println("Fin");
 	}
 
