@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 public class VideoMain extends JPanel {
 
@@ -35,9 +36,19 @@ public class VideoMain extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnNewButton1.setBounds(55, 36, 89, 23);
+		btnNewButton1.setBounds(55, 36, 107, 23);
 		add(btnNewButton1);
 		
+		JButton btnConsultaVideo = new JButton("Consulta Video");
+		btnConsultaVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConsultaVideo consultaV = new ConsultaVideo();
+				Frame.frame.setContentPane(consultaV);
+				Frame.frame.revalidate();
+			}
+		});
+		btnConsultaVideo.setBounds(55, 73, 107, 23);
+		add(btnConsultaVideo);
 		
 		
 		JButton btnVolver = new JButton("Volver");
@@ -52,5 +63,4 @@ public class VideoMain extends JPanel {
 		add(btnVolver);
 		
 	}
-
 }

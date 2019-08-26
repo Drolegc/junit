@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import uytube.models.Canal;
+import uytube.models.Categoria;
 import uytube.models.Video;
 import uytube.models.manager.Manager;
 
@@ -17,11 +18,17 @@ public class VideoController implements IVideo{
 				mana = Manager.getInstance();
 			}
 
-	public void altaVideo(Video vid, String usr) {
+	public void altaVideo(Video vid, String usr, String cate) {
 		// TODO Auto-generated method stub
 		
 		Canal canal = (Canal)mana.getSessionManager().createQuery("From Canal where nombre = :nombre").setParameter("nombre", usr).getSingleResult();
 		mana.closeSession();
+		if (!(cate == null )) {
+			Categoria cat = (Categoria)mana.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", cate).getSingleResult();
+			mana.closeSession();
+			vid.setCategoria(cat);
+		}
+		
 		
 		if(canal == null) {
 			System.out.println("Canal nulo");
@@ -50,9 +57,10 @@ public class VideoController implements IVideo{
 
 	public void consultaVideo(String titulito) {
 		// TODO Auto-generated method stub
-		/*Video vidReturn = (Video)mana.getSessionManager().createQuery("From Video where titulo= :titu").setParameter("titu", titulito).getSingleResult();
+		Video v = (Video)mana.getSessionManager().createQuery("From Video where nombre= :titu").setParameter("titu", titulito).getSingleResult();
 		mana.closeSession();
-		JOptionPane.showConfirmDialog(null, vidReturn.toString());*/
+		System.out.println();
+		JOptionPane.showMessageDialog(null, "Nombre: "+v.getNombre()+" Canal: "+v.getCanal()+" Categoria: "+v.getCategoria());
 	}
 
 	public void comentarVideo() {
