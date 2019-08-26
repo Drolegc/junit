@@ -99,9 +99,9 @@ public class Seguir extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getValueIsAdjusting()) {
 					nameUser_1 = usuarios.get(e.getFirstIndex()).getNickname();
-					System.out.println(nameUser_1);
 				}
 			}
+			
 		});
 		
 		table_1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -110,7 +110,6 @@ public class Seguir extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getValueIsAdjusting()) {
 					nameUser_2 = usuarios.get(e.getFirstIndex()).getNickname();
-					System.out.println(nameUser_2);
 				}
 			}
 		});

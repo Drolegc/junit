@@ -67,6 +67,16 @@ public class UserMain extends JPanel {
 				
 			}
 		});
+		
+		JButton btnDejarDeSeguir = new JButton("Dejar de seguir");
+		btnDejarDeSeguir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DejarSeguir dejarSeguir = new DejarSeguir();
+				Frame.frame.setContentPane(dejarSeguir);
+				Frame.frame.revalidate();
+			}
+		});
+		add(btnDejarDeSeguir, "4, 6");
 		add(btnSeguirUsuario, "4, 8");
 		add(btnNewButton, "4, 10");
 		
