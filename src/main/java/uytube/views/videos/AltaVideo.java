@@ -138,8 +138,8 @@ public class AltaVideo extends JPanel {
 		for(int i = 0; i < array.length; i++) {
 		    array[i] = usuarios.get(i).getNombre();
 		}
-		JComboBox userInfo1 = new JComboBox(array);
 		
+		JComboBox userInfo1 = new JComboBox(array);
 		userInfo1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
@@ -156,15 +156,23 @@ public class AltaVideo extends JPanel {
 		CategoriaController controladorCategoria = new CategoriaController();
 		ArrayList<Categoria> categorias = controladorCategoria.listarCategorias();
 		
-		String[] array1 = new String[categorias.size()];
-		for(int i = 0; i < array1.length; i++) {
-		    array1[i] = categorias.get(i).getNombre();
-		}
-		JComboBox categoriaAsig = new JComboBox(array1);
+		
+		int tamanioarr = categorias.size()+1;
+		String[] array1 = new String[tamanioarr];
+		array1[0]="Sin Categoria";
+		for(int i = 1; i < array1.length; i++) { 
+			array1[i] = categorias.get(i-1).getNombre(); 
+		};
+		
+		JComboBox categoriaAsig = new JComboBox(array1);		
 		categoriaAsig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox12 = (JComboBox)e.getSource();
-		        catAsignar = (String)comboBox12.getSelectedItem();
+				if (catAsignar == "Sin Categoria") {
+					catAsignar = null;
+				} else {
+					catAsignar = (String)comboBox12.getSelectedItem();
+				}
 		        System.out.println(catAsignar);
 			}
 		});
