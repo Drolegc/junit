@@ -44,7 +44,8 @@ public class HibernateUtil {
             .addAnnotatedClass(Video.class)
             .addAnnotatedClass(Canal.class)
             .addAnnotatedClass(Comentario.class)
-            .addAnnotatedClass(Lista.class);
+            .addAnnotatedClass(Lista.class)
+        	.addAnnotatedClass(ValoracionVideo.class);
 
         Metadata metadata = sources.getMetadataBuilder().build();
 
