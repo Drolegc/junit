@@ -73,6 +73,9 @@ public class DejarSeguir extends JPanel {
 				System.out.println("Name 2:"+nameUser_2);
 				controller.dejarDeSeguir(nameUser_1, nameUser_2);
 				JOptionPane.showMessageDialog(null, nameUser_1+" dejo de seguir a "+nameUser_2);
+				UserMain main = new UserMain();
+				Frame.frame.setContentPane(main);
+				Frame.frame.revalidate();
 
 			}
 		});
@@ -83,7 +86,6 @@ public class DejarSeguir extends JPanel {
 		scrollPane_1.setBounds(253, 30, 173, 186);
 		add(scrollPane_1);
 		
-		DefaultTableModel  tablemodel_2 = new DefaultTableModel(nombreColumnas, 0);
 
 		
 		table_1 = new JTable();
@@ -93,10 +95,13 @@ public class DejarSeguir extends JPanel {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				if(e.getValueIsAdjusting()) {
-					nameUser_1 = usuarios.get(e.getFirstIndex()).getNombre();
-					List<Canal> canales = controller.listCanalesSeguidos(usuarios.get(e.getFirstIndex()).getNombre());
-					System.out.println("Seguidores de "+usuarios.get(e.getFirstIndex()).getNombre()+": ");
+				if(!e.getValueIsAdjusting()) {
+					//Obtenemos el user seleccionado
+					nameUser_1 = usuarios.get(table.getSelectedRow()).getNombre();
+					List<Canal> canales = controller.listCanalesSeguidos(nameUser_1);
+					System.out.println("Seguidores de "+nameUser_1+": ");
+					
+					DefaultTableModel  tablemodel_2 = new DefaultTableModel(nombreColumnas, 0);
 					
 					for(Canal c: canales) {
 						System.out.println(c.getNombre());
@@ -106,12 +111,9 @@ public class DejarSeguir extends JPanel {
 								}
 								);
 					}
-					
 					table_1.setModel(tablemodel_2);
-					
-					scrollPane_1.setViewportView(table_1);
-					scrollPane_1.revalidate();
-					scrollPane_1.repaint();
+					table_1.revalidate();
+					table_1.repaint();
 				}
 			}
 		});
@@ -121,7 +123,7 @@ public class DejarSeguir extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getValueIsAdjusting()) {
-					nameUser_2 = usuarios.get(e.getFirstIndex()).getNombre();
+					nameUser_2 = usuarios.get(table_1.getSelectedRow()).getNombre();
 				}
 			}
 		});

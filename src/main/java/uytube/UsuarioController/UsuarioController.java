@@ -136,9 +136,6 @@ public class UsuarioController implements IUsuario{
 	public List<Canal> listCanalesSeguidos(String name) {
 		
 		Usuario user = (Usuario) mng.getSessionManager().createQuery("From Usuario where nombre = :nombre").setParameter("nombre",name).getSingleResult();
-		for(Canal c:user.getCanalesSeguidos()) {
-			System.out.println(c.getNombre());
-		}
 		
 		return user.getCanalesSeguidos();
 		
