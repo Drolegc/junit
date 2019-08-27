@@ -2,6 +2,7 @@ package uytube.VideoController;
 
 import java.util.Date;
 
+import uytube.models.ValoracionVideo;
 import uytube.models.Video;
 
 public interface IVideo {
@@ -9,6 +10,7 @@ public interface IVideo {
 	public void modificarVideo();
 	public void consultaVideo(String titulito);
 	public void comentarVideo();
-	public void valorarVideo();
+	public void valorarVideo(ValoracionVideo vv);
+
 }
 

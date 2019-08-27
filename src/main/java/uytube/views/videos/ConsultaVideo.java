@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import uytube.VideoController.VideoController;
 import uytube.views.Frame;
 import uytube.views.Inicio;
 
@@ -35,7 +36,17 @@ public class ConsultaVideo extends JPanel {
 		add(textField);
 		textField.setColumns(10);
 		
+		JLabel lblNewLabel = new JLabel("Esperando para la busqueda ...");
+		lblNewLabel.setBounds(65, 120, 343, 111);
+		add(lblNewLabel);
+		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+								
+			}	
+		});
+		
 		btnBuscar.setBounds(36, 254, 89, 23);
 		add(btnBuscar);
 		
@@ -43,7 +54,7 @@ public class ConsultaVideo extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Inicio inicio = new Inicio();
+				VideoMain inicio = new VideoMain();
 				Frame.frame.setContentPane(inicio);
 				Frame.frame.revalidate();
 			}
@@ -51,6 +62,8 @@ public class ConsultaVideo extends JPanel {
 		
 		btnVolver.setBounds(164, 254, 89, 23);
 		add(btnVolver);
+		
+	
 
 	}
 }

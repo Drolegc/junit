@@ -38,9 +38,7 @@ public class AltaVideo extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-
 	
-
 	public AltaVideo() {
 		main = new VideoMain();
 		setLayout(null);
@@ -144,7 +142,7 @@ public class AltaVideo extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
 		        userInfoStr = (String)comboBox1.getSelectedItem();
-		        System.out.println("ELEGÍ USER Y ES: "+ userInfoStr);  
+		        System.out.println("ELEGï¿½ USER Y ES: "+ userInfoStr);  
 				}
 		});
 		userInfo1.setBounds(23, 73, 96, 22);
@@ -157,22 +155,17 @@ public class AltaVideo extends JPanel {
 		ArrayList<Categoria> categorias = controladorCategoria.listarCategorias();
 		
 		
-		int tamanioarr = categorias.size()+1;
-		String[] array1 = new String[tamanioarr];
-		array1[0]="Sin Categoria";
-		for(int i = 1; i < array1.length; i++) { 
-			array1[i] = categorias.get(i-1).getNombre(); 
+		String[] array1 = new String[categorias.size()];
+		for(int i = 0; i < array1.length; i++) { 
+			array1[i] = categorias.get(i).getNombre(); 
 		};
+		catAsignar = "Sin Categoria"; // SI NO TOCA EL BOTON, SIMPLEMENTE LO CARGA COMO SIN CATEGORIAS
 		
 		JComboBox categoriaAsig = new JComboBox(array1);		
 		categoriaAsig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox12 = (JComboBox)e.getSource();
-				if (catAsignar == "Sin Categoria") {
-					catAsignar = null;
-				} else {
-					catAsignar = (String)comboBox12.getSelectedItem();
-				}
+				catAsignar = (String)comboBox12.getSelectedItem();
 		        System.out.println(catAsignar);
 			}
 		});

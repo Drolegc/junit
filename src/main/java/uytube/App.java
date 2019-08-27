@@ -72,6 +72,7 @@ public class App extends JFrame{
 		controllerUser.dejarDeSeguir("user2", "lorenzo");
 		*/
 		ICategoria controllerCategoria = new CategoriaController();
+		controllerCategoria.altaCategoria("Sin Categoria");
 		controllerCategoria.altaCategoria("Zombies");
 		controllerCategoria.altaCategoria("Monos");
 		
