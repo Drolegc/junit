@@ -70,6 +70,20 @@ public void listarCategoriasExistentes() {
 		
 	}
 
+	public String[] listarCategoriasName(){
+		
+		List<Categoria> categorias = (List<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();
+		mng.closeSession();
+		
+
+		String [] names = new String[categorias.size()];
+		
+		for(int i = 0; i<categorias.size();i++) {
+			names[i] = categorias.get(i).getNombre();
+		}
+		
+		return names;
+	}
 	public ArrayList<Categoria> listarCategorias() {
 		
 		ArrayList<Categoria> categorias = (ArrayList<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();

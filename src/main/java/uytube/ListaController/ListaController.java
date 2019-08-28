@@ -36,6 +36,11 @@ public class ListaController implements ILista {
 			List<Canal> canales = (List<Canal>) mng.getSessionManager().createQuery("From Canal").getResultList();
 			mng.closeSession();
 
+			//Al ser default hay que buscar la categoria llamada "Sin Categoria"
+			
+			Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", "Sin Categoria").getSingleResult();
+			mng.closeSession();
+			
 			System.out.println(canales.size());
 			for(Canal c: canales) {
 				System.out.println("Lista default");
