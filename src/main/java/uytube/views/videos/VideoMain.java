@@ -17,6 +17,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class VideoMain extends JPanel {
 
@@ -25,7 +28,6 @@ public class VideoMain extends JPanel {
 	 */
 	JFrame frame;
 	public VideoMain() {
-		setLayout(null);
 		
 		JButton btnNewButton1 = new JButton("AltaVideo");
 		btnNewButton1.addActionListener(new ActionListener() {
@@ -35,9 +37,15 @@ public class VideoMain extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnNewButton1.setBounds(55, 36, 89, 23);
-		add(btnNewButton1);
 		
+		JButton btnConsultaVideo = new JButton("Consulta Video");
+		btnConsultaVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConsultaVideo consultaV = new ConsultaVideo();
+				Frame.frame.setContentPane(consultaV);
+				Frame.frame.revalidate();
+			}
+		});
 		
 		
 		JButton btnVolver = new JButton("Volver");
@@ -48,9 +56,31 @@ public class VideoMain extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnVolver.setBounds(159, 254, 89, 23);
-		add(btnVolver);
+		
+		JButton btnValorarVideo = new JButton("Valorar Video");
+		btnValorarVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ValorarVideo valorov = new ValorarVideo();
+				Frame.frame.setContentPane(valorov);
+				Frame.frame.revalidate();
+			}
+		});
+		setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("55px"),
+				ColumnSpec.decode("193px"),},
+			new RowSpec[] {
+				RowSpec.decode("38px"),
+				RowSpec.decode("23px"),
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				RowSpec.decode("23px"),
+				RowSpec.decode("25px"),
+				RowSpec.decode("110px"),
+				RowSpec.decode("23px"),}));
+		add(btnNewButton1, "2, 2, left, fill");
+		add(btnConsultaVideo, "2, 4, left, fill");
+		add(btnVolver, "2, 8, right, fill");
+		add(btnValorarVideo, "2, 6, left, top");
 		
 	}
-
 }

@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 
 import uytube.UsuarioController.IUsuario;
 import uytube.UsuarioController.UsuarioController;
+import uytube.models.Canal;
 import uytube.models.Usuario;
 import uytube.views.Frame;
 
@@ -71,7 +72,6 @@ public class Seguir extends JPanel {
 		add(scrollPane_1);
 		
 		table_1 = new JTable();
-		table_1.setModel(tablemodel);
 		scrollPane_1.setViewportView(table_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -88,6 +88,9 @@ public class Seguir extends JPanel {
 				System.out.println("Siguiendo usuarios");
 				controller.seguirUsuario(nameUser_1, nameUser_2);
 				JOptionPane.showMessageDialog(null, nameUser_1+" sigue a "+nameUser_2);
+				UserMain main = new UserMain();
+				Frame.frame.setContentPane(main);
+				Frame.frame.revalidate();
 			}
 		});
 		btnConfirmar.setBounds(311, 242, 114, 25);
@@ -98,10 +101,40 @@ public class Seguir extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getValueIsAdjusting()) {
-					nameUser_1 = usuarios.get(e.getFirstIndex()).getNickname();
-					System.out.println(nameUser_1);
+					//Usuario seleccionado
+					nameUser_1 = usuarios.get(table.getSelectedRow()).getNickname();
+					
+					DefaultTableModel  tablemodel_2 = new DefaultTableModel(nombreColumnas, 0);
+					
+					//Canales que sigue el user seleccionado
+					List<Canal> canales = controller.listCanalesSeguidos(nameUser_1);
+					
+					for(Usuario u: usuarios) {
+						boolean esta = false;
+						
+						for(Canal c: canales) {
+							if(u.getNickname().equals(c.getNombre())) {
+								System.out.println(u.getNickname());
+								esta = true;
+							}
+						}
+						
+						if(!esta && !u.getNickname().equals(nameUser_1)) {
+							tablemodel_2.addRow(
+									new Object [] {
+											u.getNickname(),
+									}
+									);
+						}
+					}
+					
+					table_1.setModel(tablemodel_2);
+					table_1.revalidate();
+					table_1.repaint();
+
 				}
 			}
+			
 		});
 		
 		table_1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -109,8 +142,9 @@ public class Seguir extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getValueIsAdjusting()) {
-					nameUser_2 = usuarios.get(e.getFirstIndex()).getNickname();
-					System.out.println(nameUser_2);
+					
+					nameUser_2 = (String) table_1.getValueAt(table_1.getSelectedRow(),0);
+
 				}
 			}
 		});

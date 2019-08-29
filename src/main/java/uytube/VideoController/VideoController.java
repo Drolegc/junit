@@ -6,6 +6,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import uytube.models.Canal;
+import uytube.models.Categoria;
+import uytube.models.ValoracionVideo;
 import uytube.models.Video;
 import uytube.models.manager.Manager;
 
@@ -17,11 +19,20 @@ public class VideoController implements IVideo{
 				mana = Manager.getInstance();
 			}
 
-	public void altaVideo(Video vid, String usr) {
+	public void altaVideo(Video vid, String usr, String cate) {
 		// TODO Auto-generated method stub
 		
 		Canal canal = (Canal)mana.getSessionManager().createQuery("From Canal where nombre = :nombre").setParameter("nombre", usr).getSingleResult();
 		mana.closeSession();
+		vid.setCanal(canal);
+		
+		Categoria cat = (Categoria)mana.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", cate).getSingleResult();
+		mana.closeSession();
+		vid.setCategoria(cat);
+		
+		// PARA LUEGO,PASAR CANAL Y CATEGORIA AL VIEWS
+		
+		System.out.println(cat.getNombre());
 		
 		if(canal == null) {
 			System.out.println("Canal nulo");
@@ -29,7 +40,7 @@ public class VideoController implements IVideo{
 			System.out.println(canal.getDescripcion());
 		}
 		
-		vid.setCanal(canal);
+
 		
 		mana.startTransaction("Video", vid);
 		
@@ -50,9 +61,8 @@ public class VideoController implements IVideo{
 
 	public void consultaVideo(String titulito) {
 		// TODO Auto-generated method stub
-		/*Video vidReturn = (Video)mana.getSessionManager().createQuery("From Video where titulo= :titu").setParameter("titu", titulito).getSingleResult();
+		Video v = (Video)mana.getSessionManager().createQuery("From Video where nombre= :titu").setParameter("titu", titulito).getSingleResult();
 		mana.closeSession();
-		JOptionPane.showConfirmDialog(null, vidReturn.toString());*/
 	}
 
 	public void comentarVideo() {
@@ -60,9 +70,10 @@ public class VideoController implements IVideo{
 		
 	}
 
-	public void valorarVideo() {
+	public void valorarVideo(ValoracionVideo vv) {
 		// TODO Auto-generated method stub
 		
+		mana.startTransaction("ValoracionVideo", vv);
+		
 	}
-
 }

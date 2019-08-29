@@ -2,6 +2,9 @@ package uytube.views;
 
 import javax.swing.JPanel;
 import uytube.views.categorias.main;
+import uytube.views.listas.crear;
+import uytube.views.listas.inicio;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -77,6 +80,15 @@ public class Inicio extends JPanel {
 		add(btnCategorias, "4, 10");
 		
 		JButton btnListas = new JButton("Listas");
+		btnListas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				inicio init = new inicio();
+				Frame.frame.setContentPane(init);
+				Frame.frame.validate();
+				
+			}
+		});
 		add(btnListas, "4, 12");
 	}
 

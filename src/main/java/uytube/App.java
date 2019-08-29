@@ -60,15 +60,19 @@ public class App extends JFrame{
 
 		IUsuario controllerUser = new UsuarioController();
 		controllerUser.crearUsuario(new Usuario("user2", "user2", "user", "user",new Date(),"path"));
-		controllerUser.crearUsuario(new Usuario("userSecond", "userSecond", "user", "user",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("juancho", "juancho", "user", "user",new Date(),"path"));
 		controllerUser.crearUsuario(new Usuario("lorenzo", "lorenzo", "user", "user",new Date(),"path"));
 		
-		controllerUser.seguirUsuario("user2","userSecond");
+		/*
+		controllerUser.seguirUsuario("user2","juancho");
 		controllerUser.seguirUsuario("user2","lorenzo");
-		controllerUser.dejarDeSeguir("user2", "userSecond");
+		controllerUser.seguirUsuario("lorenzo","user2");
+		controllerUser.seguirUsuario("juancho","user2");
 		
-		
+		controllerUser.dejarDeSeguir("user2", "lorenzo");
+		*/
 		ICategoria controllerCategoria = new CategoriaController();
+		controllerCategoria.altaCategoria("Sin Categoria");
 		controllerCategoria.altaCategoria("Zombies");
 		controllerCategoria.altaCategoria("Monos");
 		

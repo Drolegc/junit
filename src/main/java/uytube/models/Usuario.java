@@ -30,7 +30,7 @@ public class Usuario {
 	@Column(name = "img")
 	private String img;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
 	private List<Canal> canalesSeguidos;
 
 	
@@ -115,15 +115,16 @@ public class Usuario {
 		
 		
 		Iterator<Canal> i = this.canalesSeguidos.iterator();
-		
+		Canal c = null;
 		while(i.hasNext()) {
-			Canal c = (Canal)i.next();
+			c = (Canal)i.next();
 			if(c.getNombre().equals(nameCanal)) {
 				System.out.println("Dejando se seguir a "+nameCanal);
-				canalesSeguidos.remove(c);
+				break;
 			}
 			
 		}
+		this.canalesSeguidos.remove(c);
 	}
 	
 	
