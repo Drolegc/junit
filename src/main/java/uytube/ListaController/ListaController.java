@@ -109,16 +109,16 @@ public class ListaController implements ILista {
 	public List<Lista> listarListas(String userName) {
 		// TODO Auto-generated method stub
 		
-		List<Lista> listas = (List<Lista>)mng.getSessionManager().createQuery("From Lista").getResultList();
+		List<Lista> listas = (List<Lista>)mng.getSessionManager().createQuery("From Lista where canal_nombre = :nombre").setParameter("nombre", userName).getResultList();
 		mng.closeSession();
 		
 		System.out.println("Listando listas");
 		for(Lista l: listas) {
 			if(l.getCategoria()!=null) {
-				System.out.println(l.getNombre() + " " + l.getCanal().getNombre()+" "+l.getId()+" "+l.getCategoria().getNombre());
+				System.out.println(l.getNombre() + " | " + l.getCanal().getNombre()+" | "+l.getId()+" | "+l.getCategoria().getNombre());
 			}
 			else {
-				System.out.println(l.getNombre()+" "+l.getCanal().getNombre()+" "+l.getId());
+				System.out.println(l.getNombre()+" | "+l.getCanal().getNombre()+" | "+l.getId());
 			}
 				
 		}

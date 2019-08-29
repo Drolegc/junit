@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class crear extends JPanel {
 	private JTextField nombreListaDefualt;
@@ -54,6 +56,7 @@ public class crear extends JPanel {
 				System.out.println(nombreListaDefualt.getText());
 				controller.crearLista(nombreListaDefualt.getText(), null, null, true, true);
 				JOptionPane.showMessageDialog(null, "Lista default cargada");
+				
 				inicio init = new inicio();
 				Frame.frame.setContentPane(init);
 				Frame.frame.revalidate();
@@ -88,6 +91,14 @@ public class crear extends JPanel {
 		}
 		
 		JComboBox comboBox = new JComboBox(array);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Cambiando");
+				System.out.println(comboBox.getSelectedIndex());
+			}
+		});
+		
+
 		
 		comboBox.setBounds(98, 142, 125, 22);
 		add(comboBox);
@@ -117,6 +128,7 @@ public class crear extends JPanel {
 		
 		
 		JComboBox comboBox_1 = new JComboBox(controllerCat.listarCategoriasName());
+		
 		comboBox_1.setBounds(108, 245, 125, 24);
 		add(comboBox_1);
 		
@@ -132,7 +144,9 @@ public class crear extends JPanel {
 				String nombreList = textField.getText();
 				
 				controller.crearLista(nombreList, categoria, user, isPrivate, false);
-				JOptionPane.showMessageDialog(null, "Lista default cargada");
+				controller.listarListas("user2");
+
+				JOptionPane.showMessageDialog(null, "Lista personalizada cargada");
 				inicio init = new inicio();
 				Frame.frame.setContentPane(init);
 				Frame.frame.revalidate();

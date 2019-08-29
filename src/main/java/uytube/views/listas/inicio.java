@@ -26,6 +26,7 @@ public class inicio extends JPanel {
 				Frame.frame.validate();
 			}
 		});
+		
 		btnCrear.setBounds(30, 41, 114, 25);
 		add(btnCrear);
 		
@@ -39,7 +40,17 @@ public class inicio extends JPanel {
 		});
 		btnVolver.setBounds(296, 240, 114, 25);
 		add(btnVolver);
+		
+		JButton btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				modificar mod = new modificar();
+				Frame.frame.setContentPane(mod);
+				Frame.frame.revalidate();
+			}
+		});
+		btnModificar.setBounds(30, 90, 114, 25);
+		add(btnModificar);
 
 	}
-
 }
