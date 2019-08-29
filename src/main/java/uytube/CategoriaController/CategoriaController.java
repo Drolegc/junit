@@ -31,7 +31,9 @@ public class CategoriaController implements ICategoria{
 	}
 	
 	private Categoria existeCategoria(String nombre) {
-		 return (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre",nombre).uniqueResult();
+		 Categoria c = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre",nombre).uniqueResult();
+		 mng.closeSession();
+		 return c;
 	}
 
 	public List<Video> consultarCategoria(String nombreCategoria) {

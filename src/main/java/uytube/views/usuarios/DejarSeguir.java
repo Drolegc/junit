@@ -111,9 +111,11 @@ public class DejarSeguir extends JPanel {
 								}
 								);
 					}
+					
 					table_1.setModel(tablemodel_2);
 					table_1.revalidate();
 					table_1.repaint();
+					
 				}
 			}
 		});
