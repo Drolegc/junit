@@ -1,45 +1,40 @@
-package uytube.views.usuarios;
+package resources.files;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
-import javassist.tools.framedump;
-import uytube.UsuarioController.UsuarioController;
-
-import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
+import uytube.UsuarioController.UsuarioController;
 import uytube.models.Usuario;
 import uytube.views.Frame;
+import uytube.views.usuarios.Editar;
+import uytube.views.usuarios.UserMain;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JSplitPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-public class Listar extends JPanel {
+public class Tablas extends JPanel{
 	private JTable table;
-
-	/**
-	 * Create the panel.
-	 */
-	private String [] nombreColumnas = {"Nombre","Apellido","Nickname","Correo","F.Nac"};
 	private String [][] datos ;
 	private JTable table_1;
 	private JFrame frame;
 	private Usuario user;
-	public Listar() {
-		setLayout(null);
+	public Tablas(String [] columnas,Class clase,String nombreClase) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		Class genericClass = null;
+		try {
+			genericClass = Class.forName("uytube.models." + nombreClase);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Object instance = genericClass.getDeclaredConstructor().newInstance();
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -56,7 +51,7 @@ public class Listar extends JPanel {
 		
 		UsuarioController controller = new UsuarioController();
 		ArrayList<Usuario> usuarios = controller.listaUsuarios();
-		DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
+		DefaultTableModel  tablemodel = new DefaultTableModel(columnas, 0);
 		table = new JTable();
 		for(Usuario u:usuarios) {
 			tablemodel.addRow(
@@ -69,7 +64,6 @@ public class Listar extends JPanel {
 					}
 			);
 		}
-		
 		table.setModel(tablemodel);
 		scrollPane.setViewportView(table);
 		
