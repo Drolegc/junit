@@ -1,25 +1,14 @@
 package uytube.views.videos;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-
-import uytube.views.Frame;
-import uytube.views.Inicio;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import uytube.views.Frame;
+import uytube.views.Inicio;
 
 public class VideoMain extends JPanel {
 
@@ -30,6 +19,7 @@ public class VideoMain extends JPanel {
 	public VideoMain() {
 		
 		JButton btnNewButton1 = new JButton("AltaVideo");
+		btnNewButton1.setBounds(55, 38, 107, 23);
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AltaVideo altaV = new AltaVideo();
@@ -39,6 +29,7 @@ public class VideoMain extends JPanel {
 		});
 		
 		JButton btnConsultaVideo = new JButton("Consulta Video");
+		btnConsultaVideo.setBounds(55, 72, 107, 23);
 		btnConsultaVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConsultaVideo consultaV = new ConsultaVideo();
@@ -49,6 +40,7 @@ public class VideoMain extends JPanel {
 		
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(185, 253, 63, 23);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Inicio inicio = new Inicio();
@@ -58,6 +50,7 @@ public class VideoMain extends JPanel {
 		});
 		
 		JButton btnValorarVideo = new JButton("Valorar Video");
+		btnValorarVideo.setBounds(55, 106, 107, 23);
 		btnValorarVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ValorarVideo valorov = new ValorarVideo();
@@ -65,22 +58,22 @@ public class VideoMain extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("55px"),
-				ColumnSpec.decode("193px"),},
-			new RowSpec[] {
-				RowSpec.decode("38px"),
-				RowSpec.decode("23px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("23px"),
-				RowSpec.decode("23px"),
-				RowSpec.decode("25px"),
-				RowSpec.decode("110px"),
-				RowSpec.decode("23px"),}));
-		add(btnNewButton1, "2, 2, left, fill");
-		add(btnConsultaVideo, "2, 4, left, fill");
-		add(btnVolver, "2, 8, right, fill");
-		add(btnValorarVideo, "2, 6, left, top");
+		setLayout(null);
+		add(btnNewButton1);
+		add(btnConsultaVideo);
+		add(btnVolver);
+		add(btnValorarVideo);
+		
+		JButton btnModificarVideo = new JButton("Modificar Video ");
+		btnModificarVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModificarDatosVideo ModifVideo = new ModificarDatosVideo();
+				Frame.frame.setContentPane(ModifVideo);
+				Frame.frame.revalidate();
+			}
+		});
+		btnModificarVideo.setBounds(55, 140, 107, 23);
+		add(btnModificarVideo);
 		
 	}
 }

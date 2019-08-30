@@ -1,9 +1,16 @@
 package uytube.views.videos;
 
-import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import com.toedter.calendar.JDateChooser;
 
 import uytube.CategoriaController.CategoriaController;
@@ -12,17 +19,7 @@ import uytube.VideoController.VideoController;
 import uytube.models.Categoria;
 import uytube.models.Usuario;
 import uytube.models.Video;
-import uytube.models.manager.Manager;
 import uytube.views.Frame;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.ComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 
 public class AltaVideo extends JPanel {
 	private JTextField userInfo;
@@ -108,6 +105,7 @@ public class AltaVideo extends JPanel {
 				videito.setDescripcion(descripcion.getText());
 				videito.setUrl(url.getText());
 				videito.setFecha(fecPub.getDate());
+				videito.setCategoria(new Categoria("Picachu"));
 				
 				
 				VideoController controladorVideo = new VideoController();
@@ -121,11 +119,11 @@ public class AltaVideo extends JPanel {
 			}
 		});
 		
-		btnOk.setBounds(46, 254, 89, 23);
+		btnOk.setBounds(30, 228, 89, 23);
 		add(btnOk);
 		
 		JLabel lblCategoraopcional = new JLabel("Categoria (Opcional)");
-		lblCategoraopcional.setBounds(275, 217, 122, 14);
+		lblCategoraopcional.setBounds(268, 203, 122, 14);
 		add(lblCategoraopcional);
 		
 		// BOTON DE ASIGNACION DE USUARIO
@@ -169,8 +167,19 @@ public class AltaVideo extends JPanel {
 		        System.out.println(catAsignar);
 			}
 		});
-		categoriaAsig.setBounds(275, 254, 96, 22);
+		categoriaAsig.setBounds(275, 228, 96, 22);
 		add(categoriaAsig);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VideoMain videos = new VideoMain();
+				Frame.frame.setContentPane(videos);
+				Frame.frame.validate();
+			}
+		});
+		btnVolver.setBounds(170, 266, 89, 23);
+		add(btnVolver);
 		
 		
 		

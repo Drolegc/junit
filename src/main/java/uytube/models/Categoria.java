@@ -25,11 +25,11 @@ public class Categoria {
 	}
 	public Categoria() {}
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 	public void setId(int id) {
 		this.id = id;

@@ -1,89 +1,107 @@
 package uytube.views.categorias;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import uytube.CategoriaController.CategoriaController;
+import uytube.VideoController.VideoController;
+import uytube.models.Categoria;
+import uytube.models.Video;
+import uytube.views.Frame;
+import uytube.views.usuarios.Editar;
 
 import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import uytube.views.Frame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
+import org.hibernate.mapping.Table;
 public class consulta extends JPanel {
-	private JTextField txtNombreCategoria;
-	private String nombre;
+
+	//Ventana principal
 	private JFrame frame;
+	//para poder volver al menu principal de categorias
 	private main miMain;
+	private JTable table;
 	
+	private String nombreColumna [] = {"Nombre"};
+	private Categoria categoria;
+	
+	ArrayList<Categoria> categorias;
+	//paso el frame principal por parametro	
 	public consulta() {
-		miMain = new main();		
 		setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(74dlu;default)"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(22dlu;default)"),
-				ColumnSpec.decode("max(59dlu;default)"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("77px"),
+				ColumnSpec.decode("198px"),
+				ColumnSpec.decode("117px"),},
 			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("247px"),
+				FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC,
+				RowSpec.decode("25px"),}));
 		
-		txtNombreCategoria = new JTextField();
-		txtNombreCategoria.setText("nombre de la categoria");
-		add(txtNombreCategoria, "2, 8, left, default");
-		txtNombreCategoria.setColumns(10);
+		JScrollPane scrollPane = new JScrollPane();
+		add(scrollPane, "2, 2, 3, 1, fill, fill");
 		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-								
-				CategoriaController categoria = new CategoriaController();
-				categoria.consultarCategoria(txtNombreCategoria.getText());
+		//Creo el controlador para poder llamar al listarCategorias()
+		CategoriaController controlador = new CategoriaController();
+		
+		//Creo un obj arrayList y le cargo el listar categorias
+		categorias = controlador.listarCategorias();
+		
+		//Creo la tabla y le paso los nombres de la categoria y un valor default
+		DefaultTableModel tableModel = new DefaultTableModel(nombreColumna,0);
+		table = new JTable();
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				//guardo en categoria lo seleccionado por el usuario para editar
+				categoria = categorias.get(e.getFirstIndex());
 			}
 		});
-		add(btnBuscar, "2, 10, left, default");
 		
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.addActionListener(new ActionListener() {
+		for(Categoria c:categorias) {
+			tableModel.addRow(new Object[] {
+					c.getNombre()}
+			);
+		}
+		
+		table.setModel(tableModel);
+		scrollPane.setViewportView(table);
+		
+		JButton btnNewButton = new JButton("Volver");
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Frame.frame.setContentPane(miMain);
 				Frame.frame.validate();
 			}
+			
 		});
-		add(btnVolver, "2, 18, left, default");
-
+		add(btnNewButton, "2, 4, left, top");
+		
+		JButton btnEditar = new JButton("Mostrar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				VideoController videoController = new VideoController();							
+				consultaMostrar muestro = new consultaMostrar(categoria);
+				Frame.frame.setContentPane(muestro);
+				Frame.frame.revalidate();
+			}
+		});
+		add(btnEditar, "4, 4, fill, top");
+		//lo cargo en miMain para poder ir y volver (navegabilidad)
+		miMain = new main();
 	}
-
 }

@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import uytube.models.ValoracionVideo;
+import uytube.models.Categoria;
 import uytube.models.Video;
 
 public interface IVideo {
 	public void altaVideo(Video vid, String usr, String cate);
 	public void modificarVideo();
-	public void consultaVideo(String titulito);
+	public Video consultaVideo(String titulito);
 	public void comentarVideo();
-	public void valorarVideo(ValoracionVideo vv);
+	public ArrayList<Video> listaVideos();
+	public ArrayList<Video> videoPorCategoria(Categoria cat);
 	public ArrayList<Video> obtenerVideosUsuario(String usuario);
-
+	public void valorarVideo(ValoracionVideo vv);
 }
 

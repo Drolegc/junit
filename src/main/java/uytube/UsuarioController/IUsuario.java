@@ -10,7 +10,7 @@ import uytube.models.Video;
 public interface IUsuario {
 	
 	public void crearUsuario(Usuario usuario);
-	public ArrayList<Usuario> consultarUsuario(String nickname);
+	public Usuario consultarUsuario(String nickname);
 	public List<Usuario> listaUsuarios();
 	
 	public List<Canal> listCanalesSeguidos(String name);

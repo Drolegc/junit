@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import uytube.models.Canal;
 import uytube.models.Categoria;
+import uytube.models.HibernateUtil;
 import uytube.models.Usuario;
 import uytube.models.ValoracionVideo;
 import uytube.models.Video;
@@ -16,6 +17,7 @@ import uytube.models.manager.Manager;
 public class VideoController implements IVideo{
 	//Variables de conexion
 			private Manager mana;
+	        private Object session;
 
 			public VideoController() {
 				mana = Manager.getInstance();
@@ -61,10 +63,11 @@ public class VideoController implements IVideo{
 		
 	}
 
-	public void consultaVideo(String titulito) {
+	public Video consultaVideo(String titulito) {
 		// TODO Auto-generated method stub
 		List<Video> videos = (List<Video>) mana.getSessionManager().createQuery("From Video where nombre= :titu").setParameter("titu", titulito).getSingleResult();
 		mana.closeSession();
+		return v;
 	}
 
 	public void comentarVideo() {
@@ -82,4 +85,34 @@ public class VideoController implements IVideo{
 		mana.startTransaction("ValoracionVideo", vv);
 		
 	}
+	public ArrayList<Video> listaVideosUsuario(String nombre) {
+		// TODO Auto-generated method stub
+		ArrayList<Video> Videos = (ArrayList<Video>)mana.getSessionManager().createQuery("from Video where canal.nombre = :nombre").setParameter("nombre", nombre).getResultList();
+		mana.closeSession();
+		return Videos;	}
+	public void editarVideo(Video video) {
+		// TODO Auto-generated method stub
+		
+	      	
+		
+	}
+	
+	public ArrayList<Video> listaVideos(){
+		
+		ArrayList<Video> videos = (ArrayList<Video>)mana.getSessionManager().createQuery("From Video").getResultList();
+		mana.closeSession();
+		return videos;
+	}
+	
+	public ArrayList<Video> videoPorCategoria(Categoria cat){
+		System.out.println(cat.getId());
+		ArrayList<Video> videos = (ArrayList<Video>)mana.getSessionManager().
+		createQuery("select v From Video as v, Categoria as c where c.id = v.categoria and c.id =:cat").
+		setParameter("cat", cat.getId()).
+		getResultList();
+		System.out.println(videos);
+		mana.closeSession();
+		return videos;
+	}
+		
 }

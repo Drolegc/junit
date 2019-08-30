@@ -31,7 +31,7 @@ public class HibernateUtil {
         settings.put("hibernate.connection.url", "jdbc:h2:~/test");
         settings.put("hibernate.connection.username", "sa");
         settings.put("hibernate.connection.password", "");
-        settings.put("hibernate.show_sql", "false");
+        settings.put("hibernate.show_sql", "true");
         settings.put("hibernate.hbm2ddl.auto", "create-drop");
 
         registryBuilder.applySettings(settings);
