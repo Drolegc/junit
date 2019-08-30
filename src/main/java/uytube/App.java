@@ -37,6 +37,7 @@ import uytube.VideoController.IVideo;
 import uytube.VideoController.VideoController;
 import uytube.models.HibernateUtil;
 import uytube.models.Usuario;
+import uytube.models.Video;
 import uytube.views.Frame;
 import uytube.views.Inicio;
 
@@ -59,9 +60,10 @@ public class App extends JFrame{
 		});
 
 		IUsuario controllerUser = new UsuarioController();
-		controllerUser.crearUsuario(new Usuario("user2", "user2", "user", "user",new Date(),"path"));
-		controllerUser.crearUsuario(new Usuario("juancho", "juancho", "user", "user",new Date(),"path"));
-		controllerUser.crearUsuario(new Usuario("lorenzo", "lorenzo", "user", "user",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("user2", "Silvio", "Sanchez", "silvio_69@hotmail.com",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("juancho", "Juan", "Garcia", "juanchi2@email.com",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("lolo", "Lorenzo", "user", "lolo2@email.com",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("youtuber", "Marcelo", "Castro", "marcelo@email.com",new Date(),"path"));
 		
 		/*
 		controllerUser.seguirUsuario("user2","juancho");
@@ -73,18 +75,28 @@ public class App extends JFrame{
 		*/
 		ICategoria controllerCategoria = new CategoriaController();
 		controllerCategoria.altaCategoria("Sin Categoria");
-		controllerCategoria.altaCategoria("Zombies");
-		controllerCategoria.altaCategoria("Monos");
+		controllerCategoria.altaCategoria("Estilo de vida");
+		controllerCategoria.altaCategoria("Musica");
+		controllerCategoria.altaCategoria("Ciencia");
+		controllerCategoria.altaCategoria("Tecnologia");
+		controllerCategoria.altaCategoria("Vlog");
+		controllerCategoria.altaCategoria("Virales");
+		
 		
 		ILista controllerLista = new ListaController();
-		
 		//Lista default
 		controllerLista.crearLista("Ver mas tardes", null, null, true, true);
-		controllerLista.crearLista("listaPer", "Zombies", "user2", true, false);
+		controllerLista.crearLista("listaPer", "Ciencia", "user2", true, false);
 		controllerLista.listarListas("user2");
-		controllerLista.modificarLista(6,"Monos", false);
+		controllerLista.modificarLista(6,"Ciencia", false);
 		controllerLista.listarListas("user2");
 		
+		
+		//videos
+		/*IVideo controllervideo = new VideoController();
+		Video vid = new Video().);;
+		controllervideo.altaVideo(vid, "youtuber", "Vlog");
+		*/
 		System.out.println("Fin");
 	}
 
