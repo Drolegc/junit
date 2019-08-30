@@ -5,6 +5,7 @@ import java.util.List;
 
 import uytube.models.Canal;
 import uytube.models.Usuario;
+import uytube.models.Video;
 
 public interface IUsuario {
 	

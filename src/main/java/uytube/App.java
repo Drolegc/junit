@@ -81,9 +81,7 @@ public class App extends JFrame{
 		//Lista default
 		controllerLista.crearLista("Ver mas tardes", null, null, true, true);
 		controllerLista.crearLista("listaPer", "Zombies", "user2", true, false);
-		controllerLista.listarListas("user2");
 		controllerLista.modificarLista(6,"Monos", false);
-		controllerLista.listarListas("user2");
 		
 		System.out.println("Fin");
 	}

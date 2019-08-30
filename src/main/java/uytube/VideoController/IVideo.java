@@ -1,5 +1,6 @@
 package uytube.VideoController;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import uytube.models.ValoracionVideo;
@@ -11,6 +12,7 @@ public interface IVideo {
 	public void consultaVideo(String titulito);
 	public void comentarVideo();
 	public void valorarVideo(ValoracionVideo vv);
+	public ArrayList<Video> obtenerVideosUsuario(String usuario);
 
 }
 

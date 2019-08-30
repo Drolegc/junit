@@ -1,5 +1,6 @@
 package uytube.ListaController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import uytube.models.manager.Manager;
 import uytube.models.Canal;
 import uytube.models.Categoria;
 import uytube.models.Lista;
+import uytube.models.Video;
 
 public class ListaController implements ILista {
 

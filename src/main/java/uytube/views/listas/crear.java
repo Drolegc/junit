@@ -145,7 +145,6 @@ public class crear extends JPanel {
 				
 				controller.crearLista(nombreList, categoria, user, isPrivate, false);
 				controller.listarListas("user2");
-
 				JOptionPane.showMessageDialog(null, "Lista personalizada cargada");
 				inicio init = new inicio();
 				Frame.frame.setContentPane(init);

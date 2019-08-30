@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import uytube.views.Frame;
 import uytube.views.Inicio;
+import uytube.views.usuarios.consultar.ConsultarMain;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.event.ActionListener;
@@ -83,8 +84,8 @@ public class UserMain extends JPanel {
 		JButton btnNewButton_2 = new JButton("Consultar usuario");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Buscar buscar = new Buscar();
-				Frame.frame.setContentPane(buscar);
+				ConsultarMain Consultar = new ConsultarMain();
+				Frame.frame.setContentPane(Consultar);
 				Frame.frame.revalidate();				
 				
 			}

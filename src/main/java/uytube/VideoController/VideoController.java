@@ -1,5 +1,6 @@
 package uytube.VideoController;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import uytube.models.Canal;
 import uytube.models.Categoria;
+import uytube.models.Usuario;
 import uytube.models.ValoracionVideo;
 import uytube.models.Video;
 import uytube.models.manager.Manager;
@@ -61,7 +63,7 @@ public class VideoController implements IVideo{
 
 	public void consultaVideo(String titulito) {
 		// TODO Auto-generated method stub
-		Video v = (Video)mana.getSessionManager().createQuery("From Video where nombre= :titu").setParameter("titu", titulito).getSingleResult();
+		List<Video> videos = (List<Video>) mana.getSessionManager().createQuery("From Video where nombre= :titu").setParameter("titu", titulito).getSingleResult();
 		mana.closeSession();
 	}
 
@@ -69,7 +71,11 @@ public class VideoController implements IVideo{
 		// TODO Auto-generated method stub
 		
 	}
-
+	public ArrayList<Video> obtenerVideosUsuario(String usuario) {
+		ArrayList<Video> v = (ArrayList<Video>)mana.getSessionManager().
+							createQuery("from Video where canal_nombre = :canal").setParameter("canal", usuario).getResultList();
+		return v;
+	}
 	public void valorarVideo(ValoracionVideo vv) {
 		// TODO Auto-generated method stub
 		

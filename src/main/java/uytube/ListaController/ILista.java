@@ -1,5 +1,6 @@
 package uytube.ListaController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uytube.models.Lista;
@@ -12,5 +13,4 @@ public interface ILista {
 	public void agregarVideo();
 	public void quitarVideo();
 	public List<Lista> listarListas(String userName);
-
 }
