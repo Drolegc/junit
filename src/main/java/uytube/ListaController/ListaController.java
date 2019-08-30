@@ -145,7 +145,6 @@ public class ListaController implements ILista {
 		createQuery("select l From Lista as l, Categoria as c where c.id = l.categoria and c.id =:cat").
 		setParameter("cat", cat.getId()).
 		getResultList();
-		System.out.println(listas);
 		mng.closeSession();
 		return listas;
 	}
