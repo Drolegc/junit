@@ -97,7 +97,7 @@ public class DejarSeguir extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				if(!e.getValueIsAdjusting()) {
 					//Obtenemos el user seleccionado
-					nameUser_1 = usuarios.get(table.getSelectedRow()).getNombre();
+					nameUser_1 = usuarios.get(table.getSelectedRow()).getNickname();
 					List<Canal> canales = controller.listCanalesSeguidos(nameUser_1);
 					System.out.println("Seguidores de "+nameUser_1+": ");
 					
@@ -125,7 +125,7 @@ public class DejarSeguir extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getValueIsAdjusting()) {
-					nameUser_2 = usuarios.get(table_1.getSelectedRow()).getNombre();
+					nameUser_2 = usuarios.get(table_1.getSelectedRow()).getNickname();
 				}
 			}
 		});

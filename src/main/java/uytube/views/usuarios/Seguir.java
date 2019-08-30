@@ -107,6 +107,7 @@ public class Seguir extends JPanel {
 					DefaultTableModel  tablemodel_2 = new DefaultTableModel(nombreColumnas, 0);
 					
 					//Canales que sigue el user seleccionado
+					System.out.println(nameUser_1);
 					List<Canal> canales = controller.listCanalesSeguidos(nameUser_1);
 					
 					for(Usuario u: usuarios) {

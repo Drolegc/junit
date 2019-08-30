@@ -87,7 +87,7 @@ public class crear extends JPanel {
 		List<Usuario> usuarios = controladorUsuario.listaUsuarios();	
 		String[] array = new String[usuarios.size()];
 		for(int i = 0; i < array.length; i++) {
-		    array[i] = usuarios.get(i).getNombre();
+		    array[i] = usuarios.get(i).getNickname();
 		}
 		
 		JComboBox comboBox = new JComboBox(array);
