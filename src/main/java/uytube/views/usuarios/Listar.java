@@ -30,9 +30,7 @@ import java.awt.event.ActionEvent;
 public class Listar extends JPanel {
 	private JTable table;
 
-	/**
-	 * Create the panel.
-	 */
+	
 	private String [] nombreColumnas = {"Nombre","Apellido","Nickname","Correo","F.Nac"};
 	private String [][] datos ;
 	private JTable table_1;

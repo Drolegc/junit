@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import uytube.VideoController.VideoController;
+import uytube.models.Categoria;
 import uytube.models.Video;
 import uytube.models.manager.Manager;
 import uytube.views.Frame;
@@ -106,6 +107,7 @@ public class AltaVideo extends JPanel {
 				videito.setDescripcion(descripcion.getText());
 				videito.setUrl(url.getText());
 				videito.setFecha(fecPub.getDate());
+				videito.setCategoria(new Categoria("Picachu"));
 				
 				VideoController controladorVideo = new VideoController();
 				controladorVideo.altaVideo(videito, userInfo.getText());

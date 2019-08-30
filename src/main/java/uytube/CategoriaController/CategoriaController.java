@@ -59,6 +59,8 @@ public class CategoriaController implements ICategoria{
 		
 	}
 	
+	
+	
 public void listarCategoriasExistentes() {
 		
 		List<Categoria> categorias = (List<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();
@@ -76,7 +78,7 @@ public void listarCategoriasExistentes() {
 		mng.closeSession();
 		
 		for(Categoria c:categorias) {
-			System.out.println(c.getNombre());
+			System.out.println(c.getNombre());			
 		}
 		
 		return categorias;

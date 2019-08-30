@@ -37,6 +37,7 @@ import uytube.VideoController.IVideo;
 import uytube.VideoController.VideoController;
 import uytube.models.HibernateUtil;
 import uytube.models.Usuario;
+import uytube.models.Video;
 import uytube.views.Frame;
 import uytube.views.Inicio;
 
@@ -73,6 +74,12 @@ public class App extends JFrame{
 		controllerCategoria.altaCategoria("Monos");
 		
 		ILista controllerLista = new ListaController();
+	
+		/*IVideo controllerVideo = new VideoController();
+		Video video = new Video();
+		video.setCanal();
+		video.se
+		controllerVideo.altaVideo(, "user2");*/
 		
 		//Lista default
 		controllerLista.crearLista("Ver mas tardes", null, null, true, true);

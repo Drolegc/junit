@@ -1,17 +1,22 @@
 package uytube.VideoController;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import uytube.models.Canal;
+import uytube.models.Categoria;
+import uytube.models.HibernateUtil;
+import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.models.manager.Manager;
 
 public class VideoController implements IVideo{
 	//Variables de conexion
 			private Manager mana;
+	        private Object session;
 
 			public VideoController() {
 				mana = Manager.getInstance();
@@ -64,5 +69,23 @@ public class VideoController implements IVideo{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public ArrayList<Video> listaVideos(){
+		
+		ArrayList<Video> videos = (ArrayList<Video>)mana.getSessionManager().createQuery("From Video").getResultList();
+		mana.closeSession();
+		return videos;
+	}
+	
+	public ArrayList<Video> videoPorCategoria(Categoria cat){
+		System.out.println(cat.getId());
+		ArrayList<Video> videos = (ArrayList<Video>)mana.getSessionManager().
+		createQuery("select v From Video as v, Categoria as c where c.id = v.categoria and c.id =:cat").
+		setParameter("cat", cat.getId()).
+		getResultList();
+		System.out.println(videos);
+		mana.closeSession();
+		return videos;
+	}
+		
 }

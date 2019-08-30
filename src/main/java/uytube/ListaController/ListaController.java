@@ -1,5 +1,6 @@
 package uytube.ListaController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import uytube.models.manager.Manager;
 import uytube.models.Canal;
 import uytube.models.Categoria;
 import uytube.models.Lista;
+import uytube.models.Video;
 
 public class ListaController implements ILista {
 
@@ -118,6 +120,17 @@ public class ListaController implements ILista {
 				
 		}
 		
+		return listas;
+	}
+	
+	public ArrayList<Lista> ListaPorCategoria(Categoria cat){
+		System.out.println(cat.getId());
+		ArrayList<Lista> listas = (ArrayList<Lista>)mng.getSessionManager().
+		createQuery("select l From Lista as l, Categoria as c where c.id = l.categoria and c.id =:cat").
+		setParameter("cat", cat.getId()).
+		getResultList();
+		System.out.println(listas);
+		mng.closeSession();
 		return listas;
 	}
 
