@@ -88,7 +88,7 @@ public class App extends JFrame{
 		controllerLista.crearLista("Ver mas tardes", null, null, true, true);
 		controllerLista.crearLista("listaPer", "Ciencia", "user2", true, false);
 		controllerLista.listarListas("user2");
-		controllerLista.modificarLista(6,"Ciencia", false);
+		//controllerLista.modificarLista(6,"Ciencia", false);
 		controllerLista.listarListas("user2");
 		
 		

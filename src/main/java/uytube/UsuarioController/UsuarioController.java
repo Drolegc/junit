@@ -31,7 +31,7 @@ public class UsuarioController implements IUsuario{
 		this.session = null;
 		this.transaction = null;
 		
-		Canal canal = new Canal(usuario.getNombre(),"My first channel",usuario);
+		Canal canal = new Canal(usuario.getNickname(),"My first channel",usuario);
 		
 	    try {
 	        session = HibernateUtil.getSessionFactory().openSession();
@@ -112,14 +112,14 @@ public class UsuarioController implements IUsuario{
 	      }		
 	}
 
-	public void seguirUsuario(String nameUser,String nameCanal) {
+	public void seguirUsuario(String nickUser,String nameCanal) {
 		// TODO Auto-generated method stub	
 		
 		//Usuario sigue canales
 		
 		//Obtener el usuario y luego el canal
 		
-		Usuario user = (Usuario)mng.getSessionManager().createQuery("From Usuario where nombre = :nameUser").setParameter("nameUser", nameUser).getSingleResult();
+		Usuario user = (Usuario)mng.getSessionManager().createQuery("From Usuario where nickname = :nameUser").setParameter("nameUser", nickUser).getSingleResult();
 		mng.closeSession();
 		
 		Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombreCanal").setParameter("nombreCanal", nameCanal).getSingleResult();
@@ -150,9 +150,9 @@ public class UsuarioController implements IUsuario{
 		
 		return user;
 	}
-	public void dejarDeSeguir(String nameUser,String nameCanal) {
+	public void dejarDeSeguir(String nickUser,String nameCanal) {
 		// TODO Auto-generated method stub
-		Usuario user = (Usuario)mng.getSessionManager().createQuery("From Usuario where nombre = :nameUser").setParameter("nameUser", nameUser).getSingleResult();
+		Usuario user = (Usuario)mng.getSessionManager().createQuery("From Usuario where nickname = :nameUser").setParameter("nameUser", nickUser).getSingleResult();
 		mng.closeSession();
 		
 		Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombreCanal").setParameter("nombreCanal", nameCanal).getSingleResult();
@@ -165,9 +165,9 @@ public class UsuarioController implements IUsuario{
 		
 	}
 
-	public void listarSeguidores(String nameUser) {
+	public void listarSeguidores(String nickUser) {
 		
-		Usuario user = (Usuario)mng.getSessionManager().createQuery("From Usuario where nombre = :nameUser").setParameter("nameUser", nameUser).getSingleResult();
+		Usuario user = (Usuario)mng.getSessionManager().createQuery("From Usuario where nickname = :nameUser").setParameter("nameUser", nickUser).getSingleResult();
 		mng.closeSession();
 		
 		System.out.println(" :: Siguiendo :: ");

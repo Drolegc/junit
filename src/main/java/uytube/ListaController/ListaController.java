@@ -19,7 +19,7 @@ public class ListaController implements ILista {
 		mng = Manager.getInstance();
 	}
 	
-	public void crearLista(String listaName,String categoria,String nombreUser,boolean privado,boolean Default) {
+	public void crearLista(String listaName,String categoria,String nickUser,boolean privado,boolean Default) {
 		// TODO Auto-generated method stub
 		
 		//POR EL MOMENTO ESTAMOS CREANDO UNA LISTA DEFAULT
@@ -60,7 +60,14 @@ public class ListaController implements ILista {
 			 * buscamos el canal 
 			 * 
 			 * */
-			Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombre").setParameter("nombre", nombreUser).getSingleResult();
+			/*
+			System.out.println("Canales: ");
+			
+			List<Canal> canales = (List<Canal>)mng.getSessionManager().createQuery("From Canal").getResultList();
+			mng.closeSession();
+			*/
+			
+			Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombre").setParameter("nombre", nickUser).getSingleResult();
 			mng.closeSession();
 			
 			Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", categoria).getSingleResult();
@@ -80,6 +87,10 @@ public class ListaController implements ILista {
 		// TODO Auto-generated method stub
 		
 		//Obtener lista segun id
+		
+		List<Lista> listas = (List<Lista>)mng.getSessionManager().createQuery("From Lista").getResultList();
+		mng.closeSession();
+		
 		
 		Lista list = (Lista)mng.getSessionManager().createQuery("From Lista where id = :id").setParameter("id", id).getSingleResult();
 		mng.closeSession();
@@ -108,10 +119,10 @@ public class ListaController implements ILista {
 		
 	}
 
-	public List<Lista> listarListas(String userName) {
+	public List<Lista> listarListas(String nickUser) {
 		// TODO Auto-generated method stub
 		
-		List<Lista> listas = (List<Lista>)mng.getSessionManager().createQuery("From Lista where canal_nombre = :nombre").setParameter("nombre", userName).getResultList();
+		List<Lista> listas = (List<Lista>)mng.getSessionManager().createQuery("From Lista where canal_nombre = :nombre").setParameter("nombre", nickUser).getResultList();
 		mng.closeSession();
 		
 		System.out.println("Listando listas");
