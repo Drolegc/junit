@@ -44,8 +44,6 @@ public class VideoController implements IVideo{
 			System.out.println(canal.getDescripcion());
 		}
 		
-
-		
 		mana.startTransaction("Video", vid);
 		
 		
@@ -53,7 +51,9 @@ public class VideoController implements IVideo{
 		mana.closeSession();
 		
 		for(Video v: videos) {
-			System.out.println("Nombre: "+v.getNombre()+" Canal: "+v.getCanal()+" Categoria: "+v.getCategoria());
+			//System.out.println("Nombre: "+v.getNombre()+" Canal: "+v.getCanal()+" Categoria: "+v.getCategoria());
+			System.out.println(v.toString());
+			
 		}
 		
 	}

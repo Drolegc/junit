@@ -29,7 +29,7 @@ public class AltaVideo extends JPanel {
 	private JTextField descrip;
 	private VideoMain main;
 	private Video videito;
-	private String userInfoStr;
+	private String nickInfoStr;
 	private String catAsignar;
 	
 	/**
@@ -104,13 +104,11 @@ public class AltaVideo extends JPanel {
 				videito.setDuracion(duracion.getText());
 				videito.setDescripcion(descripcion.getText());
 				videito.setUrl(url.getText());
-				videito.setFecha(fecPub.getDate());
-				videito.setCategoria(new Categoria("Picachu"));
-				
+				videito.setFecha(fecPub.getDate());			
 				
 				VideoController controladorVideo = new VideoController();
-				System.out.println(userInfoStr);
-				controladorVideo.altaVideo(videito, userInfoStr, catAsignar);
+				System.out.println(nickInfoStr);
+				controladorVideo.altaVideo(videito, nickInfoStr, catAsignar);
 
 				JOptionPane.showMessageDialog(null, "Video dado de alta correctamente");
 				
@@ -132,15 +130,15 @@ public class AltaVideo extends JPanel {
 		ArrayList<Usuario> usuarios = controladorUsuario.listaUsuarios();	
 		String[] array = new String[usuarios.size()];
 		for(int i = 0; i < array.length; i++) {
-		    array[i] = usuarios.get(i).getNombre();
+		    array[i] = usuarios.get(i).getNickname();
 		}
 		
 		JComboBox userInfo1 = new JComboBox(array);
 		userInfo1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
-		        userInfoStr = (String)comboBox1.getSelectedItem();
-		        System.out.println("ELEG� USER Y ES: "+ userInfoStr);  
+		        nickInfoStr = (String)comboBox1.getSelectedItem();
+		        System.out.println("ELEG� USER Y ES: "+ nickInfoStr);  
 				}
 		});
 		userInfo1.setBounds(23, 73, 96, 22);

@@ -35,14 +35,14 @@ public class ListarVideosUsuario extends JPanel {
 		
 		
 		VideoController controller = new VideoController();
-		ArrayList<Video> Videos = controller.listaVideosUsuario(usuario.getNombre());
+		ArrayList<Video> Videos = controller.listaVideosUsuario(usuario.getNickname());
 		DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
 		JTable table = new JTable();
 		for(Video v:Videos) {
 			tablemodel.addRow(
 					new Object[] {
 							v.getNombre(),
-							v.getCategoria(),
+							v.getCategoria().getNombre(),
 							v.getFecha(),
 							v.getUrl(),
 							
