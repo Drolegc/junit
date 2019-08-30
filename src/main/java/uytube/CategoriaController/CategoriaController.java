@@ -31,7 +31,9 @@ public class CategoriaController implements ICategoria{
 	}
 	
 	private Categoria existeCategoria(String nombre) {
-		 return (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre",nombre).uniqueResult();
+		 Categoria c = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre",nombre).uniqueResult();
+		 mng.closeSession();
+		 return c;
 	}
 
 	public List<Video> consultarCategoria(String nombreCategoria) {
@@ -72,6 +74,20 @@ public void listarCategoriasExistentes() {
 		
 	}
 
+	public String[] listarCategoriasName(){
+		
+		List<Categoria> categorias = (List<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();
+		mng.closeSession();
+		
+
+		String [] names = new String[categorias.size()];
+		
+		for(int i = 0; i<categorias.size();i++) {
+			names[i] = categorias.get(i).getNombre();
+		}
+		
+		return names;
+	}
 	public ArrayList<Categoria> listarCategorias() {
 		
 		ArrayList<Categoria> categorias = (ArrayList<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();

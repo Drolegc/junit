@@ -1,22 +1,14 @@
 package uytube.views.videos;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-
-import uytube.views.Frame;
-import uytube.views.Inicio;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import uytube.views.Frame;
+import uytube.views.Inicio;
 
 public class VideoMain extends JPanel {
 
@@ -25,9 +17,9 @@ public class VideoMain extends JPanel {
 	 */
 	JFrame frame;
 	public VideoMain() {
-		setLayout(null);
 		
 		JButton btnNewButton1 = new JButton("AltaVideo");
+		btnNewButton1.setBounds(55, 38, 107, 23);
 		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AltaVideo altaV = new AltaVideo();
@@ -35,12 +27,20 @@ public class VideoMain extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnNewButton1.setBounds(55, 36, 89, 23);
-		add(btnNewButton1);
 		
+		JButton btnConsultaVideo = new JButton("Consulta Video");
+		btnConsultaVideo.setBounds(55, 72, 107, 23);
+		btnConsultaVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConsultaVideo consultaV = new ConsultaVideo();
+				Frame.frame.setContentPane(consultaV);
+				Frame.frame.revalidate();
+			}
+		});
 		
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(185, 253, 63, 23);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Inicio inicio = new Inicio();
@@ -48,9 +48,32 @@ public class VideoMain extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnVolver.setBounds(159, 254, 89, 23);
+		
+		JButton btnValorarVideo = new JButton("Valorar Video");
+		btnValorarVideo.setBounds(55, 106, 107, 23);
+		btnValorarVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ValorarVideo valorov = new ValorarVideo();
+				Frame.frame.setContentPane(valorov);
+				Frame.frame.revalidate();
+			}
+		});
+		setLayout(null);
+		add(btnNewButton1);
+		add(btnConsultaVideo);
 		add(btnVolver);
+		add(btnValorarVideo);
+		
+		JButton btnModificarVideo = new JButton("Modificar Video ");
+		btnModificarVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModificarDatosVideo ModifVideo = new ModificarDatosVideo();
+				Frame.frame.setContentPane(ModifVideo);
+				Frame.frame.revalidate();
+			}
+		});
+		btnModificarVideo.setBounds(55, 140, 107, 23);
+		add(btnModificarVideo);
 		
 	}
-
 }

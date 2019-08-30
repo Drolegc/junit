@@ -1,21 +1,19 @@
 package uytube.views;
 
-import javax.swing.JPanel;
-import uytube.views.categorias.main;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
-import uytube.models.Usuario;
+import uytube.views.categorias.main;
+import uytube.views.listas.inicio;
 import uytube.views.usuarios.UserMain;
 import uytube.views.videos.VideoMain;
 
@@ -77,6 +75,15 @@ public class Inicio extends JPanel {
 		add(btnCategorias, "4, 10");
 		
 		JButton btnListas = new JButton("Listas");
+		btnListas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				inicio init = new inicio();
+				Frame.frame.setContentPane(init);
+				Frame.frame.validate();
+				
+			}
+		});
 		add(btnListas, "4, 12");
 	}
 

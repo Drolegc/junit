@@ -75,36 +75,20 @@ public class Buscar extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(textField.getText());
 				UsuarioController controller = new UsuarioController();
-				ArrayList<Usuario> usuarios = controller.consultarUsuario(textField.getText());
+				user = controller.consultarUsuario(textField.getText());
 				DefaultTableModel  model = new DefaultTableModel(nombreColumnas, 0);
-				System.out.println(usuarios);
-				for(Usuario u:usuarios) {
-					System.out.println(u.getNombre());
-					model.addRow(
-							new Object[] {
-									u.getNombre(),
-									u.getApellido(),
-									u.getNickname(),
-									u.getCorreo(),
-									u.getFnacimiento()
-							}
-					);
-					user = new Usuario(
-							u.getNickname(),
-							u.getNombre(),
-							u.getApellido(),
-							u.getCorreo(),
-							u.getFnacimiento(),
-							u.getImg()
-					);
-				}
+				model.addRow(
+						new Object[] {
+								user.getNombre(),
+								user.getApellido(),
+								user.getNickname(),
+								user.getCorreo(),
+								user.getFnacimiento()
+						}
+				);
 				table.setModel(model);
-				if(usuarios.size()>0) {
-					add(btnEditarUsuario, "5, 10, fill, center");		
-					
-				}else {
-					remove(btnEditarUsuario);
-				}
+				add(btnEditarUsuario, "5, 10, fill, center");		
+
 			}
 		});
 		

@@ -60,34 +60,43 @@ public class App extends JFrame{
 		});
 
 		IUsuario controllerUser = new UsuarioController();
-		controllerUser.crearUsuario(new Usuario("user2", "user2", "user", "user",new Date(),"path"));
-		controllerUser.crearUsuario(new Usuario("userSecond", "userSecond", "user", "user",new Date(),"path"));
-		controllerUser.crearUsuario(new Usuario("lorenzo", "lorenzo", "user", "user",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("user2", "Silvio", "Sanchez", "silvio_69@hotmail.com",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("juancho", "Juan", "Garcia", "juanchi2@email.com",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("lolo", "Lorenzo", "user", "lolo2@email.com",new Date(),"path"));
+		controllerUser.crearUsuario(new Usuario("youtuber", "Marcelo", "Castro", "marcelo@email.com",new Date(),"path"));
 		
-		controllerUser.seguirUsuario("user2","userSecond");
+		/*
+		controllerUser.seguirUsuario("user2","juancho");
 		controllerUser.seguirUsuario("user2","lorenzo");
-		controllerUser.dejarDeSeguir("user2", "userSecond");
+		controllerUser.seguirUsuario("lorenzo","user2");
+		controllerUser.seguirUsuario("juancho","user2");
 		
-		
+		controllerUser.dejarDeSeguir("user2", "lorenzo");
+		*/
 		ICategoria controllerCategoria = new CategoriaController();
-		controllerCategoria.altaCategoria("Zombies");
-		controllerCategoria.altaCategoria("Monos");
+		controllerCategoria.altaCategoria("Sin Categoria");
+		controllerCategoria.altaCategoria("Estilo de vida");
+		controllerCategoria.altaCategoria("Musica");
+		controllerCategoria.altaCategoria("Ciencia");
+		controllerCategoria.altaCategoria("Tecnologia");
+		controllerCategoria.altaCategoria("Vlog");
+		controllerCategoria.altaCategoria("Virales");
+		
 		
 		ILista controllerLista = new ListaController();
-	
-		/*IVideo controllerVideo = new VideoController();
-		Video video = new Video();
-		video.setCanal();
-		video.se
-		controllerVideo.altaVideo(, "user2");*/
-		
 		//Lista default
 		controllerLista.crearLista("Ver mas tardes", null, null, true, true);
-		controllerLista.crearLista("listaPer", "Zombies", "user2", true, false);
+		controllerLista.crearLista("listaPer", "Ciencia", "user2", true, false);
 		controllerLista.listarListas("user2");
-		controllerLista.modificarLista(6,"Monos", false);
+		controllerLista.modificarLista(6,"Ciencia", false);
 		controllerLista.listarListas("user2");
 		
+		
+		//videos
+		/*IVideo controllervideo = new VideoController();
+		Video vid = new Video().);;
+		controllervideo.altaVideo(vid, "youtuber", "Vlog");
+		*/
 		System.out.println("Fin");
 	}
 

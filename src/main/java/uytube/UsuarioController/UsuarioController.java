@@ -74,13 +74,13 @@ public class UsuarioController implements IUsuario{
 	      }		
 		return usuarios;
 	}
-	public ArrayList<Usuario> consultarUsuario(String nickname) {
+	public Usuario consultarUsuario(String nickname) {
 		this.session = null;
 		System.out.println(nickname);
-		ArrayList<Usuario> usuarios = null;
+		Usuario usuario = null;
 	    try {
 	        session = HibernateUtil.getSessionFactory().openSession();
-	        usuarios = (ArrayList<Usuario>)session.createQuery("From Usuario where nickname=:nickname").setParameter("nickname", nickname).getResultList();
+	        usuario = (Usuario)session.createQuery("From Usuario where nickname=:nickname").setParameter("nickname", nickname).getSingleResult();
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	      } finally {
@@ -88,7 +88,7 @@ public class UsuarioController implements IUsuario{
 	          session.close();
 	        }
 	      }		
-		return usuarios;
+		return usuario;
 	}	
 	public void modificarUsuario(Usuario usuario) {
 		this.session = null;
@@ -133,12 +133,11 @@ public class UsuarioController implements IUsuario{
 		
 	}
 	
-	public void listCanalesSeguidos(String name) {
+	public List<Canal> listCanalesSeguidos(String name) {
 		
 		Usuario user = (Usuario) mng.getSessionManager().createQuery("From Usuario where nombre = :nombre").setParameter("nombre",name).getSingleResult();
-		for(Canal c:user.getCanalesSeguidos()) {
-			System.out.println(c.getNombre());
-		}
+		
+		return user.getCanalesSeguidos();
 		
 	}
 

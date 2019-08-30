@@ -12,6 +12,7 @@ public interface ICategoria {
 	public List<Video> consultarCategoria(String nombreCategoria);
 	public void listarCategoriasExistentes();
 	public ArrayList<Categoria> listarCategorias();
+	public String[] listarCategoriasName();
 	public void modificarCategoria(Categoria nuevoNombre);
 	
 }
