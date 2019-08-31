@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.swing.JOptionPane;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import uytube.models.Canal;
 import uytube.models.Categoria;
@@ -16,9 +21,16 @@ import uytube.models.manager.Manager;
 
 public class VideoController implements IVideo{
 	//Variables de conexion
+private Manager mng;
+	
+	private Session session2;
+	private Transaction transaction2;
+	private static EntityManager manager;
+	private static EntityManagerFactory emf;
 			private Manager mana;
 	        private Object session;
-
+			private Object transaction;
+        
 			public VideoController() {
 				mana = Manager.getInstance();
 			}
@@ -58,8 +70,28 @@ public class VideoController implements IVideo{
 		
 	}
 
-	public void modificarVideo() {
+	public void modificarVideo(Video V) {
 		// TODO Auto-generated method stub
+		this.session2 = null;
+		this.transaction2 = null;
+        session2 = HibernateUtil.getSessionFactory().openSession();
+		try {
+	        transaction2 = session2.beginTransaction();
+	        if(!transaction2.isActive())
+	        	transaction2.begin();
+	        session2.saveOrUpdate("Video", V);
+	        transaction2.commit();
+	      } catch (Exception e) {
+	        if (transaction2 != null) {
+	          transaction2.rollback();
+	        }
+	        e.printStackTrace();
+	      } finally {
+	        if (session2 != null) {
+	          session2.close();
+	        }
+	      }		
+		
 		
 	}
 

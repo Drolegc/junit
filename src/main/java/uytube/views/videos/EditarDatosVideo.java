@@ -2,6 +2,7 @@ package uytube.views.videos;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,12 +16,17 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import com.toedter.calendar.JDateChooser;
 
+import uytube.CategoriaController.CategoriaController;
 import uytube.UsuarioController.UsuarioController;
+import uytube.VideoController.VideoController;
+import uytube.models.Canal;
+import uytube.models.Categoria;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
 import uytube.views.usuarios.Listar;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class EditarDatosVideo extends JPanel {
 
@@ -50,11 +56,11 @@ public class EditarDatosVideo extends JPanel {
 		
 			setLayout(new FormLayout(new ColumnSpec[] {
 					ColumnSpec.decode("30px"),
-					ColumnSpec.decode("148px"),
+					ColumnSpec.decode("148px:grow"),
 					ColumnSpec.decode("83px"),
-					ColumnSpec.decode("71px:grow"),
-					FormSpecs.UNRELATED_GAP_COLSPEC,
-					ColumnSpec.decode("69px"),},
+					ColumnSpec.decode("180px:grow"),
+					ColumnSpec.decode("69px"),
+					FormSpecs.UNRELATED_GAP_COLSPEC,},
 				new RowSpec[] {
 					FormSpecs.UNRELATED_GAP_ROWSPEC,
 					RowSpec.decode("13px"),
@@ -90,7 +96,7 @@ public class EditarDatosVideo extends JPanel {
 			this.url = new JTextField();
 			this.url.setColumns(10);
 			this.url.setText(video.getUrl());
-			add(url, "4, 4, 3, 1, fill, top");
+			add(url, "4, 4, fill, top");
 			
 			JLabel lblNombre = new JLabel("Titulo");
 			add(lblNombre, "2, 8, left, top");
@@ -105,7 +111,7 @@ public class EditarDatosVideo extends JPanel {
 			
 			this.descripcion = new JTextField();
 			this.descripcion.setColumns(10);
-			add(descripcion, "4, 10, 3, 1, fill, top");
+			add(descripcion, "4, 10, fill, top");
 			this.descripcion.setText(video.getDescripcion());
 			
 			this.duracion = new JTextField();
@@ -121,7 +127,7 @@ public class EditarDatosVideo extends JPanel {
 			
 			fecPub = new JDateChooser();
 			fecPub.setDate(video.getFecha());
-			add(fecPub, "4, 14, 3, 1, fill, top");
+			add(fecPub, "4, 14, fill, top");
 			
 			JButton btnCancelar = new JButton("cancelar");
 			btnCancelar.addActionListener(new ActionListener() {
@@ -132,34 +138,68 @@ public class EditarDatosVideo extends JPanel {
 				}
 			});
 			
+			
+			//BOTTON DE ASIGNACION DE CATEGORIA
+			/*
+			CategoriaController controladorCategoria = new CategoriaController();
+			ArrayList<Categoria> categorias = controladorCategoria.listarCategorias();
+			
+			
+			String[] array1 = new String[categorias.size()];
+			for(int i = 0; i < array1.length; i++) { 
+				array1[i] = categorias.get(i).getNombre(); 
+			};
+			catAsignar = "Sin Categoria"; // SI NO TOCA EL BOTON, SIMPLEMENTE LO CARGA COMO SIN CATEGORIAS
+			
+			JComboBox categoriaAsig = new JComboBox(array1);		
+			categoriaAsig.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JComboBox comboBox12 = (JComboBox)e.getSource();
+					catAsignar = (String)comboBox12.getSelectedItem();
+			        System.out.println(catAsignar);
+				}
+			});
+			categoriaAsig.setBounds(275, 228, 96, 22);
+			add(categoriaAsig);
+			
+			
+			*/
+			
 			JLabel lblCategoria = new JLabel("Categoria");
 			add(lblCategoria, "4, 15");
 			
-			JComboBox categoriaAsig = new JComboBox();
 			
-			add(categoriaAsig, "4, 16, fill, default");
+			
+			
+			
+			//add(categoriaAsig, "4, 16, fill, default");
 			add(btnCancelar, "2, 18, default, top");
-			
 			
 			JButton btnAgregar = new JButton("Editar");
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Usuario modelUsuario = new Usuario();
-					modelUsuario.setNickname(nickname.getText());
-					modelUsuario.setApellido(descripcion.getText());
-					modelUsuario.setNombre(nombre.getText());
-					modelUsuario.setCorreo(url.getText());
-					modelUsuario.setFnacimiento(fecPub.getDate());
-					modelUsuario.setImg(duracion1.getText());
-					UsuarioController Controlerusuario = new UsuarioController();
-					Controlerusuario.modificarUsuario(modelUsuario);
-					Listar listar = new Listar();
-					JOptionPane.showMessageDialog(Frame.frame, "Usuario Editado");
-					Frame.frame.setContentPane(listar);
+					UsuarioController usercontroller = new UsuarioController();		
+					Usuario usuario = usercontroller.consultarUsuario(userInfo.getText());
+					Video v = new Video();
+					
+					v.setCanal(video.getCanal());
+					v.setNombre(titulo.getText());
+					v.setUrl(url.getText());
+					v.setDescripcion(descripcion.getText());
+					v.setDuracion(duracion.getText());
+					v.setFecha(fecPub.getDate());
+					v.setCategoria(video.getCategoria());
+					VideoController ControlerV = new VideoController();
+					ControlerV.modificarVideo(v);
+					
+					
+					ListarVideosUsuario Lvu = new ListarVideosUsuario(usuario);
+					JOptionPane.showMessageDialog(Frame.frame, "Video Editado");
+					Frame.frame.setContentPane(Lvu);
 					Frame.frame.revalidate();
 				}
 			});
-			add(btnAgregar, "4, 18, 3, 1, default, top");
+			add(btnAgregar, "4, 18, default, top");
 		}
 }
 
