@@ -127,7 +127,7 @@ public class AltaVideo extends JPanel {
 		// BOTON DE ASIGNACION DE USUARIO
 		
 		UsuarioController controladorUsuario = new UsuarioController();
-		ArrayList<Usuario> usuarios = controladorUsuario.listaUsuarios();	
+		ArrayList<Usuario> usuarios = controladorUsuario.listaUsuarios();
 		String[] array = new String[usuarios.size()];
 		for(int i = 0; i < array.length; i++) {
 		    array[i] = usuarios.get(i).getNickname();

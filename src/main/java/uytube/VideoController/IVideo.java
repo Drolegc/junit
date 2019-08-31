@@ -12,7 +12,7 @@ public interface IVideo {
 	public void modificarVideo(Video v);
 	public Video consultaVideo(String titulito);
 	public void comentarVideo();
-	public void valorarVideo(ValoracionVideo vv);
+
 	public ArrayList<Video> listaVideos();
 	public ArrayList<Video> videoPorCategoria(Categoria cat);
 }

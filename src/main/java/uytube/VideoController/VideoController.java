@@ -55,7 +55,7 @@ private Manager mng;
 		}else {
 			System.out.println(canal.getDescripcion());
 		}
-		
+
 		mana.startTransaction("Video", vid);
 		
 		
@@ -97,6 +97,7 @@ private Manager mng;
 
 	public Video consultaVideo(String titulito) {
 		// TODO Auto-generated method stub
+		
 		Video v = (Video)mana.getSessionManager().createQuery("From Video where nombre= :titu").setParameter("titu", titulito).getSingleResult();
 		mana.closeSession();
 		return v;
@@ -107,12 +108,7 @@ private Manager mng;
 		
 	}
 
-	public void valorarVideo(ValoracionVideo vv) {
-		// TODO Auto-generated method stub
-		
-		mana.startTransaction("ValoracionVideo", vv);
-		
-	}
+
 	public ArrayList<Video> listaVideosUsuario(String nombre) {
 		// TODO Auto-generated method stub
 		ArrayList<Video> Videos = (ArrayList<Video>)mana.getSessionManager().createQuery("from Video where canal.nombre = :nombre").setParameter("nombre", nombre).getResultList();
@@ -121,12 +117,10 @@ private Manager mng;
 	public void editarVideo(Video video) {
 		// TODO Auto-generated method stub
 		
-	      	
 		
 	}
 	
 	public ArrayList<Video> listaVideos(){
-		
 		ArrayList<Video> videos = (ArrayList<Video>)mana.getSessionManager().createQuery("From Video").getResultList();
 		mana.closeSession();
 		return videos;

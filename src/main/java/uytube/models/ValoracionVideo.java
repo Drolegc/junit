@@ -19,6 +19,10 @@ public class ValoracionVideo {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Video video;
 	
+	public ValoracionVideo() {
+		
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -33,6 +37,22 @@ public class ValoracionVideo {
 
 	public void setValoracion(int valoracion) {
 		this.valoracion = valoracion;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Video getVideo() {
+		return video;
+	}
+
+	public void setVideo(Video video) {
+		this.video = video;
 	}	
 	
 }
