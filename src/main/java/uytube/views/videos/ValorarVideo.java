@@ -68,10 +68,12 @@ public class ValorarVideo extends JPanel {
 		labelUsuario.setBounds(24, 11, 200, 15);
 		
 	// CREACION LISTA USUARIO PARA ELEGIR
-		ArrayList<Usuario> usuarios = controladorUsuario.listaUsuarios();	
-		String[] array = new String[usuarios.size()];
-		for(int i = 0; i < array.length; i++) {
-		    array[i] = usuarios.get(i).getNickname();
+		ArrayList<Usuario> usuarios = controladorUsuario.listaUsuarios();
+		int tamanio =  usuarios.size()+1;
+		String[] array = new String[tamanio];
+		array[0]="Debe elegir usuario";
+		for(int i = 1; i < array.length; i++) {
+		    array[i] = usuarios.get(i-1).getNickname();
 		}
 		//FIN SELECCION
 		
@@ -84,6 +86,7 @@ public class ValorarVideo extends JPanel {
 		scrollPane.setViewportView(table_1);
 		
 		JComboBox selectUser = new JComboBox(array);
+		
 		selectUser.setBounds(24, 32, 200, 24);
 		selectUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -135,15 +138,19 @@ public class ValorarVideo extends JPanel {
 			
 			Usuario usercito = (Usuario)mana.getSessionManager().createQuery("From Usuario where nickname =: nombre").setParameter("nombre", nickInfoStr).getSingleResult();
 			mana.closeSession();
+			
 			System.out.println("Usuario elegido para valorar: "+ nickInfoStr);
-			Video vid = controladorVideo.consultaVideo(videoInfoStr);
+			Video vid = controladorVideo.consultaVideo(videoInfoStr, nickInfoStr);
 			
 			valorV.setVideo(vid);
 			valorV.setUsuario(usercito);
 			valorV.setValoracion(1);
 			
 			ValoracionController controladorValoracion = new ValoracionController();
-			controladorValoracion.valorarVideo(valorV); //ERROR AL INGRESAR A LA BDD
+			controladorValoracion.valorarVideo(valorV);
+			
+			System.out.println("El video de nombre: "+videoInfoStr+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoStr));
+						
 			
 			VideoMain inicio = new VideoMain();
 			Frame.frame.setContentPane(inicio);
@@ -161,7 +168,7 @@ public class ValorarVideo extends JPanel {
 				Usuario usercito = (Usuario)mana.getSessionManager().createQuery("From Usuario where nickname =: nombre").setParameter("nombre", nickInfoStr).getSingleResult();
 				mana.closeSession();
 				System.out.println("Usuario elegido para valorar: "+ nickInfoStr);
-				Video vid = controladorVideo.consultaVideo(videoInfoStr);
+				Video vid = controladorVideo.consultaVideo(videoInfoStr, nickInfoStr);
 				
 				valorV.setVideo(vid);
 				valorV.setUsuario(usercito);
