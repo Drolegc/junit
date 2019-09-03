@@ -125,14 +125,15 @@ public class EditarDatosVideo extends JPanel {
 			
 			
 			//BOTTON DE ASIGNACION DE CATEGORIA
-			/*
-			CategoriaController controladorCategoria = new CategoriaController();
+						CategoriaController controladorCategoria = new CategoriaController();
 			ArrayList<Categoria> categorias = controladorCategoria.listarCategorias();
 			
 			
 			String[] array1 = new String[categorias.size()];
 			for(int i = 0; i < array1.length; i++) { 
 				array1[i] = categorias.get(i).getNombre(); 
+				
+				
 			};
 			catAsignar = "Sin Categoria"; // SI NO TOCA EL BOTON, SIMPLEMENTE LO CARGA COMO SIN CATEGORIAS
 			
@@ -144,11 +145,12 @@ public class EditarDatosVideo extends JPanel {
 			        System.out.println(catAsignar);
 				}
 			});
+			categoriaAsig.setSelectedIndex(video.getCategoria().getId()-1);
 			categoriaAsig.setBounds(275, 228, 96, 22);
 			add(categoriaAsig);
 			
 			
-			*/
+			
 			
 			JLabel lblCategoria = new JLabel("Categoria");
 			lblCategoria.setBounds(240, 138, 180, 14);
