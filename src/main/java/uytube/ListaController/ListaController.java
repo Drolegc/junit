@@ -46,7 +46,7 @@ public class ListaController implements ILista {
 			System.out.println(canales.size());
 			for(Canal c: canales) {
 				System.out.println("Lista default");
-				Lista lista = new Lista(listaName,privado,null,c);
+				Lista lista = new Lista(listaName,privado,cat,c);
 				mng.startTransaction("Lista", lista);
 				
 			}
@@ -128,10 +128,10 @@ public class ListaController implements ILista {
 		System.out.println("Listando listas");
 		for(Lista l: listas) {
 			if(l.getCategoria()!=null) {
-				System.out.println(l.getNombre() + " | " + l.getCanal().getNombre()+" | "+l.getId()+" | "+l.getCategoria().getNombre());
+				System.out.println(l.getNombre() + " | " + l.getCanal().getNombre()+" | "+l.getId()+" | "+l.getCategoria().getNombre()+" | "+l.getCategoria().getId());
 			}
 			else {
-				System.out.println(l.getNombre()+" | "+l.getCanal().getNombre()+" | "+l.getId());
+				System.out.println(l.getNombre()+" | "+l.getCanal().getNombre()+" | "+l.getId()+" | "+l.getCategoria().getNombre()+" | "+l.getCategoria().getId());
 			}
 				
 		}
@@ -145,7 +145,6 @@ public class ListaController implements ILista {
 		createQuery("select l From Lista as l, Categoria as c where c.id = l.categoria and c.id =:cat").
 		setParameter("cat", cat.getId()).
 		getResultList();
-		System.out.println(listas);
 		mng.closeSession();
 		return listas;
 	}

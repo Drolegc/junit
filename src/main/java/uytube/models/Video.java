@@ -9,6 +9,10 @@ import uytube.models.Usuario;
 public class Video {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name ="id", insertable=false, updatable=false)
+	private int id;
+	
 	@Column(name = "nombre")
 	private String nombre;
 	
@@ -28,7 +32,7 @@ public class Video {
 	Canal canal;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="id",nullable = true)
+	//@JoinColumn(name="id",nullable = true)
 	Categoria categoria;
 
 

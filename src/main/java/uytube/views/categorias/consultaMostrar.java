@@ -31,7 +31,7 @@ public class consultaMostrar extends JPanel {
 	private JTable table; 
 	private String [] columnaVideo = {"nombre","canal"};
 	private String [][] datos;
-	private String [] columnaLista = {"nombre_lista","videos"};
+	private String [] columnaLista = {"nombre_lista"};
 	private JTable table_1;
 	
 	public consultaMostrar(Categoria categoria) {
@@ -77,10 +77,9 @@ public class consultaMostrar extends JPanel {
 		DefaultTableModel tableModel1 = new DefaultTableModel(columnaLista,0);
 		table_1 = new JTable();
 		for(Lista l: listados) {
-			tableModel.addRow(
+			tableModel1.addRow(
 					new Object[] {
-							l.getNombre(),
-							l.getVideos()
+							l.getNombre()
 						}
 					);
 		}
