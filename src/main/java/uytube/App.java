@@ -91,9 +91,10 @@ public class App extends JFrame{
 		
 		
 		//videos
-		/*IVideo controllervideo = new VideoController();
-		Video vid = new Video().);;
-		controllervideo.altaVideo(vid, "youtuber", "Vlog");
+		/*VideoController controllervideo = new VideoController();
+		Video vid = new Video();
+		
+		controllervideo.altaVideo(vid, "youtuber", "Estilo de vida");
 		*/
 		System.out.println("Fin");
 	}
