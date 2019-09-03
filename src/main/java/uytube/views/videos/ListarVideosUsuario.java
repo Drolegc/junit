@@ -75,7 +75,7 @@ public class ListarVideosUsuario extends JPanel {
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			VideoController videocontroller = new VideoController();			
-			Video video = videocontroller.consultaVideo(textField.getText());
+			Video video = videocontroller.consultaVideo(textField.getText(),"user2"); // harcodeado para probar el caso de uso ValoracionVideo
 			EditarDatosVideo editarDV = new EditarDatosVideo(video);
 			Frame.frame.setContentPane(editarDV);
 			Frame.frame.revalidate();

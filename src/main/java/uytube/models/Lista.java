@@ -18,11 +18,10 @@ public class Lista {
 	@Column( name = "privado ")
 	private Boolean privado;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "nombre",nullable=true)
+	@OneToOne(cascade = CascadeType.MERGE)
 	private Categoria categoria;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.MERGE)
 	private List<Video> videos;	
 	
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
