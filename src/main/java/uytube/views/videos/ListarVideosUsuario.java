@@ -1,23 +1,21 @@
 package uytube.views.videos;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import uytube.UsuarioController.UsuarioController;
 import uytube.VideoController.VideoController;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class ListarVideosUsuario extends JPanel {
 	private String [] nombreColumnas = {"Nombre","Categoria","Fecha","URL"};
