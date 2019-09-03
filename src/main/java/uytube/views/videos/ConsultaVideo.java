@@ -1,69 +1,102 @@
 package uytube.views.videos;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-
-import uytube.VideoController.VideoController;
-import uytube.views.Frame;
-import uytube.views.Inicio;
-
-import javax.swing.JFormattedTextField;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
+import uytube.UsuarioController.UsuarioController;
+import uytube.models.Categoria;
+import uytube.models.Usuario;
+import uytube.views.Frame;
 
 public class ConsultaVideo extends JPanel {
-	private JTextField textField;
-	private VideoMain main;
-
+	private String [] nombreColumnas = {"Nickname","Apellido","Nombre"};
+	private Usuario usuarioSeleccionado = new Usuario();
+	
 	/**
 	 * Create the panel.
 	 */
 	public ConsultaVideo() {
-		main = new VideoMain();
+		
+		usuarioSeleccionado.setNickname("");
 		setLayout(null);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 29, 467, 226);
+		add(scrollPane);
 		
-		JLabel lblTituloDeVideo = new JLabel("Titulo de video a consultar");
-		lblTituloDeVideo.setBounds(55, 34, 183, 14);
-		add(lblTituloDeVideo);
+				
 		
-		textField = new JTextField();
-		textField.setBounds(65, 59, 146, 20);
-		add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Esperando para la busqueda ...");
-		lblNewLabel.setBounds(65, 120, 343, 111);
-		add(lblNewLabel);
-		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-								
-			}	
+		UsuarioController controller = new UsuarioController();
+		ArrayList<Usuario> usuarios = controller.listaUsuarios();
+		DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
+		JTable table = new JTable();
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				//guardo en categoria lo seleccionado por el usuario para editar
+				usuarioSeleccionado = usuarios.get(e.getFirstIndex());
+			}
 		});
+		for(Usuario u:usuarios) {
+			tablemodel.addRow(
+					new Object[] {
+							u.getNickname(),
+							u.getApellido(),
+							u.getNombre(),
+							
+					}
+			);
+		}
 		
-		btnBuscar.setBounds(36, 254, 89, 23);
-		add(btnBuscar);
+		table.setModel(tablemodel);
 		
-
+		scrollPane.setViewportView(table);
+	
+		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VideoMain inicio = new VideoMain();
-				Frame.frame.setContentPane(inicio);
-				Frame.frame.revalidate();
+				VideoMain videos = new VideoMain();
+				Frame.frame.setContentPane(videos);
+				Frame.frame.validate();
 			}
 		});
-		
-		btnVolver.setBounds(164, 254, 89, 23);
+		btnVolver.setBounds(10, 277, 212, 23);
 		add(btnVolver);
+		//textField.setText(seleccion );
 		
-	
+		JButton btnVerVideos = new JButton("Consultar videos");
+		btnVerVideos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			UsuarioController usercontroller = new UsuarioController();			
+			//corrobora si selecciono un usuario;
+				if (!usuarioSeleccionado.getNickname().isEmpty()) {
+				ConsultaVideosUsuario listarVU = new ConsultaVideosUsuario(usuarioSeleccionado);
+				Frame.frame.setContentPane(listarVU);
+				Frame.frame.revalidate();
+					}
+				else
+					{JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario");}
+			}
+		});
+		btnVerVideos.setBounds(265, 277, 212, 23);
+		add(btnVerVideos);
+		
+		JLabel lblIngreseUsuario = new JLabel("Seleccione usuario");
+		lblIngreseUsuario.setBounds(10, 11, 140, 14);
+		add(lblIngreseUsuario);
+		
 
 	}
 }

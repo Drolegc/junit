@@ -3,19 +3,16 @@ package uytube.views.videos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import com.toedter.calendar.JDateChooser;
-
 import uytube.CategoriaController.CategoriaController;
 import uytube.UsuarioController.UsuarioController;
 import uytube.VideoController.VideoController;
@@ -27,15 +24,14 @@ import uytube.views.Frame;
 import uytube.views.usuarios.Listar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTree;
 
-public class EditarDatosVideo extends JPanel {
+public class ConsultaVideoyComentarios extends JPanel {
 
 	/**
 	 * Create the panel.
 	 * @param video 
 	 */
-	
-	
 	private JTextField userInfo;
 	private JTextField titulo;
 	private JTextField duracion;
@@ -46,80 +42,91 @@ public class EditarDatosVideo extends JPanel {
 	private String userInfoStr;
 	private String catAsignar;
 	private JTextField nickname;
-	private JTextField nombre;
 	private JTextField descripcion;
 	private JTextField duracion1;
-	private JDateChooser fecPub;
+	private JTextField fechapublicacion;
+	private JTextField categoria;
 	
-	public EditarDatosVideo(Video video) {
+	
+	public ConsultaVideoyComentarios(Video video) {
 			setLayout(null);
 			JLabel lblNickname = new JLabel("usuario/nickname");
-			lblNickname.setBounds(10, 11, 114, 13);
+			lblNickname.setBounds(10, 11, 206, 13);
 			add(lblNickname);
 			
+			JLabel lblUrl = new JLabel("URL");
+			lblUrl.setBounds(10, 105, 206, 13);
+			add(lblUrl);
+			
 			this.userInfo = new JTextField();
-			userInfo.setBounds(10, 22, 200, 19);
+			userInfo.setBounds(10, 30, 206, 20);
 			add(userInfo);
 			this.userInfo.setColumns(10);
 			this.userInfo.setEditable(false);
 			this.userInfo.setText(video.getCanal().getNombre());
-			
-			JLabel lblUrl = new JLabel("URL");
-			lblUrl.setBounds(10, 95, 19, 13);
-			add(lblUrl);
 			this.url = new JTextField();
-			url.setBounds(10, 109, 200, 19);
+			url.setEditable(false);
+			url.setBounds(10, 117, 206, 20);
 			this.url.setColumns(10);
 			this.url.setText(video.getUrl());
 			add(url);
 			
 			JLabel lblNombre = new JLabel("Titulo");
-			lblNombre.setBounds(10, 52, 28, 14);
+			lblNombre.setBounds(10, 61, 206, 14);
 			add(lblNombre);
 			
 			JLabel lblDescripcion = new JLabel("Descripcion");
-			lblDescripcion.setBounds(240, 10, 56, 14);
+			lblDescripcion.setBounds(224, 10, 207, 14);
 			add(lblDescripcion);
 			
 			this.titulo = new JTextField();
-			titulo.setEditable(false);
-			titulo.setBounds(10, 65, 200, 19);
+			titulo.setBounds(10, 75, 206, 19);
 			add(titulo);
 			this.titulo.setColumns(10);
 			this.titulo.setText(video.getNombre());
+			this.titulo.setEditable(false);
 			
 			this.descripcion = new JTextField();
-			descripcion.setBounds(236, 22, 205, 62);
+			descripcion.setBounds(226, 30, 205, 66);
 			this.descripcion.setColumns(10);
 			add(descripcion);
 			this.descripcion.setText(video.getDescripcion());
-			
+			this.descripcion.setEditable(false);
+
 			this.duracion = new JTextField();
-			duracion.setBounds(10, 151, 200, 19);
+			duracion.setBounds(10, 160, 206, 19);
 			this.duracion.setColumns(10);
 			this.duracion.setText(video.getDuracion());
 			add(duracion);
+			this.duracion.setEditable(false);
 			
 			JLabel lblDuracion = new JLabel("Duracion");
-			lblDuracion.setBounds(10, 139, 43, 13);
+			lblDuracion.setBounds(10, 148, 206, 13);
 			add(lblDuracion);
 			
 			JLabel lblFechaPublicacion = new JLabel("Fecha publicacion");
-			lblFechaPublicacion.setBounds(240, 95, 87, 13);
+			lblFechaPublicacion.setBounds(226, 105, 206, 13);
 			add(lblFechaPublicacion);
+			lblFechaPublicacion.setFocusable(false);
+
 			
-			fecPub = new JDateChooser();
-			fecPub.setBounds(240, 109, 201, 19);
-			fecPub.setDate(video.getFecha());
-			add(fecPub);
 			
-			JButton btnCancelar = new JButton("cancelar");
-			btnCancelar.setBounds(10, 261, 200, 23);
-			btnCancelar.addActionListener(new ActionListener() {
+			this.fechapublicacion = new JTextField();
+			fechapublicacion.setBounds(226, 117, 206, 19);
+			this.fechapublicacion.setColumns(10);
+			this.fechapublicacion.setText(video.getFecha().toString());
+			add(fechapublicacion);
+			this.fechapublicacion.setEditable(false);
+			
+			
+			
+			JButton btnVolver = new JButton("Volver");
+			btnVolver.setBounds(10, 266, 206, 23);
+			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					VideoMain videos = new VideoMain();
-					Frame.frame.setContentPane(videos);
-					Frame.frame.validate();
+					ConsultaVideosUsuario listarVU = new ConsultaVideosUsuario(video.getCanal().getUsuario());
+					Frame.frame.setContentPane(listarVU);
+					Frame.frame.revalidate();
 				}
 			});
 			
@@ -151,42 +158,28 @@ public class EditarDatosVideo extends JPanel {
 			*/
 			
 			JLabel lblCategoria = new JLabel("Categoria");
-			lblCategoria.setBounds(240, 138, 180, 14);
+			lblCategoria.setBounds(224, 147, 207, 14);
 			add(lblCategoria);
+			
+			
+			this.categoria = new JTextField();
+			categoria.setBounds(224, 160, 206, 19);
+			this.categoria.setColumns(10);
+			this.categoria.setText(video.getCategoria().getNombre());
+			add(categoria);
+			this.categoria.setEditable(false);
+			
 			
 			
 			
 			
 			
 			//add(categoriaAsig, "4, 16, fill, default");
-			add(btnCancelar);
+			add(btnVolver);
 			
-			JButton btnAgregar = new JButton("Editar");
-			btnAgregar.setBounds(240, 261, 201, 23);
-			btnAgregar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					UsuarioController usercontroller = new UsuarioController();		
-					Usuario usuario = usercontroller.consultarUsuario(userInfo.getText());
-					Video v = new Video();
-					
-					v.setCanal(video.getCanal());
-					v.setNombre(titulo.getText());
-					v.setUrl(url.getText());
-					v.setDescripcion(descripcion.getText());
-					v.setDuracion(duracion.getText());
-					v.setFecha(fecPub.getDate());
-					v.setCategoria(video.getCategoria());
-					VideoController ControlerV = new VideoController();
-					ControlerV.modificarVideo(v);
-					
-					
-					ListarVideosUsuario Lvu = new ListarVideosUsuario(usuario);
-					JOptionPane.showMessageDialog(Frame.frame, "Video Editado");
-					Frame.frame.setContentPane(Lvu);
-					Frame.frame.revalidate();
-				}
-			});
-			add(btnAgregar);
+			JTree tree = new JTree();
+			tree.setBounds(224, 214, 207, 75);
+			add(tree);
 		}
 }
 
