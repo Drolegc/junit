@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import uytube.UsuarioController.UsuarioController;
@@ -47,6 +49,7 @@ public class ModificarDatosVideo extends JPanel {
 		
 		table.setModel(tablemodel);
 		scrollPane.setViewportView(table);
+	
 		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
@@ -63,6 +66,7 @@ public class ModificarDatosVideo extends JPanel {
 		textField.setBounds(10, 168, 150, 20);
 		add(textField);
 		textField.setColumns(10);
+		//textField.setText(seleccion );
 		
 		JButton btnVerVideos = new JButton("Ver videos");
 		btnVerVideos.addActionListener(new ActionListener() {
