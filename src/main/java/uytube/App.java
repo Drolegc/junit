@@ -85,11 +85,9 @@ public class App extends JFrame{
 		
 		ILista controllerLista = new ListaController();
 		//Lista default
-		controllerLista.crearLista("Ver mas tardes", null, null, true, true);
+		controllerLista.crearLista("Ver mas tardes", "Sin Categoria", null, true, true);
 		controllerLista.crearLista("listaPer", "Ciencia", "user2", true, false);
-		controllerLista.listarListas("user2");
-		//controllerLista.modificarLista(6,"Ciencia", false);
-		controllerLista.listarListas("user2");
+
 		
 		
 		//videos
