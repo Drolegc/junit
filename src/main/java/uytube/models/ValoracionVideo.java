@@ -13,7 +13,7 @@ public class ValoracionVideo {
 	@Column(name= "valoracion")
 	private int valoracion;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	private Usuario usuario;
 	
 	@OneToOne(cascade = CascadeType.ALL)

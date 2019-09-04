@@ -95,10 +95,10 @@ private Manager mng;
 		
 	}
 
-	public Video consultaVideo(String titulito) {
+	public Video consultaVideo(String titulito, String user) {
 		// TODO Auto-generated method stub
 		
-		Video v = (Video)mana.getSessionManager().createQuery("From Video where nombre= :titu").setParameter("titu", titulito).getSingleResult();
+		Video v = (Video)mana.getSessionManager().createQuery("From Video where nombre:=titu and usuario.nombre= :nombre").setParameter("titu", titulito).setParameter("nombre",user).getSingleResult();
 		mana.closeSession();
 		return v;
 	}
