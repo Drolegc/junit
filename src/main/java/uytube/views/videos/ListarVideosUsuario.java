@@ -11,11 +11,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 import uytube.VideoController.VideoController;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
+import javax.swing.JTree;
 
 public class ListarVideosUsuario extends JPanel {
 	private String [] nombreColumnas = {"Nombre","Categoria","Fecha","URL"};
@@ -86,6 +89,14 @@ public class ListarVideosUsuario extends JPanel {
 		});
 		btnEditar.setBounds(222, 170, 89, 23);
 		add(btnEditar);
+		
+		
+		DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("nodo");
+		DefaultTreeModel model = new DefaultTreeModel(nodo);
+		JTree tree = new JTree(model);
+		tree.setBounds(46, 214, 72, 64);
+		
+		add(tree);
 
 	}
 }
