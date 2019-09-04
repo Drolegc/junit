@@ -85,18 +85,37 @@ public class App extends JFrame{
 		
 		ILista controllerLista = new ListaController();
 		//Lista default
-		controllerLista.crearLista("Ver mas tardes", null, null, true, true);
+		controllerLista.crearLista("Ver mas tardes", "Sin Categoria", null, true, true);
 		controllerLista.crearLista("listaPer", "Ciencia", "user2", true, false);
-		controllerLista.listarListas("user2");
-		//controllerLista.modificarLista(6,"Ciencia", false);
-		controllerLista.listarListas("user2");
+
 		
 		
 		//videos
-		/*IVideo controllervideo = new VideoController();
-		Video vid = new Video().);;
-		controllervideo.altaVideo(vid, "youtuber", "Vlog");
-		*/
+		VideoController controllervideo = new VideoController();
+		
+		Video vid = new Video();
+		vid.setNombre("Mi primer bicicleta");
+		vid.setDuracion("2:20");
+		vid.setDescripcion("Mi primer bicicleta era una chopera de los 80s.");
+		vid.setUrl("https://www.videos.com/2e2re3w3er");
+		vid.setFecha(new Date());			
+		controllervideo.altaVideo(vid, "youtuber", "Estilo de vida");
+		
+		Video vid2 = new Video();
+		vid2.setNombre("uno");
+		vid2.setDuracion("2:20");
+		vid2.setDescripcion("Un video que tiene una descripcion larga.. para lo que estamos acostumbrados a tener aca.");
+		vid2.setUrl("https://www.videos.com/2e2re3w3er");
+		vid2.setFecha(new Date());			
+		
+		controllervideo.altaVideo(vid2, "youtuber", "Musica");
+		
+		
+		
+		
+		
+		
+		
 		System.out.println("Fin");
 	}
 

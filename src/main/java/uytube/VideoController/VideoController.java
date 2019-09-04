@@ -97,23 +97,23 @@ private Manager mng;
 
 	public Video consultaVideo(String titulito, String user) {
 		// TODO Auto-generated method stub
-		
-		Video v = (Video)mana.getSessionManager().createQuery("From Video where nombre:=titu and usuario.nombre= :nombre").setParameter("titu", titulito).setParameter("nombre",user).getSingleResult();
+		Video v = (Video)mana.getSessionManager().createQuery("select v From Video as v, Canal as c where v.nombre=:titu and c.nombre=:nombre").setParameter("titu", titulito).setParameter("nombre",user).getSingleResult();
 		mana.closeSession();
 		return v;
-	}
-
+	} 
+	
 	public void comentarVideo() {
 		// TODO Auto-generated method stub
 		
 	}
 
-
 	public ArrayList<Video> listaVideosUsuario(String nombre) {
 		// TODO Auto-generated method stub
 		ArrayList<Video> Videos = (ArrayList<Video>)mana.getSessionManager().createQuery("from Video where canal.nombre = :nombre").setParameter("nombre", nombre).getResultList();
 		mana.closeSession();
-		return Videos;	}
+		return Videos;	
+	}
+	
 	public void editarVideo(Video video) {
 		// TODO Auto-generated method stub
 		
