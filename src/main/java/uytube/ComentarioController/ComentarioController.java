@@ -1,5 +1,6 @@
 package uytube.ComentarioController;
 
+import uytube.models.Comentario;
 import uytube.models.Video;
 
 public class ComentarioController implements IComentario{

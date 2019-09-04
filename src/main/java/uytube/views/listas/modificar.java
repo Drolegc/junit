@@ -22,6 +22,8 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
@@ -33,11 +35,14 @@ public class modificar extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
+	Lista lista_a_modificar;
+	List<Lista> listasUser;
+
+	
 	public modificar() {
 		setLayout(null);
-		
-		
-		
+				
 		IUsuario controladorUsuario = new UsuarioController();
 		List<Usuario> usuarios = controladorUsuario.listaUsuarios();	
 		String[] array = new String[usuarios.size()];
@@ -50,23 +55,16 @@ public class modificar extends JPanel {
 		comboBox.setBounds(34, 55, 150, 24);
 		add(comboBox);
 		
+		ILista controllerLista = new ListaController();
+		
 		JButton btnModificar = new JButton("Modificar");
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				/*
-				 * Guardar cambios
-				 * */
-			}
-		});
+
 		btnModificar.setBounds(293, 212, 114, 25);
 		add(btnModificar);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		
-		ILista controllerLista = new ListaController();
-		
 		List<Lista> listas = controllerLista.listarListas(usuarios.get(comboBox.getSelectedIndex()).getNickname());
-		
 		comboBox_1.setModel(new DefaultComboBoxModel(this.ListasToArr(listas)));
 		comboBox_1.setBounds(34, 172, 150, 24);
 		add(comboBox_1);
@@ -93,7 +91,7 @@ public class modificar extends JPanel {
 		
 		JRadioButton rdbtnPrivacidad = new JRadioButton("Privacidad");
 		rdbtnPrivacidad.setBounds(263, 125, 144, 23);
-		rdbtnPrivacidad.setSelected(true);
+		rdbtnPrivacidad.setSelected(listas.get(0).getPrivado());
 		add(rdbtnPrivacidad);
 		
 		ICategoria controllerCat = new CategoriaController();
@@ -106,17 +104,24 @@ public class modificar extends JPanel {
 		
 		JComboBox comboBox_2 = new JComboBox(nombreCategorias);
 		comboBox_2.setBounds(263, 55, 144, 24);
-		
-		
+
+		listasUser = controllerLista.listarListas(usuarios.get(comboBox.getSelectedIndex()).getNickname());
+		lista_a_modificar = listasUser.get(comboBox_1.getSelectedIndex());
+
+		comboBox_2.setSelectedIndex(listasUser.get(0).getCategoria().getId()-1);
 		
 		comboBox_1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					System.out.println("Categoria cambiada");
-					List<Lista> listasUser = controllerLista.listarListas(usuarios.get(comboBox.getSelectedIndex()).getNickname());
+					listasUser = controllerLista.listarListas(usuarios.get(comboBox.getSelectedIndex()).getNickname());
 					comboBox_2.setSelectedIndex(listasUser.get(comboBox_1.getSelectedIndex()).getCategoria().getId()-1);
 					rdbtnPrivacidad.setSelected(listasUser.get(comboBox_1.getSelectedIndex()).getPrivado());
+					
+					//Guardar el id de la lista seleccionada
+					
+					lista_a_modificar = listasUser.get(comboBox_1.getSelectedIndex());
 				}
 			}
 		});
@@ -144,12 +149,34 @@ public class modificar extends JPanel {
 					comboBox_1.setModel(new DefaultComboBoxModel(ListasToArr(listasUser)));
 					comboBox_1.revalidate();
 					comboBox_1.repaint();
+					
+					comboBox_2.setSelectedIndex(listasUser.get(0).getCategoria().getId()-1);
+					rdbtnPrivacidad.setSelected(listasUser.get(0).getPrivado());
+					
 				}
 				
 			}
 		});
 
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				 * Guardar cambios
+				 * */
+				 //Tendo id de la lista
+				//Falta la categoria seleccionada y la privacidad
+				System.out.println(":: A modificar ::");
+				System.out.println(comboBox_2.getSelectedIndex());
+				System.out.println(rdbtnPrivacidad.isSelected());
+				controllerLista.modificarLista(lista_a_modificar.getId(),comboBox_2.getSelectedIndex()+1,rdbtnPrivacidad.isSelected());
+				JOptionPane.showMessageDialog(null, "Lista modificada");
+
+				
+			}
+		});
 	}
+	
+	
 	
 	private String[] ListasToArr(List<Lista> listas ) {
 		String[] arr = new String[listas.size()];
