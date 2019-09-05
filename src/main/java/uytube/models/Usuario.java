@@ -39,7 +39,14 @@ public class Usuario {
 	}
 
 	public Usuario(String nickname, String nombre, String apellido, String correo, Date fnacimiento, String img) {
-		
+		if(this.nickname == "" 
+				|| this.nombre == "" 
+				|| this.apellido == "" 
+				|| this.correo == "" 
+				|| this.fnacimiento == null
+				||this.img == "") {
+			new Exception("Hay campos que no pueden ser nulos"); 
+		}
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;

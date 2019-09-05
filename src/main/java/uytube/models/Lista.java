@@ -3,6 +3,9 @@ package uytube.models;
 import java.util.List;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name = "Lista")
 public class Lista {
@@ -21,7 +24,8 @@ public class Lista {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Categoria categoria;
 
-	@OneToMany(cascade = CascadeType.MERGE)
+	@OneToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	private List<Video> videos;	
 	
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)

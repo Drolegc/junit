@@ -1,7 +1,7 @@
 package uytube.ComentarioController;
 
 import uytube.models.Video;
-
+import uytube.models.Comentario;
 public class ComentarioController implements IComentario{
 
 	@Override
@@ -24,10 +24,7 @@ public class ComentarioController implements IComentario{
 		
 	}
 
-	
-	
-	
-	
+
 	
 	
 	

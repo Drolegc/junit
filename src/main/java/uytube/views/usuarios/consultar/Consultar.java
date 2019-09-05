@@ -36,7 +36,7 @@ import uytube.ListaController.ListaController;
 import uytube.VideoController.VideoController;
 public class Consultar extends JPanel {
 	private JTable tableVideos;
-	private JTable tableCanales;
+	private JTable tableListas;
 
 	/**
 	 * Create the panel.
@@ -47,12 +47,17 @@ public class Consultar extends JPanel {
 	private String [][] datos ;
 	private JFrame frame;
 	private Usuario user;
+	private Video video;
+	private Lista lista;
 	private JScrollPane scrollPane_1;
 	private JTable table;
 	private JScrollPane scrollPane_2;
 	private JTable tableUsuarios;
+	ArrayList<Video> videos;
+	List<Lista> listas;
 	public Consultar(Usuario user) {
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(263, 279, 85, 21);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserMain main = new UserMain();
@@ -60,37 +65,25 @@ public class Consultar extends JPanel {
 				Frame.frame.revalidate();				
 			}
 		});
-		setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("430px:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("1px"),},
-			new RowSpec[] {
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("66px:grow"),
-				RowSpec.decode("24px"),
-				RowSpec.decode("66px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("66px"),
-				RowSpec.decode("27px"),
-				RowSpec.decode("21px"),}));
+		setLayout(null);
 		
 		tableUsuarios = new JTable();
-		add(tableUsuarios, "2, 2, fill, fill");
-		add(btnVolver, "2, 8, center, top");
+		tableUsuarios.setBounds(10, 10, 433, 76);
+		add(tableUsuarios);
+		add(btnVolver);
 		System.out.println(user.getNombre());
 		DefaultTableModel  modelUsuarios = new DefaultTableModel(columnasUsuarios, 0);
 		DefaultTableModel  modelVideo = new DefaultTableModel(columnasVideos, 0);
-		DefaultTableModel  modelCanales = new DefaultTableModel(columnasCanales, 0);
+		DefaultTableModel  modelListas = new DefaultTableModel(columnasCanales, 0);
 
 		tableVideos = new JTable();
-		tableCanales = new JTable();
-		tableCanales.setBounds(0, 0, 428, 1);
+		tableListas = new JTable();
+		tableListas.setBounds(0, 0, 428, 1);
 		ListaController listaController = new ListaController();
-		List<Lista> listas = listaController.listarListas(user.getNickname());
+		listas = listaController.listarListas(user.getNickname());
 		VideoController videoController = new VideoController();
 		
-		ArrayList<Video> videos = videoController.obtenerVideosUsuario(user.getNickname());
+		videos = videoController.obtenerVideosUsuario(user.getNickname());
 		modelUsuarios.addRow(
 					new Object[] {
 							user.getNombre(),
@@ -114,7 +107,7 @@ public class Consultar extends JPanel {
 		}
 
 		for(Lista l:listas) {
-			modelCanales.addRow(
+			modelListas.addRow(
 					new Object[] {
 							l.getNombre(),
 							l.getPrivado(),
@@ -123,18 +116,64 @@ public class Consultar extends JPanel {
 		}
 
 		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, "2, 4, fill, fill");
+		scrollPane.setBounds(10, 110, 433, 66);
+		add(scrollPane);
 
 		scrollPane_1 = new JScrollPane();
-		add(scrollPane_1, "2, 6, fill, fill");
+		scrollPane_1.setBounds(10, 186, 433, 66);
+		add(scrollPane_1);
 		tableVideos.setModel(modelVideo);
-		tableCanales.setModel(modelCanales);
+		tableListas.setModel(modelListas);
 		tableUsuarios.setModel(modelUsuarios);
-		scrollPane_1.setViewportView(tableCanales);
+		scrollPane_1.setViewportView(tableListas);
 		scrollPane.setViewportView(tableVideos);
 		
 		scrollPane_2 = new JScrollPane();
-		add(scrollPane_2, "4, 2, fill, fill");
+		scrollPane_2.setBounds(449, 10, 1, 76);
+		add(scrollPane_2);
 		
+		JButton btnVerLista = new JButton("Ver lista");
+		btnVerLista.setBounds(358, 279, 85, 21);
+		add(btnVerLista);
+		btnVerLista.setVisible(false);
+		btnVerLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				verLista verlista = new verLista(lista);
+				Frame.frame.setContentPane(verlista);
+				Frame.frame.revalidate();
+
+			}
+		});
+		JButton btnVerVideo = new JButton("Ver video");
+		btnVerVideo.setBounds(358, 279, 85, 21);
+		btnVerVideo.setVisible(false);
+		add(btnVerVideo);
+		btnVerVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				verVideo vervideo = new verVideo(video);
+				Frame.frame.setContentPane(vervideo);
+				Frame.frame.revalidate();
+
+			}
+		});
+		tableVideos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				video = videos.get(e.getFirstIndex());
+				System.out.println(video);
+				btnVerLista.setVisible(false);
+				btnVerVideo.setVisible(true);
+
+			}
+		});
+		tableListas.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				lista = listas.get(e.getFirstIndex());
+				System.out.println(lista);
+				btnVerLista.setVisible(true);
+				btnVerVideo.setVisible(false);
+			}
+		});		
 	}
 }

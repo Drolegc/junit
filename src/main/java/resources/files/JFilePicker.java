@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -14,6 +15,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import org.apache.commons.io.FileUtils;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
@@ -88,16 +92,9 @@ this.mode = mode;
 public String getSelectedFilePath() {
 return textField.getText();
 }
-public void saveFile(String path) {
-	try {
-		path = path + (int )(Math. random() * 50 + 1) + ".jpg";
-		System.out.println(path);
-		Path src = Paths.get(path);
-		Path dst = Paths.get(this.textField.getText());
-		Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING);		
-	}catch(Exception e) {
-		System.out.println(e.getCause());
-	}
+public void saveFile(File source, File dest) throws IOException {
+    FileUtils.copyFileToDirectory(source, dest);
+
 }
 public JFileChooser getFileChooser() {
 return this.fileChooser;

@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
+import java.awt.Image;
+
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
@@ -31,6 +33,9 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
+import org.apache.maven.model.Profile;
+
 import java.awt.Window;
 import uytube.views.usuarios.UserMain;
 import com.jgoodies.forms.layout.FormLayout;
@@ -76,7 +81,13 @@ public class Editar extends JPanel {
 		JLabel lblNickname = new JLabel("Nickname");
 		add(lblNickname, "2, 2, left, center");
 		
-		JLabel label_1 = new JLabel(new ImageIcon(user.getImg()));
+		JLabel label_1 = new JLabel();
+		label_1.setBounds(100,100,450,300);
+		ImageIcon imgIcon = new ImageIcon(user.getImg());
+		Image img = imgIcon.getImage();
+		Image newImg = img.getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon profilePicture = new ImageIcon(newImg);
+		label_1.setIcon(profilePicture);
 		add(label_1, "8, 2, 1, 7, fill, fill");
 		
 		JLabel label_2 = new JLabel("Correo");
@@ -115,14 +126,28 @@ public class Editar extends JPanel {
 		
 		JButton btnAgregar = new JButton("Editar");
 		btnAgregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Usuario modelUsuario = new Usuario();
-				modelUsuario.setNickname(nickname.getText());
-				modelUsuario.setApellido(apellido.getText());
-				modelUsuario.setNombre(nombre.getText());
-				modelUsuario.setCorreo(correo.getText());
-				modelUsuario.setFnacimiento(f_nac.getDate());
-				modelUsuario.setImg(filePicker.getSelectedFilePath());
+			public void actionPerformed(ActionEvent e) {				
+				Usuario modelUsuario = null;
+				File file = new File(filePicker.getSelectedFilePath());
+				File folder = new File("resources" + File.separator + nickname.getText());
+				file.getName();
+				try {
+					filePicker.saveFile(file, folder);					
+				} catch (Exception e2) {
+					System.out.println(e2);
+				}
+				try {
+					modelUsuario = new Usuario(
+							nickname.getText(), 
+							nombre.getText(), 
+							apellido.getText(), 
+							correo.getText(),  
+							f_nac.getDate(),
+							folder.getAbsolutePath() + File.separator + file.getName()
+					);					
+				} catch (Exception e2) {
+					System.out.println(e2);
+				}				
 				UsuarioController Controlerusuario = new UsuarioController();
 				Controlerusuario.modificarUsuario(modelUsuario);
 				Listar listar = new Listar();

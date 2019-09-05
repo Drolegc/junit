@@ -54,11 +54,6 @@ public class UsuarioController implements IUsuario{
 	    
 	}
 
-	public void consultaUsuario(String nickname) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public ArrayList<Usuario> listaUsuarios() {
 		this.session = null;
 		ArrayList<Usuario> usuarios = null;
@@ -82,7 +77,20 @@ public class UsuarioController implements IUsuario{
 	        session = HibernateUtil.getSessionFactory().openSession();
 	        usuario = (Usuario)session.createQuery("From Usuario where nickname=:nickname").setParameter("nickname", nickname).getSingleResult();
 	    } catch (Exception e) {
-	        e.printStackTrace();
+	      } finally {
+	        if (session != null) {
+	          session.close();
+	        }
+	      }		
+		return usuario;
+	}	
+	public Usuario consultarEmail(String correo) {
+		this.session = null;
+		Usuario usuario = null;
+	    try {
+	        session = HibernateUtil.getSessionFactory().openSession();
+	        usuario = (Usuario)session.createQuery("From Usuario where correo=:correo").setParameter("correo", correo).getSingleResult();
+	    } catch (Exception e) {
 	      } finally {
 	        if (session != null) {
 	          session.close();
