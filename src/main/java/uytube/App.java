@@ -52,6 +52,7 @@ import uytube.views.usuarios.Buscar;
 import uytube.views.usuarios.DejarSeguir;
 import uytube.views.usuarios.Listar;
 import uytube.views.usuarios.Seguir;
+import uytube.views.usuarios.consultar.ConsultarMain;
 import uytube.views.videos.AltaVideo;
 import uytube.views.videos.ConsultaVideo;
 import uytube.views.videos.ModificarDatosVideo;
@@ -172,8 +173,8 @@ public class App extends JFrame{
 		JMenuItem mntmConsultarUsuario = new JMenuItem("Consultar usuario");
 		mntmConsultarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Buscar buscar = new Buscar();
-				Frame.frame.setContentPane(buscar);
+				ConsultarMain consultar = new ConsultarMain();
+				Frame.frame.setContentPane(consultar);
 				Frame.frame.revalidate();		
 			}
 		});
