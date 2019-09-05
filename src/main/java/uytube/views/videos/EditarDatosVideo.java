@@ -215,6 +215,7 @@ public class EditarDatosVideo extends JPanel {
 					Usuario usuario = usercontroller.consultarUsuario(userInfo.getText());
 					Video v = new Video();
 					
+					v.setId(video.getId());
 					v.setCanal(video.getCanal());
 					v.setNombre(titulo.getText());
 					v.setUrl(url.getText());

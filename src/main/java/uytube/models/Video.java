@@ -15,7 +15,7 @@ public class Video {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name ="id", insertable=false, updatable=false)
 	private int id;
-	
+
 	@Column(name = "nombre")
 	private String nombre;
 	
@@ -119,6 +119,15 @@ public class Video {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
 
