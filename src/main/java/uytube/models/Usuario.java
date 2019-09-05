@@ -1,12 +1,10 @@
 package uytube.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.*;
 import uytube.models.Canal;
 @Entity
@@ -32,33 +30,39 @@ public class Usuario {
 	@Column(name = "img")
 	private String img;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Usuario> usuariosSeguidos;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Canal canal;
+	@ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+	private List<Canal> canalesSeguidos;
+
 	
 	public Usuario() {
 		
 	}
 
 	public Usuario(String nickname, String nombre, String apellido, String correo, Date fnacimiento, String img) {
+		if(this.nickname == "" 
+				|| this.nombre == "" 
+				|| this.apellido == "" 
+				|| this.correo == "" 
+				|| this.fnacimiento == null
+				||this.img == "") {
+			new Exception("Hay campos que no pueden ser nulos"); 
+		}
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.correo = correo;
 		this.fnacimiento = fnacimiento;
 		this.img = img;
+		canalesSeguidos = new ArrayList<Canal>();
 		
-		this.canal = new Canal(nombre,"Mi primer canal");
 	}
-	
-	public List<Usuario> getusuariosSeguidos(){
-		return this.usuariosSeguidos;
+
+	public List<Canal> getCanalesSeguidos() {
+		return canalesSeguidos;
 	}
-	
-	public void addUsuario(Usuario user) {
-		this.usuariosSeguidos.add(user);
+
+	public void addCanal(Canal c) {
+		this.canalesSeguidos.add(c);
 	}
 
 	public String getNickname() {
@@ -107,6 +111,27 @@ public class Usuario {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+	
+	public void dejarDeSeguir(String nameCanal) {
+		
+		/*
+		 * Para remover un objeto de la coleccion
+		 * lo mas conveniente es usar iteradores
+		 * */
+		
+		
+		Iterator<Canal> i = this.canalesSeguidos.iterator();
+		Canal c = null;
+		while(i.hasNext()) {
+			c = (Canal)i.next();
+			if(c.getNombre().equals(nameCanal)) {
+				System.out.println("Dejando se seguir a "+nameCanal);
+				break;
+			}
+			
+		}
+		this.canalesSeguidos.remove(c);
 	}
 	
 	

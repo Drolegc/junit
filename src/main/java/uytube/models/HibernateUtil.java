@@ -31,8 +31,8 @@ public class HibernateUtil {
         settings.put("hibernate.connection.url", "jdbc:h2:~/test");
         settings.put("hibernate.connection.username", "sa");
         settings.put("hibernate.connection.password", "");
-        settings.put("hibernate.show_sql", "true");
-        settings.put("hibernate.hbm2ddl.auto", "update");
+        settings.put("hibernate.show_sql", "false");
+        settings.put("hibernate.hbm2ddl.auto", "create-drop");
 
         registryBuilder.applySettings(settings);
 
@@ -44,7 +44,8 @@ public class HibernateUtil {
             .addAnnotatedClass(Video.class)
             .addAnnotatedClass(Canal.class)
             .addAnnotatedClass(Comentario.class)
-            .addAnnotatedClass(Lista.class);
+            .addAnnotatedClass(Lista.class)
+        	.addAnnotatedClass(ValoracionVideo.class);
 
         Metadata metadata = sources.getMetadataBuilder().build();
 

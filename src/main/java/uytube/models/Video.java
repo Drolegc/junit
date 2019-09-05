@@ -2,6 +2,9 @@ package uytube.models;
 import java.util.Date;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Columns;
+
 import uytube.models.Usuario;
 
 @Entity
@@ -9,6 +12,10 @@ import uytube.models.Usuario;
 public class Video {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name ="id", insertable=false, updatable=false)
+	private int id;
+
 	@Column(name = "nombre")
 	private String nombre;
 	
@@ -24,15 +31,48 @@ public class Video {
 	@Column(name = "url")
 	private String url;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="username")
-	Usuario usuario;
+	@Column(name="es_publico")
+	private boolean es_publico;
+	
+	
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="nombre", insertable = false, updatable = false)
+	public boolean getEs_publico() {
+		return es_publico;
+	}
+
+	public void setEs_publico(boolean es_publico) {
+		this.es_publico = es_publico;
+	}
+
+	@OneToOne(cascade = CascadeType.ALL)
+	Canal canal;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name="id",nullable = true)
 	Categoria categoria;
 
-	
+
+
+	public Canal getCanal() {
+		return canal;
+	}
+
+	public void setCanal(Canal canal) {
+		this.canal = canal;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+
+	public Video() {
+		
+	}
 	public Video (String nombre, String descripcion, String duracion, Date fecha, String url) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -82,5 +122,12 @@ public class Video {
 	}
 	
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }
 

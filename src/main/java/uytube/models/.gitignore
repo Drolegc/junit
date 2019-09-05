@@ -2,3 +2,7 @@
 /Lista.class
 /Usuario.class
 /Video.class
+/Canal.class
+/Comentario.class
+/HibernateUtil.class
+/ValoracionVideo.class

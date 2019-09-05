@@ -12,6 +12,11 @@ import javax.persistence.*;
 public class Categoria {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id",insertable = false,updatable = false)
+	private int id;
+	
+	
 	@Column(name = "nombre")
 	private String nombre; 
 		
@@ -20,9 +25,15 @@ public class Categoria {
 	}
 	public Categoria() {}
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
+	public int getId() {
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}	

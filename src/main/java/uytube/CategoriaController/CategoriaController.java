@@ -1,4 +1,5 @@
 package uytube.CategoriaController;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,47 +9,31 @@ import javax.persistence.Persistence;
 import uytube.CategoriaController.ICategoria;
 import uytube.models.Categoria;
 import uytube.models.Video;
+import uytube.models.manager.Manager;
 public class CategoriaController implements ICategoria{
 	
 		//Variables de conexion
-		private static EntityManager manager;
-		private static EntityManagerFactory emf;
+		private Manager mng;
 
 		public CategoriaController() {
+			mng = Manager.getInstance();
 		}
+		
 	public void altaCategoria(String nombre) {
-			
-		if(!existeCategoria(nombre)) {
-			
-		emf = Persistence.createEntityManagerFactory("uytube");
-		manager = emf.createEntityManager();
 		
-		Categoria c = new Categoria(nombre);
-		manager.getTransaction().begin();
-		manager.persist(c);		
-		manager.getTransaction().commit();
-		
-		System.out.println("La categoria: "+nombre+ " fue creada");
-			
-	}/*else if(consultarCategoria(nombre)) {
-		System.out.println("La categoria: "+nombre+" ya existe.");
-	}*/
-}
-	
-	public boolean existeCategoria(String nombre) {
-		emf = Persistence.createEntityManagerFactory("uytube");
-		manager = emf.createEntityManager();	
-		
-		
-		List<Categoria> categorias = (List<Categoria>) manager.createQuery("From Categoria").getResultList();
-		
-		for(Categoria c:categorias) {
-			if(c.getNombre().equals(nombre)) {
-				return true;
-			}
+		if(existeCategoria(nombre) == null) {
+			mng.startTransaction("Categoria", new Categoria(nombre));
+			System.out.println("La categoria: "+nombre+ " fue creada");		
+		}else{
+			System.out.println("La categoria: "+nombre+" ya existe.");
 		}
 		
-		return false;
+	}
+	
+	private Categoria existeCategoria(String nombre) {
+		 Categoria c = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre",nombre).uniqueResult();
+		 mng.closeSession();
+		 return c;
 	}
 
 	public List<Video> consultarCategoria(String nombreCategoria) {
@@ -60,14 +45,14 @@ public class CategoriaController implements ICategoria{
 			En primer lugar, el sistema lista todas las categorías existentes y
 			al elegir una se mostrará un listado (nombre y usuario propietario) de todos los videos 
 			y listas de reproducción que tenga dicha categoría.
-*/
+
 		emf = Persistence.createEntityManagerFactory("uytube");
 		manager = emf.createEntityManager();	
 		
 		List<Categoria> categorias = (List<Categoria>) manager.createQuery("From Categoria").getResultList();
 		
 		
-		////// a implementar //////
+		////// a implementar //////*/
 		List<Video> v = null;
 		
 		return v;
@@ -76,12 +61,12 @@ public class CategoriaController implements ICategoria{
 		
 	}
 	
+	
+	
 public void listarCategoriasExistentes() {
 		
-		emf = Persistence.createEntityManagerFactory("uytube");
-		manager = emf.createEntityManager();
-		
-		List<Categoria> categorias = (List<Categoria>) manager.createQuery("From Categoria").getResultList();
+		List<Categoria> categorias = (List<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();
+		mng.closeSession();
 		System.out.println("Listando categoria");
 		for(Categoria c:categorias) {
 			System.out.println(c.getNombre());
@@ -89,18 +74,36 @@ public void listarCategoriasExistentes() {
 		
 	}
 
-	public List<Categoria> listarCategorias() {
+	public String[] listarCategoriasName(){
 		
-		emf = Persistence.createEntityManagerFactory("uytube");
-		manager = emf.createEntityManager();
+		List<Categoria> categorias = (List<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();
+		mng.closeSession();
 		
-		List<Categoria> categorias = (List<Categoria>) manager.createQuery("From Categoria").getResultList();
+
+		String [] names = new String[categorias.size()];
+		
+		for(int i = 0; i<categorias.size();i++) {
+			names[i] = categorias.get(i).getNombre();
+		}
+		
+		return names;
+	}
+	public ArrayList<Categoria> listarCategorias() {
+		
+		ArrayList<Categoria> categorias = (ArrayList<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();
+		mng.closeSession();
 		
 		for(Categoria c:categorias) {
-			System.out.println(c.getNombre());
+			System.out.println(c.getNombre());			
 		}
+		
 		return categorias;
 		
-	}	
+	}
+	
+	public void modificarCategoria(Categoria nuevoNombre) {
+				mng.startTransaction("Categoria", nuevoNombre);
+				System.out.println(nuevoNombre.getNombre()+" Editado Correctamente!");
+	}
 
 }

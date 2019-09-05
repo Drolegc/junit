@@ -30,9 +30,7 @@ import java.awt.event.ActionEvent;
 public class Listar extends JPanel {
 	private JTable table;
 
-	/**
-	 * Create the panel.
-	 */
+	
 	private String [] nombreColumnas = {"Nombre","Apellido","Nickname","Correo","F.Nac"};
 	private String [][] datos ;
 	private JTable table_1;
@@ -50,7 +48,6 @@ public class Listar extends JPanel {
 		});
 		btnVolver.setBounds(241, 269, 85, 21);
 		add(btnVolver);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 29, 430, 230);
 		add(scrollPane);
@@ -70,6 +67,7 @@ public class Listar extends JPanel {
 					}
 			);
 		}
+		
 		table.setModel(tablemodel);
 		scrollPane.setViewportView(table);
 		

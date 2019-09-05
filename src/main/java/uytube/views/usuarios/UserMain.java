@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import uytube.views.Frame;
 import uytube.views.Inicio;
+import uytube.views.usuarios.consultar.ConsultarMain;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.event.ActionListener;
@@ -56,13 +57,35 @@ public class UserMain extends JPanel {
 				
 			}
 		});
+		
+		JButton btnSeguirUsuario = new JButton("Seguir usuario");
+		btnSeguirUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Seguir usuario panel");
+				Seguir seguir = new Seguir();
+				Frame.frame.setContentPane(seguir);
+				Frame.frame.revalidate();	
+				
+			}
+		});
+		
+		JButton btnDejarDeSeguir = new JButton("Dejar de seguir");
+		btnDejarDeSeguir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DejarSeguir dejarSeguir = new DejarSeguir();
+				Frame.frame.setContentPane(dejarSeguir);
+				Frame.frame.revalidate();
+			}
+		});
+		add(btnDejarDeSeguir, "4, 6");
+		add(btnSeguirUsuario, "4, 8");
 		add(btnNewButton, "4, 10");
 		
 		JButton btnNewButton_2 = new JButton("Consultar usuario");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Buscar buscar = new Buscar();
-				Frame.frame.setContentPane(buscar);
+				ConsultarMain Consultar = new ConsultarMain();
+				Frame.frame.setContentPane(Consultar);
 				Frame.frame.revalidate();				
 				
 			}
