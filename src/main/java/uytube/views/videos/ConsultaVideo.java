@@ -32,7 +32,7 @@ public class ConsultaVideo extends JPanel {
 		usuarioSeleccionado.setNickname("");
 		setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 29, 467, 226);
+		scrollPane.setBounds(10, 40, 430, 226);
 		add(scrollPane);
 		
 				
@@ -90,12 +90,16 @@ public class ConsultaVideo extends JPanel {
 					{JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario");}
 			}
 		});
-		btnVerVideos.setBounds(265, 277, 212, 23);
+		btnVerVideos.setBounds(228, 277, 212, 23);
 		add(btnVerVideos);
 		
 		JLabel lblIngreseUsuario = new JLabel("Seleccione usuario");
-		lblIngreseUsuario.setBounds(10, 11, 140, 14);
+		lblIngreseUsuario.setBounds(10, 24, 140, 14);
 		add(lblIngreseUsuario);
+		
+		JLabel lblConsulta = new JLabel("CONSULTA DE VIDEO");
+		lblConsulta.setBounds(160, 11, 196, 14);
+		add(lblConsulta);
 		
 
 	}

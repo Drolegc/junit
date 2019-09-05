@@ -6,9 +6,9 @@ import uytube.models.Video;
 public class ComentarioController implements IComentario{
 
 	@Override
-	public void altaComentario(Video video, String comentario,Comentario padre) {
+	public void altaComentario() {
 		// TODO Auto-generated method stub
-		
+		//altaComentario(Video video, String comentario,Comentario padre)
 		/*
 		 * Tenemos que crear un nuevo comentario
 		 * 
@@ -22,6 +22,18 @@ public class ComentarioController implements IComentario{
 		 *
 		 *
 		 * */
+		
+	}
+
+	@Override
+	public void altaComentario(Video video, String comentario) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void altaComentario(Video video, String comentario, Comentario padre) {
+		// TODO Auto-generated method stub
 		
 	}
 

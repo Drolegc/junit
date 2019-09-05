@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
@@ -25,6 +26,7 @@ import uytube.views.usuarios.Listar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTree;
+import javax.swing.JCheckBox;
 
 public class ConsultaVideoyComentarios extends JPanel {
 
@@ -42,7 +44,7 @@ public class ConsultaVideoyComentarios extends JPanel {
 	private String userInfoStr;
 	private String catAsignar;
 	private JTextField nickname;
-	private JTextField descripcion;
+	private JTextArea descripcion;
 	private JTextField duracion1;
 	private JTextField fechapublicacion;
 	private JTextField categoria;
@@ -51,68 +53,68 @@ public class ConsultaVideoyComentarios extends JPanel {
 	public ConsultaVideoyComentarios(Video video) {
 			setLayout(null);
 			JLabel lblNickname = new JLabel("usuario/nickname");
-			lblNickname.setBounds(10, 11, 206, 13);
+			lblNickname.setBounds(10, 40, 206, 13);
 			add(lblNickname);
 			
 			JLabel lblUrl = new JLabel("URL");
-			lblUrl.setBounds(10, 105, 206, 13);
+			lblUrl.setBounds(10, 125, 206, 13);
 			add(lblUrl);
 			
 			this.userInfo = new JTextField();
-			userInfo.setBounds(10, 30, 206, 20);
+			userInfo.setBounds(10, 55, 206, 20);
 			add(userInfo);
 			this.userInfo.setColumns(10);
 			this.userInfo.setEditable(false);
 			this.userInfo.setText(video.getCanal().getNombre());
 			this.url = new JTextField();
 			url.setEditable(false);
-			url.setBounds(10, 117, 206, 20);
+			url.setBounds(10, 139, 206, 20);
 			this.url.setColumns(10);
 			this.url.setText(video.getUrl());
 			add(url);
 			
 			JLabel lblNombre = new JLabel("Titulo");
-			lblNombre.setBounds(10, 61, 206, 14);
+			lblNombre.setBounds(10, 85, 206, 14);
 			add(lblNombre);
 			
 			JLabel lblDescripcion = new JLabel("Descripcion");
-			lblDescripcion.setBounds(224, 10, 207, 14);
+			lblDescripcion.setBounds(224, 40, 207, 14);
 			add(lblDescripcion);
 			
 			this.titulo = new JTextField();
-			titulo.setBounds(10, 75, 206, 19);
+			titulo.setBounds(10, 100, 206, 19);
 			add(titulo);
 			this.titulo.setColumns(10);
 			this.titulo.setText(video.getNombre());
 			this.titulo.setEditable(false);
 			
-			this.descripcion = new JTextField();
-			descripcion.setBounds(226, 30, 205, 66);
-			this.descripcion.setColumns(10);
+			this.descripcion = new JTextArea();
+			descripcion.setBounds(226, 55, 205, 66);
+			descripcion.setLineWrap(true);
 			add(descripcion);
 			this.descripcion.setText(video.getDescripcion());
 			this.descripcion.setEditable(false);
 
 			this.duracion = new JTextField();
-			duracion.setBounds(10, 160, 206, 19);
+			duracion.setBounds(10, 184, 206, 19);
 			this.duracion.setColumns(10);
 			this.duracion.setText(video.getDuracion());
 			add(duracion);
 			this.duracion.setEditable(false);
 			
 			JLabel lblDuracion = new JLabel("Duracion");
-			lblDuracion.setBounds(10, 148, 206, 13);
+			lblDuracion.setBounds(10, 170, 206, 13);
 			add(lblDuracion);
 			
 			JLabel lblFechaPublicacion = new JLabel("Fecha publicacion");
-			lblFechaPublicacion.setBounds(226, 105, 206, 13);
+			lblFechaPublicacion.setBounds(225, 125, 206, 13);
 			add(lblFechaPublicacion);
 			lblFechaPublicacion.setFocusable(false);
 
 			
 			
 			this.fechapublicacion = new JTextField();
-			fechapublicacion.setBounds(226, 117, 206, 19);
+			fechapublicacion.setBounds(226, 139, 206, 19);
 			this.fechapublicacion.setColumns(10);
 			this.fechapublicacion.setText(video.getFecha().toString());
 			add(fechapublicacion);
@@ -158,12 +160,12 @@ public class ConsultaVideoyComentarios extends JPanel {
 			*/
 			
 			JLabel lblCategoria = new JLabel("Categoria");
-			lblCategoria.setBounds(224, 147, 207, 14);
+			lblCategoria.setBounds(224, 169, 207, 14);
 			add(lblCategoria);
 			
 			
 			this.categoria = new JTextField();
-			categoria.setBounds(224, 160, 206, 19);
+			categoria.setBounds(224, 184, 206, 19);
 			this.categoria.setColumns(10);
 			this.categoria.setText(video.getCategoria().getNombre());
 			add(categoria);
@@ -180,6 +182,28 @@ public class ConsultaVideoyComentarios extends JPanel {
 			JTree tree = new JTree();
 			tree.setBounds(224, 214, 207, 75);
 			add(tree);
+			
+			JLabel label = new JLabel("CONSULTA DE VIDEO");
+			label.setBounds(160, 11, 191, 14);
+			add(label);
+			
+		
+			
+			
+			JCheckBox chckbxNewCheckBox = new JCheckBox("Es Publico");
+			chckbxNewCheckBox.setEnabled(false);
+			chckbxNewCheckBox.setSelected(video.getEs_publico());
+			chckbxNewCheckBox.setBounds(6, 214, 101, 23);
+			add(chckbxNewCheckBox);
+			JCheckBox chckbxNewCheckBox2 = new JCheckBox("Es Privado");
+			chckbxNewCheckBox2.setEnabled(false);
+			chckbxNewCheckBox2.setSelected(!(video.getEs_publico()));
+			chckbxNewCheckBox2.setBounds(106, 214, 101, 23);
+			add(chckbxNewCheckBox2);
+			
+			
+			
+			
 		}
 }
 
