@@ -83,25 +83,26 @@ public class ListaController implements ILista {
 		
 	}
 
-	public void modificarLista(int id,String categoria,boolean privacidad) {
+	public void modificarLista(int id,int id_categoria,boolean privacidad) {
 		// TODO Auto-generated method stub
 		
 		//Obtener lista segun id
-		
-		List<Lista> listas = (List<Lista>)mng.getSessionManager().createQuery("From Lista").getResultList();
-		mng.closeSession();
 		
 		
 		Lista list = (Lista)mng.getSessionManager().createQuery("From Lista where id = :id").setParameter("id", id).getSingleResult();
 		mng.closeSession();
 		
-		Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", categoria).getSingleResult();
+		Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where id = :id").setParameter("id", id_categoria).getSingleResult();
 		mng.closeSession();
+		
+		System.out.println("Buscando categoria para modificar :: " + cat.getNombre());
 		
 		list.setCategoria(cat);
 		list.setPrivado(privacidad);
 		
 		mng.startTransaction("Lista", list);
+		
+		System.out.println(" -- Lista modificada.");
 	}
 
 	public void consultarListas() {
@@ -128,7 +129,7 @@ public class ListaController implements ILista {
 		System.out.println("Listando listas");
 		for(Lista l: listas) {
 			if(l.getCategoria()!=null) {
-				System.out.println(l.getNombre() + " | " + l.getCanal().getNombre()+" | "+l.getId()+" | "+l.getCategoria().getNombre()+" | "+l.getCategoria().getId());
+				System.out.println(l.getNombre() + " | " + l.getCanal().getNombre()+" | "+l.getId()+" | "+l.getCategoria().getNombre()+" | "+l.getCategoria().getId()+" | "+" Privacidad: "+l.getPrivado());
 			}
 			else {
 				System.out.println(l.getNombre()+" | "+l.getCanal().getNombre()+" | "+l.getId()+" | "+l.getCategoria().getNombre()+" | "+l.getCategoria().getId());

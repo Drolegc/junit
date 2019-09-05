@@ -20,6 +20,7 @@ import uytube.models.Categoria;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
+import javax.swing.JCheckBox;
 
 public class AltaVideo extends JPanel {
 	private JTextField userInfo;
@@ -41,56 +42,92 @@ public class AltaVideo extends JPanel {
 		setLayout(null);
 		
 		JLabel TITULOPANEL = new JLabel("ALTA VIDEO");
-		TITULOPANEL.setBounds(176, 11, 87, 14);
+		TITULOPANEL.setBounds(178, 23, 87, 14);
 		add(TITULOPANEL);
 		
 		JLabel lblUsuarioCreador = new JLabel("Usuario creador");
-		lblUsuarioCreador.setBounds(30, 48, 89, 14);
+		lblUsuarioCreador.setBounds(10, 48, 192, 14);
 		add(lblUsuarioCreador);
 		
 		JLabel lblTituloVideo = new JLabel("Titulo Video");
-		lblTituloVideo.setBounds(30, 104, 89, 14);
+		lblTituloVideo.setBounds(10, 104, 192, 14);
 		add(lblTituloVideo);
 		
 		titulo = new JTextField();
-		titulo.setBounds(23, 129, 96, 20);
+		titulo.setBounds(10, 118, 200, 20);
 		add(titulo);
 		titulo.setColumns(10);
 		
-		JLabel lblDuracion = new JLabel("Duracion");
-		lblDuracion.setBounds(30, 160, 48, 14);
+		JLabel lblDuracion = new JLabel("Duracion(hh:mm:ss)");
+		lblDuracion.setBounds(10, 149, 192, 14);
 		add(lblDuracion);
 		
 		duracion = new JTextField();
-		duracion.setBounds(23, 185, 96, 20);
+		duracion.setBounds(10, 162, 200, 20);
 		add(duracion);
 		duracion.setColumns(10);
 		
 		JLabel lblUrl = new JLabel("URL");
-		lblUrl.setBounds(297, 48, 48, 14);
+		lblUrl.setBounds(220, 48, 220, 14);
 		add(lblUrl);
 		
 		url = new JTextField();
-		url.setBounds(275, 73, 96, 20);
+		url.setBounds(220, 62, 220, 20);
 		add(url);
 		url.setColumns(10);
 		
 		JLabel descripcion = new JLabel("Descripcion");
-		descripcion.setBounds(275, 104, 96, 14);
+		descripcion.setBounds(219, 104, 207, 14);
 		add(descripcion);
 		
 		descrip = new JTextField();
-		descrip.setBounds(275, 129, 96, 20);
+		descrip.setBounds(220, 118, 220, 20);
 		add(descrip);
 		descrip.setColumns(10);
 		
 		JLabel lblFechaPublicacion = new JLabel("Fecha Publicacion");
-		lblFechaPublicacion.setBounds(275, 160, 96, 14);
+		lblFechaPublicacion.setBounds(220, 149, 200, 14);
 		add(lblFechaPublicacion);
 		
 		JDateChooser fecPub = new JDateChooser();
-		fecPub.setBounds(276, 185, 95, 20);
+		fecPub.setBounds(220, 162, 220, 20);
 		add(fecPub);
+		
+		
+		JLabel lblPrivacidad = new JLabel("Privacidad");
+		lblPrivacidad.setBounds(220, 193, 214, 14);
+		add(lblPrivacidad);
+		
+		
+		
+		JCheckBox chckbxNewCheckBox2 = new JCheckBox("Es Privado");
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Es Publico");
+
+		chckbxNewCheckBox2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxNewCheckBox.setSelected(!(chckbxNewCheckBox2.isSelected()));	
+
+			}
+		});
+		chckbxNewCheckBox2.setEnabled(true);
+		chckbxNewCheckBox2.setSelected(true);
+		chckbxNewCheckBox2.setBounds(323, 210, 101, 23);
+		add(chckbxNewCheckBox2);
+		
+		
+	//	JCheckBox chckbxNewCheckBox = new JCheckBox("Es Publico");
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chckbxNewCheckBox2.setSelected(!(chckbxNewCheckBox.isSelected()));	
+			}
+		});
+		chckbxNewCheckBox.setEnabled(true);
+		chckbxNewCheckBox.setSelected(false);
+		chckbxNewCheckBox.setBounds(220, 210, 101, 23);
+		add(chckbxNewCheckBox);
+		
+		
+		
 		
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
@@ -104,7 +141,8 @@ public class AltaVideo extends JPanel {
 				videito.setDuracion(duracion.getText());
 				videito.setDescripcion(descripcion.getText());
 				videito.setUrl(url.getText());
-				videito.setFecha(fecPub.getDate());			
+				videito.setFecha(fecPub.getDate());	
+				videito.setEs_publico(chckbxNewCheckBox.isSelected());
 				
 				VideoController controladorVideo = new VideoController();
 				System.out.println(nickInfoStr);
@@ -117,11 +155,11 @@ public class AltaVideo extends JPanel {
 			}
 		});
 		
-		btnOk.setBounds(30, 228, 89, 23);
+		btnOk.setBounds(220, 266, 220, 23);
 		add(btnOk);
 		
 		JLabel lblCategoraopcional = new JLabel("Categoria (Opcional)");
-		lblCategoraopcional.setBounds(268, 203, 122, 14);
+		lblCategoraopcional.setBounds(10, 193, 122, 14);
 		add(lblCategoraopcional);
 		
 		// BOTON DE ASIGNACION DE USUARIO
@@ -141,7 +179,7 @@ public class AltaVideo extends JPanel {
 		        System.out.println("ELEG� USER Y ES: "+ nickInfoStr);  
 				}
 		});
-		userInfo1.setBounds(23, 73, 96, 22);
+		userInfo1.setBounds(10, 61, 200, 22);
 		add(userInfo1);
 		
 		
@@ -165,10 +203,10 @@ public class AltaVideo extends JPanel {
 		        System.out.println(catAsignar);
 			}
 		});
-		categoriaAsig.setBounds(275, 228, 96, 22);
+		categoriaAsig.setBounds(10, 207, 200, 22);
 		add(categoriaAsig);
 		
-		JButton btnVolver = new JButton("Volver");
+		JButton btnVolver = new JButton("Cancelar");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VideoMain videos = new VideoMain();
@@ -176,8 +214,9 @@ public class AltaVideo extends JPanel {
 				Frame.frame.validate();
 			}
 		});
-		btnVolver.setBounds(170, 266, 89, 23);
+		btnVolver.setBounds(10, 266, 200, 23);
 		add(btnVolver);
+		
 		
 		
 		

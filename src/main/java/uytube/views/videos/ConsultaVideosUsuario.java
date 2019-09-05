@@ -29,9 +29,14 @@ public class ConsultaVideosUsuario extends JPanel {
 	    videoSeleccionado.setNombre("");//setea el video seleccionado a vacio
 		VideoController controller = new VideoController();
 		ArrayList<Video> Videos = controller.listaVideosUsuario(usuario.getNickname());
-		if(!Videos.isEmpty()) {
+		//if(!Videos.isEmpty()) {
+					
+					JLabel lblSeleccione = new JLabel("Seleccione el video:");
+					lblSeleccione.setBounds(10, 25, 430, 14);
+					add(lblSeleccione);
+					
 					JScrollPane scrollPane = new JScrollPane();
-					scrollPane.setBounds(10, 29, 430, 100);
+					scrollPane.setBounds(10, 41, 430, 224);
 					add(scrollPane);
 					DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
 					JTable table = new JTable();
@@ -59,11 +64,7 @@ public class ConsultaVideosUsuario extends JPanel {
 					table.setModel(tablemodel);
 					scrollPane.setViewportView(table);
 					
-					JLabel lblEditarVideo = new JLabel("Consultar video");
-					lblEditarVideo.setBounds(10, 157, 79, 14);
-					add(lblEditarVideo);
-					
-					JButton btnConsultar = new JButton("Consultar");
+					JButton btnConsultar = new JButton("Consultar video");
 					btnConsultar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 						VideoController videocontroller = new VideoController();			
@@ -81,17 +82,19 @@ public class ConsultaVideosUsuario extends JPanel {
 							
 						}
 					});
-					btnConsultar.setBounds(222, 170, 89, 23);
+					btnConsultar.setBounds(230, 277, 210, 23);
 					add(btnConsultar);
-			}//	del if
+	/*		}//	del if y  de aca...
 			else {
 				JLabel lbl2 = new JLabel("Usuario no tiene videos.");
 			lbl2.setBounds(160, 157, 200, 14);
 			add(lbl2);
-			//{JOptionPane.showMessageDialog(null, "Usuario no tiene videos");
-		}
+			//{JOptionPane.showMessageDialog(null, "Usuario no tiene videos"); 
+			}//hasta aca ...
+		*/
+		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(10, 266, 217, 23);
+		btnVolver.setBounds(10, 277, 210, 23);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConsultaVideo ConsVideo = new ConsultaVideo();
@@ -101,6 +104,10 @@ public class ConsultaVideosUsuario extends JPanel {
 		});
 		setLayout(null);
 		add(btnVolver);
+		
+		JLabel label = new JLabel("CONSULTA DE VIDEO");
+		label.setBounds(160, 11, 181, 14);
+		add(label);
 
 	}
 }

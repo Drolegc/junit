@@ -2,6 +2,9 @@ package uytube.models;
 import java.util.Date;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Columns;
+
 import uytube.models.Usuario;
 
 @Entity
@@ -12,7 +15,7 @@ public class Video {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name ="id", insertable=false, updatable=false)
 	private int id;
-	
+
 	@Column(name = "nombre")
 	private String nombre;
 	
@@ -28,6 +31,19 @@ public class Video {
 	@Column(name = "url")
 	private String url;
 	
+	@Column(name="es_publico")
+	private boolean es_publico;
+	
+	
+
+	public boolean getEs_publico() {
+		return es_publico;
+	}
+
+	public void setEs_publico(boolean es_publico) {
+		this.es_publico = es_publico;
+	}
+
 	@OneToOne(cascade = CascadeType.ALL)
 	Canal canal;
 	
@@ -103,6 +119,15 @@ public class Video {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
 

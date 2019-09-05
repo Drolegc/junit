@@ -31,7 +31,7 @@ public class ModificarDatosVideo extends JPanel {
 		usuarioSeleccionado.setNickname("");
 		setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 29, 430, 226);
+		scrollPane.setBounds(10, 65, 430, 201);
 		add(scrollPane);
 		
 		UsuarioController controller = new UsuarioController();
@@ -77,9 +77,9 @@ public class ModificarDatosVideo extends JPanel {
 		});
 		
 		JLabel lblIngreseUsuario = new JLabel("Seleccione un usuario");
-		lblIngreseUsuario.setBounds(10, 11, 224, 14);
+		lblIngreseUsuario.setBounds(10, 49, 224, 14);
 		add(lblIngreseUsuario);
-		btnVerVideos.setBounds(216, 266, 224, 23);
+		btnVerVideos.setBounds(223, 277, 217, 23);
 		add(btnVerVideos);
 		
 		JButton btnVolver = new JButton("Volver");
@@ -90,8 +90,12 @@ public class ModificarDatosVideo extends JPanel {
 				Frame.frame.validate();
 			}
 		});
-		btnVolver.setBounds(10, 266, 196, 23);
+		btnVolver.setBounds(10, 277, 203, 23);
 		add(btnVolver);
+		
+		JLabel lblEditarVideo = new JLabel("EDITAR VIDEO");
+		lblEditarVideo.setBounds(186, 11, 192, 14);
+		add(lblEditarVideo);
 		
 
 	}

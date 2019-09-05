@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,19 +20,27 @@ import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
 import javax.swing.JTree;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
 
 public class ListarVideosUsuario extends JPanel {
+		
 	private String [] nombreColumnas = {"Nombre","Categoria","Fecha","URL"};
-	private JTextField textField;
-
+    private Video videoSeleccionado= new Video();
+  
 	/**
 	 * Create the panel.
 	 */
 	ListarVideosUsuario(Usuario usuario) {
 		setLayout(null);
-		
+	    videoSeleccionado.setNombre("");//setea el video seleccionado a vacio
+
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 29, 430, 100);
+		scrollPane.setBounds(10, 65, 430, 201);
 		add(scrollPane);
 		
 		
@@ -39,6 +48,14 @@ public class ListarVideosUsuario extends JPanel {
 		ArrayList<Video> Videos = controller.listaVideosUsuario(usuario.getNickname());
 		DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
 		JTable table = new JTable();
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				//guardo en categoria lo seleccionado por el usuario para editar
+				videoSeleccionado = Videos.get(e.getFirstIndex());
+				
+			}
+		});
 		for(Video v:Videos) {
 			tablemodel.addRow(
 					new Object[] {
@@ -62,32 +79,32 @@ public class ListarVideosUsuario extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnVolver.setBounds(351, 266, 89, 23);
+		btnVolver.setBounds(10, 277, 203, 23);
 		add(btnVolver);
 		
 		JLabel lblEditarVideo = new JLabel("Editar video");
 		lblEditarVideo.setBounds(10, 157, 79, 14);
 		add(lblEditarVideo);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 171, 202, 20);
-		add(textField);
-		textField.setColumns(10);
-		
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			VideoController videocontroller = new VideoController();			
-			Video video = videocontroller.consultaVideo(textField.getText(),"user2"); // harcodeado para probar el caso de uso ValoracionVideo
-			EditarDatosVideo editarDV = new EditarDatosVideo(video);
-			Frame.frame.setContentPane(editarDV);
-			Frame.frame.revalidate();
-				
+				//corrobora si selecciono un video;
+				if (!videoSeleccionado.getNombre().isEmpty()) {
+						VideoController videocontroller = new VideoController();			
+						
+						EditarDatosVideo editarDV = new EditarDatosVideo(videoSeleccionado);
+						Frame.frame.setContentPane(editarDV);
+						Frame.frame.revalidate();
+						}
+				else
+						{JOptionPane.showMessageDialog(null, "Debe seleccionar un video");
+						}	
 				
 				
 			}
 		});
-		btnEditar.setBounds(222, 170, 89, 23);
+		btnEditar.setBounds(223, 277, 217, 23);
 		add(btnEditar);
 		
 		
@@ -97,6 +114,14 @@ public class ListarVideosUsuario extends JPanel {
 		tree.setBounds(46, 214, 72, 64);
 		
 		add(tree);
+		
+		JLabel lblSeleccioneUnUn = new JLabel("Seleccione un un video para editar");
+		lblSeleccioneUnUn.setBounds(10, 49, 224, 14);
+		add(lblSeleccioneUnUn);
+		
+		JLabel label = new JLabel("EDITAR VIDEO");
+		label.setBounds(186, 11, 192, 14);
+		add(label);
 
 	}
 }
