@@ -43,6 +43,8 @@ import uytube.views.Inicio;
 import uytube.views.categorias.alta;
 import uytube.views.categorias.consulta;
 import uytube.views.categorias.listar;
+import uytube.views.listas.crear;
+import uytube.views.listas.modificar;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -298,9 +300,23 @@ public class App extends JFrame{
 		menuBar.add(mnListas);
 		
 		JMenuItem mntmCrearLista = new JMenuItem("Crear lista");
+		mntmCrearLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				crear listas = new crear();
+				Frame.frame.setContentPane(listas);
+				Frame.frame.validate();
+			}
+		});
 		mnListas.add(mntmCrearLista);
 		
 		JMenuItem mntmModificarLista = new JMenuItem("Modificar lista");
+		mntmModificarLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				modificar mod = new modificar();
+				Frame.frame.setContentPane(mod);
+				Frame.frame.revalidate();
+			}
+		});
 		mnListas.add(mntmModificarLista);
 	}
 	public void goToinit() {
