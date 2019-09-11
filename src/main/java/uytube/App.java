@@ -80,6 +80,18 @@ public class App extends JFrame{
 				}
 			}
 		});
+		
+
+		ICategoria controllerCategoria = new CategoriaController();
+		controllerCategoria.altaCategoria("Sin Categoria");
+		controllerCategoria.altaCategoria("Estilo de vida");
+		controllerCategoria.altaCategoria("Musica");
+		controllerCategoria.altaCategoria("Ciencia");
+		controllerCategoria.altaCategoria("Tecnologia");
+		controllerCategoria.altaCategoria("Vlog");
+		controllerCategoria.altaCategoria("Virales");
+		
+		ILista controllerLista = new ListaController();
 
 		IUsuario controllerUser = new UsuarioController();
 		controllerUser.crearUsuario(new Usuario("user2", "Silvio", "Sanchez", "silvio_69@hotmail.com",new Date(),"path"));
@@ -95,19 +107,8 @@ public class App extends JFrame{
 		
 		controllerUser.dejarDeSeguir("user2", "lorenzo");
 		*/
-		ICategoria controllerCategoria = new CategoriaController();
-		controllerCategoria.altaCategoria("Sin Categoria");
-		controllerCategoria.altaCategoria("Estilo de vida");
-		controllerCategoria.altaCategoria("Musica");
-		controllerCategoria.altaCategoria("Ciencia");
-		controllerCategoria.altaCategoria("Tecnologia");
-		controllerCategoria.altaCategoria("Vlog");
-		controllerCategoria.altaCategoria("Virales");
+
 		
-		
-		ILista controllerLista = new ListaController();
-		//Lista default
-		controllerLista.crearLista("Ver mas tardes", "Sin Categoria", null, true, true);
 		controllerLista.crearLista("listaPer", "Ciencia", "user2", true, false);
 
 		

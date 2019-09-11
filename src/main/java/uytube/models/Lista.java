@@ -15,6 +15,11 @@ public class Lista {
 	@Column(name = "id",insertable = false,updatable = false)
 	private int id;
 	
+	
+	//True = Default
+	@Column( name = "tipo")
+	private Boolean tipo;
+	
 	@Column( name = "nombre_lista" )
 	private String nombre_lista;
 	
@@ -41,13 +46,20 @@ public class Lista {
 		this.videos = videos;
 	}
 
-	public Lista(String nombre,boolean privado,Categoria categoria,Canal canal) {
+	public Lista(String nombre,boolean privado,Categoria categoria,Canal canal,boolean tipo) {
 		this.nombre_lista = nombre;
 		this.privado = privado;
 		this.categoria = categoria;
 		this.canal = canal;
+		this.tipo = tipo;
 	}
 
+	public String getNombre_lista() {
+		return nombre_lista;
+	}
+	public void setNombre_lista(String nombre_lista) {
+		this.nombre_lista = nombre_lista;
+	}
 	public String getNombre() {
 		return nombre_lista;
 	}

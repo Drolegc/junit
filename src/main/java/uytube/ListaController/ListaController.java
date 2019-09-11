@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.swing.JOptionPane;
 
 import uytube.models.manager.Manager;
 import uytube.models.Canal;
@@ -19,7 +20,7 @@ public class ListaController implements ILista {
 		mng = Manager.getInstance();
 	}
 	
-	public void crearLista(String listaName,String categoria,String nickUser,boolean privado,boolean Default) {
+	public boolean crearLista(String listaName,String categoria,String nickUser,boolean privado,boolean Default) {
 		// TODO Auto-generated method stub
 		
 		//POR EL MOMENTO ESTAMOS CREANDO UNA LISTA DEFAULT
@@ -32,53 +33,60 @@ public class ListaController implements ILista {
 		 * */
 		
 		//Obtener canales
-		
-		if(Default) {
+		if(!this.tieneLista(nickUser, listaName)) {
 			
-			List<Canal> canales = (List<Canal>) mng.getSessionManager().createQuery("From Canal").getResultList();
-			mng.closeSession();
-
-			//Al ser default hay que buscar la categoria llamada "Sin Categoria"
-			
-			Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", "Sin Categoria").getSingleResult();
-			mng.closeSession();
-			
-			System.out.println(canales.size());
-			for(Canal c: canales) {
-				System.out.println("Lista default");
-				Lista lista = new Lista(listaName,privado,cat,c);
-				mng.startTransaction("Lista", lista);
+			if(Default) {
 				
+				List<Canal> canales = (List<Canal>) mng.getSessionManager().createQuery("From Canal").getResultList();
+				mng.closeSession();
+	
+				//Al ser default hay que buscar la categoria llamada "Sin Categoria"
+				
+				Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", "Sin Categoria").getSingleResult();
+				mng.closeSession();
+				
+				System.out.println(canales.size());
+				for(Canal c: canales) {
+					System.out.println("Lista default");
+					Lista lista = new Lista(listaName,privado,cat,c,true);
+					mng.startTransaction("Lista", lista);
+					
+				}
+				
+				System.out.println("Listas default creadas");
+				
+			}else {
+				
+				/*
+				 * Cuando una lista es personalizada
+				 * buscamos el canal 
+				 * 
+				 * */
+				/*
+				System.out.println("Canales: ");
+				
+				List<Canal> canales = (List<Canal>)mng.getSessionManager().createQuery("From Canal").getResultList();
+				mng.closeSession();
+				*/
+				
+				Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombre").setParameter("nombre", nickUser).getSingleResult();
+				mng.closeSession();
+				
+				Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", categoria).getSingleResult();
+				mng.closeSession();
+				
+				Lista lista = new Lista(listaName,privado,cat,canal,false);
+				mng.startTransaction("Lista",lista);
+				
+				System.out.println("Lista agregada a un unico canal " + canal.getNombre());
 			}
 			
-			System.out.println("Listas default creadas");
-			
+			return true;
 		}else {
-			
-			/*
-			 * Cuando una lista es personalizada
-			 * buscamos el canal 
-			 * 
-			 * */
-			/*
-			System.out.println("Canales: ");
-			
-			List<Canal> canales = (List<Canal>)mng.getSessionManager().createQuery("From Canal").getResultList();
-			mng.closeSession();
-			*/
-			
-			Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombre").setParameter("nombre", nickUser).getSingleResult();
-			mng.closeSession();
-			
-			Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", categoria).getSingleResult();
-			mng.closeSession();
-			
-			Lista lista = new Lista(listaName,privado,cat,canal);
-			mng.startTransaction("Lista",lista);
-			
-			System.out.println("Lista agregada a un unico canal " + canal.getNombre());
+			JOptionPane.showMessageDialog(null, nickUser+" ya tiene la lista "+listaName);
+			return false;
+
 		}
-		
 		
 		
 	}
@@ -120,6 +128,7 @@ public class ListaController implements ILista {
 		
 	}
 
+
 	public List<Lista> listarListas(String nickUser) {
 		// TODO Auto-generated method stub
 		
@@ -148,6 +157,41 @@ public class ListaController implements ILista {
 		getResultList();
 		mng.closeSession();
 		return listas;
+	}
+
+	public List<String> asignarListasDefault(String name) {
+		// TODO Auto-generated method stub
+		
+		//Obtener el nombre de todas las listas default
+		//Menos ver mas tarde y favoritos
+		
+		List<String> nombresListas = (List<String>)mng.getSessionManager()
+				.createQuery("Select l.nombre_lista from Lista as l where l.nombre_lista != 'Ver mas tarde' and l.nombre_lista != 'Favoritos' and l.tipo = true group by l.nombre_lista")
+				.getResultList();
+		
+		for(String s:nombresListas) {
+		    this.crearLista(s, "Sin Categoria", name, true, false);
+		}
+		
+		return nombresListas;
+	}
+
+	@Override
+	public boolean tieneLista(String nickUser, String nameList) {
+		// TODO Auto-generated method stub
+		
+		try {
+		Object obj= mng.getSessionManager()
+				.createQuery("From Lista as L where L.canal.nombre = :nameCanal and L.nombre_lista = :nameList")
+				.setParameter("nameCanal", nickUser)
+				.setParameter("nameList", nameList)
+				.getSingleResult();
+		}catch (Exception NoResultException) {
+			return false;
+		}
+
+		System.out.println("LISTA YA ASOCIADA");
+		return true;
 	}
 
 }

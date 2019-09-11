@@ -54,9 +54,9 @@ public class crear extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				System.out.println(nombreListaDefualt.getText());
-				controller.crearLista(nombreListaDefualt.getText(), null, null, true, true);
-				JOptionPane.showMessageDialog(null, "Lista default cargada");
-				
+				if(controller.crearLista(nombreListaDefualt.getText(), null, null, true, true)) {
+					JOptionPane.showMessageDialog(null, "Lista default cargada");
+				}
 				inicio init = new inicio();
 				Frame.frame.setContentPane(init);
 				Frame.frame.revalidate();
@@ -143,9 +143,9 @@ public class crear extends JPanel {
 				boolean isPrivate = rdbtnPrivado.isSelected();
 				String nombreList = textField.getText();
 				
-				controller.crearLista(nombreList, categoria, user, isPrivate, false);
-				controller.listarListas("user2");
-				JOptionPane.showMessageDialog(null, "Lista personalizada cargada");
+				if(controller.crearLista(nombreList, categoria, user, isPrivate, false)) {
+					JOptionPane.showMessageDialog(null, "Lista personalizada cargada");
+				}
 				inicio init = new inicio();
 				Frame.frame.setContentPane(init);
 				Frame.frame.revalidate();

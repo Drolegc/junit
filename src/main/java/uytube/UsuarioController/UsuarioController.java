@@ -12,6 +12,8 @@ import org.hibernate.Transaction;
 import org.hibernate.Session;
 import uytube.models.Usuario;
 import uytube.models.manager.Manager;
+import uytube.ListaController.ILista;
+import uytube.ListaController.ListaController;
 import uytube.models.Canal;
 import uytube.models.HibernateUtil;
 public class UsuarioController implements IUsuario{
@@ -32,6 +34,7 @@ public class UsuarioController implements IUsuario{
 		this.transaction = null;
 		
 		Canal canal = new Canal(usuario.getNickname(),"My first channel",usuario);
+		//Listas default a este canal
 		
 	    try {
 	        session = HibernateUtil.getSessionFactory().openSession();
@@ -51,6 +54,11 @@ public class UsuarioController implements IUsuario{
 	        }
 	      }		
 
+	    ILista controllerLista = new ListaController();
+	    //"Favoritos", "Sin Categoria", null, true, true
+	    controllerLista.crearLista("Ver mas tarde", "Sin Categoria", canal.getNombre(), true, false);
+	    controllerLista.crearLista("Favoritos", "Sin Categoria", canal.getNombre(), true, false);
+	    controllerLista.asignarListasDefault(canal.getNombre());
 	    
 	}
 

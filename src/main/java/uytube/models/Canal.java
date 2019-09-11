@@ -23,9 +23,22 @@ public class Canal {
 	@Column(name = "descripcion")
 	private String descripcion;
 	
+	@Column(name = "privacidad")
+	private boolean privacidad;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
 	
+	
+	
+	public boolean getPrivacidad() {
+		return privacidad;
+	}
+
+	public void setPrivacidad(boolean privacidad) {
+		this.privacidad = privacidad;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -49,6 +62,7 @@ public class Canal {
 		this.nombre = name;
 		this.descripcion = descripcion;
 		this.usuario = user;
+		this.privacidad = false;
 	}
 	public Usuario getUsuario() {
 		return usuario;
@@ -56,5 +70,6 @@ public class Canal {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
 	
 }
