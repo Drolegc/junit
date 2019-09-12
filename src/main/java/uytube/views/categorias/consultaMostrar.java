@@ -37,7 +37,7 @@ public class consultaMostrar extends JPanel {
 	public consultaMostrar(Categoria categoria) {
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(12, 263, 77, 25);
+		btnVolver.setBounds(12, 263, 130, 25);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				UserMain main = new UserMain();

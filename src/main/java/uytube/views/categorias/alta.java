@@ -25,45 +25,39 @@ public class alta extends JPanel {
 	
 	public alta() {
 			miMain = new main();
-			setLayout(new FormLayout(new ColumnSpec[] {
-					FormSpecs.RELATED_GAP_COLSPEC,
-					ColumnSpec.decode("default:grow"),},
-				new RowSpec[] {
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					FormSpecs.DEFAULT_ROWSPEC,}));
 			
 			JButton btnAgregar = new JButton("Agregar");
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					boolean resultado;
 					CategoriaController categoria = new CategoriaController();
-					categoria.altaCategoria(txtIngresarCategoria.getText());
-					JOptionPane.showMessageDialog(null, "La Categoria: "+txtIngresarCategoria.getText()+" fue agregada con exito.");
+					resultado = categoria.altaCategoria(txtIngresarCategoria.getText());
+					if(resultado == false) {
+						JOptionPane.showMessageDialog(null, "La Categoria: "+txtIngresarCategoria.getText()+" fue agregada con exito.");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "La Categoria: "+txtIngresarCategoria.getText()+" ya existe");
+					}
+					
+					
 				}
 			});
+			setLayout(new FormLayout(new ColumnSpec[] {
+					FormSpecs.RELATED_GAP_COLSPEC,
+					ColumnSpec.decode("172px"),
+					FormSpecs.RELATED_GAP_COLSPEC,
+					ColumnSpec.decode("172px"),},
+				new RowSpec[] {
+					RowSpec.decode("98px"),
+					RowSpec.decode("32px"),
+					FormSpecs.RELATED_GAP_ROWSPEC,
+					RowSpec.decode("25px"),}));
 			
 			txtIngresarCategoria = new JTextField();
 			txtIngresarCategoria.setText("Ingresar Categoria");
-			add(txtIngresarCategoria, "2, 10, left, default");
+			add(txtIngresarCategoria, "2, 2, fill, fill");
 			txtIngresarCategoria.setColumns(10);
-			add(btnAgregar, "2, 12, left, default");
+			add(btnAgregar, "2, 4, fill, top");
 			
 			JButton btnNewButton = new JButton("Volver");
 			btnNewButton.addActionListener(new ActionListener() {
@@ -72,7 +66,7 @@ public class alta extends JPanel {
 					Frame.frame.validate();
 				}
 			});
-			add(btnNewButton, "2, 20, left, default");
+			add(btnNewButton, "4, 4, fill, top");
 	}
 
 }

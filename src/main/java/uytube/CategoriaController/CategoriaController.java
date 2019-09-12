@@ -19,21 +19,27 @@ public class CategoriaController implements ICategoria{
 			mng = Manager.getInstance();
 		}
 		
-	public void altaCategoria(String nombre) {
-		
-		if(existeCategoria(nombre) == null) {
-			mng.startTransaction("Categoria", new Categoria(nombre));
-			System.out.println("La categoria: "+nombre+ " fue creada");		
-		}else{
-			System.out.println("La categoria: "+nombre+" ya existe.");
+	public boolean altaCategoria(String nombre) {
+		boolean existe = existeCategoria(nombre);
+		if(existe == false) {
+			mng.startTransaction("Categoria", new Categoria(nombre));			
 		}
+		
+		return existe;
 		
 	}
 	
-	private Categoria existeCategoria(String nombre) {
-		 Categoria c = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre",nombre).uniqueResult();
-		 mng.closeSession();
-		 return c;
+	private boolean existeCategoria(String nombre) {
+		boolean existe = true;			
+		
+
+		try {
+			mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre",nombre).getSingleResult();
+			mng.closeSession();
+		} catch (Exception e) {
+			existe = false;
+		}
+		 return existe;
 	}
 
 	public List<Video> consultarCategoria(String nombreCategoria) {

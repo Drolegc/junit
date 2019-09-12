@@ -42,8 +42,8 @@ public class consulta extends JPanel {
 	public consulta() {
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("77px"),
-				ColumnSpec.decode("198px"),
+				ColumnSpec.decode("117px"),
+				ColumnSpec.decode("158px"),
 				ColumnSpec.decode("117px"),},
 			new RowSpec[] {
 				FormSpecs.UNRELATED_GAP_ROWSPEC,
@@ -88,7 +88,7 @@ public class consulta extends JPanel {
 			}
 			
 		});
-		add(btnNewButton, "2, 4, left, top");
+		add(btnNewButton, "2, 4, fill, top");
 		
 		JButton btnEditar = new JButton("Mostrar");
 		btnEditar.addActionListener(new ActionListener() {

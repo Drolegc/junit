@@ -8,7 +8,7 @@ import uytube.models.Video;
 
 public interface ICategoria {
 	
-	public void altaCategoria(String nombre);
+	public boolean altaCategoria(String nombre);
 	public List<Video> consultarCategoria(String nombreCategoria);
 	public void listarCategoriasExistentes();
 	public ArrayList<Categoria> listarCategorias();
