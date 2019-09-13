@@ -14,9 +14,14 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import uytube.models.Lista;
+import uytube.models.Usuario;
 import uytube.models.Video;
+import uytube.views.Frame;
 
 import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class verLista extends JPanel {
 	private JTextField textField;
@@ -28,7 +33,7 @@ public class verLista extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public verLista(Lista lista) {
+	public verLista(Lista lista, Usuario user) {
 		setLayout(null);
 		
 		textField = new JTextField();
@@ -81,6 +86,31 @@ public class verLista extends JPanel {
 		}		
 		table.setModel(tablemodel);
 		scrollPane.setViewportView(table);
+		
+		JButton btnEditar = new JButton("Editar ");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				modificarLista modlista = new modificarLista(lista);
+				Frame.frame.setContentPane(modlista);
+				Frame.frame.revalidate();
+
+			}
+		});
+		btnEditar.setBounds(355, 269, 85, 21);
+		add(btnEditar);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Consultar consultar = new Consultar(user);
+				Frame.frame.setContentPane(consultar);
+				Frame.frame.revalidate();
+			
+			}
+		});
+		btnVolver.setBounds(260, 269, 85, 21);
+		add(btnVolver);
 
 	}
 }

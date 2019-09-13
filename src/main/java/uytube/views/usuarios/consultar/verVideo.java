@@ -51,7 +51,7 @@ public class verVideo extends JPanel {
 	private JDateChooser fecPub;
 	private JTextField textField;
 	
-	public verVideo(Video video) {
+	public verVideo(Video video, Usuario user) {
 			setLayout(null);
 			JLabel lblNickname = new JLabel("usuario/nickname");
 			lblNickname.setBounds(10, 11, 114, 13);
@@ -118,9 +118,11 @@ public class verVideo extends JPanel {
 			add(fecPub);
 			
 			JButton btnVolver = new JButton("Volver");
-			btnVolver.setBounds(241, 267, 200, 23);
+			btnVolver.setBounds(240, 267, 87, 23);
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					Consultar consultar = new Consultar(user);
+					Frame.frame.setContentPane(consultar);
 					Frame.frame.validate();
 				}
 			});
@@ -148,6 +150,17 @@ public class verVideo extends JPanel {
 			textField.setText(video.getCategoria().getNombre());
 			textField.setEditable(false);
 			textField.setColumns(10);
+			
+			JButton btnEditarVideo = new JButton("Editar video");
+			btnEditarVideo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					editarVideo editar = new editarVideo(video, user);
+					Frame.frame.setContentPane(editar);
+					Frame.frame.revalidate();					
+				}
+			});
+			btnEditarVideo.setBounds(337, 266, 104, 23);
+			add(btnEditarVideo);
 		}
 }
 

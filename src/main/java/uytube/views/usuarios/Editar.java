@@ -100,6 +100,7 @@ public class Editar extends JPanel {
 		
 		this.correo = new JTextField();
 		this.correo.setColumns(10);
+		this.correo.setEditable(false);
 		this.correo.setText(user.getCorreo());
 		add(correo, "4, 8, 3, 1, fill, top");
 		JLabel lblNombre = new JLabel("Nombre");

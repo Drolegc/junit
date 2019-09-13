@@ -52,6 +52,7 @@ import com.toedter.calendar.JDateChooser;
 import uytube.views.usuarios.Alta;
 import uytube.views.usuarios.Buscar;
 import uytube.views.usuarios.DejarSeguir;
+import uytube.views.usuarios.ListadoEditar;
 import uytube.views.usuarios.Listar;
 import uytube.views.usuarios.Seguir;
 import uytube.views.usuarios.consultar.ConsultarMain;
@@ -182,7 +183,16 @@ public class App extends JFrame{
 			}
 		});
 		mnUsuarios.add(mntmConsultarUsuario);
-		
+
+		JMenuItem mntmEditarUsuario = new JMenuItem("Editar usuarios");
+		mntmEditarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoEditar editar = new ListadoEditar();
+				Frame.frame.setContentPane(editar);
+				Frame.frame.revalidate();		
+			}
+		});
+		mnUsuarios.add(mntmEditarUsuario);		
 		JMenuItem mntmListarUsuarios = new JMenuItem("Listar usuarios");
 		mntmListarUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

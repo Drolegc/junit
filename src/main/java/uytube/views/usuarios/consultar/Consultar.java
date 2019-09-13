@@ -9,6 +9,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import javassist.tools.framedump;
+import uytube.CanalController.CanalController;
 import uytube.ListaController.ListaController;
 import uytube.UsuarioController.UsuarioController;
 import uytube.VideoController.VideoController;
@@ -21,19 +22,24 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import uytube.models.Canal;
 import uytube.models.Lista;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import java.awt.event.ActionListener;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import uytube.views.usuarios.UserMain;
 import uytube.ListaController.ListaController;
 import uytube.VideoController.VideoController;
+import javax.swing.JTextArea;
 public class Consultar extends JPanel {
 	private JTable tableVideos;
 	private JTable tableListas;
@@ -57,10 +63,10 @@ public class Consultar extends JPanel {
 	List<Lista> listas;
 	public Consultar(Usuario user) {
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(263, 279, 85, 21);
+		btnVolver.setBounds(117, 279, 85, 21);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserMain main = new UserMain();
+				ConsultarMain main = new ConsultarMain();
 				Frame.frame.setContentPane(main);
 				Frame.frame.revalidate();				
 			}
@@ -68,9 +74,17 @@ public class Consultar extends JPanel {
 		setLayout(null);
 		
 		tableUsuarios = new JTable();
-		tableUsuarios.setBounds(10, 10, 433, 76);
+		tableUsuarios.setBounds(10, 10, 307, 28);
 		add(tableUsuarios);
 		add(btnVolver);
+		JLabel label_1 = new JLabel();
+		label_1.setBounds(327,8,116,78);
+		ImageIcon imgIcon = new ImageIcon(user.getImg());
+		Image img = imgIcon.getImage();
+		Image newImg = img.getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon profilePicture = new ImageIcon(newImg);
+		label_1.setIcon(profilePicture);
+		add(label_1, "8, 2, 1, 7, fill, fill");		
 		System.out.println(user.getNombre());
 		DefaultTableModel  modelUsuarios = new DefaultTableModel(columnasUsuarios, 0);
 		DefaultTableModel  modelVideo = new DefaultTableModel(columnasVideos, 0);
@@ -110,17 +124,18 @@ public class Consultar extends JPanel {
 			modelListas.addRow(
 					new Object[] {
 							l.getNombre(),
-							l.getPrivado(),
+							(l.getPrivado())?"Si":"No",
+							l.getCategoria().getNombre()
 					}
 			);			
 		}
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 110, 433, 66);
+		scrollPane.setBounds(10, 125, 433, 60);
 		add(scrollPane);
 
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 186, 433, 66);
+		scrollPane_1.setBounds(10, 203, 433, 66);
 		add(scrollPane_1);
 		tableVideos.setModel(modelVideo);
 		tableListas.setModel(modelListas);
@@ -129,7 +144,7 @@ public class Consultar extends JPanel {
 		scrollPane.setViewportView(tableVideos);
 		
 		scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(449, 10, 1, 76);
+		scrollPane_2.setBounds(327, 10, 116, 105);
 		add(scrollPane_2);
 		
 		JButton btnVerLista = new JButton("Ver lista");
@@ -138,7 +153,7 @@ public class Consultar extends JPanel {
 		btnVerLista.setVisible(false);
 		btnVerLista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				verLista verlista = new verLista(lista);
+				verLista verlista = new verLista(lista, user);
 				Frame.frame.setContentPane(verlista);
 				Frame.frame.revalidate();
 
@@ -148,9 +163,40 @@ public class Consultar extends JPanel {
 		btnVerVideo.setBounds(358, 279, 85, 21);
 		btnVerVideo.setVisible(false);
 		add(btnVerVideo);
+		CanalController canalCont = new CanalController();
+		Canal canal = canalCont.obtenerCanalUsuario(user.getNickname());
+		JTextArea textArea = new JTextArea();
+		textArea.setText(canal.getDescripcion());
+		textArea.setEditable(false);
+		textArea.setBounds(10, 63, 307, 37);
+		add(textArea);
+		
+		JLabel lblDescripcionDelCanal = new JLabel("Descripcion del canal");
+		lblDescripcionDelCanal.setBounds(10, 48, 139, 13);
+		add(lblDescripcionDelCanal);
+		
+		JLabel lblListas = new JLabel("Listas");
+		lblListas.setBounds(10, 186, 46, 13);
+		add(lblListas);
+		
+		JLabel lblVideos = new JLabel("Videos");
+		lblVideos.setBounds(10, 110, 46, 13);
+		add(lblVideos);
+		
+		JButton btnVerSeguidoresY = new JButton("Ver seguidores y seguidos");
+		btnVerSeguidoresY.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Seguidores viewSeguidores = new Seguidores(user);
+				Frame.frame.setContentPane(viewSeguidores);
+				Frame.frame.revalidate();
+			}
+		});
+		btnVerSeguidoresY.setBounds(212, 279, 136, 21);
+		add(btnVerSeguidoresY);
 		btnVerVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				verVideo vervideo = new verVideo(video);
+				verVideo vervideo = new verVideo(video, user);
+				
 				Frame.frame.setContentPane(vervideo);
 				Frame.frame.revalidate();
 

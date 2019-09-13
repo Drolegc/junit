@@ -1,4 +1,5 @@
-package uytube.views.usuarios.consultar;
+package uytube.views.usuarios;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,21 +27,27 @@ import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import uytube.views.usuarios.UserMain;
-import uytube.views.usuarios.consultar.Consultar;;
-public class ConsultarMain extends JPanel {
+public class ListadoEditar extends JPanel {
 	private JTable table;
 
-	/**
-	 * Create the panel.
-	 */
+	
 	private String [] nombreColumnas = {"Nombre","Apellido","Nickname","Correo","F.Nac"};
 	private String [][] datos ;
 	private JTable table_1;
 	private JFrame frame;
 	private Usuario user;
-	public ConsultarMain() {
+	public ListadoEditar() {
 		setLayout(null);
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserMain main = new UserMain();
+				Frame.frame.setContentPane(main);
+				Frame.frame.revalidate();				
+			}
+		});
+		btnVolver.setBounds(241, 269, 85, 21);
+		add(btnVolver);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 29, 430, 230);
 		add(scrollPane);
@@ -64,23 +71,21 @@ public class ConsultarMain extends JPanel {
 		table.setModel(tablemodel);
 		scrollPane.setViewportView(table);
 		
-		JButton btnEditarUsuario = new JButton("Consultar usuario");
+		JButton btnEditarUsuario = new JButton("Editar usuario");
 		btnEditarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Consultar consultar = new Consultar(user);
-				Frame.frame.setContentPane(consultar);
+				Editar editar = new Editar(user);
+				Frame.frame.setContentPane(editar);
 				Frame.frame.revalidate();
 
 			}
 		});
 		btnEditarUsuario.setBounds(336, 269, 104, 21);
-		btnEditarUsuario.setVisible(false);
 		add(btnEditarUsuario);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				user = usuarios.get(e.getFirstIndex());
-				btnEditarUsuario.setVisible(true);
 			}
 		});
 		

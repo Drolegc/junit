@@ -46,7 +46,7 @@ public class Listar extends JPanel {
 				Frame.frame.revalidate();				
 			}
 		});
-		btnVolver.setBounds(241, 269, 85, 21);
+		btnVolver.setBounds(355, 269, 85, 21);
 		add(btnVolver);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 29, 430, 230);
@@ -70,18 +70,6 @@ public class Listar extends JPanel {
 		
 		table.setModel(tablemodel);
 		scrollPane.setViewportView(table);
-		
-		JButton btnEditarUsuario = new JButton("Editar usuario");
-		btnEditarUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Editar editar = new Editar(user);
-				Frame.frame.setContentPane(editar);
-				Frame.frame.revalidate();
-
-			}
-		});
-		btnEditarUsuario.setBounds(336, 269, 104, 21);
-		add(btnEditarUsuario);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {

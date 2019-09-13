@@ -82,12 +82,12 @@ public class UsuarioController implements IUsuario{
 		System.out.println(nickname);
 		Usuario usuario = null;
 	    try {
-	        session = HibernateUtil.getSessionFactory().openSession();
+	    	this.session = HibernateUtil.getSessionFactory().openSession();
 	        usuario = (Usuario)session.createQuery("From Usuario where nickname=:nickname").setParameter("nickname", nickname).getSingleResult();
 	    } catch (Exception e) {
 	      } finally {
-	        if (session != null) {
-	          session.close();
+	        if (this.session != null) {
+	          this.session.close();
 	        }
 	      }		
 		return usuario;
@@ -156,7 +156,13 @@ public class UsuarioController implements IUsuario{
 		return user.getCanalesSeguidos();
 		
 	}
-
+	public List<Usuario> listUsuariosSeguidores(String nickname){
+		List<Usuario> users = (List<Usuario>) mng.getSessionManager().
+								createQuery("select u From Usuario as u inner join u.canalesSeguidos as canalesSeguidos where canalesSeguidos.nombre = :nick").
+								setParameter("nick",nickname).getResultList();
+		return users;	
+		
+	}
 	private Usuario getUser(String nick) {
 		emf = Persistence.createEntityManagerFactory("uytube");
 		manager = this.emf.createEntityManager();

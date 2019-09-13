@@ -74,9 +74,10 @@ private Manager mng;
 		// TODO Auto-generated method stub
 		this.session2 = null;
 		this.transaction2 = null;
-        session2 = HibernateUtil.getSessionFactory().openSession();
+		System.out.println(this.session2);
 		try {
-	        transaction2 = session2.beginTransaction();
+	        session2 = HibernateUtil.getSessionFactory().openSession();
+			transaction2 = session2.beginTransaction();
 	        if(!transaction2.isActive())
 	        	transaction2.begin();
 	        session2.saveOrUpdate("Video", V);
@@ -86,12 +87,12 @@ private Manager mng;
 	          transaction2.rollback();
 	        }
 	        e.printStackTrace();
+	        
 	      } finally {
 	        if (session2 != null) {
 	          session2.close();
 	        }
 	      }		
-		
 		
 	}
 
@@ -109,6 +110,7 @@ private Manager mng;
 	public ArrayList<Video> obtenerVideosUsuario(String usuario) {
 		ArrayList<Video> v = (ArrayList<Video>)mana.getSessionManager().
 							createQuery("from Video where canal_nombre = :canal").setParameter("canal", usuario).getResultList();
+		mana.closeSession();
 		return v;
 	}
 	public void valorarVideo(ValoracionVideo vv) {
