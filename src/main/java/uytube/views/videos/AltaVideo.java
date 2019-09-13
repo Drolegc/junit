@@ -146,12 +146,14 @@ public class AltaVideo extends JPanel {
 				
 				VideoController controladorVideo = new VideoController();
 				System.out.println(nickInfoStr);
-				controladorVideo.altaVideo(videito, nickInfoStr, catAsignar);
-
-				JOptionPane.showMessageDialog(null, "Video dado de alta correctamente");
-				
-				Frame.frame.setContentPane(main);
-				Frame.frame.revalidate();
+				if (nickInfoStr == null ) {
+					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario");
+				} else {
+					controladorVideo.altaVideo(videito, nickInfoStr, catAsignar);
+					JOptionPane.showMessageDialog(null, "Video dado de alta correctamente");
+					Frame.frame.setContentPane(main);
+					Frame.frame.revalidate();
+				}
 			}
 		});
 		
@@ -166,10 +168,12 @@ public class AltaVideo extends JPanel {
 		
 		UsuarioController controladorUsuario = new UsuarioController();
 		ArrayList<Usuario> usuarios = controladorUsuario.listaUsuarios();
-		String[] array = new String[usuarios.size()];
-		for(int i = 0; i < array.length; i++) {
-		    array[i] = usuarios.get(i).getNickname();
-		}
+		int tamanio =  usuarios.size()+1;
+		String[] array = new String[tamanio];
+		array[0]="Debe elegir usuario";
+		for(int i = 1; i < array.length; i++) {
+		    array[i] = usuarios.get(i-1).getNickname();
+		}		
 		
 		JComboBox userInfo1 = new JComboBox(array);
 		userInfo1.addActionListener(new ActionListener() {

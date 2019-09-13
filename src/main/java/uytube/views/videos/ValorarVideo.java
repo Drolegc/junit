@@ -86,7 +86,6 @@ public class ValorarVideo extends JPanel {
 		scrollPane.setViewportView(table_1);
 		
 		JComboBox selectUser = new JComboBox(array);
-		
 		selectUser.setBounds(24, 32, 200, 24);
 		selectUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -133,25 +132,29 @@ public class ValorarVideo extends JPanel {
 		btnLIKE.setBounds(97, 323, 103, 25);
 		btnLIKE.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-
-			ValoracionVideo valorV = new ValoracionVideo();
-			
+								
 			Usuario usercito = (Usuario)mana.getSessionManager().createQuery("From Usuario where nickname =: nombre").setParameter("nombre", nickInfoStr).getSingleResult();
 			mana.closeSession();
 			
 			System.out.println("Usuario elegido para valorar: "+ nickInfoStr);
 			Video vid = controladorVideo.consultaVideo(videoInfoStr, nickInfoStr);
-			
-			valorV.setVideo(vid);
-			valorV.setUsuario(usercito);
-			valorV.setValoracion(1);
-			
 			ValoracionController controladorValoracion = new ValoracionController();
-			controladorValoracion.valorarVideo(valorV);
 			
-			System.out.println("El video de nombre: "+videoInfoStr+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoStr));
+			
+			if (controladorValoracion.existeValoracion(videoInfoStr,nickInfoStr)) {
+				ValoracionVideo valorVideo = controladorValoracion.traerValoracion(videoInfoStr, nickInfoStr);
+				valorVideo.setValoracion(1);
+				controladorValoracion.valorarVideo(valorVideo);
+			} else {
+				ValoracionVideo valorV = new ValoracionVideo(); // GENERO LA NUEVA VALORACION
+				valorV.setVideo(vid);
+				valorV.setUsuario(usercito);
+				valorV.setValoracion(1);
+				controladorValoracion.valorarVideo(valorV);
+			}
+
+			System.out.println("El video de nombre: "+videoInfoStr+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoStr,nickInfoStr));
 						
-			
 			VideoMain inicio = new VideoMain();
 			Frame.frame.setContentPane(inicio);
 			Frame.frame.revalidate();
@@ -163,20 +166,28 @@ public class ValorarVideo extends JPanel {
 		btnDislike.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				ValoracionVideo valorV = new ValoracionVideo();
-				
 				Usuario usercito = (Usuario)mana.getSessionManager().createQuery("From Usuario where nickname =: nombre").setParameter("nombre", nickInfoStr).getSingleResult();
 				mana.closeSession();
+				
 				System.out.println("Usuario elegido para valorar: "+ nickInfoStr);
 				Video vid = controladorVideo.consultaVideo(videoInfoStr, nickInfoStr);
-				
-				valorV.setVideo(vid);
-				valorV.setUsuario(usercito);
-				valorV.setValoracion(-1);
-				
+
 				ValoracionController controladorValoracion = new ValoracionController();
-				controladorValoracion.valorarVideo(valorV); //ERROR AL INGRESAR A LA BDD
-				
+					
+				if (controladorValoracion.existeValoracion(videoInfoStr,nickInfoStr)) {
+					ValoracionVideo valorVideo = controladorValoracion.traerValoracion(videoInfoStr, nickInfoStr);
+					valorVideo.setValoracion(-1);
+					controladorValoracion.valorarVideo(valorVideo);
+				} else {
+					ValoracionVideo valorV = new ValoracionVideo(); // GENERO LA NUEVA VALORACION
+					valorV.setVideo(vid);
+					valorV.setUsuario(usercito);
+					valorV.setValoracion(-1);
+					controladorValoracion.valorarVideo(valorV);
+				}
+
+				System.out.println("El video de nombre: "+videoInfoStr+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoStr,nickInfoStr));
+							
 				VideoMain inicio = new VideoMain();
 				Frame.frame.setContentPane(inicio);
 				Frame.frame.revalidate();

@@ -1,5 +1,6 @@
 package uytube.models;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.*;
@@ -97,5 +98,32 @@ public class Lista {
 		this.categoria = categoria;
 	}
 	
+	public void addVideo(Video v) {
+		this.videos.add(v);
+	}
+	
+public void removerVideo(int idVideo) {
+		
+		/*
+		 * Para remover un objeto de la coleccion
+		 * lo mas conveniente es usar iteradores
+		 * */
+		
+		
+		Iterator<Video> i = this.videos.iterator();
+		Video v = null;
+		while(i.hasNext()) {
+			v = (Video)i.next();
+			if(v.getId() == idVideo) {
+				System.out.println("Video removido con ID: "+idVideo);
+				break;
+			}
+		}
+		this.videos.remove(v);
+	}
+	
+	public List<Video> getVideosLista() {
+		return videos;
+	}
 	
 }

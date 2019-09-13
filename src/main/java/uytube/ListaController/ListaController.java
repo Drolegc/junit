@@ -115,16 +115,52 @@ public class ListaController implements ILista {
 
 	public void consultarListas() {
 		// TODO Auto-generated method stub
+
+	}	
+
+	public void agregarVideo(int idvid, int idList) {
+		// TODO Auto-generated method stub
+		/* Primero el admin elige un usuario U (viene del view)
+		 * se listan los videos de U (viene del view)
+		 * se elige el video a ingresar de U 
+		 * se lista los usuarios, se elige usuario U2
+		 * se elige la lista a insertar de U2
+		 * se inserta video
+		 */
+		
+		Lista listarepro = (Lista)mng.getSessionManager().createQuery("From Lista where id=:idList").setParameter("idList", idList).getSingleResult();
+		mng.closeSession();
+		
+		Video vidd = (Video)mng.getSessionManager().createQuery("From Video where id=: idVideo").setParameter("idVideo", idvid).getSingleResult();
+		mng.closeSession();
+		
+		listarepro.addVideo(vidd);
+		
+		mng.startTransaction("Lista", listarepro);
+		
+		System.out.println("El video: "+vidd.getNombre()+" ha sido insertado en la lista de reproduccion "+ listarepro.getNombre());
 		
 	}
 
-	public void agregarVideo() {
+	public void quitarVideo(int idvid, int idList) {
 		// TODO Auto-generated method stub
+		/*
+		 * Se elige usuario U
+		 * se listan las listas de U
+		 * Se elige la lista y se listan los videos
+		 * se elige el video y se borra de la lista
+		 */
+		Lista listarepro = (Lista)mng.getSessionManager().createQuery("From Lista where id=:idList").setParameter("idList", idList).getSingleResult();
+		mng.closeSession();
 		
-	}
-
-	public void quitarVideo() {
-		// TODO Auto-generated method stub
+		Video vidd = (Video)mng.getSessionManager().createQuery("From Video where id=: idVideo").setParameter("idVideo", idvid).getSingleResult();
+		mng.closeSession();
+		
+		listarepro.removerVideo(idvid);
+		
+		mng.startTransaction("Lista", listarepro);
+		
+		System.out.println("El video: "+vidd.getNombre()+" ha deleteado de la lista "+ listarepro.getNombre());
 		
 	}
 
@@ -192,6 +228,12 @@ public class ListaController implements ILista {
 
 		System.out.println("LISTA YA ASOCIADA");
 		return true;
+	}
+	
+	public Lista obtenerListaPorId(int idList) {
+		Lista listarepro = (Lista)mng.getSessionManager().createQuery("From Lista where id=:idList").setParameter("idList", idList).getSingleResult();
+		mng.closeSession();
+		return listarepro;
 	}
 
 }

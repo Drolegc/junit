@@ -43,6 +43,8 @@ import uytube.views.Inicio;
 import uytube.views.categorias.alta;
 import uytube.views.categorias.consulta;
 import uytube.views.categorias.listar;
+import uytube.views.listas.AgregarVideo1;
+import uytube.views.listas.QuitarVideo1;
 import uytube.views.listas.crear;
 import uytube.views.listas.modificar;
 
@@ -329,6 +331,27 @@ public class App extends JFrame{
 			}
 		});
 		mnListas.add(mntmModificarLista);
+		
+		JMenuItem mntmAgregarVideoLista= new JMenuItem("Agregar video");
+		mntmAgregarVideoLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AgregarVideo1 addVid = new AgregarVideo1();
+				Frame.frame.setContentPane(addVid);
+				Frame.frame.revalidate();
+			}
+		});
+		mnListas.add(mntmAgregarVideoLista);
+		
+		JMenuItem mntmBorrarVideoLista= new JMenuItem("Borrar video");
+		mntmBorrarVideoLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				QuitarVideo1 deleteVid = new QuitarVideo1();
+				Frame.frame.setContentPane(deleteVid);
+				Frame.frame.revalidate();
+			}
+		});
+		mnListas.add(mntmBorrarVideoLista);
+		
 	}
 	public void goToinit() {
 		

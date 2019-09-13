@@ -94,12 +94,14 @@ private Manager mng;
 	        }
 	      }		
 		
+		
 	}
 
 	public Video consultaVideo(String titulito, String user) {
 		// TODO Auto-generated method stub
-		Video v = (Video)mana.getSessionManager().createQuery("select v From Video as v, Canal as c where v.nombre=:titu and c.nombre=:nombre").setParameter("titu", titulito).setParameter("nombre",user).getSingleResult();
+		Video v = (Video)mana.getSessionManager().createQuery("select v From Video as v, Canal as c where v.canal.nombre = c.nombre and v.nombre=:titu and c.nombre=:nombre").setParameter("titu", titulito).setParameter("nombre",user).getSingleResult();
 		mana.closeSession();
+		System.out.println("---------Nombre video: "+v.getNombre()+" Canal: "+v.getCanal().getNombre());
 		return v;
 	} 
 	
@@ -130,6 +132,13 @@ private Manager mng;
 		// TODO Auto-generated method stub
 		
 		
+	}
+	
+	public Video consultaVideoPorID(int id) {
+		
+		Video v = (Video)mana.getSessionManager().createQuery("select v From Video as v where v.id=: id").setParameter("id", id).getSingleResult();
+		mana.closeSession();
+		return v;
 	}
 	
 	public ArrayList<Video> listaVideos(){

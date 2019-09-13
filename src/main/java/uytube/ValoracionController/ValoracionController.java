@@ -18,11 +18,22 @@ public class ValoracionController implements IValoracion {
 		mana.startTransaction("ValoracionVideo", vv);
 		mana.closeSession();
 	}
+	
+	public ValoracionVideo traerValoracion(String vv, String nick) {
+		ValoracionVideo videoValorado = (ValoracionVideo)mana.getSessionManager().createQuery("From ValoracionVideo as vl where vl.video.nombre=: nombre and vl.video.canal.nombre=:nickname").setParameter("nombre", vv).setParameter("nickname", nick).getSingleResult();
+		mana.closeSession();
+		return videoValorado;
+	}
+	
+	public boolean existeValoracion(String vid, String nick) {
+		boolean exists = mana.getSessionManager().createQuery("select id from ValoracionVideo where exists (From ValoracionVideo as vl where vl.video.nombre=: nombre and vl.video.canal.nombre=:nickname)").setParameter("nombre", vid).setParameter("nickname", nick).uniqueResult() != null;
+		return exists;
+	}
 
-	public long valoracionActual(String vv) {
+	public long valoracionActual(String vv, String nick) {
 		// TODO Auto-generated method stub
 		
-		long valorVideo = (long)mana.getSessionManager().createQuery("select sum(valoracion) as valoracion From ValoracionVideo where video.nombre=: nombre").setParameter("nombre", vv).getSingleResult();
+		long valorVideo = (long)mana.getSessionManager().createQuery("select sum(valoracion) as valoracion From ValoracionVideo as vl where vl.video.nombre=: nombre and vl.video.canal.nombre=:nickname").setParameter("nombre", vv).setParameter("nickname", nick).getSingleResult();
 		mana.closeSession();
 		
 		return valorVideo;
