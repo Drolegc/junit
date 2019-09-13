@@ -31,6 +31,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 public class EditarDatosVideo extends JPanel {
 
@@ -59,52 +61,70 @@ public class EditarDatosVideo extends JPanel {
 			setLayout(null);
 			
 			JLabel lblNombre = new JLabel("Titulo del video ");
-			lblNombre.setBounds(10, 49, 200, 14);
+			lblNombre.setBounds(10, 85, 200, 14);
 			add(lblNombre);
 			
 			this.titulo = new JTextField();
-			titulo.setBounds(10, 62, 200, 19);
+			titulo.setBounds(10, 100, 368, 19);
 			add(titulo);
 			this.titulo.setColumns(10);
 			this.titulo.setText(video.getNombre());
 			JLabel lblNickname = new JLabel("usuario/nickname");
-			lblNickname.setBounds(10, 92, 200, 13);
+			lblNickname.setBounds(11, 131, 200, 13);
 			add(lblNickname);
 			
 			this.userInfo = new JTextField();
 			userInfo.setEditable(false);
-			userInfo.setBounds(10, 104, 200, 19);
+			userInfo.setBounds(11, 143, 367, 19);
 			add(userInfo);
 			this.userInfo.setColumns(10);
 			this.userInfo.setText(video.getCanal().getNombre());
 			
 			JLabel lblFechaPublicacion = new JLabel("Fecha publicacion");
-			lblFechaPublicacion.setBounds(10, 132, 200, 13);
+			lblFechaPublicacion.setBounds(11, 171, 200, 13);
 			add(lblFechaPublicacion);
 			
 			fecPub = new JDateChooser();
-			fecPub.setBounds(9, 145, 201, 19);
+			fecPub.setBounds(10, 184, 368, 19);
 			fecPub.setDate(video.getFecha());
 			add(fecPub);
 			
 			JLabel lblDuracion = new JLabel("Duracion");
-			lblDuracion.setBounds(10, 175, 194, 13);
+			lblDuracion.setBounds(10, 254, 194, 13);
 			add(lblDuracion);
 			
 			
 			this.duracion = new JTextField();
-			duracion.setBounds(10, 187, 200, 19);
+			duracion.setBounds(10, 267, 368, 19);
 			this.duracion.setColumns(10);
 			this.duracion.setText(video.getDuracion());
 			add(duracion);
 			
+			JSeparator separator_2 = new JSeparator();
+			separator_2.setOrientation(SwingConstants.VERTICAL);
+			separator_2.setBounds(400, 98, 2, 144);
+			add(separator_2);
+			
+			JSeparator separator_3 = new JSeparator();
+			separator_3.setOrientation(SwingConstants.VERTICAL);
+			separator_3.setBounds(788, 98, 2, 144);
+			add(separator_3);
+			
+			JSeparator separator_1 = new JSeparator();
+			separator_1.setBounds(401, 240, 389, 2);
+			add(separator_1);
+			
+			JSeparator separator = new JSeparator();
+			separator.setBounds(400, 97, 390, 2);
+			add(separator);
+			
 			JLabel lblDescripcion = new JLabel("Descripcion");
-			lblDescripcion.setBounds(220, 49, 200, 14);
+			lblDescripcion.setBounds(401, 85, 200, 14);
 			add(lblDescripcion);
 			
 			this.descripcion = new JTextArea();
 			descripcion.setLineWrap(true);
-			descripcion.setBounds(220, 64, 221, 59);
+			descripcion.setBounds(400, 100, 390, 142);
 			this.descripcion.setColumns(10);
 			add(descripcion);
 			this.descripcion.setText(video.getDescripcion());
@@ -113,7 +133,7 @@ public class EditarDatosVideo extends JPanel {
 			
 			
 			JLabel lblCategoria = new JLabel("Categoria");
-			lblCategoria.setBounds(220, 131, 201, 14);
+			lblCategoria.setBounds(401, 253, 378, 14);
 			add(lblCategoria);
 			
 			
@@ -139,20 +159,20 @@ public class EditarDatosVideo extends JPanel {
 				}
 			});
 			categoriaAsig.setSelectedIndex(video.getCategoria().getId()-1);
-			categoriaAsig.setBounds(220, 145, 221, 19);
+			categoriaAsig.setBounds(401, 268, 389, 19);
 			add(categoriaAsig);
 			
 			JLabel lblUrl = new JLabel("URL");
-			lblUrl.setBounds(10, 217, 430, 13);
+			lblUrl.setBounds(10, 208, 430, 19);
 			add(lblUrl);
 			this.url = new JTextField();
-			url.setBounds(11, 230, 430, 19);
+			url.setBounds(10, 224, 368, 19);
 			this.url.setColumns(10);
 			this.url.setText(video.getUrl());
 			add(url);
 			
 			JButton btnCancelar = new JButton("cancelar");
-			btnCancelar.setBounds(10, 277, 200, 23);
+			btnCancelar.setBounds(10, 431, 368, 23);
 			btnCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					UsuarioController usercontroller = new UsuarioController();	
@@ -174,7 +194,7 @@ public class EditarDatosVideo extends JPanel {
 			add(btnCancelar);
 			
 			JLabel label = new JLabel("EDITAR VIDEO");
-			label.setBounds(186, 11, 192, 14);
+			label.setBounds(10, 51, 192, 14);
 			add(label);
 			
 			JCheckBox chckbxNewCheckBox2 = new JCheckBox("Es Privado");
@@ -188,7 +208,7 @@ public class EditarDatosVideo extends JPanel {
 			});
 			chckbxNewCheckBox2.setEnabled(true);
 			chckbxNewCheckBox2.setSelected(!(video.getEs_publico()));
-			chckbxNewCheckBox2.setBounds(322, 186, 101, 23);
+			chckbxNewCheckBox2.setBounds(186, 302, 101, 23);
 			add(chckbxNewCheckBox2);
 			
 			
@@ -200,7 +220,7 @@ public class EditarDatosVideo extends JPanel {
 			});
 			chckbxNewCheckBox.setEnabled(true);
 			chckbxNewCheckBox.setSelected(video.getEs_publico());
-			chckbxNewCheckBox.setBounds(219, 186, 101, 23);
+			chckbxNewCheckBox.setBounds(10, 302, 101, 23);
 			add(chckbxNewCheckBox);
 			
 			
@@ -208,7 +228,7 @@ public class EditarDatosVideo extends JPanel {
 			
 			
 			JButton btnAgregar = new JButton("Guardar cambios");
-			btnAgregar.setBounds(220, 277, 221, 23);
+			btnAgregar.setBounds(400, 431, 390, 23);
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					UsuarioController usercontroller = new UsuarioController();		

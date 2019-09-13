@@ -54,78 +54,65 @@ public class Editar extends JPanel {
 	private JFilePicker filePicker;
 	private BufferedImage image;
 	public Editar(Usuario user) {
-		setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("63px"),
-				ColumnSpec.decode("63px"),
-				ColumnSpec.decode("20px"),
-				ColumnSpec.decode("32px"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("110px"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("115px"),},
-			new RowSpec[] {
-				RowSpec.decode("41px"),
-				RowSpec.decode("19px"),
-				FormSpecs.PARAGRAPH_GAP_ROWSPEC,
-				RowSpec.decode("19px"),
-				RowSpec.decode("21px"),
-				RowSpec.decode("19px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("19px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("19px"),
-				RowSpec.decode("19px"),
-				RowSpec.decode("52px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("21px"),}));
+		setLayout(null);
 		JLabel lblNickname = new JLabel("Nickname");
-		add(lblNickname, "2, 2, left, center");
+		lblNickname.setBounds(10, 87, 148, 14);
+		add(lblNickname);
 		
-		JLabel label_1 = new JLabel();
-		label_1.setBounds(100,100,450,300);
+		JLabel lblRrrr = new JLabel();
+		lblRrrr.setBounds(403, 283, 115, 122);
 		ImageIcon imgIcon = new ImageIcon(user.getImg());
 		Image img = imgIcon.getImage();
-		Image newImg = img.getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_SMOOTH);
+		Image newImg = img.getScaledInstance(lblRrrr.getWidth(), lblRrrr.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon profilePicture = new ImageIcon(newImg);
-		label_1.setIcon(profilePicture);
-		add(label_1, "8, 2, 1, 7, fill, fill");
+		add(lblRrrr);
 		
 		JLabel label_2 = new JLabel("Correo");
-		add(label_2, "2, 8, left, center");
+		label_2.setBounds(403, 87, 166, 14);
+		add(label_2);
 		this.nickname = new JTextField();
-		add(nickname, "4, 2, 3, 1, fill, top");
+		nickname.setBounds(10, 104, 368, 23);
+		add(nickname);
 		this.nickname.setColumns(10);
 		this.nickname.setEditable(false);
 		this.nickname.setText(user.getNickname());
 		
 		this.correo = new JTextField();
+		correo.setBounds(400, 100, 390, 23);
 		this.correo.setColumns(10);
 		this.correo.setEditable(false);
 		this.correo.setText(user.getCorreo());
-		add(correo, "4, 8, 3, 1, fill, top");
+		add(correo);
 		JLabel lblNombre = new JLabel("Nombre");
-		add(lblNombre, "2, 4, left, center");
+		lblNombre.setBounds(10, 148, 368, 14);
+		add(lblNombre);
 		
 		JLabel label = new JLabel("Apellido");
-		add(label, "2, 6, left, center");
+		label.setBounds(10, 217, 360, 14);
+		add(label);
 		
 		this.nombre = new JTextField();
-		add(nombre, "4, 4, 3, 1, fill, top");
+		nombre.setBounds(10, 173, 368, 23);
+		add(nombre);
 		this.nombre.setColumns(10);
 		this.nombre.setText(user.getNombre());
 		this.apellido = new JTextField();
+		apellido.setBounds(10, 235, 368, 23);
 		this.apellido.setColumns(10);
-		add(apellido, "4, 6, 3, 1, fill, top");
+		add(apellido);
 		this.apellido.setText(user.getApellido());
 		
 		JLabel label_3 = new JLabel("F. Nacimiento");
-		add(label_3, "2, 10, left, bottom");
+		label_3.setBounds(400, 149, 63, 14);
+		add(label_3);
 		
 		f_nac = new JDateChooser();
+		f_nac.setBounds(400, 172, 390, 23);
 		f_nac.setDate(user.getFnacimiento());
-		add(f_nac, "4, 10, 3, 1, fill, top");
+		add(f_nac);
 		
 		JButton btnAgregar = new JButton("Editar");
+		btnAgregar.setBounds(400, 431, 390, 23);
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				Usuario modelUsuario = null;
@@ -159,6 +146,7 @@ public class Editar extends JPanel {
 		});
 		
 		JButton btnCancelar = new JButton("cancelar");
+		btnCancelar.setBounds(10, 431, 368, 23);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Listar listar = new Listar();				
@@ -167,6 +155,7 @@ public class Editar extends JPanel {
 			}
 		});
 		filePicker = new JFilePicker("Img", "Buscar");
+		filePicker.setBounds(345, 235, 445, 23);
 		filePicker.setMode(JFilePicker.MODE_SAVE);
 		filePicker.addFileTypeFilter(".jpg", "JPEG Images");
 		filePicker.addFileTypeFilter(".png", "PNG Images");
@@ -175,9 +164,17 @@ public class Editar extends JPanel {
 		
 		// access JFileChooser class directly	
 		// add the component to the frame		
-		add(filePicker, "2, 12, 5, 1, fill, fill");		
-		add(btnCancelar, "2, 14, 3, 1, fill, top");
-		add(btnAgregar, "6, 14, fill, top");
+		add(filePicker);		
+		add(btnCancelar);
+		add(btnAgregar);
+		
+		JLabel lblImagenDeUsuario = new JLabel("Imagen de usuario");
+		lblImagenDeUsuario.setBounds(403, 217, 387, 14);
+		add(lblImagenDeUsuario);
+		
+		JLabel lblModificarUsuario = new JLabel("MODIFICAR USUARIO");
+		lblModificarUsuario.setBounds(10, 51, 191, 14);
+		add(lblModificarUsuario);
 	}
     @Override
     protected void paintComponent(Graphics g) {

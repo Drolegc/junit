@@ -27,7 +27,8 @@ import javax.swing.JSplitPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import uytube.views.usuarios.UserMain;
-import uytube.views.usuarios.consultar.Consultar;;
+import uytube.views.usuarios.consultar.Consultar;
+import javax.swing.JLabel;;
 public class ConsultarMain extends JPanel {
 	private JTable table;
 
@@ -41,8 +42,18 @@ public class ConsultarMain extends JPanel {
 	private Usuario user;
 	public ConsultarMain() {
 		setLayout(null);
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserMain main = new UserMain();
+				Frame.frame.setContentPane(main);
+				Frame.frame.revalidate();				
+			}
+		});
+		btnVolver.setBounds(10, 431, 368, 23);
+		add(btnVolver);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 29, 430, 230);
+		scrollPane.setBounds(10, 100, 780, 313);
 		add(scrollPane);
 		
 		UsuarioController controller = new UsuarioController();
@@ -73,9 +84,12 @@ public class ConsultarMain extends JPanel {
 
 			}
 		});
-		btnEditarUsuario.setBounds(336, 269, 104, 21);
-		btnEditarUsuario.setVisible(false);
+		btnEditarUsuario.setBounds(408, 432, 382, 23);
 		add(btnEditarUsuario);
+		
+		JLabel label = new JLabel("CONSULTA DE VIDEO");
+		label.setBounds(10, 51, 196, 14);
+		add(label);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {

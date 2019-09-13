@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class DejarSeguir extends JPanel {
 	private JTable table;
@@ -33,7 +34,7 @@ public class DejarSeguir extends JPanel {
 		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(33, 30, 173, 186);
+		scrollPane.setBounds(10, 100, 368, 313);
 		add(scrollPane);
 		
 		String [] nombreColumnas = {"Usuario"};
@@ -63,7 +64,7 @@ public class DejarSeguir extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnVolver.setBounds(33, 244, 114, 25);
+		btnVolver.setBounds(10, 431, 368, 23);
 		add(btnVolver);
 		
 		JButton btnDejarDeSeguir = new JButton("Dejar de seguir");
@@ -79,17 +80,29 @@ public class DejarSeguir extends JPanel {
 
 			}
 		});
-		btnDejarDeSeguir.setBounds(265, 244, 173, 25);
+		btnDejarDeSeguir.setBounds(400, 431, 390, 23);
 		add(btnDejarDeSeguir);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(253, 30, 173, 186);
+		scrollPane_1.setBounds(400, 100, 378, 313);
 		add(scrollPane_1);
 		
 
 		
 		table_1 = new JTable();
 		scrollPane_1.setViewportView(table_1);
+		
+		JLabel lblDejarDeSeguir = new JLabel("DEJAR DE SEGUIR USUARIO");
+		lblDejarDeSeguir.setBounds(10, 51, 191, 14);
+		add(lblDejarDeSeguir);
+		
+		JLabel lblSeleccioneUsuarioSeguidor = new JLabel("Seleccione usuario seguidor");
+		lblSeleccioneUsuarioSeguidor.setBounds(10, 86, 368, 14);
+		add(lblSeleccioneUsuarioSeguidor);
+		
+		JLabel lblDejaDeSeguir = new JLabel("Deja de seguir a:");
+		lblDejaDeSeguir.setBounds(400, 86, 356, 14);
+		add(lblDejaDeSeguir);
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			

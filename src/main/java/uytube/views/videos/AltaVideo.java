@@ -157,7 +157,7 @@ public class AltaVideo extends JPanel {
 			}
 		});
 		
-		btnOk.setBounds(220, 266, 220, 23);
+		btnOk.setBounds(400, 431, 390, 23);
 		add(btnOk);
 		
 		JLabel lblCategoraopcional = new JLabel("Categoria (Opcional)");
@@ -218,7 +218,7 @@ public class AltaVideo extends JPanel {
 				Frame.frame.validate();
 			}
 		});
-		btnVolver.setBounds(10, 266, 200, 23);
+		btnVolver.setBounds(10, 431, 368, 23);
 		add(btnVolver);
 		
 		

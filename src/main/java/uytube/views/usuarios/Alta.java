@@ -57,38 +57,38 @@ public class Alta extends JPanel {
 		setLayout(null);
 
 		JLabel lblNickname = new JLabel("Nickname");
-		lblNickname.setBounds(68, 87, 45, 13);
+		lblNickname.setBounds(10, 87, 148, 13);
 		add(lblNickname);
 		
 		nombre = new JTextField();
-		nombre.setBounds(144, 113, 148, 19);
+		nombre.setBounds(10, 172, 368, 23);
 		add(nombre);
 		nombre.setColumns(10);
 		
 		apellido = new JTextField();
-		apellido.setBounds(144, 142, 148, 19);
+		apellido.setBounds(10, 241, 368, 23);
 		apellido.setColumns(10);
 		add(apellido);
 				
 		correo = new JTextField();
-		correo.setBounds(144, 171, 150, 19);
+		correo.setBounds(400, 100, 390, 23);
 		correo.setColumns(10);
 		add(correo);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(66, 116, 37, 13);
+		lblNombre.setBounds(10, 148, 368, 13);
 		add(lblNombre);
 		
 		JLabel label = new JLabel("Apellido");
-		label.setBounds(66, 151, 36, 13);
+		label.setBounds(10, 217, 360, 13);
 		add(label);
 		
 		JLabel label_2 = new JLabel("Correo");
-		label_2.setBounds(68, 177, 31, 13);
+		label_2.setBounds(400, 87, 177, 13);
 		add(label_2);
 		
-		JButton btnAgregar = new JButton("Agregar");
-		btnAgregar.setBounds(186, 269, 111, 21);
+		JButton btnAgregar = new JButton("Agregar usuario");
+		btnAgregar.setBounds(400, 431, 390, 23);
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Usuario modelUsuario = null;
@@ -123,7 +123,7 @@ public class Alta extends JPanel {
 		});
 		
 		JButton btnCancelar = new JButton("cancelar");
-		btnCancelar.setBounds(66, 269, 95, 21);
+		btnCancelar.setBounds(10, 431, 368, 23);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Frame.frame.setContentPane(Main);
@@ -131,7 +131,7 @@ public class Alta extends JPanel {
 			}
 		});
 		filePicker = new JFilePicker("Img", "Buscar");
-		filePicker.setBounds(66, 229, 231, 30);
+		filePicker.setBounds(348, 241, 442, 23);
 		filePicker.setMode(JFilePicker.MODE_SAVE);
 		filePicker.addFileTypeFilter(".jpg", "JPEG Images");
 		filePicker.addFileTypeFilter(".png", "PNG Images");
@@ -143,11 +143,11 @@ public class Alta extends JPanel {
 		add(filePicker);		
 		
 		JLabel label_3 = new JLabel("F. Nacimiento");
-		label_3.setBounds(66, 206, 63, 13);
+		label_3.setBounds(400, 148, 390, 13);
 		add(label_3);
 		
 		f_nac = new JDateChooser();
-		f_nac.setBounds(144, 200, 148, 19);
+		f_nac.setBounds(400, 172, 390, 23);
 		add(f_nac);
 		add(btnCancelar);
 		
@@ -155,12 +155,12 @@ public class Alta extends JPanel {
 		
 		JLabel nickanamerrror = new JLabel("El nickname ya esta en uso");
 		nickanamerrror.setForeground(Color.RED);
-		nickanamerrror.setBounds(302, 87, 138, 13);
+		nickanamerrror.setBounds(240, 87, 138, 13);
 		nickanamerrror.setVisible(false);
 		add(nickanamerrror);
 		JLabel correoerror = new JLabel("El correo ya esta en uso");
 		correoerror.setForeground(Color.RED);
-		correoerror.setBounds(302, 174, 138, 13);
+		correoerror.setBounds(652, 87, 138, 13);
 		correoerror.setVisible(false);
 		add(correoerror);
 		nickname = new JTextField();
@@ -193,8 +193,16 @@ public class Alta extends JPanel {
 				 }
 			 }
 		});		
-		nickname.setBounds(144, 84, 148, 19);
+		nickname.setBounds(10, 100, 368, 23);
 		nickname.setColumns(10);
 		add(nickname);
+		
+		JLabel lblAltaDeUsuario = new JLabel("ALTA DE USUARIO");
+		lblAltaDeUsuario.setBounds(10, 51, 191, 14);
+		add(lblAltaDeUsuario);
+		
+		JLabel lblImagen = new JLabel("Imagen");
+		lblImagen.setBounds(399, 217, 391, 14);
+		add(lblImagen);
 	}
 }

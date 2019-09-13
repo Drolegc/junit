@@ -40,7 +40,7 @@ public class ListarVideosUsuario extends JPanel {
 	    videoSeleccionado.setNombre("");//setea el video seleccionado a vacio
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 65, 430, 201);
+		scrollPane.setBounds(10, 100, 780, 313);
 		add(scrollPane);
 		
 		
@@ -79,7 +79,7 @@ public class ListarVideosUsuario extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnVolver.setBounds(10, 277, 203, 23);
+		btnVolver.setBounds(10, 431, 368, 23);
 		add(btnVolver);
 		
 		JLabel lblEditarVideo = new JLabel("Editar video");
@@ -104,7 +104,7 @@ public class ListarVideosUsuario extends JPanel {
 				
 			}
 		});
-		btnEditar.setBounds(223, 277, 217, 23);
+		btnEditar.setBounds(400, 431, 390, 23);
 		add(btnEditar);
 		
 		
@@ -116,11 +116,11 @@ public class ListarVideosUsuario extends JPanel {
 		add(tree);
 		
 		JLabel lblSeleccioneUnUn = new JLabel("Seleccione un un video para editar");
-		lblSeleccioneUnUn.setBounds(10, 49, 224, 14);
+		lblSeleccioneUnUn.setBounds(10, 80, 224, 14);
 		add(lblSeleccioneUnUn);
 		
 		JLabel label = new JLabel("EDITAR VIDEO");
-		label.setBounds(186, 11, 192, 14);
+		label.setBounds(10, 51, 119, 14);
 		add(label);
 
 	}

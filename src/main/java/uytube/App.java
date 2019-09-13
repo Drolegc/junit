@@ -29,12 +29,14 @@ import java.awt.event.ActionEvent;
 
 import uytube.CategoriaController.CategoriaController;
 import uytube.CategoriaController.ICategoria;
+import uytube.ComentarioController.ComentarioController;
 import uytube.ListaController.ILista;
 import uytube.ListaController.ListaController;
 import uytube.UsuarioController.IUsuario;
 import uytube.UsuarioController.UsuarioController;
 import uytube.VideoController.IVideo;
 import uytube.VideoController.VideoController;
+import uytube.models.Comentario;
 import uytube.models.HibernateUtil;
 import uytube.models.Usuario;
 import uytube.models.Video;
@@ -45,6 +47,7 @@ import uytube.views.categorias.consulta;
 import uytube.views.categorias.listar;
 import uytube.views.listas.AgregarVideo1;
 import uytube.views.listas.QuitarVideo1;
+import uytube.views.listas.ConsultaListasUsuario;
 import uytube.views.listas.crear;
 import uytube.views.listas.modificar;
 
@@ -58,6 +61,7 @@ import uytube.views.usuarios.ListadoEditar;
 import uytube.views.usuarios.Listar;
 import uytube.views.usuarios.Seguir;
 import uytube.views.usuarios.consultar.ConsultarMain;
+import uytube.views.videos.AltaComentario;
 import uytube.views.videos.AltaVideo;
 import uytube.views.videos.ConsultaVideo;
 import uytube.views.videos.ModificarDatosVideo;
@@ -68,6 +72,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
+import java.awt.Font;
+import java.awt.Color;
 
 public class App extends JFrame{
 	public static void main(String[] args) {
@@ -76,7 +83,7 @@ public class App extends JFrame{
 				try {
 					App frame = new App();
 					frame.setVisible(true);	
-					frame.setTitle("Uytube");
+					frame.setTitle("Uytube - ADMINISTRADOR");
 					//frame.setSize(900, 400);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -130,7 +137,7 @@ public class App extends JFrame{
 		
 		
 		Video vid2 = new Video();
-		vid2.setNombre("uno");
+		vid2.setNombre("video uno");
 		vid2.setDuracion("2:20");
 		vid2.setDescripcion("Un video que tiene una descripcion larga.. para lo que estamos acostumbrados a tener aca.");
 		vid2.setUrl("https://www.videos.com/2e2re3w3er");
@@ -139,6 +146,21 @@ public class App extends JFrame{
 		
 		controllervideo.altaVideo(vid2, "youtuber", "Musica");
 		
+		
+		//comentario alta
+		ComentarioController comentar = new ComentarioController();
+		
+		Comentario Com1 = new Comentario();
+		Com1.setComentario("comentario uno");
+		Com1.setFecha(new Date());
+		Com1.setVid(vid2);
+		comentar.AgregarComentario(Com1);
+		
+		Comentario Com2 = new Comentario();
+		Com2.setComentario("comentario dos");
+		Com2.setFecha(new Date());
+		Com2.setVid(vid2);
+		comentar.AgregarComentario(Com2);
 		
 		
 		
@@ -154,11 +176,26 @@ public class App extends JFrame{
 	public App() {
 		Frame.frame = this;		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 400);
+		setBounds(0, 0, 820, 550);
 		Inicio inicio = new Inicio();
+		inicio.setBounds(0, 498, 814, 1);
 		setResizable(false);
 		setVisible(true);
+		getContentPane().setLayout(null);
 		getContentPane().add(inicio);
+		
+		JLabel lblUytubeAdministrador = new JLabel("UYTUBE ADMINISTRADOR");
+		lblUytubeAdministrador.setBounds(10, 76, 165, 14);
+		getContentPane().add(lblUytubeAdministrador);
+		
+		JTextArea txtrUtilizeLosMenus = new JTextArea();
+		txtrUtilizeLosMenus.setForeground(Color.BLACK);
+		txtrUtilizeLosMenus.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 13));
+		txtrUtilizeLosMenus.setWrapStyleWord(true);
+		txtrUtilizeLosMenus.setLineWrap(true);
+		txtrUtilizeLosMenus.setText("Utilize los menus para ingresar a las diferentes funciones de el administrador de la plataforma.\r\n\r\n- Usuarios - Aqui podra dar de alta, consultar(permite modificar el usuario), seguir usuario, dejar de seguir usuario y listar usuarios de la plataforma.\r\n\r\n-Videos - Esta categoria concierne en cuanto a los datos de los videos, agregar, modificar valorar, consultar y comentar los videos de la plataforma.\r\n\r\n- Categorias - En la seccion de categorias, el administrador  puede agregar, consultar y listar las mismas. \r\n\r\n- Listas - Por ultimo, en el menu de listas se puede crear, consultar y listar las listas de los usuarios de Uytube. Estas pueden ser las listas default o particulares.\r\n\r\n#  |'\u00AF\u00AF|\u00AF\u00AF'|\u00B0\\\u00AF\u00AF\u00AF|\u00AF\u00AF\u00AF/||\u00AF\u00AF\u00AF\u00AF\u00AF|\u00B0|'\u00AF\u00AF|\u00AF\u00AF'|\u00B0|\u00AF\u00AF\u00AF|      /\u00AFx\u00AF\u00AF\\ \r\n#  |         |   \\        /  |         | |         | |      \u00AF\u00AF\\'|   (\\__/|\r\n#   \\____/ '   |____|'   \u00AF|__|\u00AF   \\____/ '|__x__/\u00B0 \\____\\   ");
+		txtrUtilizeLosMenus.setBounds(10, 99, 782, 313);
+		getContentPane().add(txtrUtilizeLosMenus);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -272,6 +309,9 @@ public class App extends JFrame{
 		JMenuItem mntmComentarUnVideo = new JMenuItem("Comentar un video");
 		mntmComentarUnVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AltaComentario altaC = new AltaComentario();
+				Frame.frame.setContentPane(altaC);
+				Frame.frame.revalidate();
 			}
 		});
 		mnNewMenu.add(mntmComentarUnVideo);
@@ -352,9 +392,18 @@ public class App extends JFrame{
 		});
 		mnListas.add(mntmBorrarVideoLista);
 		
+		
+		JMenuItem mntmListarListas = new JMenuItem("Consulta de listas");
+		mntmListarListas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				uytube.views.listas.consulta listarLU = new uytube.views.listas.consulta();
+				Frame.frame.setContentPane(listarLU);
+				Frame.frame.revalidate();
+			}
+		});
+		mnListas.add(mntmListarListas);
 	}
 	public void goToinit() {
 		
 	}
-
 }

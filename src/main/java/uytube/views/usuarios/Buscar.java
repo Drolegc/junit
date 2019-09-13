@@ -30,35 +30,22 @@ public class Buscar extends JPanel {
 	private String [] nombreColumnas = {"Nombre","Apellido","Nickname","Correo","F.Nac"};
 	private Usuario user;
 	private JTable table;
+	private JButton btnVolver;
+	private JLabel lblBuscarUsuario;
 
 	/**
 	 * Create the panel.
 	 */
 	public Buscar() {
-		setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("1px"),
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("312px:grow"),
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("108px"),},
-			new RowSpec[] {
-				RowSpec.decode("1px"),
-				RowSpec.decode("25px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("13px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("21px"),
-				RowSpec.decode("200px:grow"),
-				RowSpec.decode("21px"),}));
 		DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
-		JLabel lblNewLabel = new JLabel("Buscar por nickname");
-		add(lblNewLabel, "3, 4, left, top");
+		setLayout(null);
+		JLabel lblNewLabel = new JLabel("Ingrese nickname");
+		lblNewLabel.setBounds(10, 81, 100, 14);
+		add(lblNewLabel);
 		
 		textField = new JTextField();
-		add(textField, "3, 7, fill, center");
+		textField.setBounds(10, 100, 780, 20);
+		add(textField);
 		textField.setColumns(10);
 		JButton btnEditarUsuario = new JButton("Editar usuario");
 		btnEditarUsuario.addActionListener(new ActionListener() {
@@ -70,7 +57,8 @@ public class Buscar extends JPanel {
 			}
 		});
 		JButton btnBuscar = new JButton("Buscar");
-		add(btnBuscar, "5, 7, fill, center");
+		btnBuscar.setBounds(400, 431, 390, 23);
+		add(btnBuscar);
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(textField.getText());
@@ -92,8 +80,17 @@ public class Buscar extends JPanel {
 			}
 		});
 		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(10, 431, 368, 23);
+		add(btnVolver);
+		
 		table = new JTable();
-		add(table, "3, 10, fill, top");
+		table.setBounds(11, 120, 671, 0);
+		add(table);
+		
+		lblBuscarUsuario = new JLabel("BUSCAR USUARIO");
+		lblBuscarUsuario.setBounds(10, 51, 191, 14);
+		add(lblBuscarUsuario);
 		
 	}
 }

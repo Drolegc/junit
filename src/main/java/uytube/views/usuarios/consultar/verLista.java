@@ -6,6 +6,10 @@ import javax.swing.table.DefaultTableModel;
 
 import org.hibernate.Hibernate;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import com.jgoodies.forms.layout.FormLayout;
@@ -17,6 +21,7 @@ import uytube.models.Lista;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
+import uytube.views.usuarios.UserMain;
 
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -37,37 +42,37 @@ public class verLista extends JPanel {
 		setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(10, 41, 147, 19);
+		textField.setBounds(10, 100, 265, 19);
 		textField.setText(lista.getNombre());
 		add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(167, 41, 137, 19);
+		textField_1.setBounds(285, 100, 244, 19);
 		textField_1.setColumns(10);
 		textField_1.setText(lista.getCategoria().getNombre());
 		add(textField_1);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(314, 41, 126, 19);
+		textField_2.setBounds(539, 100, 251, 19);
 		textField_2.setColumns(10);
 		textField_2.setText((lista.getPrivado()) ? "Si":"No");
 		add(textField_2);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(10, 18, 37, 13);
+		lblNombre.setBounds(10, 86, 107, 13);
 		add(lblNombre);
 		
 		JLabel lblCategoria = new JLabel("Categoria");
-		lblCategoria.setBounds(167, 18, 44, 13);
+		lblCategoria.setBounds(285, 86, 244, 13);
 		add(lblCategoria);
 		
 		JLabel lblEsPrivada = new JLabel("Es privada?");
-		lblEsPrivada.setBounds(314, 18, 136, 13);
+		lblEsPrivada.setBounds(539, 86, 251, 13);
 		add(lblEsPrivada);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 78, 430, 185);
+		scrollPane.setBounds(10, 135, 780, 271);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -99,18 +104,19 @@ public class verLista extends JPanel {
 		});
 		btnEditar.setBounds(355, 269, 85, 21);
 		add(btnEditar);
-		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Consultar consultar = new Consultar(user);
-				Frame.frame.setContentPane(consultar);
-				Frame.frame.revalidate();
-			
+				UserMain main = new UserMain();
+				Frame.frame.setContentPane(main);
+				Frame.frame.revalidate();				
 			}
 		});
-		btnVolver.setBounds(260, 269, 85, 21);
+		btnVolver.setBounds(400, 431, 390, 23);
 		add(btnVolver);
-
+		
+		JLabel label = new JLabel("CONSULTA DE VIDEO");
+		label.setBounds(10, 51, 196, 14);
+		add(label);
 	}
 }

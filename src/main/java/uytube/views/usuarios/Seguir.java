@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.JLabel;
 
 public class Seguir extends JPanel {
 	private JTable table_1;
@@ -54,7 +55,7 @@ public class Seguir extends JPanel {
 				Frame.frame.revalidate();	
 			}
 		});
-		btnVolver.setBounds(173, 242, 114, 25);
+		btnVolver.setBounds(10, 431, 368, 25);
 		add(btnVolver);
 		
 		DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
@@ -68,14 +69,14 @@ public class Seguir extends JPanel {
 		}
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(256, 35, 169, 160);
+		scrollPane_1.setBounds(400, 100, 390, 313);
 		add(scrollPane_1);
 		
 		table_1 = new JTable();
 		scrollPane_1.setViewportView(table_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(49, 35, 169, 160);
+		scrollPane.setBounds(10, 100, 368, 313);
 		add(scrollPane);
 		
 		table = new JTable();
@@ -93,8 +94,20 @@ public class Seguir extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnConfirmar.setBounds(311, 242, 114, 25);
+		btnConfirmar.setBounds(400, 431, 390, 23);
 		add(btnConfirmar);
+		
+		JLabel lblSeguirUsuario = new JLabel("SEGUIR USUARIO");
+		lblSeguirUsuario.setBounds(10, 51, 191, 14);
+		add(lblSeguirUsuario);
+		
+		JLabel lblSeleccioneUsuarioSeguidor = new JLabel("Seleccione usuario seguidor:");
+		lblSeleccioneUsuarioSeguidor.setBounds(10, 86, 368, 14);
+		add(lblSeleccioneUsuarioSeguidor);
+		
+		JLabel lblSigueA = new JLabel("Sigue a:");
+		lblSigueA.setBounds(400, 86, 390, 14);
+		add(lblSigueA);
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			

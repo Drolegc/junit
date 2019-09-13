@@ -18,20 +18,20 @@ import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
 
-public class ConsultaVideosUsuario extends JPanel {
+public class AltaComentario2 extends JPanel {
 	private String [] nombreColumnas = {"Nombre","Categoria","Fecha"};
     private Video videoSeleccionado= new Video();
 	/**
 	 * Create the panel.
 	 */
 
-    ConsultaVideosUsuario(Usuario usuario) {
+    AltaComentario2(Usuario usuario) {
 	    videoSeleccionado.setNombre("");//setea el video seleccionado a vacio
 		VideoController controller = new VideoController();
 		ArrayList<Video> Videos = controller.listaVideosUsuario(usuario.getNickname());
 		//if(!Videos.isEmpty()) {
 					
-					JLabel lblSeleccione = new JLabel("Seleccione el video:");
+					JLabel lblSeleccione = new JLabel("Seleccione el video a consultar:");
 					lblSeleccione.setBounds(10, 80, 430, 14);
 					add(lblSeleccione);
 					
@@ -71,8 +71,8 @@ public class ConsultaVideosUsuario extends JPanel {
 						
 						//corrobora si selecciono un video;
 						if (!videoSeleccionado.getNombre().isEmpty()) {
-						ConsultaVideoyComentarios consultarDV = new ConsultaVideoyComentarios(videoSeleccionado);
-						Frame.frame.setContentPane(consultarDV);
+							AltaComentario3 AltaC = new AltaComentario3(videoSeleccionado);
+						Frame.frame.setContentPane(AltaC);
 						Frame.frame.revalidate();
 						}
 						else

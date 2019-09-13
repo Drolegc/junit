@@ -52,29 +52,29 @@ public class modificar extends JPanel {
 		
 		JComboBox comboBox = new JComboBox(array);
 
-		comboBox.setBounds(34, 55, 150, 24);
+		comboBox.setBounds(10, 100, 368, 23);
 		add(comboBox);
 		
 		ILista controllerLista = new ListaController();
 		
 		JButton btnModificar = new JButton("Modificar");
 
-		btnModificar.setBounds(293, 212, 114, 25);
+		btnModificar.setBounds(400, 431, 390, 23);
 		add(btnModificar);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		
 		List<Lista> listas = controllerLista.listarListas(usuarios.get(comboBox.getSelectedIndex()).getNickname());
 		comboBox_1.setModel(new DefaultComboBoxModel(this.ListasToArr(listas)));
-		comboBox_1.setBounds(34, 172, 150, 24);
+		comboBox_1.setBounds(10, 180, 368, 24);
 		add(comboBox_1);
 
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(34, 30, 66, 15);
+		lblUsuario.setBounds(10, 85, 150, 15);
 		add(lblUsuario);
 		
 		JLabel lblListas = new JLabel("Listas");
-		lblListas.setBounds(34, 145, 66, 15);
+		lblListas.setBounds(10, 165, 66, 15);
 		add(lblListas);
 		
 		JButton btnVolver = new JButton("Volver");
@@ -86,11 +86,11 @@ public class modificar extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnVolver.setBounds(293, 249, 114, 25);
+		btnVolver.setBounds(10, 431, 368, 23);
 		add(btnVolver);
 		
 		JRadioButton rdbtnPrivacidad = new JRadioButton("Privacidad");
-		rdbtnPrivacidad.setBounds(263, 125, 144, 23);
+		rdbtnPrivacidad.setBounds(400, 181, 144, 23);
 		rdbtnPrivacidad.setSelected(listas.get(0).getPrivado());
 		add(rdbtnPrivacidad);
 		
@@ -103,7 +103,7 @@ public class modificar extends JPanel {
 		}
 		
 		JComboBox comboBox_2 = new JComboBox(nombreCategorias);
-		comboBox_2.setBounds(263, 55, 144, 24);
+		comboBox_2.setBounds(400, 100, 390, 24);
 
 		listasUser = controllerLista.listarListas(usuarios.get(comboBox.getSelectedIndex()).getNickname());
 		lista_a_modificar = listasUser.get(comboBox_1.getSelectedIndex());
@@ -130,8 +130,12 @@ public class modificar extends JPanel {
 		add(comboBox_2);
 		
 		JLabel lblCategoria = new JLabel("Categoria");
-		lblCategoria.setBounds(263, 30, 66, 15);
+		lblCategoria.setBounds(400, 85, 66, 15);
 		add(lblCategoria);
+		
+		JLabel lblModificarLista = new JLabel("MODIFICAR LISTA");
+		lblModificarLista.setBounds(10, 51, 196, 14);
+		add(lblModificarLista);
 		
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {

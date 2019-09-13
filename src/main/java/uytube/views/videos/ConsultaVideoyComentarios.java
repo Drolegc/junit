@@ -3,6 +3,8 @@ package uytube.views.videos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,10 +17,12 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import com.toedter.calendar.JDateChooser;
 import uytube.CategoriaController.CategoriaController;
+import uytube.ComentarioController.ComentarioController;
 import uytube.UsuarioController.UsuarioController;
 import uytube.VideoController.VideoController;
 import uytube.models.Canal;
 import uytube.models.Categoria;
+import uytube.models.Comentario;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
@@ -26,7 +30,13 @@ import uytube.views.usuarios.Listar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import javax.swing.JCheckBox;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 public class ConsultaVideoyComentarios extends JPanel {
 
@@ -52,78 +62,100 @@ public class ConsultaVideoyComentarios extends JPanel {
 	
 	public ConsultaVideoyComentarios(Video video) {
 			setLayout(null);
-			JLabel lblNickname = new JLabel("usuario/nickname");
-			lblNickname.setBounds(10, 40, 206, 13);
+			
+
+			JLabel label = new JLabel("CONSULTA DE VIDEO");
+			label.setBounds(10, 51, 191, 14);
+			add(label);
+			
+			
+			JLabel lblNickname = new JLabel("Usuario/nickname");
+			lblNickname.setBounds(10, 76, 206, 32);
 			add(lblNickname);
 			
 			JLabel lblUrl = new JLabel("URL");
-			lblUrl.setBounds(10, 125, 206, 13);
+			lblUrl.setBounds(10, 281, 206, 13);
 			add(lblUrl);
 			
 			this.userInfo = new JTextField();
-			userInfo.setBounds(10, 55, 206, 20);
+			userInfo.setBounds(10, 100, 359, 20);
 			add(userInfo);
 			this.userInfo.setColumns(10);
-			this.userInfo.setEditable(false);
 			this.userInfo.setText(video.getCanal().getNombre());
 			this.url = new JTextField();
-			url.setEditable(false);
-			url.setBounds(10, 139, 206, 20);
+			url.setBounds(10, 299, 359, 20);
 			this.url.setColumns(10);
 			this.url.setText(video.getUrl());
 			add(url);
 			
 			JLabel lblNombre = new JLabel("Titulo");
-			lblNombre.setBounds(10, 85, 206, 14);
+			lblNombre.setBounds(10, 131, 206, 14);
 			add(lblNombre);
 			
+			JSeparator separator = new JSeparator();
+			separator.setBounds(10, 192, 359, 2);
+			add(separator);
+			
+			JSeparator separator_1 = new JSeparator();
+			separator_1.setOrientation(SwingConstants.VERTICAL);
+			separator_1.setBounds(367, 192, 2, 78);
+			add(separator_1);
+			
+			JSeparator separator_2 = new JSeparator();
+			separator_2.setOrientation(SwingConstants.VERTICAL);
+			separator_2.setBounds(10, 192, 2, 78);
+			add(separator_2);
+			
+			JSeparator separator_3 = new JSeparator();
+			separator_3.setBounds(10, 268, 359, 2);
+			add(separator_3);
+			
 			JLabel lblDescripcion = new JLabel("Descripcion");
-			lblDescripcion.setBounds(224, 40, 207, 14);
+			lblDescripcion.setBounds(9, 176, 207, 14);
 			add(lblDescripcion);
 			
 			this.titulo = new JTextField();
-			titulo.setBounds(10, 100, 206, 19);
+			titulo.setBounds(10, 146, 359, 19);
 			add(titulo);
 			this.titulo.setColumns(10);
 			this.titulo.setText(video.getNombre());
-			this.titulo.setEditable(false);
 			
 			this.descripcion = new JTextArea();
-			descripcion.setBounds(226, 55, 205, 66);
+			descripcion.setBounds(10, 192, 359, 78);
+			descripcion.setEnabled(false);
+			descripcion.setEditable(false);
+			descripcion.setWrapStyleWord(true);
 			descripcion.setLineWrap(true);
 			add(descripcion);
 			this.descripcion.setText(video.getDescripcion());
-			this.descripcion.setEditable(false);
 
 			this.duracion = new JTextField();
-			duracion.setBounds(10, 184, 206, 19);
+			duracion.setBounds(10, 343, 174, 19);
 			this.duracion.setColumns(10);
 			this.duracion.setText(video.getDuracion());
 			add(duracion);
-			this.duracion.setEditable(false);
 			
 			JLabel lblDuracion = new JLabel("Duracion");
-			lblDuracion.setBounds(10, 170, 206, 13);
+			lblDuracion.setBounds(10, 330, 89, 13);
 			add(lblDuracion);
 			
 			JLabel lblFechaPublicacion = new JLabel("Fecha publicacion");
-			lblFechaPublicacion.setBounds(225, 125, 206, 13);
+			lblFechaPublicacion.setBounds(194, 330, 153, 13);
 			add(lblFechaPublicacion);
 			lblFechaPublicacion.setFocusable(false);
 
 			
 			
 			this.fechapublicacion = new JTextField();
-			fechapublicacion.setBounds(226, 139, 206, 19);
+			fechapublicacion.setBounds(194, 343, 175, 19);
 			this.fechapublicacion.setColumns(10);
-			this.fechapublicacion.setText(video.getFecha().toString());
+			this.fechapublicacion.setText(video.getFecha().toString().substring(0,13));
 			add(fechapublicacion);
-			this.fechapublicacion.setEditable(false);
 			
 			
 			
 			JButton btnVolver = new JButton("Volver");
-			btnVolver.setBounds(10, 266, 206, 23);
+			btnVolver.setBounds(400, 431, 390, 23);
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					ConsultaVideosUsuario listarVU = new ConsultaVideosUsuario(video.getCanal().getUsuario());
@@ -133,73 +165,84 @@ public class ConsultaVideoyComentarios extends JPanel {
 			});
 			
 			
-			//BOTTON DE ASIGNACION DE CATEGORIA
-			/*
-			CategoriaController controladorCategoria = new CategoriaController();
-			ArrayList<Categoria> categorias = controladorCategoria.listarCategorias();
-			
-			
-			String[] array1 = new String[categorias.size()];
-			for(int i = 0; i < array1.length; i++) { 
-				array1[i] = categorias.get(i).getNombre(); 
-			};
-			catAsignar = "Sin Categoria"; // SI NO TOCA EL BOTON, SIMPLEMENTE LO CARGA COMO SIN CATEGORIAS
-			
-			JComboBox categoriaAsig = new JComboBox(array1);		
-			categoriaAsig.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JComboBox comboBox12 = (JComboBox)e.getSource();
-					catAsignar = (String)comboBox12.getSelectedItem();
-			        System.out.println(catAsignar);
-				}
-			});
-			categoriaAsig.setBounds(275, 228, 96, 22);
-			add(categoriaAsig);
-			
-			
-			*/
 			
 			JLabel lblCategoria = new JLabel("Categoria");
-			lblCategoria.setBounds(224, 169, 207, 14);
+			lblCategoria.setBounds(9, 373, 207, 14);
 			add(lblCategoria);
 			
 			
 			this.categoria = new JTextField();
-			categoria.setBounds(224, 184, 206, 19);
+			categoria.setBounds(10, 386, 174, 19);
 			this.categoria.setColumns(10);
 			this.categoria.setText(video.getCategoria().getNombre());
 			add(categoria);
-			this.categoria.setEditable(false);
 			
-			
-			
+			JCheckBox chckbxNewCheckBox = new JCheckBox("Es Publico");
+			chckbxNewCheckBox.setBounds(194, 385, 75, 23);
+			chckbxNewCheckBox.setSelected(video.getEs_publico());
+			add(chckbxNewCheckBox);
+			JCheckBox chckbxNewCheckBox2 = new JCheckBox("Es Privado");
+			chckbxNewCheckBox2.setBounds(294, 385, 75, 23);
+			chckbxNewCheckBox2.setSelected(!(video.getEs_publico()));
+			add(chckbxNewCheckBox2);
 			
 			
 			
 			//add(categoriaAsig, "4, 16, fill, default");
 			add(btnVolver);
 			
-			JTree tree = new JTree();
-			tree.setBounds(224, 214, 207, 75);
-			add(tree);
+			//Comentarios con Jtree-------------------------------------------------------------------
+			ComentarioController ComControl = new ComentarioController();
+			List<Comentario> Comentarios =  ComControl.listarComentarios(video.getNombre());			
+			//String ComentarioText = coment.getComentario();
+			//Comentarios con jtree
+			DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
+			DefaultTreeModel modelo = new DefaultTreeModel(raiz);
+			DefaultMutableTreeNode nuevo=new DefaultMutableTreeNode("Comentario nuevo");
+			modelo.insertNodeInto(nuevo, raiz, 0);
 			
-			JLabel label = new JLabel("CONSULTA DE VIDEO");
-			label.setBounds(160, 11, 191, 14);
-			add(label);
+			for(Comentario coment:Comentarios) {
+				//DefaultMutableTreeNode idComentario = <String>coment.getId();
+				//String FechaStrng = coment.getFecha().toString().substring(15);
+				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"-" + coment.getFecha().toString().substring(0, 13)+" - "+coment.getComentario());
+				modelo.insertNodeInto(coment1,raiz,0);
+				
+				DefaultMutableTreeNode responder=new DefaultMutableTreeNode("Responder");
+				modelo.insertNodeInto(responder, coment1, 0);
+				
+				List<Comentario> Respuestas = ComControl.ListarRespuestas(coment.getId());
+				for(Comentario resp:Respuestas) {
+					
+					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"-" + resp.getFecha().toString().substring(0, 13)+" - "+resp.getComentario());
+					modelo.insertNodeInto(respuesta1,coment1,0);
+				}
+			}
+			//contenedor con scroll
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(397, 100, 393, 170);
+			add(scrollPane);
 			
-		
+			JTree tree = new JTree(modelo);
+			scrollPane.setViewportView(tree);
+			
+			JLabel lblComentarios = new JLabel("Comentarios");
+			lblComentarios.setBounds(397, 82, 393, 20);
+			add(lblComentarios);
+			
+			JScrollPane scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBounds(397, 299, 393, 106);
+			add(scrollPane_1);
+			
+			JLabel lblCalificacin = new JLabel("Calificaci\u00F3nes");
+			lblCalificacin.setBounds(396, 280, 394, 14);
+			add(lblCalificacin);
+			for (int i = 0; i < tree.getRowCount(); i++) {
+			    tree.expandRow(i);
+			}
+						// comentario con jtree
 			
 			
-			JCheckBox chckbxNewCheckBox = new JCheckBox("Es Publico");
-			chckbxNewCheckBox.setEnabled(false);
-			chckbxNewCheckBox.setSelected(video.getEs_publico());
-			chckbxNewCheckBox.setBounds(6, 214, 101, 23);
-			add(chckbxNewCheckBox);
-			JCheckBox chckbxNewCheckBox2 = new JCheckBox("Es Privado");
-			chckbxNewCheckBox2.setEnabled(false);
-			chckbxNewCheckBox2.setSelected(!(video.getEs_publico()));
-			chckbxNewCheckBox2.setBounds(106, 214, 101, 23);
-			add(chckbxNewCheckBox2);
+			
 			
 			
 			

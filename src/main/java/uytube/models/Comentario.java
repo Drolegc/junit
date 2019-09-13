@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -25,10 +26,10 @@ public class Comentario {
 	@Column(name = "comentario")
 	private String comentario;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<Comentario> respuestas;
 	
-	@ManyToOne(cascade=CascadeType.ALL)//eeee proximamente join nulleable, por que tal vez no es necesario
+	@ManyToOne(cascade=CascadeType.MERGE)//eeee proximamente join nulleable, por que tal vez no es necesario
 	private Video vid;
 	
 	
@@ -36,12 +37,20 @@ public class Comentario {
 		return id;
 	}
 
+	public Video getVid() {
+		return vid;
+	}
+
+	public void setVid(Video vid) {
+		this.vid = vid;
+	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
 
 	public List<Comentario> getRespuestas() {
-		return respuestas;
+		return this.respuestas;
 	}
 
 	public void setRespuestas(List<Comentario> respuestas) {
@@ -52,9 +61,11 @@ public class Comentario {
 		
 	}
 	
-	public Comentario(Date fecha,String comentario) {
+	public Comentario(Video video,Date fecha,String comentario) {
+		this.vid=video;
 		this.fecha = fecha;
 		this.comentario = comentario;
+		
 	}
 
 	public Date getFecha() {
