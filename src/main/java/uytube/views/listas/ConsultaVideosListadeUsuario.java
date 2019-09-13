@@ -42,11 +42,11 @@ public class ConsultaVideosListadeUsuario extends JPanel {
 			//if(!Videos.isEmpty()) {
 						
 						JLabel lblSeleccione = new JLabel("Seleccione el video:");
-						lblSeleccione.setBounds(10, 25, 430, 14);
+						lblSeleccione.setBounds(10, 86, 430, 14);
 						add(lblSeleccione);
 						
 						JScrollPane scrollPane = new JScrollPane();
-						scrollPane.setBounds(10, 41, 430, 224);
+						scrollPane.setBounds(10, 100, 780, 313);
 						add(scrollPane);
 						DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
 						JTable table = new JTable();
@@ -95,7 +95,7 @@ public class ConsultaVideosListadeUsuario extends JPanel {
 								
 							}
 						});
-						btnConsultar.setBounds(230, 277, 210, 23);
+						btnConsultar.setBounds(400, 431, 390, 23);
 						add(btnConsultar);
 		/*		}//	del if y  de aca...
 				else {
@@ -107,7 +107,7 @@ public class ConsultaVideosListadeUsuario extends JPanel {
 			*/
 			
 			JButton btnVolver = new JButton("Volver");
-			btnVolver.setBounds(10, 277, 210, 23);
+			btnVolver.setBounds(10, 431, 368, 23);
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					UsuarioController usercontrol = new UsuarioController();
@@ -119,9 +119,9 @@ public class ConsultaVideosListadeUsuario extends JPanel {
 			setLayout(null);
 			add(btnVolver);
 			
-			JLabel label = new JLabel("CONSULTA DE VIDEO");
-			label.setBounds(160, 11, 181, 14);
-			add(label);
+			JLabel lblConsultaDeVideo = new JLabel("CONSULTA DE VIDEO DE LISTAS DE USUARIO");
+			lblConsultaDeVideo.setBounds(10, 51, 181, 14);
+			add(lblConsultaDeVideo);
 
 		}
 	}

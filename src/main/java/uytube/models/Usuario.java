@@ -30,7 +30,7 @@ public class Usuario {
 	@Column(name = "img")
 	private String img;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
 	private List<Canal> canalesSeguidos;
 
 	

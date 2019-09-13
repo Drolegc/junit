@@ -204,7 +204,7 @@ public class ListaController implements ILista {
 		List<String> nombresListas = (List<String>)mng.getSessionManager()
 				.createQuery("Select l.nombre_lista from Lista as l where l.nombre_lista != 'Ver mas tarde' and l.nombre_lista != 'Favoritos' and l.tipo = true group by l.nombre_lista")
 				.getResultList();
-		
+		mng.closeSession();
 		for(String s:nombresListas) {
 		    this.crearLista(s, "Sin Categoria", name, true, false);
 		}
@@ -222,6 +222,7 @@ public class ListaController implements ILista {
 				.setParameter("nameCanal", nickUser)
 				.setParameter("nameList", nameList)
 				.getSingleResult();
+		mng.closeSession();
 		}catch (Exception NoResultException) {
 			return false;
 		}
