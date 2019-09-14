@@ -22,6 +22,7 @@ import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.Date;
@@ -75,6 +76,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class App extends JFrame{
 	public static void main(String[] args) {
@@ -91,7 +93,7 @@ public class App extends JFrame{
 			}
 		});
 		
-
+		
 		ICategoria controllerCategoria = new CategoriaController();
 		controllerCategoria.altaCategoria("Sin Categoria");
 		controllerCategoria.altaCategoria("Estilo de vida");
@@ -149,17 +151,23 @@ public class App extends JFrame{
 		
 		//comentario alta
 		ComentarioController comentar = new ComentarioController();
-		
+		UsuarioController usuariocontr =new UsuarioController();
+		Usuario usuario =new Usuario();
+		usuario = usuariocontr.consultarUsuario("youtuber");
 		Comentario Com1 = new Comentario();
 		Com1.setComentario("comentario uno");
 		Com1.setFecha(new Date());
 		Com1.setVid(vid2);
+		Com1.setUsuario(usuario);
 		comentar.AgregarComentario(Com1);
 		
+		Usuario usuario2 =new Usuario();
+		usuario2 = usuariocontr.consultarUsuario("user2");
 		Comentario Com2 = new Comentario();
 		Com2.setComentario("comentario dos");
 		Com2.setFecha(new Date());
 		Com2.setVid(vid2);
+		Com2.setUsuario(usuario2);
 		comentar.AgregarComentario(Com2);
 		
 		
@@ -174,11 +182,14 @@ public class App extends JFrame{
 	 * Create the frame.
 	 */
 	public App() {
-		Frame.frame = this;		
+		Frame.frame = this;	
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 820, 550);
+		setBounds(dim.width/2-this.getSize().width/2, 0, 820, 550);
 		Inicio inicio = new Inicio();
-		inicio.setBounds(0, 498, 814, 1);
+		inicio.setBounds(0, 0, 814, 1);
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		setResizable(false);
 		setVisible(true);
 		getContentPane().setLayout(null);
@@ -193,7 +204,7 @@ public class App extends JFrame{
 		txtrUtilizeLosMenus.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 13));
 		txtrUtilizeLosMenus.setWrapStyleWord(true);
 		txtrUtilizeLosMenus.setLineWrap(true);
-		txtrUtilizeLosMenus.setText("Utilize los menus para ingresar a las diferentes funciones de el administrador de la plataforma.\r\n\r\n- Usuarios - Aqui podra dar de alta, consultar(permite modificar el usuario), seguir usuario, dejar de seguir usuario y listar usuarios de la plataforma.\r\n\r\n-Videos - Esta categoria concierne en cuanto a los datos de los videos, agregar, modificar valorar, consultar y comentar los videos de la plataforma.\r\n\r\n- Categorias - En la seccion de categorias, el administrador  puede agregar, consultar y listar las mismas. \r\n\r\n- Listas - Por ultimo, en el menu de listas se puede crear, consultar y listar las listas de los usuarios de Uytube. Estas pueden ser las listas default o particulares.\r\n\r\n#  |'\u00AF\u00AF|\u00AF\u00AF'|\u00B0\\\u00AF\u00AF\u00AF|\u00AF\u00AF\u00AF/||\u00AF\u00AF\u00AF\u00AF\u00AF|\u00B0|'\u00AF\u00AF|\u00AF\u00AF'|\u00B0|\u00AF\u00AF\u00AF|      /\u00AFx\u00AF\u00AF\\ \r\n#  |         |   \\        /  |         | |         | |      \u00AF\u00AF\\'|   (\\__/|\r\n#   \\____/ '   |____|'   \u00AF|__|\u00AF   \\____/ '|__x__/\u00B0 \\____\\   ");
+		txtrUtilizeLosMenus.setText("Utilize los menus para ingresar a las diferentes funciones de el administrador de la plataforma.\r\n\r\n- Usuarios - Aqui podra dar de alta, consultar(permite modificar el usuario), seguir usuario, dejar de seguir usuario y listar usuarios de la plataforma.\r\n\r\n-Videos - Esta categoria concierne en cuanto a los datos de los videos, agregar, modificar valorar, consultar y comentar los videos de la plataforma.\r\n\r\n- Categorias - En la seccion de categorias, el administrador  puede agregar, consultar y listar las mismas. \r\n\r\n- Listas - Por ultimo, en el menu de listas se puede crear, consultar y listar las listas de los usuarios de Uytube. Estas pueden ser las listas default o particulares.\r\n\r\n#  |'\u00AF\u00AF|\u00AF\u00AF'|\u00B0\\\u00AF\u00AF\u00AF|\u00AF\u00AF\u00AF/||\u00AF\u00AF\u00AF\u00AF\u00AF|\u00B0|'\u00AF\u00AF|\u00AF\u00AF'|\u00B0|\u00AF\u00AF\u00AF|      /\u00AFx\u00AF\u00AF\\ \r\n#  |        |  \\       /  |       | |      | |    \u00AF\u00AF\\'|   (\\__/|\r\n#   \\____/ '   |____|'   \u00AF|__|\u00AF   \\____/ '|__x__/\u00B0 \\____\\   ");
 		txtrUtilizeLosMenus.setBounds(10, 99, 782, 313);
 		getContentPane().add(txtrUtilizeLosMenus);
 		

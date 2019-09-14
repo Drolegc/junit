@@ -52,7 +52,9 @@ public class AltaComentario3 extends JPanel {
 	private JTextField nickname;
 	private JTextField duracion1;
 	private JTextField txtComentarioUno;
-	
+	private JDateChooser fecPub;
+	private String nickInfoStr;
+	private JComboBox userInfo1;
 	
 	public AltaComentario3(Video video) {
 			setLayout(null);
@@ -62,7 +64,7 @@ public class AltaComentario3 extends JPanel {
 			add(label);
 			txtComentarioUno = new JTextField();
 			txtComentarioUno.setText("respuesta uno");
-			txtComentarioUno.setBounds(281, 63, 136, 20);
+			txtComentarioUno.setBounds(287, 101, 250, 23);
 			add(txtComentarioUno);
 			txtComentarioUno.setColumns(10);
 			
@@ -73,14 +75,16 @@ public class AltaComentario3 extends JPanel {
 			btnVolver.setBounds(10, 431, 368, 23);
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ConsultaVideosUsuario listarVU = new ConsultaVideosUsuario(video.getCanal().getUsuario());
+					UsuarioController usercontrol = new UsuarioController();
+					Usuario usuario = usercontrol.consultarUsuario(video.getCanal().getNombre());
+					AltaComentario2 listarVU = new AltaComentario2(usuario);
 					Frame.frame.setContentPane(listarVU);
 					Frame.frame.revalidate();
-				}
+					}
 			});
 			
-			JLabel lblFecha = new JLabel("fecha");
-			lblFecha.setBounds(456, 66, 48, 14);
+			JLabel lblFecha = new JLabel("Seleccione una fecha");
+			lblFecha.setBounds(547, 84, 136, 14);
 			add(lblFecha);
 			add(btnVolver);
 			
@@ -91,28 +95,24 @@ public class AltaComentario3 extends JPanel {
 			//Comentarios con jtree
 			DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
 			DefaultTreeModel modelo = new DefaultTreeModel(raiz);
-			DefaultMutableTreeNode nuevo=new DefaultMutableTreeNode("Comentario nuevo");
-			modelo.insertNodeInto(nuevo, raiz, 0);
 			
 			for(Comentario coment:Comentarios) {
 				//DefaultMutableTreeNode idComentario = <String>coment.getId();
 				//String FechaStrng = coment.getFecha().toString().substring(15);
-				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"-" + coment.getFecha().toString().substring(0, 13)+" - "+coment.getComentario());
+				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"» " + coment.getFecha().toString().substring(0, 10)+" » "+ coment.getUsuario().getNickname()+" » "+coment.getComentario());
 				modelo.insertNodeInto(coment1,raiz,0);
 				
-				DefaultMutableTreeNode responder=new DefaultMutableTreeNode("Responder");
-				modelo.insertNodeInto(responder, coment1, 0);
 				
 				List<Comentario> Respuestas = ComControl.ListarRespuestas(coment.getId());
 				for(Comentario resp:Respuestas) {
 					
-					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"-" + resp.getFecha().toString().substring(0, 13)+" - "+resp.getComentario());
+					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"» " + resp.getFecha().toString().substring(0, 10)+" » "+ resp.getUsuario().getNickname()+" » "+resp.getComentario());
 					modelo.insertNodeInto(respuesta1,coment1,0);
 				}
 			}
 			//contenedor con scroll
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 100, 780, 313);
+			scrollPane.setBounds(10, 148, 780, 265);
 			add(scrollPane);
 			
 			JTree tree = new JTree(modelo);
@@ -127,19 +127,26 @@ public class AltaComentario3 extends JPanel {
 			JButton btnNewButton = new JButton("Comentar");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					UsuarioController vcontrol =new UsuarioController();
+					
+				Usuario usuario = vcontrol.consultarUsuario(nickInfoStr);
+				if (nickInfoStr == null || txtComentarioUno.getText().isBlank() ) {
+					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario y/o ingresar un texto para comentar");
+				} else {
 				//guarda hoja del arbol 
 				TreePath[] paths = tree.getSelectionPaths();
                 String[] IdControl = null;
                 if (paths!=null) {//si selecciono una rama del arbol es por que va a comentar un comentario 
 	                for (TreePath path : paths) {
-	                	IdControl = path.getLastPathComponent().toString().split("-");
+	                	IdControl = path.getLastPathComponent().toString().split("»");
 	                    System.out.println("You've selected: "+ IdControl[0]);
 	                    if(IdControl[0]=="Comentarios") {// hoja Comentarios es para nuevo comentaroi al video 
 	                        ComentarioController controladorC = new ComentarioController();
 	        			    Comentario c = new Comentario();
 	        			    c.setComentario(txtComentarioUno.getText());
-	        			    c.setFecha(new Date());
-	        			    c.setVid(video);      			    
+	        			    c.setFecha(fecPub.getDate());	
+	        			    c.setVid(video);   
+	        			    c.setUsuario(usuario);
 	        			    controladorC.AgregarComentario(c);                      
 	                    }
 	                    else {//si seleeciono un id es para comentar ese comentario
@@ -147,8 +154,9 @@ public class AltaComentario3 extends JPanel {
 	        			    //Comentario c = new Comentario();
 	        			    Comentario  r = new Comentario();
 	        			    r.setComentario(txtComentarioUno.getText());
-	        			    r.setFecha(new Date());
-	        			    r.setVid(null);      			    
+	        			    r.setFecha(fecPub.getDate());
+	        			    r.setVid(null);   
+	        			    r.setUsuario(usuario);
 	        			    long IdNum = Long.parseLong(IdControl[0]);//transformo a long la hoja seleccionada
 	        			    controladorC.AgregarRespuesta(IdNum, r);
 	        			    //public void AgregarRespuesta(Long idComentario, Comentario respuesta) 
@@ -161,32 +169,61 @@ public class AltaComentario3 extends JPanel {
                 ComentarioController controladorC = new ComentarioController();
 			    Comentario c = new Comentario();
 			    c.setComentario(txtComentarioUno.getText());
-			    c.setFecha(new Date());
+			    c.setFecha(fecPub.getDate());
 			    c.setVid(video);
-			    //long IdNum = Long.parseLong(IdControl[0]);
-			    //boolean existe = controladorC.ExisteComentarioID(IdNum);
-			    //if (IdControl !=null)  {c.setId(IdNum); } //
-			    //Long idContr =(long)IdControl[0].;
-			    
-			    
+			    c.setUsuario(usuario);
 			    controladorC.AgregarComentario(c);
                 }
 			    ConsultaVideoyComentarios consultarDV = new ConsultaVideoyComentarios(video);
 				Frame.frame.setContentPane(consultarDV);
 				Frame.frame.revalidate();
-			    
+				}
 			    
 				}
 			});
 			btnNewButton.setBounds(400, 431, 390, 23);
 			add(btnNewButton);
 			
-			JLabel lblNickname = new JLabel("Comentario");
-			lblNickname.setBounds(10, 80, 430, 23);
+			JLabel lblNickname = new JLabel("Seleccione un comentario para responder ");
+			lblNickname.setBounds(10, 130, 430, 23);
 			add(lblNickname);
 			
+			fecPub = new JDateChooser();
+			fecPub.setBounds(547, 102, 243, 23);
+			fecPub.setDate(video.getFecha());
+			add(fecPub);
 			
 			
+
+			// BOTON DE ASIGNACION DE USUARIO
+			
+			UsuarioController controladorUsuario = new UsuarioController();
+			ArrayList<Usuario> usuarios = controladorUsuario.listaUsuarios();
+			int tamanio =  usuarios.size()+1;
+			String[] array = new String[tamanio];
+			array[0]="Debe elegir usuario";
+			for(int i = 1; i < array.length; i++) {
+			    array[i] = usuarios.get(i-1).getNickname();
+			}		
+			
+			JComboBox userInfo1 = new JComboBox(array);
+			userInfo1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JComboBox comboBox1 = (JComboBox)e.getSource();
+			        nickInfoStr = (String)comboBox1.getSelectedItem();
+			        System.out.println("ELEGï¿½ USER Y ES: "+ nickInfoStr);  
+					}
+			});
+			userInfo1.setBounds(10, 100, 267, 23);
+			add(userInfo1);
+			
+			JLabel lblIngreseElTexto = new JLabel("Ingrese el texto del comentario");
+			lblIngreseElTexto.setBounds(289, 84, 248, 14);
+			add(lblIngreseElTexto);
+			
+			JLabel lblNewLabel = new JLabel("Seleccione un usuario");
+			lblNewLabel.setBounds(10, 84, 267, 14);
+			add(lblNewLabel);
 			
 			
 			

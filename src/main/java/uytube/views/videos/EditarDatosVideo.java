@@ -41,7 +41,7 @@ public class EditarDatosVideo extends JPanel {
 	 * @param video 
 	 */
 	
-	
+	private String nickInfoStr;
 	private JTextField userInfo;
 	private JTextField titulo;
 	private JTextField duracion;

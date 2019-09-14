@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class editar extends JPanel {
 	private JTextField txtNuevoNombreCategoria;
@@ -22,29 +23,16 @@ public class editar extends JPanel {
 	 * Create the panel.
 	 */
 	public editar(Categoria catAeditar) {
-		setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
+		setLayout(null);
 		
 		txtNuevoNombreCategoria = new JTextField();
+		txtNuevoNombreCategoria.setBounds(10, 100, 350, 20);
 		txtNuevoNombreCategoria.setText("Nuevo Nombre Categoria");
-		add(txtNuevoNombreCategoria, "6, 6, fill, default");
+		add(txtNuevoNombreCategoria);
 		txtNuevoNombreCategoria.setColumns(10);
 		
 		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(10, 431, 368, 23);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				main miMain = new main();
@@ -52,9 +40,10 @@ public class editar extends JPanel {
 				Frame.frame.validate();
 			}
 		});
-		add(btnVolver, "4, 8");
+		add(btnVolver);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBounds(400, 431, 390, 23);
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Categoria nuevaCategoria = new Categoria();
@@ -67,7 +56,11 @@ public class editar extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		add(btnEditar, "6, 8");
+		add(btnEditar);
+		
+		JLabel lblNewLabel = new JLabel("ALTA DE CATEGORIA");
+		lblNewLabel.setBounds(10, 51, 137, 14);
+		add(lblNewLabel);
 
 	}
 

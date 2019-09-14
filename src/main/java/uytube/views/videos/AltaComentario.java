@@ -67,9 +67,9 @@ public class AltaComentario extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VideoMain videos = new VideoMain();
+				/*VideoMain videos = new VideoMain();
 				Frame.frame.setContentPane(videos);
-				Frame.frame.validate();
+				Frame.frame.validate();*/
 			}
 		});
 		btnVolver.setBounds(10, 431, 368, 23);

@@ -39,11 +39,11 @@ public class ConsultaListasUsuario extends JPanel {
 			//if(!Videos.isEmpty()) {
 						
 						JLabel lblSeleccione = new JLabel("Seleccione la lista:");
-						lblSeleccione.setBounds(10, 25, 430, 14);
+						lblSeleccione.setBounds(10, 84, 430, 14);
 						add(lblSeleccione);
 						
 						JScrollPane scrollPane = new JScrollPane();
-						scrollPane.setBounds(10, 41, 430, 224);
+						scrollPane.setBounds(10, 100, 780, 313);
 						add(scrollPane);
 						DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
 						JTable table = new JTable();
@@ -91,7 +91,7 @@ public class ConsultaListasUsuario extends JPanel {
 								
 							}
 						});
-						btnConsultar.setBounds(230, 277, 210, 23);
+						btnConsultar.setBounds(400, 431, 390, 23);
 						add(btnConsultar);
 		/*		}//	del if y  de aca...
 				else {
@@ -103,7 +103,7 @@ public class ConsultaListasUsuario extends JPanel {
 			*/
 			
 			JButton btnVolver = new JButton("Volver");
-			btnVolver.setBounds(10, 277, 210, 23);
+			btnVolver.setBounds(10, 431, 368, 23);
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					uytube.views.listas.consulta listarLU = new uytube.views.listas.consulta();
@@ -115,7 +115,7 @@ public class ConsultaListasUsuario extends JPanel {
 			add(btnVolver);
 			
 			JLabel lblConsultaDeLista = new JLabel("CONSULTA DE LISTA");
-			lblConsultaDeLista.setBounds(160, 11, 181, 14);
+			lblConsultaDeLista.setBounds(10, 51, 146, 14);
 			add(lblConsultaDeLista);
 
 		}

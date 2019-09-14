@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
 public class listar extends JPanel {
 
 	//Ventana principal
@@ -34,19 +35,11 @@ public class listar extends JPanel {
 	ArrayList<Categoria> categorias;
 	//paso el frame principal por parametro	
 	public listar() {
-		setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("77px"),
-				ColumnSpec.decode("198px"),
-				ColumnSpec.decode("117px"),},
-			new RowSpec[] {
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("247px"),
-				FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC,
-				RowSpec.decode("25px"),}));
+		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, "2, 2, 3, 1, fill, fill");
+		scrollPane.setBounds(10, 100, 780, 313);
+		add(scrollPane);
 		
 		//Creo el controlador para poder llamar al listarCategorias()
 		CategoriaController controlador = new CategoriaController();
@@ -75,6 +68,7 @@ public class listar extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JButton btnNewButton = new JButton("Volver");
+		btnNewButton.setBounds(10, 431, 368, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Frame.frame.setContentPane(miMain);
@@ -82,9 +76,10 @@ public class listar extends JPanel {
 			}
 			
 		});
-		add(btnNewButton, "2, 4, left, top");
+		add(btnNewButton);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBounds(400, 431, 390, 23);
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//le cargo a edito la categoria a editar
@@ -94,7 +89,15 @@ public class listar extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		add(btnEditar, "4, 4, fill, top");
+		add(btnEditar);
+		
+		JLabel lblCategorias = new JLabel("Categorias");
+		lblCategorias.setBounds(10, 79, 104, 14);
+		add(lblCategorias);
+		
+		JLabel lblListarCategorias = new JLabel("LISTAR CATEGORIAS");
+		lblListarCategorias.setBounds(10, 51, 120, 14);
+		add(lblListarCategorias);
 		//lo cargo en miMain para poder ir y volver (navegabilidad)
 		miMain = new main();
 	}

@@ -40,19 +40,11 @@ public class consulta extends JPanel {
 	ArrayList<Categoria> categorias;
 	//paso el frame principal por parametro	
 	public consulta() {
-		setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("117px"),
-				ColumnSpec.decode("158px"),
-				ColumnSpec.decode("117px"),},
-			new RowSpec[] {
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("247px"),
-				FormSpecs.LABEL_COMPONENT_GAP_ROWSPEC,
-				RowSpec.decode("25px"),}));
+		setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		add(scrollPane, "2, 2, 3, 1, fill, fill");
+		scrollPane.setBounds(10, 100, 780, 313);
+		add(scrollPane);
 		
 		//Creo el controlador para poder llamar al listarCategorias()
 		CategoriaController controlador = new CategoriaController();
@@ -81,6 +73,7 @@ public class consulta extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JButton btnNewButton = new JButton("Volver");
+		btnNewButton.setBounds(10, 431, 368, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Frame.frame.setContentPane(miMain);
@@ -88,9 +81,10 @@ public class consulta extends JPanel {
 			}
 			
 		});
-		add(btnNewButton, "2, 4, fill, top");
+		add(btnNewButton);
 		
 		JButton btnEditar = new JButton("Mostrar");
+		btnEditar.setBounds(400, 431, 390, 23);
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -100,7 +94,7 @@ public class consulta extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		add(btnEditar, "4, 4, fill, top");
+		add(btnEditar);
 		//lo cargo en miMain para poder ir y volver (navegabilidad)
 		miMain = new main();
 	}

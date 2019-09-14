@@ -42,60 +42,60 @@ public class AltaVideo extends JPanel {
 		setLayout(null);
 		
 		JLabel TITULOPANEL = new JLabel("ALTA VIDEO");
-		TITULOPANEL.setBounds(178, 23, 87, 14);
+		TITULOPANEL.setBounds(10, 51, 192, 23);
 		add(TITULOPANEL);
 		
-		JLabel lblUsuarioCreador = new JLabel("Usuario creador");
-		lblUsuarioCreador.setBounds(10, 48, 192, 14);
+		JLabel lblUsuarioCreador = new JLabel("Seleccione usuario creador");
+		lblUsuarioCreador.setBounds(10, 87, 192, 14);
 		add(lblUsuarioCreador);
 		
 		JLabel lblTituloVideo = new JLabel("Titulo Video");
-		lblTituloVideo.setBounds(10, 104, 192, 14);
+		lblTituloVideo.setBounds(10, 155, 192, 14);
 		add(lblTituloVideo);
 		
 		titulo = new JTextField();
-		titulo.setBounds(10, 118, 200, 20);
+		titulo.setBounds(10, 171, 358, 20);
 		add(titulo);
 		titulo.setColumns(10);
 		
 		JLabel lblDuracion = new JLabel("Duracion(hh:mm:ss)");
-		lblDuracion.setBounds(10, 149, 192, 14);
+		lblDuracion.setBounds(10, 224, 192, 14);
 		add(lblDuracion);
 		
 		duracion = new JTextField();
-		duracion.setBounds(10, 162, 200, 20);
+		duracion.setBounds(10, 237, 358, 20);
 		add(duracion);
 		duracion.setColumns(10);
 		
 		JLabel lblUrl = new JLabel("URL");
-		lblUrl.setBounds(220, 48, 220, 14);
+		lblUrl.setBounds(402, 87, 220, 14);
 		add(lblUrl);
 		
 		url = new JTextField();
-		url.setBounds(220, 62, 220, 20);
+		url.setBounds(400, 100, 390, 20);
 		add(url);
 		url.setColumns(10);
 		
 		JLabel descripcion = new JLabel("Descripcion");
-		descripcion.setBounds(219, 104, 207, 14);
+		descripcion.setBounds(402, 155, 207, 14);
 		add(descripcion);
 		
 		descrip = new JTextField();
-		descrip.setBounds(220, 118, 220, 20);
+		descrip.setBounds(400, 171, 390, 20);
 		add(descrip);
 		descrip.setColumns(10);
 		
 		JLabel lblFechaPublicacion = new JLabel("Fecha Publicacion");
-		lblFechaPublicacion.setBounds(220, 149, 200, 14);
+		lblFechaPublicacion.setBounds(402, 224, 200, 14);
 		add(lblFechaPublicacion);
 		
 		JDateChooser fecPub = new JDateChooser();
-		fecPub.setBounds(220, 162, 220, 20);
+		fecPub.setBounds(402, 237, 388, 20);
 		add(fecPub);
 		
 		
 		JLabel lblPrivacidad = new JLabel("Privacidad");
-		lblPrivacidad.setBounds(220, 193, 214, 14);
+		lblPrivacidad.setBounds(402, 290, 214, 14);
 		add(lblPrivacidad);
 		
 		
@@ -111,7 +111,7 @@ public class AltaVideo extends JPanel {
 		});
 		chckbxNewCheckBox2.setEnabled(true);
 		chckbxNewCheckBox2.setSelected(true);
-		chckbxNewCheckBox2.setBounds(323, 210, 101, 23);
+		chckbxNewCheckBox2.setBounds(590, 303, 177, 23);
 		add(chckbxNewCheckBox2);
 		
 		
@@ -123,7 +123,7 @@ public class AltaVideo extends JPanel {
 		});
 		chckbxNewCheckBox.setEnabled(true);
 		chckbxNewCheckBox.setSelected(false);
-		chckbxNewCheckBox.setBounds(220, 210, 101, 23);
+		chckbxNewCheckBox.setBounds(402, 303, 150, 23);
 		add(chckbxNewCheckBox);
 		
 		
@@ -161,7 +161,7 @@ public class AltaVideo extends JPanel {
 		add(btnOk);
 		
 		JLabel lblCategoraopcional = new JLabel("Categoria (Opcional)");
-		lblCategoraopcional.setBounds(10, 193, 122, 14);
+		lblCategoraopcional.setBounds(10, 290, 122, 14);
 		add(lblCategoraopcional);
 		
 		// BOTON DE ASIGNACION DE USUARIO
@@ -183,7 +183,7 @@ public class AltaVideo extends JPanel {
 		        System.out.println("ELEG� USER Y ES: "+ nickInfoStr);  
 				}
 		});
-		userInfo1.setBounds(10, 61, 200, 22);
+		userInfo1.setBounds(10, 100, 358, 22);
 		add(userInfo1);
 		
 		
@@ -207,7 +207,7 @@ public class AltaVideo extends JPanel {
 		        System.out.println(catAsignar);
 			}
 		});
-		categoriaAsig.setBounds(10, 207, 200, 22);
+		categoriaAsig.setBounds(10, 303, 358, 22);
 		add(categoriaAsig);
 		
 		JButton btnVolver = new JButton("Cancelar");

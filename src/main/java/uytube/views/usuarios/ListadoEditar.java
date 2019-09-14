@@ -27,6 +27,7 @@ import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 public class ListadoEditar extends JPanel {
 	private JTable table;
 
@@ -46,10 +47,10 @@ public class ListadoEditar extends JPanel {
 				Frame.frame.revalidate();				
 			}
 		});
-		btnVolver.setBounds(241, 269, 85, 21);
+		btnVolver.setBounds(10, 431, 368, 23);
 		add(btnVolver);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 29, 430, 230);
+		scrollPane.setBounds(10, 100, 780, 313);
 		add(scrollPane);
 		
 		UsuarioController controller = new UsuarioController();
@@ -80,8 +81,16 @@ public class ListadoEditar extends JPanel {
 
 			}
 		});
-		btnEditarUsuario.setBounds(336, 269, 104, 21);
+		btnEditarUsuario.setBounds(400, 431, 390, 23);
 		add(btnEditarUsuario);
+		
+		JLabel lblEditarUsuario = new JLabel("EDITAR USUARIO");
+		lblEditarUsuario.setBounds(10, 51, 124, 14);
+		add(lblEditarUsuario);
+		
+		JLabel lblSeleccioneElUsuario = new JLabel("Seleccione el usuario a editar:");
+		lblSeleccioneElUsuario.setBounds(10, 85, 220, 14);
+		add(lblSeleccioneElUsuario);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {

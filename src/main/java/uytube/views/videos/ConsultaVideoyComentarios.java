@@ -149,7 +149,7 @@ public class ConsultaVideoyComentarios extends JPanel {
 			this.fechapublicacion = new JTextField();
 			fechapublicacion.setBounds(194, 343, 175, 19);
 			this.fechapublicacion.setColumns(10);
-			this.fechapublicacion.setText(video.getFecha().toString().substring(0,13));
+			this.fechapublicacion.setText(video.getFecha().toString().substring(0,10));
 			add(fechapublicacion);
 			
 			
@@ -178,11 +178,11 @@ public class ConsultaVideoyComentarios extends JPanel {
 			add(categoria);
 			
 			JCheckBox chckbxNewCheckBox = new JCheckBox("Es Publico");
-			chckbxNewCheckBox.setBounds(194, 385, 75, 23);
+			chckbxNewCheckBox.setBounds(194, 385, 98, 23);
 			chckbxNewCheckBox.setSelected(video.getEs_publico());
 			add(chckbxNewCheckBox);
 			JCheckBox chckbxNewCheckBox2 = new JCheckBox("Es Privado");
-			chckbxNewCheckBox2.setBounds(294, 385, 75, 23);
+			chckbxNewCheckBox2.setBounds(294, 385, 97, 23);
 			chckbxNewCheckBox2.setSelected(!(video.getEs_publico()));
 			add(chckbxNewCheckBox2);
 			
@@ -198,22 +198,16 @@ public class ConsultaVideoyComentarios extends JPanel {
 			//Comentarios con jtree
 			DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
 			DefaultTreeModel modelo = new DefaultTreeModel(raiz);
-			DefaultMutableTreeNode nuevo=new DefaultMutableTreeNode("Comentario nuevo");
-			modelo.insertNodeInto(nuevo, raiz, 0);
 			
 			for(Comentario coment:Comentarios) {
-				//DefaultMutableTreeNode idComentario = <String>coment.getId();
-				//String FechaStrng = coment.getFecha().toString().substring(15);
-				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"-" + coment.getFecha().toString().substring(0, 13)+" - "+coment.getComentario());
+				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"» " + coment.getFecha().toString().substring(0, 10)+" » "+ coment.getUsuario().getNickname()+" » " +coment.getComentario());
 				modelo.insertNodeInto(coment1,raiz,0);
 				
-				DefaultMutableTreeNode responder=new DefaultMutableTreeNode("Responder");
-				modelo.insertNodeInto(responder, coment1, 0);
 				
 				List<Comentario> Respuestas = ComControl.ListarRespuestas(coment.getId());
 				for(Comentario resp:Respuestas) {
 					
-					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"-" + resp.getFecha().toString().substring(0, 13)+" - "+resp.getComentario());
+					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"» " + resp.getFecha().toString().substring(0, 10)+" » "+ resp.getUsuario().getNickname()+" » "+resp.getComentario());
 					modelo.insertNodeInto(respuesta1,coment1,0);
 				}
 			}

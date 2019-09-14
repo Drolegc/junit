@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,7 +33,18 @@ public class Comentario {
 	@ManyToOne(cascade=CascadeType.MERGE)//eeee proximamente join nulleable, por que tal vez no es necesario
 	private Video vid;
 	
+	@ManyToOne(cascade=CascadeType.MERGE)
+	private  Usuario usuario;
 	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -40,7 +52,7 @@ public class Comentario {
 	public Video getVid() {
 		return vid;
 	}
-
+	
 	public void setVid(Video vid) {
 		this.vid = vid;
 	}

@@ -97,8 +97,8 @@ public class AltaComentario2 extends JPanel {
 		btnVolver.setBounds(10, 431, 368, 23);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConsultaVideo ConsVideo = new ConsultaVideo();
-				Frame.frame.setContentPane(ConsVideo);
+				AltaComentario altacom = new AltaComentario();
+				Frame.frame.setContentPane(altacom);
 				Frame.frame.revalidate();
 			}
 		});

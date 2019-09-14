@@ -37,7 +37,7 @@ public class consultaMostrar extends JPanel {
 	public consultaMostrar(Categoria categoria) {
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(12, 263, 130, 25);
+		btnVolver.setBounds(400, 431, 368, 23);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				UserMain main = new UserMain();
@@ -49,7 +49,7 @@ public class consultaMostrar extends JPanel {
 		add(btnVolver);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 12, 216, 239);
+		scrollPane.setBounds(10, 100, 368, 313);
 		add(scrollPane);
 		
 		VideoController videoControlador = new VideoController();
@@ -69,7 +69,7 @@ public class consultaMostrar extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(263, 12, 175, 239);
+		scrollPane_1.setBounds(400, 100, 368, 313);
 		add(scrollPane_1);
 		
 		ListaController listaControlador = new ListaController();		

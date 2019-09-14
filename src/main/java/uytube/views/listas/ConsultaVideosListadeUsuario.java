@@ -82,10 +82,12 @@ public class ConsultaVideosListadeUsuario extends JPanel {
 							//corrobora si selecciono un video;
 							if (!videoSeleccionado.getNombre().isEmpty()) {
 						
-							Usuario u = new Usuario();
-							u.setNickname(videoSeleccionado.getCanal().getNombre());
-							ConsultaListasUsuario consultarDV = new ConsultaListasUsuario(u);
-							Frame.frame.setContentPane(consultarDV);
+							Video V = new Video();
+							VideoController vcontrol =new VideoController();
+							V = vcontrol.consultaVideoPorID(videoSeleccionado.getId());
+							
+							ConsultaVideoyComentarios consultarVyC = new ConsultaVideoyComentarios(V);
+							Frame.frame.setContentPane(consultarVyC);
 							Frame.frame.revalidate();
 							}
 							else
@@ -120,7 +122,7 @@ public class ConsultaVideosListadeUsuario extends JPanel {
 			add(btnVolver);
 			
 			JLabel lblConsultaDeVideo = new JLabel("CONSULTA DE VIDEO DE LISTAS DE USUARIO");
-			lblConsultaDeVideo.setBounds(10, 51, 181, 14);
+			lblConsultaDeVideo.setBounds(10, 51, 345, 14);
 			add(lblConsultaDeVideo);
 
 		}

@@ -27,6 +27,7 @@ public class alta extends JPanel {
 			miMain = new main();
 			
 			JButton btnAgregar = new JButton("Agregar");
+			btnAgregar.setBounds(400, 431, 390, 23);
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					boolean resultado;
@@ -42,31 +43,24 @@ public class alta extends JPanel {
 					
 				}
 			});
-			setLayout(new FormLayout(new ColumnSpec[] {
-					FormSpecs.RELATED_GAP_COLSPEC,
-					ColumnSpec.decode("172px"),
-					FormSpecs.RELATED_GAP_COLSPEC,
-					ColumnSpec.decode("172px"),},
-				new RowSpec[] {
-					RowSpec.decode("98px"),
-					RowSpec.decode("32px"),
-					FormSpecs.RELATED_GAP_ROWSPEC,
-					RowSpec.decode("25px"),}));
+			setLayout(null);
 			
 			txtIngresarCategoria = new JTextField();
+			txtIngresarCategoria.setBounds(10, 100, 368, 23);
 			txtIngresarCategoria.setText("Ingresar Categoria");
-			add(txtIngresarCategoria, "2, 2, fill, fill");
+			add(txtIngresarCategoria);
 			txtIngresarCategoria.setColumns(10);
-			add(btnAgregar, "2, 4, fill, top");
+			add(btnAgregar);
 			
 			JButton btnNewButton = new JButton("Volver");
+			btnNewButton.setBounds(10, 431, 368, 23);
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					Frame.frame.setContentPane(miMain);
 					Frame.frame.validate();
 				}
 			});
-			add(btnNewButton, "4, 4, fill, top");
+			add(btnNewButton);
 	}
 
 }
