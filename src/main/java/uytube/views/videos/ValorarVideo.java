@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import uytube.CanalController.CanalController;
 import uytube.UsuarioController.UsuarioController;
 import uytube.ValoracionController.ValoracionController;
 import uytube.VideoController.VideoController;
@@ -89,13 +90,18 @@ public class ValorarVideo extends JPanel {
 				
 		table_1 = new JTable();
 		scrollPane.setViewportView(table_1);
+		
+		
 
+		CanalController controladorCanal = new CanalController();
 		JComboBox selectUser = new JComboBox(array);
 		selectUser.setBounds(24, 32, 200, 24);
 		selectUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
-		        nickInfoStr = (String)comboBox1.getSelectedItem();
+				String infoStringNick = (String)comboBox1.getSelectedItem();
+		        
+		        nickInfoStr = controladorCanal.obtenerCanalUsuario(infoStringNick).getNombre();
 		        System.out.println("ELEGI USER Y ES: " + nickInfoStr);
 	
 				DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
