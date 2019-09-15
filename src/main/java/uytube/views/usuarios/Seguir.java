@@ -127,7 +127,7 @@ public class Seguir extends JPanel {
 						boolean esta = false;
 						
 						for(Canal c: canales) {
-							if(u.getNickname().equals(c.getNombre())) {
+							if(u.getNickname().equals(c.getUsuario().getNickname())) {
 								System.out.println(u.getNickname());
 								esta = true;
 							}

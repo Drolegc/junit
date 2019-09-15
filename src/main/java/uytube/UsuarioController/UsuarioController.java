@@ -55,8 +55,8 @@ public class UsuarioController implements IUsuario{
 
 	    ILista controllerLista = new ListaController();
 	    //"Favoritos", "Sin Categoria", null, true, true
-	    controllerLista.crearLista("Ver mas tarde", "Sin Categoria", canal.getNombre(), true, false);
-	    controllerLista.crearLista("Favoritos", "Sin Categoria", canal.getNombre(), true, false);
+	    controllerLista.crearLista("Ver mas tarde", "Sin Categoria", usuario.getNickname(), true, false);
+	    controllerLista.crearLista("Favoritos", "Sin Categoria", usuario.getNickname(), true, false);
 	    controllerLista.asignarListasDefault(canal.getNombre());
 	    
 	}
