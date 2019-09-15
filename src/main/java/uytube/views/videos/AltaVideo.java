@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import uytube.CanalController.CanalController;
 import uytube.CategoriaController.CategoriaController;
 import uytube.UsuarioController.UsuarioController;
 import uytube.VideoController.VideoController;
@@ -128,13 +129,8 @@ public class AltaVideo extends JPanel {
 		chckbxNewCheckBox.setBounds(402, 303, 150, 23);
 		add(chckbxNewCheckBox);
 		
-		
-		
-		
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
-			
-
 			public void actionPerformed(ActionEvent e) {
 				
 				videito = new Video();
@@ -148,13 +144,14 @@ public class AltaVideo extends JPanel {
 				
 				VideoController controladorVideo = new VideoController();
 				System.out.println(nickInfoStr);
-				if (nickInfoStr == null ) {
+				if (nickInfoStr == null || ( nickInfoStr == "Debe elegir usuario") ) {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario");
 				} else {
 					controladorVideo.altaVideo(videito, nickInfoStr, catAsignar);
 					JOptionPane.showMessageDialog(null, "Video dado de alta correctamente");
-					Frame.frame.setContentPane(main);
-					Frame.frame.revalidate();
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
+					Frame.frame.validate();
 				}
 			}
 		});
@@ -177,11 +174,15 @@ public class AltaVideo extends JPanel {
 		    array[i] = usuarios.get(i-1).getNickname();
 		}		
 		
+		CanalController controladorCanal = new CanalController();
 		JComboBox userInfo1 = new JComboBox(array);
 		userInfo1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
-		        nickInfoStr = (String)comboBox1.getSelectedItem();
+				
+		        String infoStringNick = (String)comboBox1.getSelectedItem();
+		        
+		        nickInfoStr = controladorCanal.obtenerCanalUsuario(infoStringNick).getNombre();
 		        System.out.println("ELEG� USER Y ES: "+ nickInfoStr);  
 				}
 		});

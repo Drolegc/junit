@@ -35,7 +35,6 @@ public class Video {
 	private boolean es_publico;
 	
 	
-
 	public boolean getEs_publico() {
 		return es_publico;
 	}
