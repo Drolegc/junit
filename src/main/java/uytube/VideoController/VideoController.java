@@ -115,12 +115,6 @@ private Manager mng;
 		mana.closeSession();
 		return v;
 	}
-	public void valorarVideo(ValoracionVideo vv) {
-		// TODO Auto-generated method stub
-		
-		mana.startTransaction("ValoracionVideo", vv);
-		
-	}
 	public ArrayList<Video> listaVideosUsuario(String nombre) {
 		// TODO Auto-generated method stub
 		ArrayList<Video> Videos = (ArrayList<Video>)mana.getSessionManager().createQuery("from Video where canal.nombre = :nombre").setParameter("nombre", nombre).getResultList();

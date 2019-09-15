@@ -33,7 +33,7 @@ public class ValoracionController implements IValoracion {
 	public long valoracionActual(String vv, String nick) {
 		// TODO Auto-generated method stub
 		
-		long valorVideo = (long)mana.getSessionManager().createQuery("select sum(valoracion) as valoracion From ValoracionVideo as vl where vl.video.nombre=: nombre and vl.video.canal.nombre=:nickname").setParameter("nombre", vv).setParameter("nickname", nick).getSingleResult();
+		long valorVideo = (long)mana.getSessionManager().createQuery("select sum(valoracion) as valoracion From ValoracionVideo as vl where vl.video.nombre=: nombre and vl.usuario.nickname=:nickname").setParameter("nombre", vv).setParameter("nickname", nick).getSingleResult();
 		mana.closeSession();
 		
 		return valorVideo;

@@ -16,7 +16,6 @@ public interface IVideo {
 	public ArrayList<Video> listaVideos();
 	public ArrayList<Video> videoPorCategoria(Categoria cat);
 	public ArrayList<Video> obtenerVideosUsuario(String usuario);
-	public void valorarVideo(ValoracionVideo vv);
 	public ArrayList<Video> listaVideosUsuario(String nombre);
 	public Video consultaVideoPorID(int id);
 }
