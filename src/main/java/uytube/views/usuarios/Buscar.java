@@ -8,6 +8,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import uytube.UsuarioController.UsuarioController;
 import uytube.models.Usuario;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 import uytube.views.usuarios.editar.editarMain;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -82,6 +83,13 @@ public class Buscar extends JPanel {
 		});
 		
 		btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
+			}
+		});
 		btnVolver.setBounds(10, 431, 368, 23);
 		add(btnVolver);
 		

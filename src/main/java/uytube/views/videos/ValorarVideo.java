@@ -68,11 +68,13 @@ public class ValorarVideo extends JPanel {
 	// Controladores 
 		VideoController controladorVideo = new VideoController();
 		UsuarioController controladorUsuario = new UsuarioController();
+		CanalController controladorCanal = new CanalController();
+		ValoracionController controladorValoracion = new ValoracionController();
 		mana = Manager.getInstance();
 		videoInfoInt=-1;
 		
 		JLabel labelUsuario = new JLabel("Usuario para mostrar videos");
-		labelUsuario.setBounds(24, 11, 200, 15);
+		labelUsuario.setBounds(10, 74, 200, 15);
 		
 	// CREACION LISTA USUARIO PARA ELEGIR
 		ArrayList<Usuario> usuarios = controladorUsuario.listaUsuarios();
@@ -86,17 +88,15 @@ public class ValorarVideo extends JPanel {
 		//FIN SELECCION
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(26, 87, 414, 130);
+		scrollPane.setBounds(10, 135, 780, 224);
 		add(scrollPane);
 				
 		table_1 = new JTable();
 		scrollPane.setViewportView(table_1);
 		
-		
-
-		CanalController controladorCanal = new CanalController();
+		// OBTENGO EL USUARIO PARA LISTAR LOS VIDEOS A ELEGIR PARA VALORAR.
 		JComboBox selectUser = new JComboBox(array);
-		selectUser.setBounds(24, 32, 200, 24);
+		selectUser.setBounds(10, 100, 780, 24);
 		selectUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
@@ -129,11 +129,11 @@ public class ValorarVideo extends JPanel {
 				//SI EL USUARIO TIENE VIDEOS, LO CARGO AL COMBOBOX
 							
 			} //FIN DEL ACCION DEL BOTON
-		});
+		}); // TABLE CARGADA CON VIDEOS PARA ELEGIR.
 		
 		
 		JButton btnLIKE = new JButton("LIKE");
-		btnLIKE.setBounds(97, 323, 103, 25);
+		btnLIKE.setBounds(10, 431, 369, 23);
 		btnLIKE.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if (videoInfoInt != -1) {
@@ -142,27 +142,25 @@ public class ValorarVideo extends JPanel {
 				
 				System.out.println("Usuario elegido para valorar: "+ userQueValora);
 
-				Video vid = controladorVideo.consultaVideoPorID(videoInfoInt);
-				ValoracionController controladorValoracion = new ValoracionController();
-				
-				
-				if (controladorValoracion.existeValoracion(vid.getNombre(),userQueValora)) {
-					ValoracionVideo valorVideo = controladorValoracion.traerValoracion(vid.getNombre(), userQueValora);
+				if (controladorValoracion.existeValoracion(videoInfoInt,userQueValora)) {
+					ValoracionVideo valorVideo = controladorValoracion.traerValoracion(videoInfoInt, userQueValora);
 					valorVideo.setValoracion(1);
 					controladorValoracion.valorarVideo(valorVideo);
+					System.out.println("Si ya tengo valorada deberia entrar acá");
 				} else {
 					ValoracionVideo valorV = new ValoracionVideo(); // GENERO LA NUEVA VALORACION
+					Video vid = controladorVideo.consultaVideoPorID(videoInfoInt);
 					valorV.setVideo(vid);
 					valorV.setUsuario(usercito);
 					valorV.setValoracion(1);
 					controladorValoracion.valorarVideo(valorV);
 				}
 
-				System.out.println("El video de nombre: "+vid.getNombre()+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(vid.getNombre(),userQueValora));
+				System.out.println("El video de ID: "+videoInfoInt+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoInt,userQueValora));
 							
-				VideoMain inicio = new VideoMain();
+				Inicio inicio = new Inicio();
 				Frame.frame.setContentPane(inicio);
-				Frame.frame.revalidate();
+				Frame.frame.validate();
 			} else {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un video, gracias.");
 			}
@@ -171,38 +169,37 @@ public class ValorarVideo extends JPanel {
 		});
 		
 		JButton btnDislike = new JButton("DISLIKE");
-		btnDislike.setBounds(261, 323, 114, 25);
+		btnDislike.setBounds(400, 431, 390, 23);
 		btnDislike.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (videoInfoInt != -1) {
 					Usuario usercito = (Usuario)mana.getSessionManager().createQuery("From Usuario where nickname =: nombre").setParameter("nombre", userQueValora).getSingleResult();
 					mana.closeSession();
 
-				Video vid = controladorVideo.consultaVideoPorID(videoInfoInt);
-				ValoracionController controladorValoracion = new ValoracionController();
-				
 					
+					ValoracionController controladorValoracion = new ValoracionController();
 
-				if (controladorValoracion.existeValoracion(vid.getNombre(),userQueValora)) {
-					ValoracionVideo valorVideo = controladorValoracion.traerValoracion(vid.getNombre(), userQueValora);
-					valorVideo.setValoracion(-1);
-					controladorValoracion.valorarVideo(valorVideo);
-				} else {
-					ValoracionVideo valorV = new ValoracionVideo(); // GENERO LA NUEVA VALORACION
-					valorV.setVideo(vid);
-					valorV.setUsuario(usercito);
-					valorV.setValoracion(-1);
-					controladorValoracion.valorarVideo(valorV);
-				}
-
-				System.out.println("El video de nombre: "+vid.getNombre()+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(vid.getNombre(),userQueValora));
-							
-				VideoMain inicio = new VideoMain();
-				Frame.frame.setContentPane(inicio);
-				Frame.frame.revalidate();
-				} else {
-					JOptionPane.showMessageDialog(null, "Debe seleccionar un video, gracias.");
-				}
+					if (controladorValoracion.existeValoracion(videoInfoInt,userQueValora)) {
+						ValoracionVideo valorVideo = controladorValoracion.traerValoracion(videoInfoInt, userQueValora);
+						valorVideo.setValoracion(-1);
+						controladorValoracion.valorarVideo(valorVideo);
+					} else {
+						ValoracionVideo valorV = new ValoracionVideo(); // GENERO LA NUEVA VALORACION
+						Video vid = controladorVideo.consultaVideoPorID(videoInfoInt);
+						valorV.setVideo(vid);
+						valorV.setUsuario(usercito);
+						valorV.setValoracion(-1);
+						controladorValoracion.valorarVideo(valorV);
+					}
+	
+					System.out.println("El video de ID: "+videoInfoInt+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoInt,userQueValora));
+								
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
+					Frame.frame.validate();
+					} else {
+						JOptionPane.showMessageDialog(null, "Debe seleccionar un video, gracias.");
+					}
 				
 			}
 			});
@@ -221,12 +218,16 @@ public class ValorarVideo extends JPanel {
 		        userQueValora = (String)comboBox1.getSelectedItem();   
 		        }
 			});
-		 userValoracion.setBounds(26, 267, 198, 25);
+		 userValoracion.setBounds(10, 395, 780, 25);
 		 add(userValoracion);
 		
 		JLabel lblUsuarioQueValora = new JLabel("Usuario que valora");
-		lblUsuarioQueValora.setBounds(26, 242, 165, 14);
+		lblUsuarioQueValora.setBounds(10, 370, 165, 14);
 		add(lblUsuarioQueValora);
+		
+		JLabel lblValorarVideo = new JLabel("VALORAR VIDEO");
+		lblValorarVideo.setBounds(10, 51, 165, 14);
+		add(lblValorarVideo);
 		
 		
 		table_1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {

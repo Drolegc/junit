@@ -270,6 +270,10 @@ public class editarMain extends JPanel {
 		lblNombreDelCanal.setBounds(49, 283, 148, 13);
 		add(lblNombreDelCanal);
 		
+		JLabel lblFotoDeUsuario = new JLabel("Foto de usuario");
+		lblFotoDeUsuario.setBounds(400, 190, 385, 14);
+		add(lblFotoDeUsuario);
+		
 	}
     @Override
     protected void paintComponent(Graphics g) {

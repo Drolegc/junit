@@ -69,7 +69,7 @@ public class ListaController implements ILista {
 				mng.closeSession();
 				*/
 				
-				Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombre").setParameter("nombre", nickUser).getSingleResult();
+				Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where usuario.nickname = :nombre").setParameter("nombre", nickUser).getSingleResult();
 				mng.closeSession();
 				
 				Categoria cat = (Categoria)mng.getSessionManager().createQuery("From Categoria where nombre = :nombre").setParameter("nombre", categoria).getSingleResult();
@@ -168,7 +168,7 @@ public class ListaController implements ILista {
 	public List<Lista> listarListas(String nickUser) {
 		// TODO Auto-generated method stub
 		
-		List<Lista> listas = (List<Lista>)mng.getSessionManager().createQuery("From Lista where canal_nombre = :nombre").setParameter("nombre", nickUser).getResultList();
+		List<Lista> listas = (List<Lista>)mng.getSessionManager().createQuery("From Lista where canal.usuario.nickname = :nombre").setParameter("nombre", nickUser).getResultList();
 		mng.closeSession();
 		
 		System.out.println("Listando listas");

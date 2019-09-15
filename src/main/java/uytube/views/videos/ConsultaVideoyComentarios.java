@@ -171,8 +171,6 @@ public class ConsultaVideoyComentarios extends JPanel {
 				}
 			});
 			
-			
-			
 			JLabel lblCategoria = new JLabel("Categoria");
 			lblCategoria.setBounds(9, 373, 207, 14);
 			add(lblCategoria);
@@ -207,14 +205,14 @@ public class ConsultaVideoyComentarios extends JPanel {
 			DefaultTreeModel modelo = new DefaultTreeModel(raiz);
 			
 			for(Comentario coment:Comentarios) {
-				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"� " + coment.getFecha().toString().substring(0, 10)+" � "+ coment.getUsuario().getNickname()+" � " +coment.getComentario());
+				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+">> " + coment.getFecha().toString().substring(0, 10)+" >> "+ coment.getUsuario().getNickname()+" >> " +coment.getComentario());
 				modelo.insertNodeInto(coment1,raiz,0);
 				
 				
 				List<Comentario> Respuestas = ComControl.ListarRespuestas(coment.getId());
 				for(Comentario resp:Respuestas) {
 					
-					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"� " + resp.getFecha().toString().substring(0, 10)+" � "+ resp.getUsuario().getNickname()+" � "+resp.getComentario());
+					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+">> " + resp.getFecha().toString().substring(0, 10)+" >> "+ resp.getUsuario().getNickname()+" >> "+resp.getComentario());
 					modelo.insertNodeInto(respuesta1,coment1,0);
 				}
 			}
@@ -240,12 +238,13 @@ public class ConsultaVideoyComentarios extends JPanel {
 						vl.getValoracion()
 					});
 				}
-			
-			table = new JTable();
 			JScrollPane scrollPanelComentariosVideo = new JScrollPane();
 			scrollPanelComentariosVideo.setRowHeaderView(table);
 			scrollPanelComentariosVideo.setBounds(397, 299, 393, 106);
 			add(scrollPanelComentariosVideo);
+			table = new JTable();
+			table.setModel(tablemodelValoracion);
+			scrollPanelComentariosVideo.setViewportView(table);
 			
 			
 			

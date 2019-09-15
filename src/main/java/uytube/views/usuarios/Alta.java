@@ -147,8 +147,9 @@ public class Alta extends JPanel {
 					Controlerusuario.crearUsuario(modelUsuario, canal);
 					
 					JOptionPane.showMessageDialog(null, "Usuario creado");
-					Frame.frame.setContentPane(Main);
-					Frame.frame.revalidate();
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
+					Frame.frame.validate();
 				}
 			}
 			public boolean validateFields()
@@ -208,8 +209,9 @@ public class Alta extends JPanel {
 		btnCancelar.setBounds(10, 431, 368, 23);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Frame.frame.setContentPane(Main);
-				Frame.frame.revalidate();
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
 			}
 		});
 		filePicker = new JFilePicker("Img", "Buscar");

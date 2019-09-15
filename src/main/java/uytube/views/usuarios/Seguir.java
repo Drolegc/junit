@@ -11,6 +11,7 @@ import uytube.UsuarioController.UsuarioController;
 import uytube.models.Canal;
 import uytube.models.Usuario;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -50,9 +51,9 @@ public class Seguir extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				UserMain main = new UserMain();
-				Frame.frame.setContentPane(main);
-				Frame.frame.revalidate();	
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();	
 			}
 		});
 		btnVolver.setBounds(10, 431, 368, 25);
@@ -89,9 +90,9 @@ public class Seguir extends JPanel {
 				System.out.println("Siguiendo usuarios");
 				controller.seguirUsuario(nameUser_1, nameUser_2);
 				JOptionPane.showMessageDialog(null, nameUser_1+" sigue a "+nameUser_2);
-				UserMain main = new UserMain();
-				Frame.frame.setContentPane(main);
-				Frame.frame.revalidate();
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
 			}
 		});
 		btnConfirmar.setBounds(400, 431, 390, 23);
@@ -127,7 +128,7 @@ public class Seguir extends JPanel {
 						boolean esta = false;
 						
 						for(Canal c: canales) {
-							if(u.getNickname().equals(c.getNombre())) {
+							if(u.getNickname().equals(c.getUsuario().getNickname())) {
 								System.out.println(u.getNickname());
 								esta = true;
 							}
@@ -136,6 +137,7 @@ public class Seguir extends JPanel {
 						if(!esta && !u.getNickname().equals(nameUser_1)) {
 							tablemodel_2.addRow(
 									new Object [] {
+
 											u.getNickname(),
 									}
 									);
