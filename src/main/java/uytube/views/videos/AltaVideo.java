@@ -147,6 +147,8 @@ public class AltaVideo extends JPanel {
 				if (nickInfoStr == null || ( nickInfoStr == "Debe elegir usuario") ) {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario");
 				} else {
+					CanalController controladorCanal = new CanalController();
+					nickInfoStr = controladorCanal.obtenerCanalUsuario(nickInfoStr).getNombre();
 					controladorVideo.altaVideo(videito, nickInfoStr, catAsignar);
 					JOptionPane.showMessageDialog(null, "Video dado de alta correctamente");
 					Inicio inicio = new Inicio();
@@ -174,15 +176,12 @@ public class AltaVideo extends JPanel {
 		    array[i] = usuarios.get(i-1).getNickname();
 		}		
 		
-		CanalController controladorCanal = new CanalController();
 		JComboBox userInfo1 = new JComboBox(array);
 		userInfo1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
-				
-		        String infoStringNick = (String)comboBox1.getSelectedItem();
 		        
-		        nickInfoStr = controladorCanal.obtenerCanalUsuario(infoStringNick).getNombre();
+		        nickInfoStr = (String)comboBox1.getSelectedItem();
 		        System.out.println("ELEG� USER Y ES: "+ nickInfoStr);  
 				}
 		});
