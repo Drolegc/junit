@@ -32,7 +32,7 @@ public class AltaComentario2 extends JPanel {
 	    VideoController controller = new VideoController();
 		CanalController contrcanal = new CanalController();
 		
-		ArrayList<Video> Videos = controller.listaVideosUsuario(contrcanal.obtenerCanalUsuario(usuario.getNickname()).getNombre());
+		ArrayList<Video> Videos = controller.listaVideosUsuario(usuario.getNickname());
 		if(!Videos.isEmpty()) {
 					
 					JLabel lblSeleccione = new JLabel("Seleccione el video a consultar:");

@@ -56,8 +56,7 @@ public class QuitarVideo1 extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
 				
-				String infoStringNick = (String)comboBox1.getSelectedItem();
-		        nickInfoStr = controladorCanal.obtenerCanalUsuario(infoStringNick).getNombre();
+				nickInfoStr = (String)comboBox1.getSelectedItem();
 		        
 		        System.out.println("ELEGI USER Y ES: "+ nickInfoStr);
 		

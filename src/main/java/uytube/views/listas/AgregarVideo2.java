@@ -50,15 +50,14 @@ public class AgregarVideo2 extends JPanel {
 		    array[i] = usuarios.get(i).getNickname();
 		}
 		
-		CanalController controladorCanal = new CanalController();
 		JComboBox comboBox = new JComboBox(array);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				JComboBox comboBox1 = (JComboBox)e.getSource();
-				String infoStringNick = (String)comboBox1.getSelectedItem();
-		        
-		        nickInfoStr = controladorCanal.obtenerCanalUsuario(infoStringNick).getNombre();
+				
+				nickInfoStr = (String)comboBox1.getSelectedItem();
+		               
 		        System.out.println("ELEGI USER Y ES: "+ nickInfoStr);
 		        
 				DefaultTableModel tablemodelLista = new DefaultTableModel(ModeloLista,0);

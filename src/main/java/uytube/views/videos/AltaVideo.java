@@ -148,7 +148,6 @@ public class AltaVideo extends JPanel {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario");
 				} else {
 					CanalController controladorCanal = new CanalController();
-					nickInfoStr = controladorCanal.obtenerCanalUsuario(nickInfoStr).getNombre();
 					controladorVideo.altaVideo(videito, nickInfoStr, catAsignar);
 					JOptionPane.showMessageDialog(null, "Video dado de alta correctamente");
 					Inicio inicio = new Inicio();
