@@ -134,14 +134,15 @@ public class AltaComentario3 extends JPanel {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario y/o ingresar un texto para comentar");
 				} else {
 				//guarda hoja del arbol 
-				TreePath[] paths = tree.getSelectionPaths();
+				TreePath[] paths = tree..getSelectionPaths();
                 String[] IdControl = null;
                 if (paths!=null) {//si selecciono una rama del arbol es por que va a comentar un comentario 
 	                for (TreePath path : paths) {
 	                	IdControl = path.getLastPathComponent().toString().split(">");
 	                    System.out.println("You've selected: "+ IdControl[0]);
 	                    if(IdControl[0]=="Comentarios") {// hoja Comentarios es para nuevo comentaroi al video 
-	                        ComentarioController controladorC = new ComentarioController();
+	                    	System.out.println(path.toString()+"12222");
+	                    	ComentarioController controladorC = new ComentarioController();
 	        			    Comentario c = new Comentario();
 	        			    c.setComentario(txtComentarioUno.getText());
 	        			    c.setFecha(fecPub.getDate());	
@@ -149,23 +150,34 @@ public class AltaComentario3 extends JPanel {
 	        			    c.setUsuario(usuario);
 	        			    controladorC.AgregarComentario(c);                      
 	                    }
-	                    else {//si seleeciono un id es para comentar ese comentario
-	                    	ComentarioController controladorC = new ComentarioController();
-	        			    //Comentario c = new Comentario();
-	        			    Comentario  r = new Comentario();
-	        			    r.setComentario(txtComentarioUno.getText());
-	        			    r.setFecha(fecPub.getDate());
-	        			    r.setVid(null);   
-	        			    r.setUsuario(usuario);
-	        			    long IdNum = Long.parseLong(IdControl[0]);//transformo a long la hoja seleccionada
-	        			    controladorC.AgregarRespuesta(IdNum, r);
-	        			    //public void AgregarRespuesta(Long idComentario, Comentario respuesta) 
-	                    	
+	                    else {//si seleeciono un id es para responder comentario
+			                //  if (path..isDescendant(coment1)){  	
+	                    	System.out.println(path.toString()+"1111111111111111");
+	                    	       long IdNum = Long.parseLong(IdControl[0]);//transformo a long la hoja seleccionada
+	                    	       ComentarioController controladorC = new ComentarioController();
+	                    	       Comentario co = controladorC.getcomentario(IdNum);
+			        			   
+	                    	       if(co.getVid()!=null) {
+	                    	       //Comentario c = new Comentario();
+			        			    Comentario  r = new Comentario();
+			        			    r.setComentario(txtComentarioUno.getText());
+			        			    r.setFecha(fecPub.getDate());
+			        			    r.setVid(null);   
+			        			    r.setUsuario(usuario);
+			        			   
+			        			    controladorC.AgregarRespuesta(IdNum, r);
+			        			   }else {
+			        				   System.out.println("es una hoja no se puede");
+			        			   }
+			        			    
+			        			    //public void AgregarRespuesta(Long idComentario, Comentario respuesta) 
+			                  //}
 	                    }
+			                 
 	                }	
                 }
-                else { 
-               
+               else { 
+                	System.out.println("33333333333333");
                 ComentarioController controladorC = new ComentarioController();
 			    Comentario c = new Comentario();
 			    c.setComentario(txtComentarioUno.getText());
@@ -179,7 +191,7 @@ public class AltaComentario3 extends JPanel {
 				Frame.frame.revalidate();
 				}
 			    
-				}
+				   }
 			});
 			btnNewButton.setBounds(400, 431, 390, 23);
 			add(btnNewButton);

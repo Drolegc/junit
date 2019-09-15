@@ -25,6 +25,13 @@ public class ComentarioController implements IComentario{
 		mng = Manager.getInstance();
 	}
 	
+	public Comentario getcomentario(long idNum) {
+		Comentario c = (Comentario) mng.getSessionManager().createQuery("From Comentario where id = :IdComentario").setParameter("IdComentario", idNum).getSingleResult();
+		return c;
+		
+		
+	}
+	
 	
 public List<Comentario> ListarRespuestas(Long idComentario) {
 	   //obtengo el comentario
