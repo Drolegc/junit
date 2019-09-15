@@ -10,6 +10,8 @@ import uytube.CategoriaController.CategoriaController;
 import uytube.models.Categoria;
 import uytube.views.Frame;
 import uytube.views.usuarios.editar.editarMain;
+import uytube.views.Inicio;
+import uytube.views.usuarios.Editar;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JButton;
@@ -71,7 +73,8 @@ public class listar extends JPanel {
 		btnNewButton.setBounds(10, 431, 368, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Frame.frame.setContentPane(miMain);
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
 				Frame.frame.validate();
 			}
 			

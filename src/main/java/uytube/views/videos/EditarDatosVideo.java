@@ -25,6 +25,7 @@ import uytube.models.Categoria;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 import uytube.views.usuarios.Listar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -248,10 +249,11 @@ public class EditarDatosVideo extends JPanel {
 					ControlerV.modificarVideo(v);
 					
 					
-					ListarVideosUsuario Lvu = new ListarVideosUsuario(usuario);
+					
 					JOptionPane.showMessageDialog(Frame.frame, "Video Editado");
-					Frame.frame.setContentPane(Lvu);
-					Frame.frame.revalidate();
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
+					Frame.frame.validate();
 				}
 			});
 			add(btnAgregar);

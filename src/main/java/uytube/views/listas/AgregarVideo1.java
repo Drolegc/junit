@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,6 +25,7 @@ import uytube.models.Lista;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 
 public class AgregarVideo1 extends JPanel {
 	private JTable table;
@@ -103,7 +105,17 @@ public class AgregarVideo1 extends JPanel {
 		comboBox.setBounds(21, 48, 151, 22);
 		add(comboBox);
 		
-		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Inicio init = new Inicio();
+				Frame.frame.setContentPane(init);
+				Frame.frame.revalidate();
+			}
+		});
+		btnVolver.setBounds(10, 431, 368, 23);
+		add(btnVolver);
 		
 		
 	}

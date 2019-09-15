@@ -78,24 +78,24 @@ public class Alta extends JPanel {
 		correo.setColumns(10);
 		add(correo);
 		nombreCanal = new JTextField();
-		nombreCanal.setBounds(38, 191, 148, 19);
+		nombreCanal.setBounds(10, 301, 368, 19);
 		add(nombreCanal);
 		nombreCanal.setColumns(10);
 		
 		JLabel lblNombreDelCanal = new JLabel("Nombre del canal");
-		lblNombreDelCanal.setBounds(38, 168, 111, 13);
+		lblNombreDelCanal.setBounds(10, 275, 111, 13);
 		add(lblNombreDelCanal);
 		
 		JRadioButton statusCanal = new JRadioButton("El canal es privado?");
-		statusCanal.setBounds(251, 190, 152, 21);
+		statusCanal.setBounds(400, 301, 152, 21);
 		add(statusCanal);
 		
 		JTextPane descripcionCanal = new JTextPane();
-		descripcionCanal.setBounds(38, 230, 365, 36);
+		descripcionCanal.setBounds(10, 360, 770, 36);
 		add(descripcionCanal);
 		
 		JLabel lblDescripcionDelCanal = new JLabel("Descripcion del canal");
-		lblDescripcionDelCanal.setBounds(38, 220, 138, 13);
+		lblDescripcionDelCanal.setBounds(10, 334, 138, 13);
 		add(lblDescripcionDelCanal);
 		
 		JLabel lblNombre = new JLabel("Nombre");
@@ -213,7 +213,7 @@ public class Alta extends JPanel {
 			}
 		});
 		filePicker = new JFilePicker("Img", "Buscar");
-		filePicker.setBounds(348, 241, 442, 23);
+		filePicker.setBounds(394, 241, 224, 23);
 		filePicker.setMode(JFilePicker.MODE_SAVE);
 		filePicker.addFileTypeFilter(".jpg", "JPEG Images");
 		filePicker.addFileTypeFilter(".png", "PNG Images");
