@@ -171,8 +171,6 @@ public class ConsultaVideoyComentarios extends JPanel {
 				}
 			});
 			
-			
-			
 			JLabel lblCategoria = new JLabel("Categoria");
 			lblCategoria.setBounds(9, 373, 207, 14);
 			add(lblCategoria);

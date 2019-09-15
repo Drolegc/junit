@@ -82,9 +82,7 @@ public class ConsultaVideosUsuario extends JPanel {
 						}
 						else
 							{JOptionPane.showMessageDialog(null, "Debe seleccionar un video");}
-							
-							
-							
+
 						}
 					});
 					btnConsultar.setBounds(400, 431, 390, 23);

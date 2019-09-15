@@ -134,7 +134,7 @@ public class AltaComentario3 extends JPanel {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario y/o ingresar un texto para comentar");
 				} else {
 				//guarda hoja del arbol 
-				TreePath[] paths = tree..getSelectionPaths();
+				TreePath[] paths = tree.getSelectionPaths();
                 String[] IdControl = null;
                 if (paths!=null) {//si selecciono una rama del arbol es por que va a comentar un comentario 
 	                for (TreePath path : paths) {
