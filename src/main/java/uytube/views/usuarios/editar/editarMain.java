@@ -63,13 +63,13 @@ public class editarMain extends JPanel {
 	public editarMain(Usuario user) {
 		setLayout(null);
 		JLabel lblNickname = new JLabel("Nickname");
-		lblNickname.setBounds(49, 10, 45, 13);
+		lblNickname.setBounds(49, 118, 45, 13);
 		add(lblNickname);
 		CanalController canalcont = new CanalController();
 		canal = canalcont.obtenerCanalUsuario(user.getNickname());
 		
 		JLabel label_1 = new JLabel();
-		label_1.setBounds(300,41,115,119);
+		label_1.setBounds(585,141,223,184);
 		ImageIcon imgIcon = new ImageIcon(user.getImg());
 		Image img = imgIcon.getImage();
 		Image newImg = img.getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_SMOOTH);
@@ -78,70 +78,70 @@ public class editarMain extends JPanel {
 		add(label_1);
 		nombreCanal = new JTextField();
 		nombreCanal.setText(canal.getNombre());
-		nombreCanal.setBounds(49, 193, 148, 19);
+		nombreCanal.setBounds(10, 306, 316, 19);
 		add(nombreCanal);
 		nombreCanal.setColumns(10);
 		
 		JRadioButton statusCanal = new JRadioButton("Es privado?");
-		statusCanal.setBounds(217, 192, 105, 21);
+		statusCanal.setBounds(425, 305, 105, 21);
 		statusCanal.setSelected(canal.getPrivacidad());
 		add(statusCanal);
 		
 		JTextArea descripcionCanal = new JTextArea();
-		descripcionCanal.setBounds(49, 253, 316, 40);
+		descripcionCanal.setBounds(10, 358, 798, 40);
 		descripcionCanal.setText(canal.getDescripcion());
 		add(descripcionCanal);
 		
 		JLabel lblDescripcionDelCanal = new JLabel("Descripcion del canal");
-		lblDescripcionDelCanal.setBounds(49, 230, 115, 13);
+		lblDescripcionDelCanal.setBounds(10, 335, 115, 13);
 		add(lblDescripcionDelCanal);
 		
 		JLabel label_2 = new JLabel("Correo");
-		label_2.setBounds(217, 62, 31, 13);
+		label_2.setBounds(425, 118, 31, 13);
 		add(label_2);
 		this.nickname = new JTextField();
-		nickname.setBounds(49, 33, 148, 19);
+		nickname.setBounds(10, 141, 316, 19);
 		add(nickname);
 		this.nickname.setColumns(10);
 		this.nickname.setEditable(false);
 		this.nickname.setText(user.getNickname());
 		
 		this.correo = new JTextField();
-		correo.setBounds(217, 85, 148, 19);
+		correo.setBounds(344, 141, 231, 19);
 		this.correo.setColumns(10);
 		this.correo.setEditable(false);
 		this.correo.setText(user.getCorreo());
 		add(correo);
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(217, 10, 37, 13);
+		lblNombre.setBounds(49, 179, 37, 13);
 		add(lblNombre);
 		
 		JLabel label = new JLabel("Apellido");
-		label.setBounds(49, 62, 36, 13);
+		label.setBounds(425, 179, 36, 13);
 		add(label);
 		
 		this.nombre = new JTextField();
-		nombre.setBounds(217, 33, 148, 19);
+		nombre.setBounds(10, 202, 319, 19);
 		add(nombre);
 		this.nombre.setColumns(10);
 		this.nombre.setText(user.getNombre());
 		this.apellido = new JTextField();
-		apellido.setBounds(49, 85, 148, 19);
+		apellido.setBounds(344, 202, 231, 19);
 		this.apellido.setColumns(10);
 		add(apellido);
 		this.apellido.setText(user.getApellido());
 		
 		JLabel label_3 = new JLabel("F. Nacimiento");
-		label_3.setBounds(49, 114, 63, 13);
+		label_3.setBounds(51, 231, 63, 13);
 		add(label_3);
 		
 		f_nac = new JDateChooser();
-		f_nac.setBounds(49, 141, 148, 19);
+		f_nac.setBounds(10, 254, 316, 19);
 		f_nac.setDate(user.getFnacimiento());
 		add(f_nac);
 		
 		JButton btnAgregar = new JButton("Editar");
-		btnAgregar.setBounds(174, 316, 110, 21);
+		btnAgregar.setBounds(330, 422, 110, 21);
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				if(validateFields()) {
@@ -233,7 +233,7 @@ public class editarMain extends JPanel {
 		});
 		
 		JButton btnCancelar = new JButton("cancelar");
-		btnCancelar.setBounds(49, 316, 115, 21);
+		btnCancelar.setBounds(79, 422, 115, 21);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Listar listar = new Listar();				
@@ -242,7 +242,7 @@ public class editarMain extends JPanel {
 			}
 		});
 		filePicker = new JFilePicker("Img", "Buscar");
-		filePicker.setBounds(209, 141, 231, 19);
+		filePicker.setBounds(344, 254, 231, 19);
 		filePicker.setMode(JFilePicker.MODE_SAVE);
 		filePicker.addFileTypeFilter(".jpg", "JPEG Images");
 		filePicker.addFileTypeFilter(".png", "PNG Images");
@@ -263,11 +263,11 @@ public class editarMain extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnVerVideosY.setBounds(300, 316, 115, 21);
+		btnVerVideosY.setBounds(657, 422, 115, 21);
 		add(btnVerVideosY);
 		
 		JLabel lblNombreDelCanal = new JLabel("Nombre del canal (Opcional)");
-		lblNombreDelCanal.setBounds(49, 170, 148, 13);
+		lblNombreDelCanal.setBounds(49, 283, 148, 13);
 		add(lblNombreDelCanal);
 		
 	}
