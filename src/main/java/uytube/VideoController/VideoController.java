@@ -39,7 +39,7 @@ private Manager mng;
 		// TODO Auto-generated method stub
 		
 		// tengo que buscar en canal.usuario.nombre
-		Canal canal = (Canal)mana.getSessionManager().createQuery("From Canal where nombre = :nombre").setParameter("nombre", usr).getSingleResult();
+		Canal canal = (Canal)mana.getSessionManager().createQuery("From Canal where nombre.usuario.nickname = :nombre").setParameter("nombre", usr).getSingleResult();
 		mana.closeSession();
 		vid.setCanal(canal);
 		
@@ -116,7 +116,7 @@ private Manager mng;
 	}
 	public ArrayList<Video> listaVideosUsuario(String nombre) {
 		// TODO Auto-generated method stub
-		ArrayList<Video> Videos = (ArrayList<Video>)mana.getSessionManager().createQuery("from Video where canal.nombre = :nombre").setParameter("nombre", nombre).getResultList();
+		ArrayList<Video> Videos = (ArrayList<Video>)mana.getSessionManager().createQuery("from Video where canal.usuario.nickname = :nombre").setParameter("nombre", nombre).getResultList();
 		mana.closeSession();
 		return Videos;	
 	}

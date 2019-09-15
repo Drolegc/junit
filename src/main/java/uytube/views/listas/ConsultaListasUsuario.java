@@ -43,7 +43,7 @@ public class ConsultaListasUsuario extends JPanel {
 						add(lblSeleccione);
 						
 						JScrollPane scrollPane = new JScrollPane();
-						scrollPane.setBounds(10, 100, 780, 313);
+						scrollPane.setBounds(20, 99, 780, 313);
 						add(scrollPane);
 						DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
 						JTable table = new JTable();
