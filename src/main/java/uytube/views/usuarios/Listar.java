@@ -71,19 +71,6 @@ public class Listar extends JPanel {
 		
 		table.setModel(tablemodel);
 		scrollPane.setViewportView(table);
-		
-		JButton btnEditarUsuario = new JButton("Editar usuario");
-		btnEditarUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Editar editar = new Editar(user);
-				Frame.frame.setContentPane(editar);
-				Frame.frame.revalidate();
-
-			}
-		});
-		btnEditarUsuario.setBounds(400, 431, 390, 23);
-		add(btnEditarUsuario);
-		
 		JLabel lblListaDeUsuarios = new JLabel("LISTA DE USUARIOS");
 		lblListaDeUsuarios.setBounds(10, 51, 191, 14);
 		add(lblListaDeUsuarios);
