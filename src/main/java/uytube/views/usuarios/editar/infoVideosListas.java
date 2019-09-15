@@ -27,6 +27,7 @@ import uytube.models.Lista;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -65,9 +66,9 @@ public class infoVideosListas extends JPanel {
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				editarMain main = new editarMain(user);
-				Frame.frame.setContentPane(main);
-				Frame.frame.revalidate();				
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();			
 			}
 		});
 		setLayout(null);

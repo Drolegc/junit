@@ -54,7 +54,7 @@ public class editarLista extends JPanel {
 		
 		JButton btnModificar = new JButton("Modificar");
 
-		btnModificar.setBounds(326, 251, 114, 25);
+		btnModificar.setBounds(400, 431, 390, 23);
 		add(btnModificar);
 		
 		JButton btnVolver = new JButton("Volver");
@@ -65,7 +65,7 @@ public class editarLista extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnVolver.setBounds(202, 251, 114, 25);
+		btnVolver.setBounds(10, 431, 368, 23);
 		add(btnVolver);
 		
 
@@ -79,21 +79,21 @@ public class editarLista extends JPanel {
 		}
 		
 		JComboBox comboBox_2 = new JComboBox(nombreCategorias);
-		comboBox_2.setBounds(10, 55, 144, 24);
+		comboBox_2.setBounds(10, 100, 329, 24);
 
 		comboBox_2.setSelectedIndex(lista.getCategoria().getId()-1);
 		
 		
 		add(comboBox_2);
 		
-		JLabel lblCategoria = new JLabel("Categoria");
-		lblCategoria.setBounds(10, 30, 66, 15);
+		JLabel lblCategoria = new JLabel("Editar Categoria");
+		lblCategoria.setBounds(10, 87, 166, 15);
 		add(lblCategoria);
 		
 		JRadioButton rdbtnPrivada = new JRadioButton("Privada");
 		JRadioButton rdbtnOpublica = new JRadioButton("Publica");
 
-		rdbtnPrivada.setBounds(263, 56, 76, 23);
+		rdbtnPrivada.setBounds(400, 101, 76, 23);
 		add(rdbtnPrivada);
 
 		
@@ -113,8 +113,12 @@ public class editarLista extends JPanel {
 				rdbtnOpublica.setSelected(false);
 			}
 		});
-		rdbtnOpublica.setBounds(339, 57, 105, 21);
+		rdbtnOpublica.setBounds(500, 102, 105, 21);
 		add(rdbtnOpublica);
+		
+		JLabel lblEditar = new JLabel("EDITAR");
+		lblEditar.setBounds(10, 51, 48, 14);
+		add(lblEditar);
 
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
