@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
+import uytube.CanalController.CanalController;
 import uytube.VideoController.VideoController;
 import uytube.models.Usuario;
 import uytube.models.Video;
@@ -28,7 +30,9 @@ public class ConsultaVideosUsuario extends JPanel {
     ConsultaVideosUsuario(Usuario usuario) {
 	    videoSeleccionado.setNombre("");//setea el video seleccionado a vacio
 		VideoController controller = new VideoController();
-		ArrayList<Video> Videos = controller.listaVideosUsuario(usuario.getNickname());
+		CanalController contrcanal = new CanalController();
+		
+		ArrayList<Video> Videos = controller.listaVideosUsuario(contrcanal.obtenerCanalUsuario(usuario.getNickname()).getNombre());
 		//acaaa
 		if(!Videos.isEmpty()) {
 					

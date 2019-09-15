@@ -240,12 +240,13 @@ public class ConsultaVideoyComentarios extends JPanel {
 						vl.getValoracion()
 					});
 				}
-			
-			table = new JTable();
 			JScrollPane scrollPanelComentariosVideo = new JScrollPane();
 			scrollPanelComentariosVideo.setRowHeaderView(table);
 			scrollPanelComentariosVideo.setBounds(397, 299, 393, 106);
 			add(scrollPanelComentariosVideo);
+			table = new JTable();
+			table.setModel(tablemodelValoracion);
+			scrollPanelComentariosVideo.setViewportView(table);
 			
 			
 			
