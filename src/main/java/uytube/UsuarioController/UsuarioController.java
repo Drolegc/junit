@@ -163,6 +163,7 @@ public class UsuarioController implements IUsuario{
 		return users;	
 		
 	}
+	
 	private Usuario getUser(String nick) {
 		emf = Persistence.createEntityManagerFactory("uytube");
 		manager = this.emf.createEntityManager();

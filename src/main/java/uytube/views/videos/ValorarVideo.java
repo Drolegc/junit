@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import uytube.CanalController.CanalController;
 import uytube.UsuarioController.UsuarioController;
 import uytube.ValoracionController.ValoracionController;
 import uytube.VideoController.VideoController;
@@ -49,13 +50,14 @@ import java.awt.event.MouseEvent;
 public class ValorarVideo extends JPanel {
 	private JTable table;
 	private String nickInfoStr;
-	private String videoInfoStr;
+	private int videoInfoInt;
 	private String [] nombreColumnas = {"Titulo","Descripcion","Duracion","URL","Categoria","Canal"};
 	private JTable table_1;
 	private ArrayList<Video> videos;
 	private String [] ArrayVideos;
 	private Manager mana;
 	private String userQueValora;
+	private String userQueValora1;
 	private int idVideos;
 	
 	/**
@@ -67,7 +69,7 @@ public class ValorarVideo extends JPanel {
 		VideoController controladorVideo = new VideoController();
 		UsuarioController controladorUsuario = new UsuarioController();
 		mana = Manager.getInstance();
-		videoInfoStr=null;
+		videoInfoInt=-1;
 		
 		JLabel labelUsuario = new JLabel("Usuario para mostrar videos");
 		labelUsuario.setBounds(24, 11, 200, 15);
@@ -89,13 +91,18 @@ public class ValorarVideo extends JPanel {
 				
 		table_1 = new JTable();
 		scrollPane.setViewportView(table_1);
+		
+		
 
+		CanalController controladorCanal = new CanalController();
 		JComboBox selectUser = new JComboBox(array);
 		selectUser.setBounds(24, 32, 200, 24);
 		selectUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
-		        nickInfoStr = (String)comboBox1.getSelectedItem();
+				String infoStringNick = (String)comboBox1.getSelectedItem();
+		        
+		        nickInfoStr = controladorCanal.obtenerCanalUsuario(infoStringNick).getNombre();
 		        System.out.println("ELEGI USER Y ES: " + nickInfoStr);
 	
 				DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
@@ -129,17 +136,18 @@ public class ValorarVideo extends JPanel {
 		btnLIKE.setBounds(97, 323, 103, 25);
 		btnLIKE.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			if (videoInfoStr != null) {
+			if (videoInfoInt != -1) {
 				Usuario usercito = (Usuario)mana.getSessionManager().createQuery("From Usuario where nickname =: nombre").setParameter("nombre", userQueValora).getSingleResult();
 				mana.closeSession();
 				
 				System.out.println("Usuario elegido para valorar: "+ userQueValora);
-				Video vid = controladorVideo.consultaVideo(videoInfoStr, userQueValora);
+
+				Video vid = controladorVideo.consultaVideoPorID(videoInfoInt);
 				ValoracionController controladorValoracion = new ValoracionController();
 				
 				
-				if (controladorValoracion.existeValoracion(videoInfoStr,userQueValora)) {
-					ValoracionVideo valorVideo = controladorValoracion.traerValoracion(videoInfoStr, userQueValora);
+				if (controladorValoracion.existeValoracion(vid.getNombre(),userQueValora)) {
+					ValoracionVideo valorVideo = controladorValoracion.traerValoracion(vid.getNombre(), userQueValora);
 					valorVideo.setValoracion(1);
 					controladorValoracion.valorarVideo(valorVideo);
 				} else {
@@ -150,7 +158,7 @@ public class ValorarVideo extends JPanel {
 					controladorValoracion.valorarVideo(valorV);
 				}
 
-				//System.out.println("El video de nombre: "+videoInfoStr+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoStr,userQueValora));
+				System.out.println("El video de nombre: "+vid.getNombre()+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(vid.getNombre(),userQueValora));
 							
 				VideoMain inicio = new VideoMain();
 				Frame.frame.setContentPane(inicio);
@@ -166,17 +174,17 @@ public class ValorarVideo extends JPanel {
 		btnDislike.setBounds(261, 323, 114, 25);
 		btnDislike.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (videoInfoStr != null) {
-					Usuario usercito = (Usuario)mana.getSessionManager().createQuery("From Usuario where nickname =: nombre").setParameter("nombre", nickInfoStr).getSingleResult();
-				mana.closeSession();
-				
-				System.out.println("Usuario elegido para valorar: "+ userQueValora);
-				Video vid = controladorVideo.consultaVideo(videoInfoStr, userQueValora);
+				if (videoInfoInt != -1) {
+					Usuario usercito = (Usuario)mana.getSessionManager().createQuery("From Usuario where nickname =: nombre").setParameter("nombre", userQueValora).getSingleResult();
+					mana.closeSession();
 
+				Video vid = controladorVideo.consultaVideoPorID(videoInfoInt);
 				ValoracionController controladorValoracion = new ValoracionController();
+				
 					
-				if (controladorValoracion.existeValoracion(videoInfoStr,userQueValora)) {
-					ValoracionVideo valorVideo = controladorValoracion.traerValoracion(videoInfoStr, userQueValora);
+
+				if (controladorValoracion.existeValoracion(vid.getNombre(),userQueValora)) {
+					ValoracionVideo valorVideo = controladorValoracion.traerValoracion(vid.getNombre(), userQueValora);
 					valorVideo.setValoracion(-1);
 					controladorValoracion.valorarVideo(valorVideo);
 				} else {
@@ -187,7 +195,7 @@ public class ValorarVideo extends JPanel {
 					controladorValoracion.valorarVideo(valorV);
 				}
 
-				System.out.println("El video de nombre: "+videoInfoStr+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoStr,nickInfoStr));
+				System.out.println("El video de nombre: "+vid.getNombre()+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(vid.getNombre(),userQueValora));
 							
 				VideoMain inicio = new VideoMain();
 				Frame.frame.setContentPane(inicio);
@@ -206,10 +214,11 @@ public class ValorarVideo extends JPanel {
 		add(btnDislike);
 		
 		JComboBox userValoracion = new JComboBox(array);
-		selectUser.addActionListener(new ActionListener() {
+		userValoracion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
-		        userQueValora = (String)comboBox1.getSelectedItem();
+				
+		        userQueValora = (String)comboBox1.getSelectedItem();   
 		        }
 			});
 		 userValoracion.setBounds(26, 267, 198, 25);
@@ -225,9 +234,7 @@ public class ValorarVideo extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getValueIsAdjusting()) {					
-					videoInfoStr = videos.get(table_1.getSelectedRow()).getNombre();
-					System.out.println("Hola me llamo juna");
-					
+					videoInfoInt = videos.get(table_1.getSelectedRow()).getId();
 				}
 			}	
 		});
