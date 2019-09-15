@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,6 +16,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import uytube.CanalController.CanalController;
 import uytube.ListaController.ListaController;
 import uytube.UsuarioController.IUsuario;
 import uytube.UsuarioController.UsuarioController;
@@ -24,6 +26,7 @@ import uytube.models.Lista;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 
 public class AgregarVideo1 extends JPanel {
 	private JTable table;
@@ -60,11 +63,14 @@ public class AgregarVideo1 extends JPanel {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
+		CanalController controladorCanal = new CanalController();
 		JComboBox comboBox = new JComboBox(array);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
-		        nickInfoStr = (String)comboBox1.getSelectedItem();
+				String infoStringNick = (String)comboBox1.getSelectedItem();
+		        
+		        nickInfoStr = controladorCanal.obtenerCanalUsuario(infoStringNick).getNombre();
 		        System.out.println("ELEGI USER Y ES: "+ nickInfoStr);
 				
 			
@@ -103,7 +109,17 @@ public class AgregarVideo1 extends JPanel {
 		comboBox.setBounds(21, 48, 151, 22);
 		add(comboBox);
 		
-		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Inicio init = new Inicio();
+				Frame.frame.setContentPane(init);
+				Frame.frame.revalidate();
+			}
+		});
+		btnVolver.setBounds(10, 431, 368, 23);
+		add(btnVolver);
 		
 		
 	}

@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import uytube.CanalController.CanalController;
 import uytube.CategoriaController.CategoriaController;
 import uytube.UsuarioController.UsuarioController;
 import uytube.VideoController.VideoController;
@@ -20,6 +21,8 @@ import uytube.models.Categoria;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
+import uytube.views.Inicio;
+
 import javax.swing.JCheckBox;
 
 public class AltaVideo extends JPanel {
@@ -126,13 +129,8 @@ public class AltaVideo extends JPanel {
 		chckbxNewCheckBox.setBounds(402, 303, 150, 23);
 		add(chckbxNewCheckBox);
 		
-		
-		
-		
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
-			
-
 			public void actionPerformed(ActionEvent e) {
 				
 				videito = new Video();
@@ -146,13 +144,16 @@ public class AltaVideo extends JPanel {
 				
 				VideoController controladorVideo = new VideoController();
 				System.out.println(nickInfoStr);
-				if (nickInfoStr == null ) {
+				if (nickInfoStr == null || ( nickInfoStr == "Debe elegir usuario") ) {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario");
 				} else {
+					CanalController controladorCanal = new CanalController();
+					nickInfoStr = controladorCanal.obtenerCanalUsuario(nickInfoStr).getNombre();
 					controladorVideo.altaVideo(videito, nickInfoStr, catAsignar);
 					JOptionPane.showMessageDialog(null, "Video dado de alta correctamente");
-					Frame.frame.setContentPane(main);
-					Frame.frame.revalidate();
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
+					Frame.frame.validate();
 				}
 			}
 		});
@@ -179,6 +180,7 @@ public class AltaVideo extends JPanel {
 		userInfo1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
+		        
 		        nickInfoStr = (String)comboBox1.getSelectedItem();
 		        System.out.println("ELEG� USER Y ES: "+ nickInfoStr);  
 				}
@@ -213,8 +215,8 @@ public class AltaVideo extends JPanel {
 		JButton btnVolver = new JButton("Cancelar");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VideoMain videos = new VideoMain();
-				Frame.frame.setContentPane(videos);
+			    Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
 				Frame.frame.validate();
 			}
 		});

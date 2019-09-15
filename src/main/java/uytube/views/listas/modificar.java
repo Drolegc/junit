@@ -13,6 +13,7 @@ import uytube.models.Categoria;
 import uytube.models.Lista;
 import uytube.models.Usuario;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 
 import javax.swing.JComboBox;
 
@@ -81,7 +82,7 @@ public class modificar extends JPanel {
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				inicio init = new inicio();
+				Inicio init = new Inicio();
 				Frame.frame.setContentPane(init);
 				Frame.frame.revalidate();
 			}

@@ -16,6 +16,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import uytube.CanalController.CanalController;
 import uytube.ListaController.ListaController;
 import uytube.UsuarioController.UsuarioController;
 import uytube.VideoController.VideoController;
@@ -49,17 +50,21 @@ public class AgregarVideo2 extends JPanel {
 		    array[i] = usuarios.get(i).getNickname();
 		}
 		
+		CanalController controladorCanal = new CanalController();
 		JComboBox comboBox = new JComboBox(array);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				JComboBox comboBox1 = (JComboBox)e.getSource();
-		        nickInfoStr = (String)comboBox1.getSelectedItem();
+				String infoStringNick = (String)comboBox1.getSelectedItem();
+		        
+		        nickInfoStr = controladorCanal.obtenerCanalUsuario(infoStringNick).getNombre();
 		        System.out.println("ELEGI USER Y ES: "+ nickInfoStr);
 		        
 				DefaultTableModel tablemodelLista = new DefaultTableModel(ModeloLista,0);
 				
 				ListaController controladorLista = new ListaController();
+				
 				listaR = controladorLista.listarListas(nickInfoStr);
 					for(Lista list: listaR) {
 						tablemodelLista.addRow(new Object [] {

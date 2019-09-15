@@ -1,5 +1,6 @@
 package uytube.ValoracionController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uytube.models.ValoracionVideo;
@@ -37,5 +38,11 @@ public class ValoracionController implements IValoracion {
 		mana.closeSession();
 		
 		return valorVideo;
+	}
+	
+	public List<ValoracionVideo> listaValoracionesVideo(int id) {
+		List<ValoracionVideo> listaValoraciones = (List<ValoracionVideo>)mana.getSessionManager().createQuery("From ValoracionVideo as vl where vl.video.id=:idvideo").setParameter("idvideo",id).getResultList();
+		mana.closeSession();
+		return listaValoraciones;
 	}
 }

@@ -19,13 +19,16 @@ import com.toedter.calendar.JDateChooser;
 import uytube.CategoriaController.CategoriaController;
 import uytube.ComentarioController.ComentarioController;
 import uytube.UsuarioController.UsuarioController;
+import uytube.ValoracionController.ValoracionController;
 import uytube.VideoController.VideoController;
 import uytube.models.Canal;
 import uytube.models.Categoria;
 import uytube.models.Comentario;
 import uytube.models.Usuario;
+import uytube.models.ValoracionVideo;
 import uytube.models.Video;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 import uytube.views.usuarios.Listar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -37,6 +40,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
 
 public class ConsultaVideoyComentarios extends JPanel {
 
@@ -58,11 +63,13 @@ public class ConsultaVideoyComentarios extends JPanel {
 	private JTextField duracion1;
 	private JTextField fechapublicacion;
 	private JTextField categoria;
+	private JTable table;
 	
 	
 	public ConsultaVideoyComentarios(Video video) {
 			setLayout(null);
 			
+			String [] ColumnasValoracion = {"Usuario", "Valoracion"};
 
 			JLabel label = new JLabel("CONSULTA DE VIDEO");
 			label.setBounds(10, 51, 191, 14);
@@ -158,9 +165,9 @@ public class ConsultaVideoyComentarios extends JPanel {
 			btnVolver.setBounds(400, 431, 390, 23);
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ConsultaVideosUsuario listarVU = new ConsultaVideosUsuario(video.getCanal().getUsuario());
-					Frame.frame.setContentPane(listarVU);
-					Frame.frame.revalidate();
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
+					Frame.frame.validate();
 				}
 			});
 			
@@ -200,14 +207,14 @@ public class ConsultaVideoyComentarios extends JPanel {
 			DefaultTreeModel modelo = new DefaultTreeModel(raiz);
 			
 			for(Comentario coment:Comentarios) {
-				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"» " + coment.getFecha().toString().substring(0, 10)+" » "+ coment.getUsuario().getNickname()+" » " +coment.getComentario());
+				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"ï¿½ " + coment.getFecha().toString().substring(0, 10)+" ï¿½ "+ coment.getUsuario().getNickname()+" ï¿½ " +coment.getComentario());
 				modelo.insertNodeInto(coment1,raiz,0);
 				
 				
 				List<Comentario> Respuestas = ComControl.ListarRespuestas(coment.getId());
 				for(Comentario resp:Respuestas) {
 					
-					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"» " + resp.getFecha().toString().substring(0, 10)+" » "+ resp.getUsuario().getNickname()+" » "+resp.getComentario());
+					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"ï¿½ " + resp.getFecha().toString().substring(0, 10)+" ï¿½ "+ resp.getUsuario().getNickname()+" ï¿½ "+resp.getComentario());
 					modelo.insertNodeInto(respuesta1,coment1,0);
 				}
 			}
@@ -223,9 +230,24 @@ public class ConsultaVideoyComentarios extends JPanel {
 			lblComentarios.setBounds(397, 82, 393, 20);
 			add(lblComentarios);
 			
-			JScrollPane scrollPane_1 = new JScrollPane();
-			scrollPane_1.setBounds(397, 299, 393, 106);
-			add(scrollPane_1);
+			DefaultTableModel tablemodelValoracion = new DefaultTableModel(ColumnasValoracion, 0);
+			ValoracionController controladorValoracion = new ValoracionController();
+			List<ValoracionVideo> valoracionLista = controladorValoracion.listaValoracionesVideo(video.getId());
+			
+			for(ValoracionVideo vl: valoracionLista) {
+				tablemodelValoracion.addRow(new Object[] {
+						vl.getUsuario().getNickname(),
+						vl.getValoracion()
+					});
+				}
+			
+			table = new JTable();
+			JScrollPane scrollPanelComentariosVideo = new JScrollPane();
+			scrollPanelComentariosVideo.setRowHeaderView(table);
+			scrollPanelComentariosVideo.setBounds(397, 299, 393, 106);
+			add(scrollPanelComentariosVideo);
+			
+			
 			
 			JLabel lblCalificacin = new JLabel("Calificaci\u00F3nes");
 			lblCalificacin.setBounds(396, 280, 394, 14);

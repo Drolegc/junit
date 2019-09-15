@@ -19,6 +19,7 @@ import uytube.UsuarioController.UsuarioController;
 import uytube.models.Categoria;
 import uytube.models.Usuario;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 
 public class ConsultaVideo extends JPanel {
 	private String [] nombreColumnas = {"Nickname","Apellido","Nombre"};
@@ -67,8 +68,8 @@ public class ConsultaVideo extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VideoMain videos = new VideoMain();
-				Frame.frame.setContentPane(videos);
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
 				Frame.frame.validate();
 			}
 		});

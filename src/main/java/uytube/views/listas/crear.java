@@ -25,6 +25,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import javax.swing.SwingConstants;
 
 public class crear extends JPanel {
 	private JTextField nombreListaDefualt;
@@ -40,12 +41,12 @@ public class crear extends JPanel {
 		
 		setLayout(null);
 		
-		JLabel lblDefault = new JLabel("Default");
-		lblDefault.setBounds(29, 24, 66, 15);
+		JLabel lblDefault = new JLabel("Alta de lista por default");
+		lblDefault.setBounds(400, 82, 390, 15);
 		add(lblDefault);
 		
 		nombreListaDefualt = new JTextField();
-		nombreListaDefualt.setBounds(28, 56, 188, 28);
+		nombreListaDefualt.setBounds(400, 100, 390, 23);
 		add(nombreListaDefualt);
 		nombreListaDefualt.setColumns(10);
 		
@@ -63,11 +64,11 @@ public class crear extends JPanel {
 
 			}
 		});
-		btnCargar.setBounds(270, 57, 114, 25);
+		btnCargar.setBounds(400, 329, 390, 23);
 		add(btnCargar);
 		
-		JLabel lblPersonalizada = new JLabel("Particular");
-		lblPersonalizada.setBounds(29, 114, 82, 15);
+		JLabel lblPersonalizada = new JLabel("Alta de lista de un usuario");
+		lblPersonalizada.setBounds(10, 82, 368, 15);
 		add(lblPersonalizada);
 		
 		JButton btnVolver = new JButton("Volver");
@@ -78,7 +79,7 @@ public class crear extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnVolver.setBounds(324, 263, 114, 25);
+		btnVolver.setBounds(10, 431, 368, 23);
 		add(btnVolver);
 		
 		
@@ -100,28 +101,28 @@ public class crear extends JPanel {
 		
 
 		
-		comboBox.setBounds(98, 142, 125, 22);
+		comboBox.setBounds(10, 100, 368, 23);
 		add(comboBox);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(29, 149, 66, 15);
+		lblUsuario.setBounds(10, 135, 66, 15);
 		add(lblUsuario);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(29, 184, 66, 15);
+		lblNombre.setBounds(10, 161, 66, 15);
 		add(lblNombre);
 		
 		textField = new JTextField();
-		textField.setBounds(108, 182, 124, 19);
+		textField.setBounds(10, 187, 368, 23);
 		add(textField);
 		textField.setColumns(10);
 		
 		JRadioButton rdbtnPrivado = new JRadioButton("Privado");
-		rdbtnPrivado.setBounds(29, 207, 144, 23);
+		rdbtnPrivado.setBounds(10, 228, 144, 23);
 		add(rdbtnPrivado);
 		
 		JLabel lblCateoria = new JLabel("Categoria");
-		lblCateoria.setBounds(29, 245, 66, 15);
+		lblCateoria.setBounds(10, 258, 66, 15);
 		add(lblCateoria);
 		
 		ICategoria controllerCat = new CategoriaController();
@@ -129,7 +130,7 @@ public class crear extends JPanel {
 		
 		JComboBox comboBox_1 = new JComboBox(controllerCat.listarCategoriasName());
 		
-		comboBox_1.setBounds(108, 245, 125, 24);
+		comboBox_1.setBounds(10, 284, 368, 23);
 		add(comboBox_1);
 		
 		JButton btnCargar_1 = new JButton("Cargar");
@@ -152,12 +153,17 @@ public class crear extends JPanel {
 				
 			}
 		});
-		btnCargar_1.setBounds(270, 144, 114, 25);
+		btnCargar_1.setBounds(10, 329, 368, 23);
 		add(btnCargar_1);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(12, 96, 426, 6);
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setBounds(388, 99, 2, 318);
 		add(separator);
+		
+		JLabel lblCrearListaDe = new JLabel("CREAR LISTA DE VIDEOS");
+		lblCrearListaDe.setBounds(10, 51, 206, 14);
+		add(lblCrearListaDe);
 
 	}
 }
