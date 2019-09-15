@@ -137,7 +137,7 @@ public class Editar extends JPanel {
 					System.out.println(e2);
 				}				
 				UsuarioController Controlerusuario = new UsuarioController();
-				Controlerusuario.modificarUsuario(modelUsuario);
+			//	Controlerusuario.modificarUsuario(modelUsuario);
 				Listar listar = new Listar();
 				JOptionPane.showMessageDialog(Frame.frame, "Usuario Editado");
 				Frame.frame.setContentPane(listar);
