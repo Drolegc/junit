@@ -77,9 +77,9 @@ public class ListadoEditar extends JPanel {
 		JButton btnEditarUsuario = new JButton("Editar usuario");
 		btnEditarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				editarMain editar = new editarMain(user);
-				Frame.frame.setContentPane(editar);
-				Frame.frame.revalidate();
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
 
 			}
 		});

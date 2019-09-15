@@ -147,8 +147,9 @@ public class Alta extends JPanel {
 					Controlerusuario.crearUsuario(modelUsuario, canal);
 					
 					JOptionPane.showMessageDialog(null, "Usuario creado");
-					Frame.frame.setContentPane(Main);
-					Frame.frame.revalidate();
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
+					Frame.frame.validate();
 				}
 			}
 			public boolean validateFields()

@@ -20,6 +20,7 @@ import javax.swing.table.TableModel;
 
 import uytube.models.Usuario;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,9 +46,9 @@ public class ConsultarMain extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserMain main = new UserMain();
-				Frame.frame.setContentPane(main);
-				Frame.frame.revalidate();				
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();			
 			}
 		});
 		btnVolver.setBounds(10, 431, 368, 23);

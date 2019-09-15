@@ -63,7 +63,7 @@ public class Consultar extends JPanel {
 	List<Lista> listas;
 	public Consultar(Usuario user) {
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(117, 279, 85, 21);
+		btnVolver.setBounds(10, 431, 259, 23);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConsultarMain main = new ConsultarMain();
@@ -74,17 +74,12 @@ public class Consultar extends JPanel {
 		setLayout(null);
 		
 		tableUsuarios = new JTable();
-		tableUsuarios.setBounds(10, 10, 307, 28);
+		tableUsuarios.setBounds(10, 100, 638, 37);
 		add(tableUsuarios);
 		add(btnVolver);
-		JLabel label_1 = new JLabel();
-		label_1.setBounds(327,8,116,78);
 		ImageIcon imgIcon = new ImageIcon(user.getImg());
 		Image img = imgIcon.getImage();
-		Image newImg = img.getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon profilePicture = new ImageIcon(newImg);
-		label_1.setIcon(profilePicture);
-		add(label_1, "8, 2, 1, 7, fill, fill");		
 		System.out.println(user.getNombre());
 		DefaultTableModel  modelUsuarios = new DefaultTableModel(columnasUsuarios, 0);
 		DefaultTableModel  modelVideo = new DefaultTableModel(columnasVideos, 0);
@@ -131,11 +126,11 @@ public class Consultar extends JPanel {
 		}
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 125, 433, 60);
+		scrollPane.setBounds(10, 255, 780, 60);
 		add(scrollPane);
 
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 203, 433, 66);
+		scrollPane_1.setBounds(10, 339, 780, 66);
 		add(scrollPane_1);
 		tableVideos.setModel(modelVideo);
 		tableListas.setModel(modelListas);
@@ -144,11 +139,14 @@ public class Consultar extends JPanel {
 		scrollPane.setViewportView(tableVideos);
 		
 		scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(327, 10, 116, 105);
+		scrollPane_2.setBounds(658, 102, 132, 120);
 		add(scrollPane_2);
-		
+		JLabel label_1 = new JLabel();
+		scrollPane_2.setViewportView(label_1);
+		Image newImg = img.getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_SMOOTH);
+		label_1.setIcon(profilePicture);
 		JButton btnVerLista = new JButton("Ver lista");
-		btnVerLista.setBounds(358, 279, 85, 21);
+		btnVerLista.setBounds(510, 431, 280, 23);
 		add(btnVerLista);
 		btnVerLista.setVisible(false);
 		btnVerLista.addActionListener(new ActionListener() {
@@ -160,7 +158,7 @@ public class Consultar extends JPanel {
 			}
 		});
 		JButton btnVerVideo = new JButton("Ver video");
-		btnVerVideo.setBounds(358, 279, 85, 21);
+		btnVerVideo.setBounds(510, 431, 280, 23);
 		btnVerVideo.setVisible(false);
 		add(btnVerVideo);
 		CanalController canalCont = new CanalController();
@@ -168,19 +166,19 @@ public class Consultar extends JPanel {
 		JTextArea textArea = new JTextArea();
 		textArea.setText(canal.getDescripcion());
 		textArea.setEditable(false);
-		textArea.setBounds(10, 63, 307, 37);
+		textArea.setBounds(10, 168, 638, 54);
 		add(textArea);
 		
 		JLabel lblDescripcionDelCanal = new JLabel("Descripcion del canal");
-		lblDescripcionDelCanal.setBounds(10, 48, 139, 13);
+		lblDescripcionDelCanal.setBounds(10, 148, 139, 13);
 		add(lblDescripcionDelCanal);
 		
 		JLabel lblListas = new JLabel("Listas");
-		lblListas.setBounds(10, 186, 46, 13);
+		lblListas.setBounds(10, 326, 46, 13);
 		add(lblListas);
 		
 		JLabel lblVideos = new JLabel("Videos");
-		lblVideos.setBounds(10, 110, 46, 13);
+		lblVideos.setBounds(10, 243, 297, 13);
 		add(lblVideos);
 		
 		JButton btnVerSeguidoresY = new JButton("Ver seguidores y seguidos");
@@ -191,8 +189,12 @@ public class Consultar extends JPanel {
 				Frame.frame.revalidate();
 			}
 		});
-		btnVerSeguidoresY.setBounds(212, 279, 136, 21);
+		btnVerSeguidoresY.setBounds(279, 431, 221, 23);
 		add(btnVerSeguidoresY);
+		
+		JLabel lblConsultar = new JLabel("CONSULTAR USUARIO");
+		lblConsultar.setBounds(10, 51, 190, 14);
+		add(lblConsultar);
 		btnVerVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				verVideo vervideo = new verVideo(video, user);

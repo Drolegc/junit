@@ -62,7 +62,7 @@ public class infoVideosListas extends JPanel {
 	List<Lista> listas;
 	public infoVideosListas(Usuario user) {
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(263, 279, 85, 21);
+		btnVolver.setBounds(10, 431, 368, 21);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -108,11 +108,11 @@ public class infoVideosListas extends JPanel {
 		}
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 33, 433, 93);
+		scrollPane.setBounds(10, 100, 780, 146);
 		add(scrollPane);
 
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 159, 433, 93);
+		scrollPane_1.setBounds(10, 268, 780, 152);
 		add(scrollPane_1);
 		tableVideos.setModel(modelVideo);
 		tableListas.setModel(modelListas);
@@ -120,7 +120,7 @@ public class infoVideosListas extends JPanel {
 		scrollPane.setViewportView(tableVideos);
 		
 		JButton btnVerLista = new JButton("Editar lista");
-		btnVerLista.setBounds(358, 279, 85, 21);
+		btnVerLista.setBounds(400, 431, 390, 21);
 		add(btnVerLista);
 		btnVerLista.setVisible(false);
 		btnVerLista.addActionListener(new ActionListener() {
@@ -132,19 +132,23 @@ public class infoVideosListas extends JPanel {
 			}
 		});
 		JButton btnVerVideo = new JButton("Editar video");
-		btnVerVideo.setBounds(358, 279, 85, 21);
+		btnVerVideo.setBounds(400, 431, 390, 21);
 		btnVerVideo.setVisible(false);
 		add(btnVerVideo);
 		CanalController canalCont = new CanalController();
 		Canal canal = canalCont.obtenerCanalUsuario(user.getNickname());
 		
-		JLabel lblListas = new JLabel("Listas");
-		lblListas.setBounds(10, 136, 46, 13);
+		JLabel lblListas = new JLabel("Seleccioone lista a editar");
+		lblListas.setBounds(10, 255, 433, 13);
 		add(lblListas);
 		
-		JLabel lblVideos = new JLabel("Videos");
-		lblVideos.setBounds(10, 10, 46, 13);
+		JLabel lblVideos = new JLabel("Seleccione video a editar");
+		lblVideos.setBounds(10, 88, 138, 13);
 		add(lblVideos);
+		
+		JLabel lblEditarVideosY = new JLabel("EDITAR VIDEOS Y LISTAS");
+		lblEditarVideosY.setBounds(10, 39, 433, 14);
+		add(lblEditarVideosY);
 		btnVerVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editarVideo editarvideo = new editarVideo(video, user);
