@@ -32,7 +32,7 @@ public class ConsultaVideosUsuario extends JPanel {
 		VideoController controller = new VideoController();
 		CanalController contrcanal = new CanalController();
 		
-		ArrayList<Video> Videos = controller.listaVideosUsuario(contrcanal.obtenerCanalUsuario(usuario.getNickname()).getNombre());
+		ArrayList<Video> Videos = controller.listaVideosUsuario(usuario.getNickname());
 		//acaaa
 		if(!Videos.isEmpty()) {
 					

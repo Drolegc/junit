@@ -100,10 +100,10 @@ public class ValorarVideo extends JPanel {
 		selectUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
-				String infoStringNick = (String)comboBox1.getSelectedItem();
+				nickInfoStr = (String)comboBox1.getSelectedItem();
 		        
-		        nickInfoStr = controladorCanal.obtenerCanalUsuario(infoStringNick).getNombre();
-		        System.out.println("ELEGI USER Y ES: " + nickInfoStr);
+		        
+		        System.out.println("ELEGI CANAL Y ES: " + nickInfoStr);
 	
 				DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
 				
@@ -146,7 +146,7 @@ public class ValorarVideo extends JPanel {
 					ValoracionVideo valorVideo = controladorValoracion.traerValoracion(videoInfoInt, userQueValora);
 					valorVideo.setValoracion(1);
 					controladorValoracion.valorarVideo(valorVideo);
-					System.out.println("Si ya tengo valorada deberia entrar acá");
+					System.out.println("Si ya tengo valorada deberia entrar acï¿½");
 				} else {
 					ValoracionVideo valorV = new ValoracionVideo(); // GENERO LA NUEVA VALORACION
 					Video vid = controladorVideo.consultaVideoPorID(videoInfoInt);

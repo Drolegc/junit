@@ -116,7 +116,7 @@ private Manager mng;
 	}
 	public ArrayList<Video> listaVideosUsuario(String nombre) {
 		// TODO Auto-generated method stub
-		ArrayList<Video> Videos = (ArrayList<Video>)mana.getSessionManager().createQuery("from Video where canal.nombre = :nombre").setParameter("nombre", nombre).getResultList();
+		ArrayList<Video> Videos = (ArrayList<Video>)mana.getSessionManager().createQuery("from Video where canal.usuario.nickname = :nombre").setParameter("nombre", nombre).getResultList();
 		mana.closeSession();
 		return Videos;	
 	}
