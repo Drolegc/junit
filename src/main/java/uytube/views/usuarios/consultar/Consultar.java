@@ -77,9 +77,6 @@ public class Consultar extends JPanel {
 		tableUsuarios.setBounds(10, 100, 638, 37);
 		add(tableUsuarios);
 		add(btnVolver);
-		ImageIcon imgIcon = new ImageIcon(user.getImg());
-		Image img = imgIcon.getImage();
-		ImageIcon profilePicture = new ImageIcon(newImg);
 		System.out.println(user.getNombre());
 		DefaultTableModel  modelUsuarios = new DefaultTableModel(columnasUsuarios, 0);
 		DefaultTableModel  modelVideo = new DefaultTableModel(columnasVideos, 0);
@@ -143,7 +140,11 @@ public class Consultar extends JPanel {
 		add(scrollPane_2);
 		JLabel label_1 = new JLabel();
 		scrollPane_2.setViewportView(label_1);
+		ImageIcon imgIcon = new ImageIcon(user.getImg());
+		Image img = imgIcon.getImage();
 		Image newImg = img.getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon profilePicture = new ImageIcon(newImg);
+
 		label_1.setIcon(profilePicture);
 		JButton btnVerLista = new JButton("Ver lista");
 		btnVerLista.setBounds(510, 431, 280, 23);

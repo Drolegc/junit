@@ -90,9 +90,9 @@ public class Seguir extends JPanel {
 				System.out.println("Siguiendo usuarios");
 				controller.seguirUsuario(nameUser_1, nameUser_2);
 				JOptionPane.showMessageDialog(null, nameUser_1+" sigue a "+nameUser_2);
-				UserMain main = new UserMain();
-				Frame.frame.setContentPane(main);
-				Frame.frame.revalidate();
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
 			}
 		});
 		btnConfirmar.setBounds(400, 431, 390, 23);

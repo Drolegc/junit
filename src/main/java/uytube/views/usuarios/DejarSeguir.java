@@ -75,9 +75,9 @@ public class DejarSeguir extends JPanel {
 				System.out.println("Name 2:"+nameUser_2);
 				controller.dejarDeSeguir(nameUser_1, nameUser_2);
 				JOptionPane.showMessageDialog(null, nameUser_1+" dejo de seguir a "+nameUser_2);
-				UserMain main = new UserMain();
-				Frame.frame.setContentPane(main);
-				Frame.frame.revalidate();
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
 
 			}
 		});

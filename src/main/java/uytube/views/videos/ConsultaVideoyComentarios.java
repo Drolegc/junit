@@ -207,14 +207,14 @@ public class ConsultaVideoyComentarios extends JPanel {
 			DefaultTreeModel modelo = new DefaultTreeModel(raiz);
 			
 			for(Comentario coment:Comentarios) {
-				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"� " + coment.getFecha().toString().substring(0, 10)+" � "+ coment.getUsuario().getNickname()+" � " +coment.getComentario());
+				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+">> " + coment.getFecha().toString().substring(0, 10)+" >> "+ coment.getUsuario().getNickname()+" >> " +coment.getComentario());
 				modelo.insertNodeInto(coment1,raiz,0);
 				
 				
 				List<Comentario> Respuestas = ComControl.ListarRespuestas(coment.getId());
 				for(Comentario resp:Respuestas) {
 					
-					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"� " + resp.getFecha().toString().substring(0, 10)+" � "+ resp.getUsuario().getNickname()+" � "+resp.getComentario());
+					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+">> " + resp.getFecha().toString().substring(0, 10)+" >> "+ resp.getUsuario().getNickname()+" >> "+resp.getComentario());
 					modelo.insertNodeInto(respuesta1,coment1,0);
 				}
 			}

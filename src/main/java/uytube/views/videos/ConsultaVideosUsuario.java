@@ -29,7 +29,8 @@ public class ConsultaVideosUsuario extends JPanel {
 	    videoSeleccionado.setNombre("");//setea el video seleccionado a vacio
 		VideoController controller = new VideoController();
 		ArrayList<Video> Videos = controller.listaVideosUsuario(usuario.getNickname());
-		//if(!Videos.isEmpty()) {
+		//acaaa
+		if(!Videos.isEmpty()) {
 					
 					JLabel lblSeleccione = new JLabel("Seleccione el video:");
 					lblSeleccione.setBounds(10, 80, 430, 14);
@@ -84,14 +85,14 @@ public class ConsultaVideosUsuario extends JPanel {
 					});
 					btnConsultar.setBounds(400, 431, 390, 23);
 					add(btnConsultar);
-	/*		}//	del if y  de aca...
+			}//	del if y  de aca...
 			else {
 				JLabel lbl2 = new JLabel("Usuario no tiene videos.");
 			lbl2.setBounds(160, 157, 200, 14);
 			add(lbl2);
 			//{JOptionPane.showMessageDialog(null, "Usuario no tiene videos"); 
 			}//hasta aca ...
-		*/
+	
 		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 431, 368, 23);
