@@ -101,6 +101,7 @@ public class ValorarVideo extends JPanel {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
 				nickInfoStr = (String)comboBox1.getSelectedItem();
 		        
+		        
 		        System.out.println("ELEGI CANAL Y ES: " + nickInfoStr);
 	
 				DefaultTableModel  tablemodel = new DefaultTableModel(nombreColumnas, 0);
