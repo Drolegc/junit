@@ -30,7 +30,7 @@ public class Lista {
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Categoria categoria;
 
-	@OneToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
 	@Fetch(FetchMode.SELECT)
 	private List<Video> videos;	
 	
