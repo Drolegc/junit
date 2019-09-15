@@ -15,6 +15,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import uytube.views.Frame;
+import uytube.views.Inicio;
+
+import javax.swing.JLabel;
 public class alta extends JPanel {
 
 	private String nombre;
@@ -56,11 +59,16 @@ public class alta extends JPanel {
 			btnNewButton.setBounds(10, 431, 368, 23);
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					Frame.frame.setContentPane(miMain);
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
 					Frame.frame.validate();
 				}
 			});
 			add(btnNewButton);
+			
+			JLabel lblNuevaCategoria = new JLabel("NUEVA CATEGORIA");
+			lblNuevaCategoria.setBounds(10, 51, 131, 14);
+			add(lblNuevaCategoria);
 	}
 
 }

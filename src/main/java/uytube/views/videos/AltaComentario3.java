@@ -130,7 +130,7 @@ public class AltaComentario3 extends JPanel {
 					UsuarioController vcontrol =new UsuarioController();
 					
 				Usuario usuario = vcontrol.consultarUsuario(nickInfoStr);
-				if (nickInfoStr == null || txtComentarioUno.getText().isBlank() ) {
+				if (nickInfoStr == null || txtComentarioUno.getText().isEmpty() ) {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario y/o ingresar un texto para comentar");
 				} else {
 				//guarda hoja del arbol 

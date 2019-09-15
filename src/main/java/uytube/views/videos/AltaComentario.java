@@ -19,6 +19,7 @@ import uytube.UsuarioController.UsuarioController;
 import uytube.models.Categoria;
 import uytube.models.Usuario;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 
 public class AltaComentario extends JPanel {
 	private String [] nombreColumnas = {"Nickname","Apellido","Nombre"};
@@ -67,9 +68,9 @@ public class AltaComentario extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*VideoMain videos = new VideoMain();
-				Frame.frame.setContentPane(videos);
-				Frame.frame.validate();*/
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
 			}
 		});
 		btnVolver.setBounds(10, 431, 368, 23);

@@ -100,5 +100,16 @@ public class QuitarVideo1 extends JPanel {
 				}
 			}	
 		});
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Inicio init = new Inicio();
+				Frame.frame.setContentPane(init);
+				Frame.frame.revalidate();
+			}
+		});
+		btnVolver.setBounds(10, 431, 368, 23);
+		add(btnVolver);
 	}
 }

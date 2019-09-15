@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import uytube.UsuarioController.UsuarioController;
 import uytube.models.Usuario;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 import uytube.views.videos.ConsultaVideosUsuario;
 import uytube.views.videos.VideoMain;
 
@@ -30,7 +31,7 @@ public class consulta extends JPanel {
 		usuarioSeleccionado.setNickname("");
 		setLayout(null);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 40, 430, 226);
+		scrollPane.setBounds(10, 100, 780, 313);
 		add(scrollPane);
 		
 				
@@ -65,12 +66,12 @@ public class consulta extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VideoMain videos = new VideoMain();
-				Frame.frame.setContentPane(videos);
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
 				Frame.frame.validate();
 			}
 		});
-		btnVolver.setBounds(10, 277, 212, 23);
+		btnVolver.setBounds(10, 431, 368, 23);
 		add(btnVolver);
 		//textField.setText(seleccion );
 		
@@ -88,15 +89,15 @@ public class consulta extends JPanel {
 					{JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario");}
 			}
 		});
-		btnVerVideos.setBounds(228, 277, 212, 23);
+		btnVerVideos.setBounds(400, 431, 390, 23);
 		add(btnVerVideos);
 		
 		JLabel lblIngreseUsuario = new JLabel("Seleccione usuario");
-		lblIngreseUsuario.setBounds(10, 24, 140, 14);
+		lblIngreseUsuario.setBounds(10, 83, 140, 14);
 		add(lblIngreseUsuario);
 		
 		JLabel lblConsulta = new JLabel("CONSULTA DE LISTAS");
-		lblConsulta.setBounds(160, 11, 196, 14);
+		lblConsulta.setBounds(10, 51, 196, 14);
 		add(lblConsulta);
 		
 

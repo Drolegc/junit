@@ -20,6 +20,8 @@ import uytube.models.Categoria;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
+import uytube.views.Inicio;
+
 import javax.swing.JCheckBox;
 
 public class AltaVideo extends JPanel {
@@ -213,8 +215,8 @@ public class AltaVideo extends JPanel {
 		JButton btnVolver = new JButton("Cancelar");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VideoMain videos = new VideoMain();
-				Frame.frame.setContentPane(videos);
+			    Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
 				Frame.frame.validate();
 			}
 		});

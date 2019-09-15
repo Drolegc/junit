@@ -26,6 +26,7 @@ import uytube.models.Comentario;
 import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 import uytube.views.usuarios.Listar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -158,9 +159,9 @@ public class ConsultaVideoyComentarios extends JPanel {
 			btnVolver.setBounds(400, 431, 390, 23);
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ConsultaVideosUsuario listarVU = new ConsultaVideosUsuario(video.getCanal().getUsuario());
-					Frame.frame.setContentPane(listarVU);
-					Frame.frame.revalidate();
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
+					Frame.frame.validate();
 				}
 			});
 			
