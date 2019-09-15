@@ -136,6 +136,7 @@ public class Seguir extends JPanel {
 						if(!esta && !u.getNickname().equals(nameUser_1)) {
 							tablemodel_2.addRow(
 									new Object [] {
+
 											u.getNickname(),
 									}
 									);
