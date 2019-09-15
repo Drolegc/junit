@@ -148,13 +148,14 @@ public class AltaVideo extends JPanel {
 				
 				VideoController controladorVideo = new VideoController();
 				System.out.println(nickInfoStr);
-				if (nickInfoStr == null ) {
+				if (nickInfoStr == null || ( nickInfoStr == "Debe elegir usuario") ) {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario");
 				} else {
 					controladorVideo.altaVideo(videito, nickInfoStr, catAsignar);
 					JOptionPane.showMessageDialog(null, "Video dado de alta correctamente");
-					Frame.frame.setContentPane(main);
-					Frame.frame.revalidate();
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
+					Frame.frame.validate();
 				}
 			}
 		});

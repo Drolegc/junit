@@ -38,6 +38,7 @@ private Manager mng;
 	public void altaVideo(Video vid, String usr, String cate) {
 		// TODO Auto-generated method stub
 		
+		// tengo que buscar en canal.usuario.nombre
 		Canal canal = (Canal)mana.getSessionManager().createQuery("From Canal where nombre = :nombre").setParameter("nombre", usr).getSingleResult();
 		mana.closeSession();
 		vid.setCanal(canal);
@@ -93,12 +94,10 @@ private Manager mng;
 	          session2.close();
 	        }
 	      }		
-		
-		
 	}
 
 	public Video consultaVideo(String titulito, String user) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub .. para volver a mirar
 		Video v = (Video)mana.getSessionManager().createQuery("select v From Video as v, Canal as c where v.canal.nombre = c.nombre and v.nombre=:titu and c.nombre=:nombre").setParameter("titu", titulito).setParameter("nombre",user).getSingleResult();
 		mana.closeSession();
 		System.out.println("---------Nombre video: "+v.getNombre()+" Canal: "+v.getCanal().getNombre());

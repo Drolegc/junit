@@ -99,14 +99,14 @@ public class AltaComentario3 extends JPanel {
 			for(Comentario coment:Comentarios) {
 				//DefaultMutableTreeNode idComentario = <String>coment.getId();
 				//String FechaStrng = coment.getFecha().toString().substring(15);
-				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"» " + coment.getFecha().toString().substring(0, 10)+" » "+ coment.getUsuario().getNickname()+" » "+coment.getComentario());
+				DefaultMutableTreeNode coment1 = new DefaultMutableTreeNode(coment.getId()+"ï¿½ " + coment.getFecha().toString().substring(0, 10)+" ï¿½ "+ coment.getUsuario().getNickname()+" ï¿½ "+coment.getComentario());
 				modelo.insertNodeInto(coment1,raiz,0);
 				
 				
 				List<Comentario> Respuestas = ComControl.ListarRespuestas(coment.getId());
 				for(Comentario resp:Respuestas) {
 					
-					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"» " + resp.getFecha().toString().substring(0, 10)+" » "+ resp.getUsuario().getNickname()+" » "+resp.getComentario());
+					DefaultMutableTreeNode respuesta1 = new DefaultMutableTreeNode(resp.getId()+"ï¿½ " + resp.getFecha().toString().substring(0, 10)+" ï¿½ "+ resp.getUsuario().getNickname()+" ï¿½ "+resp.getComentario());
 					modelo.insertNodeInto(respuesta1,coment1,0);
 				}
 			}
@@ -138,7 +138,7 @@ public class AltaComentario3 extends JPanel {
                 String[] IdControl = null;
                 if (paths!=null) {//si selecciono una rama del arbol es por que va a comentar un comentario 
 	                for (TreePath path : paths) {
-	                	IdControl = path.getLastPathComponent().toString().split("»");
+	                	IdControl = path.getLastPathComponent().toString().split("ï¿½");
 	                    System.out.println("You've selected: "+ IdControl[0]);
 	                    if(IdControl[0]=="Comentarios") {// hoja Comentarios es para nuevo comentaroi al video 
 	                        ComentarioController controladorC = new ComentarioController();
