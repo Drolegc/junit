@@ -114,14 +114,16 @@ public class DejarSeguir extends JPanel {
 					nameUser_1 = usuarios.get(table.getSelectedRow()).getNickname();
 					List<Canal> canales = controller.listCanalesSeguidos(nameUser_1);
 					System.out.println("Seguidores de "+nameUser_1+": ");
-					
-					DefaultTableModel  tablemodel_2 = new DefaultTableModel(nombreColumnas, 0);
+
+					String [] columnas = {"Usuario","Canal"};
+					DefaultTableModel  tablemodel_2 = new DefaultTableModel(columnas, 0);
 					
 					for(Canal c: canales) {
 						System.out.println(c.getNombre());
 						tablemodel_2.addRow(
 								new Object[] {
-										c.getNombre(),
+										c.getUsuario().getNombre(),
+										c.getNombre()
 								}
 								);
 					}
@@ -139,7 +141,8 @@ public class DejarSeguir extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getValueIsAdjusting()) {
-					nameUser_2 = usuarios.get(table_1.getSelectedRow()).getNickname();
+					System.out.println("SOME DATA: "+table_1.getValueAt(table_1.getSelectedRow(),1));
+					nameUser_2 = (String)table_1.getValueAt(table_1.getSelectedRow(),1);
 				}
 			}
 		});

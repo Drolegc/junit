@@ -128,7 +128,7 @@ public class Seguir extends JPanel {
 						boolean esta = false;
 						
 						for(Canal c: canales) {
-							if(u.getNickname().equals(c.getNombre())) {
+							if(u.getNickname().equals(c.getUsuario().getNickname())) {
 								System.out.println(u.getNickname());
 								esta = true;
 							}
@@ -137,6 +137,7 @@ public class Seguir extends JPanel {
 						if(!esta && !u.getNickname().equals(nameUser_1)) {
 							tablemodel_2.addRow(
 									new Object [] {
+
 											u.getNickname(),
 									}
 									);
