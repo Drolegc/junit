@@ -25,6 +25,8 @@ import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
 import uytube.views.usuarios.Listar;
+import uytube.views.usuarios.editar.editarVideo;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -151,21 +153,8 @@ public class verVideo extends JPanel {
 			textField.setText(video.getCategoria().getNombre());
 			textField.setEditable(false);
 			textField.setColumns(10);
-			
-			JButton btnEditarVideo = new JButton("Editar video");
-			btnEditarVideo.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					editarVideo editar = new editarVideo(video, user);
-					Frame.frame.setContentPane(editar);
-					Frame.frame.revalidate();					
-				}
-			});
-			btnEditarVideo.setBounds(337, 266, 104, 23);
-			add(btnEditarVideo);
-			
-			label = new JLabel("CONSULTA DE VIDEO");
 			label.setBounds(10, 51, 196, 14);
-			add(label);
+			label = new JLabel("CONSULTA DE VIDEO");
 		}
 }
 

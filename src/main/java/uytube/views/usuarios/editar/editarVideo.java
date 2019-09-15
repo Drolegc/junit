@@ -1,4 +1,4 @@
-package uytube.views.usuarios.consultar;
+package uytube.views.usuarios.editar;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +26,8 @@ import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
 import uytube.views.usuarios.Listar;
+import uytube.views.usuarios.consultar.verVideo;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;

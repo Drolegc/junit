@@ -1,4 +1,4 @@
-package uytube.views.usuarios.consultar;
+package uytube.views.usuarios.editar;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,7 +30,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.JRadioButton;
 
-public class modificarLista extends JPanel {
+public class editarLista extends JPanel {
 
 	/**
 	 * Create the panel.
@@ -40,7 +40,7 @@ public class modificarLista extends JPanel {
 	List<Lista> listasUser;
 
 	
-	public modificarLista(Lista lista) {
+	public editarLista(Lista lista, Usuario user) {
 		setLayout(null);
 				
 		IUsuario controladorUsuario = new UsuarioController();
@@ -60,7 +60,8 @@ public class modificarLista extends JPanel {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				infoVideosListas info = new infoVideosListas(user);
+				Frame.frame.setContentPane(info);
 				Frame.frame.revalidate();
 			}
 		});

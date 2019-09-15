@@ -11,7 +11,7 @@ import uytube.VideoController.VideoController;
 import uytube.models.Categoria;
 import uytube.models.Video;
 import uytube.views.Frame;
-import uytube.views.usuarios.Editar;
+import uytube.views.usuarios.editar.editarMain;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JButton;

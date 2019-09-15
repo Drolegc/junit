@@ -9,4 +9,5 @@ import uytube.models.Canal;
 public interface ICanal {
 	
 	public Canal obtenerCanalUsuario(String nombre);
+	public void actualizarCanal(Canal canal);
 }

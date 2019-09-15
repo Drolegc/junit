@@ -9,7 +9,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import uytube.CategoriaController.CategoriaController;
 import uytube.models.Categoria;
 import uytube.views.Frame;
-import uytube.views.usuarios.Editar;
+import uytube.views.usuarios.editar.editarMain;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JButton;

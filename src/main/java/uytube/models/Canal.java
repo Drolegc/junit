@@ -57,12 +57,12 @@ public class Canal {
 		
 	}
 	
-	public Canal(String name,String descripcion,Usuario user) {
+	public Canal(String name,String descripcion,boolean privacidad, Usuario user) {
 		super();
 		this.nombre = name;
 		this.descripcion = descripcion;
 		this.usuario = user;
-		this.privacidad = false;
+		this.privacidad = privacidad;
 	}
 	public Usuario getUsuario() {
 		return usuario;

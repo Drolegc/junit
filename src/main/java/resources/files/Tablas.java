@@ -17,8 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import uytube.UsuarioController.UsuarioController;
 import uytube.models.Usuario;
 import uytube.views.Frame;
-import uytube.views.usuarios.Editar;
 import uytube.views.usuarios.UserMain;
+import uytube.views.usuarios.editar.editarMain;
 
 public class Tablas extends JPanel{
 	private JTable table;
@@ -70,7 +70,7 @@ public class Tablas extends JPanel{
 		JButton btnEditarUsuario = new JButton("Editar usuario");
 		btnEditarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Editar editar = new Editar(user);
+				editarMain editar = new editarMain(user);
 				Frame.frame.setContentPane(editar);
 				Frame.frame.revalidate();
 

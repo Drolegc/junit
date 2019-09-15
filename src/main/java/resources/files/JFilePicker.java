@@ -28,8 +28,6 @@ public class JFilePicker extends JPanel {
 	private static final long serialVersionUID = 1L;
 private String textFieldLabel;
 private String buttonLabel;
-
-private JLabel label;
 private JTextField textField;
 private JButton button;
 
@@ -45,14 +43,10 @@ this.buttonLabel = buttonLabel;
 
 fileChooser = new JFileChooser();
 
-// creates the GUI
-label = new JLabel(textFieldLabel);
-label.setBounds(0, 6, 52, 13);
-
 textField = new JTextField(30);
-textField.setBounds(52, 0, 78, 19);
+textField.setBounds(10, 1, 78, 19);
 button = new JButton(buttonLabel);
-button.setBounds(134, 0, 100, 21);
+button.setBounds(98, 0, 69, 21);
 
 button.addActionListener(new ActionListener() {
 @Override
@@ -61,8 +55,6 @@ buttonActionPerformed(evt);
 }
 });
 setLayout(null);
-
-add(label);
 add(textField);
 add(button);
 

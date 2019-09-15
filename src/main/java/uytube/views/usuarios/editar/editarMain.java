@@ -1,30 +1,34 @@
-package uytube.views.usuarios;
+package uytube.views.usuarios.editar;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
+import java.awt.Image;
+
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
 import resources.files.JFilePicker;
+import uytube.CanalController.CanalController;
 import uytube.UsuarioController.UsuarioController;
 import uytube.models.Canal;
 import uytube.models.Usuario;
 import uytube.views.Frame;
 import uytube.views.Inicio;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*; 
-import java.nio.file.Files;
-import java.util.Date;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JRadioButton;
 import javax.swing.JComponent;
@@ -32,18 +36,19 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.io.FilenameUtils;
+import org.apache.maven.model.Profile;
 
 import java.awt.Window;
+
+import uytube.views.usuarios.Listar;
 import uytube.views.usuarios.UserMain;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
-import com.sun.xml.bind.v2.schemagen.xmlschema.Import;
-import java.awt.Color;
-import javax.swing.JTextPane;
-public class Alta extends JPanel {
+import javax.swing.Icon;
+import javax.swing.JTextArea;
+public class editarMain extends JPanel {
 
 	private JTextField nickname;
 	private JTextField nombre;
@@ -51,71 +56,96 @@ public class Alta extends JPanel {
 	private JTextField img;
 	private JTextField correo;
 	private JDateChooser f_nac;
-	private UserMain Main;
 	private JFilePicker filePicker;
-	private Boolean nicknameTaken;
+	private BufferedImage image;
 	private JTextField nombreCanal;
-	public Alta() {
-		Main = new UserMain();
+	private Canal canal;
+	public editarMain(Usuario user) {
 		setLayout(null);
-
 		JLabel lblNickname = new JLabel("Nickname");
-		lblNickname.setBounds(10, 87, 148, 13);
+		lblNickname.setBounds(49, 10, 45, 13);
 		add(lblNickname);
+		CanalController canalcont = new CanalController();
+		canal = canalcont.obtenerCanalUsuario(user.getNickname());
 		
-		nombre = new JTextField();
-		nombre.setBounds(10, 172, 368, 23);
-		add(nombre);
-		nombre.setColumns(10);
-		
-		apellido = new JTextField();
-		apellido.setBounds(10, 241, 368, 23);
-		apellido.setColumns(10);
-		add(apellido);
-				
-		correo = new JTextField();
-		correo.setBounds(400, 100, 390, 23);
-		correo.setColumns(10);
-		add(correo);
+		JLabel label_1 = new JLabel();
+		label_1.setBounds(300,41,115,119);
+		ImageIcon imgIcon = new ImageIcon(user.getImg());
+		Image img = imgIcon.getImage();
+		Image newImg = img.getScaledInstance(label_1.getWidth(), label_1.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon profilePicture = new ImageIcon(newImg);
+		label_1.setIcon(profilePicture);
+		add(label_1);
 		nombreCanal = new JTextField();
-		nombreCanal.setBounds(38, 191, 148, 19);
+		nombreCanal.setText(canal.getNombre());
+		nombreCanal.setBounds(49, 193, 148, 19);
 		add(nombreCanal);
 		nombreCanal.setColumns(10);
 		
-		JLabel lblNombreDelCanal = new JLabel("Nombre del canal");
-		lblNombreDelCanal.setBounds(38, 168, 111, 13);
-		add(lblNombreDelCanal);
-		
-		JRadioButton statusCanal = new JRadioButton("El canal es privado?");
-		statusCanal.setBounds(251, 190, 152, 21);
+		JRadioButton statusCanal = new JRadioButton("Es privado?");
+		statusCanal.setBounds(217, 192, 105, 21);
+		statusCanal.setSelected(canal.getPrivacidad());
 		add(statusCanal);
 		
-		JTextPane descripcionCanal = new JTextPane();
-		descripcionCanal.setBounds(38, 230, 365, 36);
+		JTextArea descripcionCanal = new JTextArea();
+		descripcionCanal.setBounds(49, 253, 316, 40);
+		descripcionCanal.setText(canal.getDescripcion());
 		add(descripcionCanal);
 		
 		JLabel lblDescripcionDelCanal = new JLabel("Descripcion del canal");
-		lblDescripcionDelCanal.setBounds(38, 220, 138, 13);
+		lblDescripcionDelCanal.setBounds(49, 230, 115, 13);
 		add(lblDescripcionDelCanal);
 		
+		JLabel label_2 = new JLabel("Correo");
+		label_2.setBounds(217, 62, 31, 13);
+		add(label_2);
+		this.nickname = new JTextField();
+		nickname.setBounds(49, 33, 148, 19);
+		add(nickname);
+		this.nickname.setColumns(10);
+		this.nickname.setEditable(false);
+		this.nickname.setText(user.getNickname());
+		
+		this.correo = new JTextField();
+		correo.setBounds(217, 85, 148, 19);
+		this.correo.setColumns(10);
+		this.correo.setEditable(false);
+		this.correo.setText(user.getCorreo());
+		add(correo);
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(10, 148, 368, 13);
+		lblNombre.setBounds(217, 10, 37, 13);
 		add(lblNombre);
 		
 		JLabel label = new JLabel("Apellido");
-		label.setBounds(10, 217, 360, 13);
+		label.setBounds(49, 62, 36, 13);
 		add(label);
 		
-		JLabel label_2 = new JLabel("Correo");
-		label_2.setBounds(400, 87, 177, 13);
-		add(label_2);
+		this.nombre = new JTextField();
+		nombre.setBounds(217, 33, 148, 19);
+		add(nombre);
+		this.nombre.setColumns(10);
+		this.nombre.setText(user.getNombre());
+		this.apellido = new JTextField();
+		apellido.setBounds(49, 85, 148, 19);
+		this.apellido.setColumns(10);
+		add(apellido);
+		this.apellido.setText(user.getApellido());
 		
-		JButton btnAgregar = new JButton("Agregar usuario");
-		btnAgregar.setBounds(400, 431, 390, 23);
+		JLabel label_3 = new JLabel("F. Nacimiento");
+		label_3.setBounds(49, 114, 63, 13);
+		add(label_3);
+		
+		f_nac = new JDateChooser();
+		f_nac.setBounds(49, 141, 148, 19);
+		f_nac.setDate(user.getFnacimiento());
+		add(f_nac);
+		
+		JButton btnAgregar = new JButton("Editar");
+		btnAgregar.setBounds(174, 316, 110, 21);
 		btnAgregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Usuario modelUsuario = null;
+			public void actionPerformed(ActionEvent e) {	
 				if(validateFields()) {
+					Usuario modelUsuario = null;
 					File file = new File(filePicker.getSelectedFilePath());
 					File folder = new File("resources" + File.separator + nickname.getText());
 					file.getName();
@@ -135,19 +165,17 @@ public class Alta extends JPanel {
 						);					
 					} catch (Exception e2) {
 						System.out.println(e2);
-					}
-					
-					Canal canal = new Canal(
-							(nombreCanal.getText()!="")  ? nombreCanal.getText():nickname.getText() ,
-							descripcionCanal.getText(),
-							statusCanal.getVerifyInputWhenFocusTarget(),
-							modelUsuario
-							);
+					}				
 					UsuarioController Controlerusuario = new UsuarioController();
-					Controlerusuario.crearUsuario(modelUsuario, canal);
-					
-					JOptionPane.showMessageDialog(null, "Usuario creado");
-					Frame.frame.setContentPane(Main);
+					canal.setNombre(nombreCanal.getText());
+					canal.setPrivacidad(statusCanal.isSelected());
+					canal.setDescripcion(descripcionCanal.getText());
+					Controlerusuario.modificarUsuario(modelUsuario, canal);
+					CanalController canalcont = new CanalController();
+					canalcont.actualizarCanal(canal);
+					Listar listar = new Listar();
+					JOptionPane.showMessageDialog(Frame.frame, "Usuario Editado");
+					Frame.frame.setContentPane(listar);
 					Frame.frame.revalidate();
 				}
 			}
@@ -201,19 +229,20 @@ public class Alta extends JPanel {
 			{
 			  JOptionPane.showMessageDialog(Frame.frame, errormsg); // give user feedback
 			  return false; // return false, as validation has failed
-			}
+			}			
 		});
 		
 		JButton btnCancelar = new JButton("cancelar");
-		btnCancelar.setBounds(10, 431, 368, 23);
+		btnCancelar.setBounds(49, 316, 115, 21);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Frame.frame.setContentPane(Main);
+				Listar listar = new Listar();				
+				Frame.frame.setContentPane(listar);
 				Frame.frame.revalidate();
 			}
 		});
 		filePicker = new JFilePicker("Img", "Buscar");
-		filePicker.setBounds(348, 241, 442, 23);
+		filePicker.setBounds(209, 141, 231, 19);
 		filePicker.setMode(JFilePicker.MODE_SAVE);
 		filePicker.addFileTypeFilter(".jpg", "JPEG Images");
 		filePicker.addFileTypeFilter(".png", "PNG Images");
@@ -223,68 +252,28 @@ public class Alta extends JPanel {
 		// access JFileChooser class directly	
 		// add the component to the frame		
 		add(filePicker);		
-		
-		JLabel label_3 = new JLabel("F. Nacimiento");
-		label_3.setBounds(400, 148, 390, 13);
-		add(label_3);
-		
-		f_nac = new JDateChooser();
-		f_nac.setBounds(400, 172, 390, 23);
-		add(f_nac);
 		add(btnCancelar);
-		
 		add(btnAgregar);
 		
-		JLabel nickanamerrror = new JLabel("El nickname ya esta en uso");
-		nickanamerrror.setForeground(Color.RED);
-		nickanamerrror.setBounds(240, 87, 138, 13);
-		nickanamerrror.setVisible(false);
-		add(nickanamerrror);
-		JLabel correoerror = new JLabel("El correo ya esta en uso");
-		correoerror.setForeground(Color.RED);
-		correoerror.setBounds(652, 87, 138, 13);
-		correoerror.setVisible(false);
-		add(correoerror);
-		nickname = new JTextField();
-		nickname.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				 String enterNickname = nickname.getText();
-				 UsuarioController controller = new UsuarioController();
-				 System.out.println(enterNickname);
-				 Usuario usuario = controller.consultarUsuario(enterNickname);
-				 if (usuario != null) {
-					btnAgregar.setVisible(false);
-					nickanamerrror.setVisible(true);
-				 }else {
-					btnAgregar.setVisible(true);
-					nickanamerrror.setVisible(false);
-				 }
-			 }
+		JButton btnVerVideosY = new JButton("Ver videos y listas");
+		btnVerVideosY.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				infoVideosListas videosYlistas = new infoVideosListas(user);
+				Frame.frame.setContentPane(videosYlistas);
+				Frame.frame.revalidate();
+			}
 		});
-		correo.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent e) {
-				 String enterCorreo = correo.getText();
-				 UsuarioController controller = new UsuarioController();
-				 Usuario usuario = controller.consultarEmail(enterCorreo);
-				 if (usuario != null) {
-					btnAgregar.setVisible(false);
-					correoerror.setVisible(true);
-				 }else {
-					btnAgregar.setVisible(true);
-					correoerror.setVisible(false);
-				 }
-			 }
-		});		
-		nickname.setBounds(10, 100, 368, 23);
-		nickname.setColumns(10);
-		add(nickname);
+		btnVerVideosY.setBounds(300, 316, 115, 21);
+		add(btnVerVideosY);
 		
-		JLabel lblAltaDeUsuario = new JLabel("ALTA DE USUARIO");
-		lblAltaDeUsuario.setBounds(10, 51, 191, 14);
-		add(lblAltaDeUsuario);
+		JLabel lblNombreDelCanal = new JLabel("Nombre del canal (Opcional)");
+		lblNombreDelCanal.setBounds(49, 170, 148, 13);
+		add(lblNombreDelCanal);
 		
-		JLabel lblImagen = new JLabel("Imagen");
-		lblImagen.setBounds(399, 217, 391, 14);
-		add(lblImagen);
 	}
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters            
+    }
 }

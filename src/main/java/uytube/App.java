@@ -58,11 +58,11 @@ import com.toedter.calendar.JDateChooser;
 import uytube.views.usuarios.Alta;
 import uytube.views.usuarios.Buscar;
 import uytube.views.usuarios.DejarSeguir;
-import uytube.views.usuarios.ListadoEditar;
 import uytube.views.usuarios.Listar;
 import uytube.views.usuarios.Seguir;
 import uytube.views.usuarios.consultar.ConsultarMain;
 import uytube.views.videos.AltaComentario;
+import uytube.views.usuarios.editar.ListadoEditar;
 import uytube.views.videos.AltaVideo;
 import uytube.views.videos.ConsultaVideo;
 import uytube.views.videos.ModificarDatosVideo;
@@ -102,77 +102,6 @@ public class App extends JFrame{
 		controllerCategoria.altaCategoria("Tecnologia");
 		controllerCategoria.altaCategoria("Vlog");
 		controllerCategoria.altaCategoria("Virales");
-		
-		ILista controllerLista = new ListaController();
-
-		IUsuario controllerUser = new UsuarioController();
-		controllerUser.crearUsuario(new Usuario("user2", "Silvio", "Sanchez", "silvio_69@hotmail.com",new Date(),"path"));
-		controllerUser.crearUsuario(new Usuario("juancho", "Juan", "Garcia", "juanchi2@email.com",new Date(),"path"));
-		controllerUser.crearUsuario(new Usuario("lolo", "Lorenzo", "user", "lolo2@email.com",new Date(),"path"));
-		controllerUser.crearUsuario(new Usuario("youtuber", "Marcelo", "Castro", "marcelo@email.com",new Date(),"path"));
-		
-		/*
-		controllerUser.seguirUsuario("user2","juancho");
-		controllerUser.seguirUsuario("user2","lorenzo");
-		controllerUser.seguirUsuario("lorenzo","user2");
-		controllerUser.seguirUsuario("juancho","user2");
-		
-		controllerUser.dejarDeSeguir("user2", "lorenzo");
-		*/
-
-		
-		controllerLista.crearLista("listaPer", "Ciencia", "user2", true, false);
-
-		
-		
-		//videos
-		VideoController controllervideo = new VideoController();
-		
-		Video vid = new Video();
-		vid.setNombre("Mi primer bicicleta");
-		vid.setDuracion("2:20");
-		vid.setDescripcion("Mi primer bicicleta era una chopera de los 80s.");
-		vid.setUrl("https://www.videos.com/2e2re3w3er");
-		vid.setFecha(new Date());			
-		vid.setEs_publico(false);
-		controllervideo.altaVideo(vid, "youtuber", "Estilo de vida");
-		
-		
-		Video vid2 = new Video();
-		vid2.setNombre("video uno");
-		vid2.setDuracion("2:20");
-		vid2.setDescripcion("Un video que tiene una descripcion larga.. para lo que estamos acostumbrados a tener aca.");
-		vid2.setUrl("https://www.videos.com/2e2re3w3er");
-		vid2.setFecha(new Date());
-		vid2.setEs_publico(true);
-		
-		controllervideo.altaVideo(vid2, "youtuber", "Musica");
-		
-		
-		//comentario alta
-		ComentarioController comentar = new ComentarioController();
-		UsuarioController usuariocontr =new UsuarioController();
-		Usuario usuario =new Usuario();
-		usuario = usuariocontr.consultarUsuario("youtuber");
-		Comentario Com1 = new Comentario();
-		Com1.setComentario("comentario uno");
-		Com1.setFecha(new Date());
-		Com1.setVid(vid2);
-		Com1.setUsuario(usuario);
-		comentar.AgregarComentario(Com1);
-		
-		Usuario usuario2 =new Usuario();
-		usuario2 = usuariocontr.consultarUsuario("user2");
-		Comentario Com2 = new Comentario();
-		Com2.setComentario("comentario dos");
-		Com2.setFecha(new Date());
-		Com2.setVid(vid2);
-		Com2.setUsuario(usuario2);
-		comentar.AgregarComentario(Com2);
-		
-		
-		
-		
 		
 		
 		System.out.println("Fin");

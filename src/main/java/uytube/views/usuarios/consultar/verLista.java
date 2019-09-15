@@ -22,6 +22,7 @@ import uytube.models.Usuario;
 import uytube.models.Video;
 import uytube.views.Frame;
 import uytube.views.usuarios.UserMain;
+import uytube.views.usuarios.editar.editarLista;
 
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -92,18 +93,6 @@ public class verLista extends JPanel {
 		table.setModel(tablemodel);
 		scrollPane.setViewportView(table);
 		
-		JButton btnEditar = new JButton("Editar ");
-		btnEditar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				modificarLista modlista = new modificarLista(lista);
-				Frame.frame.setContentPane(modlista);
-				Frame.frame.revalidate();
-
-			}
-		});
-		btnEditar.setBounds(355, 269, 85, 21);
-		add(btnEditar);
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

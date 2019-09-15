@@ -1,4 +1,4 @@
-package uytube.views.usuarios;
+package uytube.views.usuarios.editar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,7 @@ import javax.swing.table.TableModel;
 
 import uytube.models.Usuario;
 import uytube.views.Frame;
+import uytube.views.usuarios.UserMain;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -75,7 +76,7 @@ public class ListadoEditar extends JPanel {
 		JButton btnEditarUsuario = new JButton("Editar usuario");
 		btnEditarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Editar editar = new Editar(user);
+				editarMain editar = new editarMain(user);
 				Frame.frame.setContentPane(editar);
 				Frame.frame.revalidate();
 

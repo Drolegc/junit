@@ -29,11 +29,10 @@ public class UsuarioController implements IUsuario{
 		mng = Manager.getInstance();
 	}
 	
-	public void crearUsuario(Usuario usuario) {
+	public void crearUsuario(Usuario usuario, Canal canal) {
 		this.session = null;
 		this.transaction = null;
 		
-		Canal canal = new Canal(usuario.getNickname(),"My first channel",usuario);
 		//Listas default a este canal
 		
 	    try {
@@ -106,7 +105,7 @@ public class UsuarioController implements IUsuario{
 	      }		
 		return usuario;
 	}	
-	public void modificarUsuario(Usuario usuario) {
+	public void modificarUsuario(Usuario usuario, Canal canal) {
 		this.session = null;
 		this.transaction = null;
         session = HibernateUtil.getSessionFactory().openSession();
@@ -115,6 +114,7 @@ public class UsuarioController implements IUsuario{
 	        if(!transaction.isActive())
 	        	transaction.begin();
 	        session.saveOrUpdate("Usuario", usuario);
+
 	        transaction.commit();
 	      } catch (Exception e) {
 	        if (transaction != null) {
@@ -138,7 +138,7 @@ public class UsuarioController implements IUsuario{
 		Usuario user = (Usuario)mng.getSessionManager().createQuery("From Usuario where nickname = :nameUser").setParameter("nameUser", nickUser).getSingleResult();
 		mng.closeSession();
 		
-		Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where nombre = :nombreCanal").setParameter("nombreCanal", nameCanal).getSingleResult();
+		Canal canal = (Canal)mng.getSessionManager().createQuery("From Canal where usuario_nickname = :nombreCanal").setParameter("nombreCanal", nameCanal).getSingleResult();
 		mng.closeSession();
 		
 		user.addCanal(canal);
@@ -158,7 +158,7 @@ public class UsuarioController implements IUsuario{
 	}
 	public List<Usuario> listUsuariosSeguidores(String nickname){
 		List<Usuario> users = (List<Usuario>) mng.getSessionManager().
-								createQuery("select u From Usuario as u inner join u.canalesSeguidos as canalesSeguidos where canalesSeguidos.nombre = :nick").
+								createQuery("select u From Usuario as u inner join u.canalesSeguidos as canalesSeguidos where canalesSeguidos.usuario_nickname = :nick").
 								setParameter("nick",nickname).getResultList();
 		return users;	
 		
