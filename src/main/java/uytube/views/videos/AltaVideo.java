@@ -2,7 +2,10 @@ package uytube.views.videos;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -94,6 +97,9 @@ public class AltaVideo extends JPanel {
 		
 		JDateChooser fecPub = new JDateChooser();
 		fecPub.setBounds(402, 237, 388, 20);
+		  Calendar c = new GregorianCalendar();
+		  fecPub.setCalendar(c);
+	
 		add(fecPub);
 		
 		

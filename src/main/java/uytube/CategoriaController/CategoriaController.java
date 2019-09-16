@@ -18,6 +18,12 @@ public class CategoriaController implements ICategoria{
 		public CategoriaController() {
 			mng = Manager.getInstance();
 		}
+	
+   public Categoria obtenerCategoria(String categoria) {
+	 Categoria cat = (Categoria) mng.getSessionManager().createQuery("from Categoria where nombre = :nombre").setParameter("nombre", categoria).getSingleResult();
+	   mng.closeSession();
+	   return cat;
+   }
 		
 	public boolean altaCategoria(String nombre) {
 		boolean existe = existeCategoria(nombre);
