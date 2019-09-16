@@ -167,7 +167,7 @@ public class AltaComentario3 extends JPanel {
 			        			   
 			        			    controladorC.AgregarRespuesta(IdNum, r);
 			        			   }else {
-			        				   JOptionPane.showMessageDialog(null, "Es una hoja no se puede"); 
+			        				   JOptionPane.showMessageDialog(null, "No se puede comentar a la respuesta"); 
 			        				   AltaComentario altacom = new AltaComentario();
 			        					Frame.frame.setContentPane(altacom);
 			        					Frame.frame.revalidate();
