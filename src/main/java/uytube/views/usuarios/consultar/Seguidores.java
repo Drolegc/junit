@@ -37,13 +37,13 @@ public class Seguidores extends JPanel {
 		List<Usuario> seguidores = controller.listUsuariosSeguidores(user.getNickname());
 		setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("27px"),
-				ColumnSpec.decode("162px"),
-				ColumnSpec.decode("73px"),
-				ColumnSpec.decode("162px"),},
+				ColumnSpec.decode("353px"),
+				ColumnSpec.decode("37px"),
+				ColumnSpec.decode("375px"),},
 			new RowSpec[] {
 				RowSpec.decode("23px"),
-				RowSpec.decode("239px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("465px"),
+				FormSpecs.PARAGRAPH_GAP_ROWSPEC,
 				RowSpec.decode("21px"),}));
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "2, 2, fill, fill");

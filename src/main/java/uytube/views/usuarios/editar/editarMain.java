@@ -275,7 +275,7 @@ public class editarMain extends JPanel {
 		add(lblNombreDelCanal);
 		
 		JLabel lblFotoDeUsuario = new JLabel("Foto de usuario");
-		lblFotoDeUsuario.setBounds(400, 190, 385, 14);
+		lblFotoDeUsuario.setBounds(597, 117, 175, 14);
 		add(lblFotoDeUsuario);
 		
 	}
