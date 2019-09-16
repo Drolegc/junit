@@ -61,7 +61,7 @@ public class ListarVideosUsuario extends JPanel {
 					new Object[] {
 							v.getNombre(),
 							v.getCategoria().getNombre(),
-							v.getFecha().toString().subSequence(0,10),
+							v.getFecha().toString().substring(0,10),
 							v.getUrl(),
 							
 					}

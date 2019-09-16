@@ -28,7 +28,6 @@ public class editar extends JPanel {
 		
 		txtNuevoNombreCategoria = new JTextField();
 		txtNuevoNombreCategoria.setBounds(10, 100, 350, 20);
-		txtNuevoNombreCategoria.setText("Nuevo Nombre Categoria");
 		add(txtNuevoNombreCategoria);
 		txtNuevoNombreCategoria.setColumns(10);
 		
@@ -62,6 +61,10 @@ public class editar extends JPanel {
 		JLabel lblNewLabel = new JLabel("ALTA DE CATEGORIA");
 		lblNewLabel.setBounds(10, 51, 137, 14);
 		add(lblNewLabel);
+		
+		JLabel lblIngreseNombreDe = new JLabel("Ingrese nombre de nueva categoria");
+		lblIngreseNombreDe.setBounds(10, 86, 310, 14);
+		add(lblIngreseNombreDe);
 
 	}
 

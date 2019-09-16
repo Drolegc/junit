@@ -175,7 +175,9 @@ public class modificar extends JPanel {
 				System.out.println(rdbtnPrivacidad.isSelected());
 				controllerLista.modificarLista(lista_a_modificar.getId(),comboBox_2.getSelectedIndex()+1,rdbtnPrivacidad.isSelected());
 				JOptionPane.showMessageDialog(null, "Lista modificada");
-
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
 				
 			}
 		});

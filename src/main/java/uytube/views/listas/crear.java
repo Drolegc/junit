@@ -14,6 +14,7 @@ import uytube.UsuarioController.IUsuario;
 import uytube.UsuarioController.UsuarioController;
 import uytube.models.Usuario;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 import uytube.views.videos.VideoMain;
 
 import java.awt.event.ActionListener;
@@ -58,10 +59,9 @@ public class crear extends JPanel {
 				if(controller.crearLista(nombreListaDefualt.getText(), null, null, true, true)) {
 					JOptionPane.showMessageDialog(null, "Lista default cargada");
 				}
-				inicio init = new inicio();
-				Frame.frame.setContentPane(init);
-				Frame.frame.revalidate();
-
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
 			}
 		});
 		btnCargar.setBounds(400, 329, 390, 23);
@@ -147,9 +147,9 @@ public class crear extends JPanel {
 				if(controller.crearLista(nombreList, categoria, user, isPrivate, false)) {
 					JOptionPane.showMessageDialog(null, "Lista personalizada cargada");
 				}
-				inicio init = new inicio();
-				Frame.frame.setContentPane(init);
-				Frame.frame.revalidate();
+				Inicio inicio = new Inicio();
+				Frame.frame.setContentPane(inicio);
+				Frame.frame.validate();
 				
 			}
 		});
