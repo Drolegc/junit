@@ -139,6 +139,7 @@ public class Consultar extends JPanel {
 		scrollPane_2.setBounds(658, 102, 132, 120);
 		add(scrollPane_2);
 		JLabel label_1 = new JLabel();
+		label_1.setBounds(327,8,116,78);		
 		scrollPane_2.setViewportView(label_1);
 		ImageIcon imgIcon = new ImageIcon(user.getImg());
 		Image img = imgIcon.getImage();

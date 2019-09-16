@@ -27,12 +27,12 @@ public class HibernateUtil {
             new StandardServiceRegistryBuilder();
 
         Map<String, String> settings = new HashMap<>();
-        settings.put("hibernate.connection.driver_class", "org.h2.Driver");
-        settings.put("hibernate.connection.url", "jdbc:h2:~/test");
-        settings.put("hibernate.connection.username", "sa");
+        settings.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+        settings.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/uytube");
+        settings.put("hibernate.connection.username", "root");
         settings.put("hibernate.connection.password", "");
-        settings.put("hibernate.show_sql", "false");
-        settings.put("hibernate.hbm2ddl.auto", "create-drop");
+        settings.put("hibernate.show_sql", "true");
+        settings.put("hibernate.hbm2ddl.auto", "update");
 
         registryBuilder.applySettings(settings);
 

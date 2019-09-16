@@ -110,7 +110,7 @@ private Manager mng;
 	}
 	public ArrayList<Video> obtenerVideosUsuario(String usuario) {
 		ArrayList<Video> v = (ArrayList<Video>)mana.getSessionManager().
-							createQuery("from Video where canal_nombre = :canal").setParameter("canal", usuario).getResultList();
+							createQuery("from Video where canal.usuario.nickname = :canal").setParameter("canal", usuario).getResultList();
 		mana.closeSession();
 		return v;
 	}

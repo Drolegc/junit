@@ -66,6 +66,7 @@ public class editarMain extends JPanel {
 		lblNickname.setBounds(49, 118, 45, 13);
 		add(lblNickname);
 		CanalController canalcont = new CanalController();
+		System.out.println(user);
 		canal = canalcont.obtenerCanalUsuario(user.getNickname());
 		
 		JLabel label_1 = new JLabel();
@@ -143,11 +144,13 @@ public class editarMain extends JPanel {
 		JButton btnAgregar = new JButton("Editar");
 		btnAgregar.setBounds(330, 422, 110, 21);
 		btnAgregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
+			public void actionPerformed(ActionEvent e) {
+				
 				if(validateFields()) {
 					Usuario modelUsuario = null;
 					File file = new File(filePicker.getSelectedFilePath());
 					File folder = new File("resources" + File.separator + nickname.getText());
+					System.out.println(folder.getAbsolutePath() + File.separator + file.getName());
 					file.getName();
 					try {
 						filePicker.saveFile(file, folder);					
