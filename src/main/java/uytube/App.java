@@ -97,15 +97,7 @@ public class App extends JFrame{
 		
 		
 		ICategoria controllerCategoria = new CategoriaController();
-		controllerCategoria.altaCategoria("Sin Categoria");
-		controllerCategoria.altaCategoria("Estilo de vida");
-		controllerCategoria.altaCategoria("Musica");
-		controllerCategoria.altaCategoria("Ciencia");
-		controllerCategoria.altaCategoria("Tecnologia");
-		controllerCategoria.altaCategoria("Vlog");
-		controllerCategoria.altaCategoria("Virales");
-		
-		
+		controllerCategoria.altaCategoria("Sin Categoria");		
 		System.out.println("Fin");
 	}
 

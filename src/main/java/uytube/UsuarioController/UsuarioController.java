@@ -106,22 +106,23 @@ public class UsuarioController implements IUsuario{
 	      }		
 		return usuario;
 	}	
-	public void modificarUsuario(Usuario usuario, Canal canal) {
+	public void modificarUsuario(Usuario usuario) {
 		this.session = null;
 		this.transaction = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+		session = HibernateUtil.getSessionFactory().openSession();
 		try {
 	        transaction = session.beginTransaction();
 	        if(!transaction.isActive())
 	        	transaction.begin();
-	        session.saveOrUpdate("Usuario", usuario);
-
+	        System.out.println(usuario.getNickname());
+	        System.out.println(usuario.getNombre());
+	        session.update(usuario);
 	        transaction.commit();
 	      } catch (Exception e) {
+	    	System.out.println("aca?");
 	        if (transaction != null) {
 	          transaction.rollback();
 	        }
-	        System.out.println(e);
 	      } finally {
 	        if (session != null) {
 	          session.close();

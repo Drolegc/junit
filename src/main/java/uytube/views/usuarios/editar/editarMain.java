@@ -79,6 +79,7 @@ public class editarMain extends JPanel {
 		add(label_1);
 		nombreCanal = new JTextField();
 		nombreCanal.setText(canal.getNombre());
+		nombreCanal.setEditable(false);
 		nombreCanal.setBounds(10, 306, 316, 19);
 		add(nombreCanal);
 		nombreCanal.setColumns(10);
@@ -173,9 +174,9 @@ public class editarMain extends JPanel {
 					canal.setNombre(nombreCanal.getText());
 					canal.setPrivacidad(statusCanal.isSelected());
 					canal.setDescripcion(descripcionCanal.getText());
-					Controlerusuario.modificarUsuario(modelUsuario, canal);
 					CanalController canalcont = new CanalController();
 					canalcont.actualizarCanal(canal);
+					Controlerusuario.modificarUsuario(modelUsuario);
 					Listar listar = new Listar();
 					JOptionPane.showMessageDialog(Frame.frame, "Usuario Editado");
 					Frame.frame.setContentPane(listar);
