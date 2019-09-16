@@ -34,10 +34,15 @@ public class AltaVideo extends JPanel {
 	private JTextField duracion;
 	private JTextField url;
 	private JTextField descrip;
+	private JDateChooser fecPub;
 	private VideoMain main;
 	private Video videito;
 	private String nickInfoStr;
 	private String catAsignar;
+	private String tituloString;
+	private String duracionString;
+	private String descripString;
+	private String urlString;
 	
 	/**
 	 * Create the panel.
@@ -46,6 +51,12 @@ public class AltaVideo extends JPanel {
 	public AltaVideo() {
 		main = new VideoMain();
 		setLayout(null);
+		
+		tituloString = null;
+		duracionString = null;
+		descripString = null;
+		urlString = null;
+	
 		
 		JLabel TITULOPANEL = new JLabel("ALTA VIDEO");
 		TITULOPANEL.setBounds(10, 51, 192, 23);
@@ -135,32 +146,89 @@ public class AltaVideo extends JPanel {
 		chckbxNewCheckBox.setBounds(402, 303, 150, 23);
 		add(chckbxNewCheckBox);
 		
+	
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				videito = new Video();
 				
-				videito.setNombre(titulo.getText());
-				videito.setDuracion(duracion.getText());
-				videito.setDescripcion(descripcion.getText());
-				videito.setUrl(url.getText());
+				tituloString = titulo.getText();
+				duracionString = duracion.getText();
+				descripString = descrip.getText();
+				urlString = url.getText();
+								
+				videito.setNombre(tituloString);
+				videito.setDuracion(duracionString);
+				videito.setDescripcion(descripString);
+				videito.setUrl(urlString);
 				videito.setFecha(fecPub.getDate());	
 				videito.setEs_publico(chckbxNewCheckBox.isSelected());
 				
-				VideoController controladorVideo = new VideoController();
+				
 				System.out.println(nickInfoStr);
-				if (nickInfoStr == null || ( nickInfoStr == "Debe elegir usuario") ) {
+				if (nickInfoStr == null || ( nickInfoStr == "Debe elegir usuario")) {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario");
-				} else {
-					CanalController controladorCanal = new CanalController();
-					controladorVideo.altaVideo(videito, nickInfoStr, catAsignar);
-					JOptionPane.showMessageDialog(null, "Video dado de alta correctamente");
-					Inicio inicio = new Inicio();
-					Frame.frame.setContentPane(inicio);
-					Frame.frame.validate();
+				} else { 
+					if (validateFields()) {
+						VideoController controladorVideo = new VideoController();
+						controladorVideo.altaVideo(videito, nickInfoStr, catAsignar);
+						JOptionPane.showMessageDialog(null, "Video dado de alta correctamente");
+						Inicio inicio = new Inicio();
+						Frame.frame.setContentPane(inicio);
+						Frame.frame.validate();
+					}
 				}
 			}
+			public boolean validateFields()
+			{
+			  if (! validateField( titulo.getText(), "Debe ingresar un Titulo"))
+			    return false;
+			  else
+			  if (! validateField( duracion.getText(), "Debe ingresar una duracion"))
+			    return false;
+			  else
+			  if (! validateField( descrip.getText(), "Debe ingresar una descripcion"))
+			    return false;
+			  if (! validateField( url.getText(), "Debe ingresar una url"))
+				return false;
+			  else
+			    return true;
+			}
+
+			// test if field is empty
+			public boolean validateField( String f, String errormsg )
+			{
+			  if ( f.equals("") )
+			    return failedMessage( errormsg );
+			  else
+			    return true; // validation successful
+			}
+
+			public boolean validateInteger( JTextField f, String errormsg )
+			{
+			  try
+			  {  // try to convert input to integer
+			    int i = Integer.parseInt(f.getText());
+
+			    // input must be greater then 0
+			    // if it is, success
+			    if ( i > 0 )
+			      return true; // success, validation succeeded
+			   }
+			   catch(Exception e)
+			   {
+			      // if conversion failed, or input was <= 0,
+			      // fall-through and do final return below
+			   }
+			   return failedMessage( errormsg );
+			}
+
+			public boolean failedMessage(String errormsg)
+			{
+			  JOptionPane.showMessageDialog(Frame.frame, errormsg); // give user feedback
+			  return false; // return false, as validation has failed
+			}			
 		});
 		
 		btnOk.setBounds(400, 431, 390, 23);
