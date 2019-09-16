@@ -59,7 +59,7 @@ public class ConsultaVideosUsuario extends JPanel {
 								new Object[] {
 										v.getNombre(),
 										v.getCategoria().getNombre(),
-										v.getFecha(),
+										v.getFecha().toString().substring(0,10),
 										
 								}
 						);

@@ -41,8 +41,11 @@ public class alta extends JPanel {
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "La Categoria: "+txtIngresarCategoria.getText()+" ya existe");
-					}
 					
+					}
+					Inicio inicio = new Inicio();
+					Frame.frame.setContentPane(inicio);
+					Frame.frame.validate();
 					
 				}
 			});
@@ -50,7 +53,6 @@ public class alta extends JPanel {
 			
 			txtIngresarCategoria = new JTextField();
 			txtIngresarCategoria.setBounds(10, 100, 368, 23);
-			txtIngresarCategoria.setText("Ingresar Categoria");
 			add(txtIngresarCategoria);
 			txtIngresarCategoria.setColumns(10);
 			add(btnAgregar);
@@ -69,6 +71,9 @@ public class alta extends JPanel {
 			JLabel lblNuevaCategoria = new JLabel("NUEVA CATEGORIA");
 			lblNuevaCategoria.setBounds(10, 51, 131, 14);
 			add(lblNuevaCategoria);
+			
+			JLabel lblIngreseNombreDe = new JLabel("ingrese nombre de la nueva categoria");
+			lblIngreseNombreDe.setBounds(10, 87, 254, 14);
+			add(lblIngreseNombreDe);
 	}
-
 }

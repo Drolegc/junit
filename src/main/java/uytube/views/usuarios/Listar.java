@@ -65,7 +65,7 @@ public class Listar extends JPanel {
 							u.getApellido(),
 							u.getNickname(),
 							u.getCorreo(),
-							u.getFnacimiento()
+							u.getFnacimiento().toString().substring(0,10)
 					}
 			);
 		}

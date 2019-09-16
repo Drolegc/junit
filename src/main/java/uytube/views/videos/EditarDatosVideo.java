@@ -243,7 +243,8 @@ public class EditarDatosVideo extends JPanel {
 					v.setDescripcion(descripcion.getText());
 					v.setDuracion(duracion.getText());
 					v.setFecha(fecPub.getDate());
-					v.setCategoria(video.getCategoria());
+					
+					v.setCategoria(controladorCategoria.obtenerCategoria(catAsignar));
 					v.setEs_publico(chckbxNewCheckBox.isSelected());
 					VideoController ControlerV = new VideoController();
 					ControlerV.modificarVideo(v);

@@ -27,6 +27,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import org.hibernate.mapping.Table;
+import javax.swing.JLabel;
 
 public class consultaMostrar extends JPanel {
 	private JTable table; 
@@ -86,6 +87,18 @@ public class consultaMostrar extends JPanel {
 		}
 		table_1.setModel(tableModel1);
 		scrollPane_1.setViewportView(table_1);		
+		
+		JLabel lblVideosDeLa = new JLabel("Videos de la categoria");
+		lblVideosDeLa.setBounds(10, 75, 207, 14);
+		add(lblVideosDeLa);
+		
+		JLabel lblListasDeLa = new JLabel("Listas de la  categoria");
+		lblListasDeLa.setBounds(405, 75, 170, 14);
+		add(lblListasDeLa);
+		
+		JLabel lblConsultaDeCategoria = new JLabel("CONSULTA DE CATEGORIA");
+		lblConsultaDeCategoria.setBounds(10, 41, 251, 14);
+		add(lblConsultaDeCategoria);
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			

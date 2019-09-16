@@ -78,7 +78,7 @@ public class Alta extends JPanel {
 		correo.setColumns(10);
 		add(correo);
 		nombreCanal = new JTextField();
-		nombreCanal.setBounds(10, 315, 148, 19);
+		nombreCanal.setBounds(10, 315, 148, 23);
 		add(nombreCanal);
 		nombreCanal.setColumns(10);
 		
