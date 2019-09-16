@@ -8,6 +8,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import uytube.CategoriaController.CategoriaController;
 import uytube.models.Categoria;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JTextField;
@@ -35,7 +36,7 @@ public class editar extends JPanel {
 		btnVolver.setBounds(10, 431, 368, 23);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				main miMain = new main();
+				Inicio miMain = new Inicio();
 				Frame.frame.setContentPane(miMain);
 				Frame.frame.validate();
 			}

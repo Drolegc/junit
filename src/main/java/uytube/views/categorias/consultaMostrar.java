@@ -11,6 +11,7 @@ import uytube.models.Categoria;
 import uytube.models.Lista;
 import uytube.models.Video;
 import uytube.views.Frame;
+import uytube.views.Inicio;
 import uytube.views.usuarios.UserMain;
 import uytube.views.usuarios.editar.editarMain;
 
@@ -40,7 +41,7 @@ public class consultaMostrar extends JPanel {
 		btnVolver.setBounds(400, 431, 368, 23);
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				UserMain main = new UserMain();
+				Inicio main = new Inicio();
 				Frame.frame.setContentPane(main);
 				Frame.frame.revalidate();	
 			}

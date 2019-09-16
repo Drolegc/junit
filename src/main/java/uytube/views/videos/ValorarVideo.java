@@ -51,6 +51,7 @@ public class ValorarVideo extends JPanel {
 	private JTable table;
 	private String nickInfoStr;
 	private int videoInfoInt;
+	private boolean elegiVideo;
 	private String [] nombreColumnas = {"Titulo","Descripcion","Duracion","URL","Categoria","Canal"};
 	private JTable table_1;
 	private ArrayList<Video> videos;
@@ -70,7 +71,7 @@ public class ValorarVideo extends JPanel {
 		UsuarioController controladorUsuario = new UsuarioController();
 		ValoracionController controladorValoracion = new ValoracionController();
 		mana = Manager.getInstance();
-		videoInfoInt=-1;
+		elegiVideo=false;
 		
 		JLabel labelUsuario = new JLabel("Usuario para mostrar videos");
 		labelUsuario.setBounds(10, 74, 200, 15);
@@ -100,7 +101,6 @@ public class ValorarVideo extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox comboBox1 = (JComboBox)e.getSource();
 				nickInfoStr = (String)comboBox1.getSelectedItem();
-		        
 		        
 		        System.out.println("ELEGI CANAL Y ES: " + nickInfoStr);
 	
@@ -135,7 +135,7 @@ public class ValorarVideo extends JPanel {
 		btnLIKE.setBounds(10, 431, 369, 23);
 		btnLIKE.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			if (videoInfoInt != -1) {
+			if (elegiVideo) {
 				Usuario usercito = (Usuario)mana.getSessionManager().createQuery("From Usuario where nickname =: nombre").setParameter("nombre", userQueValora).getSingleResult();
 				mana.closeSession();
 				
@@ -172,7 +172,7 @@ public class ValorarVideo extends JPanel {
 		btnDislike.setBounds(400, 431, 390, 23);
 		btnDislike.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (videoInfoInt != -1) {
+				if (elegiVideo) {
 					Usuario usercito = (Usuario)mana.getSessionManager().createQuery("From Usuario where nickname =: nombre").setParameter("nombre", userQueValora).getSingleResult();
 					mana.closeSession();
 
@@ -235,6 +235,8 @@ public class ValorarVideo extends JPanel {
 				// TODO Auto-generated method stub
 				if(e.getValueIsAdjusting()) {					
 					videoInfoInt = videos.get(table_1.getSelectedRow()).getId();
+					elegiVideo=true;
+					
 				}
 			}	
 		});

@@ -112,16 +112,9 @@ public class ConsultaVideosListadeUsuario extends JPanel {
 			btnVolver.setBounds(10, 431, 368, 23);
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					UsuarioController usercontrol = new UsuarioController();
-					if (videoSeleccionado.getNombre().isEmpty()) {
-						consulta consultita = new consulta();
-						Frame.frame.setContentPane(consultita);
-						Frame.frame.revalidate();
-					}else {
-						ConsultaListasUsuario consultarDV = new ConsultaListasUsuario(usercontrol.consultarUsuario(videoSeleccionado.getCanal().getNombre()));
-						Frame.frame.setContentPane(consultarDV);
-						Frame.frame.revalidate();
-					}
+					consulta consultita = new consulta();
+					Frame.frame.setContentPane(consultita);
+					Frame.frame.revalidate();
 					
 					}
 			});
