@@ -55,8 +55,9 @@ public class UsuarioController implements IUsuario{
 
 	    ILista controllerLista = new ListaController();
 	    //"Favoritos", "Sin Categoria", null, true, true
-	    controllerLista.crearLista("Ver mas tarde", "Sin Categoria", usuario.getNickname(), true, false);
-	    controllerLista.crearLista("Favoritos", "Sin Categoria", usuario.getNickname(), true, false);
+	    controllerLista.crearLista("Escuchar mas tarde", "Sin Categoria", usuario.getNickname(), true, false);
+	    controllerLista.crearLista("Deporte total", "Sin Categoria", usuario.getNickname(), true, false);
+	    controllerLista.crearLista("Novedades generales", "Sin Categoria", usuario.getNickname(), true, false);
 	    controllerLista.asignarListasDefault(canal.getNombre());
 	    
 	}
@@ -120,7 +121,7 @@ public class UsuarioController implements IUsuario{
 	        if (transaction != null) {
 	          transaction.rollback();
 	        }
-	        e.printStackTrace();
+	        System.out.println(e);
 	      } finally {
 	        if (session != null) {
 	          session.close();
@@ -158,7 +159,7 @@ public class UsuarioController implements IUsuario{
 	}
 	public List<Usuario> listUsuariosSeguidores(String nickname){
 		List<Usuario> users = (List<Usuario>) mng.getSessionManager().
-								createQuery("select u From Usuario as u inner join u.canalesSeguidos as canalesSeguidos where canalesSeguidos.usuario_nickname = :nick").
+								createQuery("select u From Usuario as u inner join u.canalesSeguidos as canalesSeguidos where canalesSeguidos.usuario.nickname = :nick").
 								setParameter("nick",nickname).getResultList();
 		return users;	
 		

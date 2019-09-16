@@ -155,9 +155,9 @@ public class editarVideo extends JPanel {
 			JButton btnCancelar = new JButton("cancelar");
 			btnCancelar.setBounds(10, 277, 200, 23);
 			btnCancelar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					verVideo vervideo = new verVideo(video, user);
-					Frame.frame.setContentPane(vervideo);
+				public void actionPerformed(ActionEvent e) {					
+					infoVideosListas info = new infoVideosListas(user);
+					Frame.frame.setContentPane(info);
 					Frame.frame.revalidate();
 				}
 			});
