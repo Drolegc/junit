@@ -83,7 +83,8 @@ INSERT INTO `categoria` (`id`, `nombre`) VALUES
 (9, 'ONG y activismo'),
 (10, 'Gente y blogs'),
 (11, 'Mascotas y animales'),
-(12, 'Viajes y eventos');
+(12, 'Viajes y eventos'),
+(13, 'Sin Categoria');
 
 -- --------------------------------------------------------
 

@@ -28,9 +28,9 @@ public class HibernateUtil {
 
         Map<String, String> settings = new HashMap<>();
         settings.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
-        settings.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/uytube");
-        settings.put("hibernate.connection.username", "root");
-        settings.put("hibernate.connection.password", "");
+        settings.put("hibernate.connection.url", "jdbc:mysql://190.134.225.50:3306/uytube");
+        settings.put("hibernate.connection.username", "uytube");
+        settings.put("hibernate.connection.password", "aDE8Ei3TBiSGlN2F");
         settings.put("hibernate.show_sql", "true");
         settings.put("hibernate.hbm2ddl.auto", "update");
 

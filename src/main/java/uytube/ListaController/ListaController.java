@@ -202,7 +202,7 @@ public class ListaController implements ILista {
 		//Menos ver mas tarde y favoritos
 		
 		List<String> nombresListas = (List<String>)mng.getSessionManager()
-				.createQuery("Select l.nombre_lista from Lista as l where l.nombre_lista != 'Ver mas tarde' and l.nombre_lista != 'Favoritos' and l.tipo = true group by l.nombre_lista")
+				.createQuery("Select l.nombre_lista from Lista as l where l.nombre_lista != 'Escuchar mas tarde' and l.nombre_lista != 'Deporte total' and l.nombre_lista != 'Novedades generales'  and l.tipo = true group by l.nombre_lista")
 				.getResultList();
 		mng.closeSession();
 		for(String s:nombresListas) {

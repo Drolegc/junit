@@ -96,8 +96,6 @@ public class App extends JFrame{
 		});
 		
 		
-		ICategoria controllerCategoria = new CategoriaController();
-		controllerCategoria.altaCategoria("Sin Categoria");		
 		System.out.println("Fin");
 	}
 
