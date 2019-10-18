@@ -218,7 +218,7 @@ public class ListaController implements ILista {
 		
 		try {
 		Object obj= mng.getSessionManager()
-				.createQuery("From Lista as L where L.canal.nombre = :nameCanal and L.nombre_lista = :nameList")
+				.createQuery("From Lista as L where L.canal.usuario.nickname = :nameCanal and L.nombre_lista = :nameList")
 				.setParameter("nameCanal", nickUser)
 				.setParameter("nameList", nameList)
 				.getSingleResult();

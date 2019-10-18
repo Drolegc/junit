@@ -23,7 +23,15 @@ public class testCanalController {
 
 	@Test
 	public void testActualizarCanal() {
-		fail("Not yet implemented");
+		
+		Canal c = controller.obtenerCanalUsuario("juliob");
+		String desc_1 = c.getDescripcion();
+		c.setDescripcion(c.getDescripcion()+"Test");
+		controller.actualizarCanal(c);
+		c = controller.obtenerCanalUsuario("juliob");
+		
+		assertNotEquals(desc_1, c.getNombre());
+		
 	}
 
 }
