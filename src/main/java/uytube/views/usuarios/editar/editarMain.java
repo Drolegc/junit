@@ -164,6 +164,7 @@ public class editarMain extends JPanel {
 								nombre.getText(), 
 								apellido.getText(), 
 								correo.getText(),  
+								null,
 								f_nac.getDate(),
 								folder.getAbsolutePath() + File.separator + file.getName()
 						);					

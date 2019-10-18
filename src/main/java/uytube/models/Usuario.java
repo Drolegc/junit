@@ -29,7 +29,10 @@ public class Usuario {
 	
 	@Column(name = "img")
 	private String img;
-	
+
+	@Column(name = "password")
+	private String password;
+
 	@ManyToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
 	private List<Canal> canalesSeguidos;
 
@@ -38,7 +41,7 @@ public class Usuario {
 		
 	}
 
-	public Usuario(String nickname, String nombre, String apellido, String correo, Date fnacimiento, String img) {
+	public Usuario(String nickname, String nombre, String apellido, String correo,String password, Date fnacimiento, String img) {
 		if(this.nickname == "" 
 				|| this.nombre == "" 
 				|| this.apellido == "" 

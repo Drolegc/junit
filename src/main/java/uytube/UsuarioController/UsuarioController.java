@@ -106,6 +106,12 @@ public class UsuarioController implements IUsuario{
 	      }		
 		return usuario;
 	}	
+	public Usuario login(String nickname,String password) {
+		Usuario usuario = null;
+		usuario = (Usuario)mng.getSessionManager().createQuery("From Usuario where nickname=:nickname and password=:password").setParameter("nickname", nickname).setParameter("password", password).getSingleResult();
+		mng.closeSession();
+		return usuario;
+	}	
 	public void modificarUsuario(Usuario usuario) {
 		this.session = null;
 		this.transaction = null;
