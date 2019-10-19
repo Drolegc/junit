@@ -50,12 +50,6 @@ private Manager mng;
 		// PARA LUEGO,PASAR CANAL Y CATEGORIA AL VIEWS
 		
 		System.out.println(cat.getNombre());
-		
-		if(canal == null) {
-			System.out.println("Canal nulo");
-		}else {
-			System.out.println(canal.getDescripcion());
-		}
 
 		mana.startTransaction("Video", vid);
 		
@@ -98,7 +92,7 @@ private Manager mng;
 
 	public Video consultaVideo(String titulito, String user) {
 		// TODO Auto-generated method stub .. para volver a mirar
-		Video v = (Video)mana.getSessionManager().createQuery("select v From Video as v, Canal as c where v.canal.nombre = c.nombre and v.nombre=:titu and c.nombre=:nombre").setParameter("titu", titulito).setParameter("nombre",user).getSingleResult();
+		Video v = (Video)mana.getSessionManager().createQuery("select v From Video as v, Canal as c where v.nombre=:titu and c.usuario.nickname=:nombre").setParameter("titu", titulito).setParameter("nombre",user).getSingleResult();
 		mana.closeSession();
 		System.out.println("---------Nombre video: "+v.getNombre()+" Canal: "+v.getCanal().getNombre());
 		return v;
@@ -120,13 +114,7 @@ private Manager mng;
 		mana.closeSession();
 		return Videos;	
 	}
-	
-	public void editarVideo(Video video) {
-		// TODO Auto-generated method stub
 		
-		
-	}
-	
 	public Video consultaVideoPorID(int id) {
 		
 		Video v = (Video)mana.getSessionManager().createQuery("select v From Video as v where v.id=: id").setParameter("id", id).getSingleResult();
@@ -135,7 +123,7 @@ private Manager mng;
 	}
 	
 	public ArrayList<Video> listaVideos(){
-		ArrayList<Video> videos = (ArrayList<Video>)mana.getSessionManager().createQuery("From Video").getResultList();
+		ArrayList<Video> videos = (ArrayList<Video>)mana.getSessionManager().createSQLQuery("select * from Video").getResultList();
 		mana.closeSession();
 		return videos;
 	}

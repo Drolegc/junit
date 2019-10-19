@@ -19,14 +19,10 @@ public class ValoracionController implements IValoracion {
 		mana.startTransaction("ValoracionVideo", vv);
 		mana.closeSession();
 	}
+		
 	
 	public boolean existeValoracion(int idvid, String nick) {
-		boolean exists = mana.getSessionManager().createQuery("select 'hola' as Message From ValoracionVideo where exists (From ValoracionVideo as vl where vl.video.id=: nombre and vl.usuario.nickname=:nickname)").setParameter("nombre", idvid).setParameter("nickname", nick).uniqueResult() != null;
-		if (exists) {
-			System.out.println("Tengo una Valoracion previa.");
-		} else {
-			System.out.println("NO tengo una Valoracion previa.");
-		}
+		boolean exists = mana.getSessionManager().createSQLQuery("select 1 where exists (select * from ValoracionVideo as vl where vl.video_id=:nombre and vl.usuario_nickname=:nickname)").setParameter("nombre", idvid).setParameter("nickname", nick).uniqueResult() != null;
 		return exists;
 	}
 	
@@ -38,10 +34,8 @@ public class ValoracionController implements IValoracion {
 
 	public long valoracionActual(int idvid) {
 		// TODO Auto-generated method stub
-		
 		long valorVideo = (long)mana.getSessionManager().createQuery("select sum(valoracion) as valoracion From ValoracionVideo as vl where vl.video.id=: nombre").setParameter("nombre", idvid).getSingleResult();
 		mana.closeSession();
-		
 		return valorVideo;
 	}
 	
