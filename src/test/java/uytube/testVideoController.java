@@ -44,11 +44,6 @@ public class testVideoController {
 	}
 
 	@Test
-	public void testComentarVideo() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testObtenerVideosUsuario() {
 		assertNotNull(controllerVideo.obtenerVideosUsuario("cachilas"));
 	}
