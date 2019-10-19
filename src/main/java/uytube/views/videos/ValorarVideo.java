@@ -156,7 +156,7 @@ public class ValorarVideo extends JPanel {
 				}
 
 				JOptionPane.showMessageDialog(null,"Se le ha dado - Me Gusta - al video");
-				System.out.println("El video de ID: "+videoInfoInt+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoInt,userQueValora));
+				System.out.println("El video de ID: "+videoInfoInt+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoInt));
 							
 				Inicio inicio = new Inicio();
 				Frame.frame.setContentPane(inicio);
@@ -191,7 +191,7 @@ public class ValorarVideo extends JPanel {
 					}
 					
 					JOptionPane.showMessageDialog(null,"Se le ha dado - No Me Gusta - al video");
-					System.out.println("El video de ID: "+videoInfoInt+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoInt,userQueValora));
+					System.out.println("El video de ID: "+videoInfoInt+" tiene una valoracion total de: "+controladorValoracion.valoracionActual(videoInfoInt));
 								
 					Inicio inicio = new Inicio();
 					Frame.frame.setContentPane(inicio);
