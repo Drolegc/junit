@@ -27,11 +27,12 @@ public class CategoriaController implements ICategoria{
 		
 	public boolean altaCategoria(String nombre) {
 		boolean existe = existeCategoria(nombre);
-		if(existe == false) {
-			mng.startTransaction("Categoria", new Categoria(nombre));			
+		if(!existe) {
+			mng.startTransaction("Categoria", new Categoria(nombre));
+			
 		}
-		
-		return existe;
+				
+		return !existe;
 		
 	}
 	
@@ -48,7 +49,7 @@ public class CategoriaController implements ICategoria{
 		 return existe;
 	}
 
-	public List<Video> consultarCategoria(String nombreCategoria) {
+	/*public List<Video> consultarCategoria(String nombreCategoria) {
 		
 		/*
 		 Caso de uso Consulta de Categoría
@@ -65,17 +66,16 @@ public class CategoriaController implements ICategoria{
 		
 		
 		////// a implementar //////*/
-		List<Video> v = null;
+		//List<Video> v = null;
 		
-		return v;
-				
+		//return v;		
 		
 		
-	}
+	//}*/
 	
 	
 	
-public void listarCategoriasExistentes() {
+/*public void listarCategoriasExistentes() {
 		
 		List<Categoria> categorias = (List<Categoria>) mng.getSessionManager().createQuery("From Categoria").getResultList();
 		mng.closeSession();
@@ -84,7 +84,7 @@ public void listarCategoriasExistentes() {
 			System.out.println(c.getNombre());
 		}
 		
-	}
+	}*/
 
 	public String[] listarCategoriasName(){
 		
