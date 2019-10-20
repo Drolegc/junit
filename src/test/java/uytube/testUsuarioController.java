@@ -1,6 +1,8 @@
 package uytube;
 
 import static org.junit.Assert.*;
+
+// al parecer no hay que cambiar nada
 // dejar de seguir  y seguir, hay que cambiar  el usuario que se agrega si no no funciona, para cada funcion una pareja de usuarios diferentes, el de dejar de seguir que sea realmente que deje de seguir, el de seguir puede ser cualqueira a cualquiera. 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +62,11 @@ public class testUsuarioController {
 
 	@Test
 	public void testModificarUsuario() {
-		fail("Not yet implemented");
+		
+		Usuario usuario = ControllerUsuario.consultarUsuario("cachilas");
+		usuario.setApellido("JunitTest");
+		ControllerUsuario.modificarUsuario(usuario);
+		assertEquals(usuario.getApellido(),ControllerUsuario.consultarUsuario("cachilas").getApellido()); //
 	}
 
 	@Test
@@ -110,9 +116,6 @@ public class testUsuarioController {
 		assertTrue(true); //es solo para mostrar en consola no se usa en la app en realidad
 	}
 
-	@Test
-	public void testModificarDatos() {
-		fail("Not yet implemented");
-	}
+	
 
 }

@@ -208,9 +208,6 @@ public class UsuarioController implements IUsuario{
 		
 	}
 	
-	public void modificarDatos() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
