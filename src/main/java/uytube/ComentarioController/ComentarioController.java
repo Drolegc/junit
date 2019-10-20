@@ -27,6 +27,7 @@ public class ComentarioController implements IComentario{
 	
 	public Comentario getcomentario(long idNum) {
 		Comentario c = (Comentario) mng.getSessionManager().createQuery("From Comentario where id = :IdComentario").setParameter("IdComentario", idNum).getSingleResult();
+		mng.closeSession();
 		return c;
 		
 		
@@ -106,7 +107,10 @@ public List<Comentario> listarComentarios(String nombreVideo) {
 	        if (session != null) {
 	          session.close();
 	        }
-	      }		
+	      }
+		
+		
+		
 	}
 	
 	

@@ -30,10 +30,10 @@ public class Comentario {
 	@ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<Comentario> respuestas;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)//eeee proximamente join nulleable, por que tal vez no es necesario
+	@ManyToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)//eeee proximamente join nulleable, por que tal vez no es necesario
 	private Video vid;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	private  Usuario usuario;
 	
 	

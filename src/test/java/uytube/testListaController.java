@@ -11,7 +11,7 @@ import uytube.models.Lista;
 import uytube.models.Video;
 
 public class testListaController {
-
+  private int idLista=17;//numero de la lista a utilizr
 	private ListaController controller = new ListaController();
 	
 	@Test
@@ -27,18 +27,18 @@ public class testListaController {
 	@Test
 	public void testModificarLista() {
 		
-		Lista l = controller.obtenerListaPorId(29);
+		Lista l = controller.obtenerListaPorId(idLista);
 		boolean privacidad = l.getPrivado();
-		controller.modificarLista(29, 13, !l.getPrivado());
-		l = controller.obtenerListaPorId(29);
+		controller.modificarLista(idLista, 13, !l.getPrivado());
+		l = controller.obtenerListaPorId(idLista);
 		assertNotEquals(privacidad, l.getPrivado());
 	}
 
 	@Test
 	public void testAgregarVideo() {
 		int id_video = 1;
-		controller.agregarVideo(id_video, 29);
-		Lista l = controller.obtenerListaPorId(29);
+		controller.agregarVideo(id_video, idLista);
+		Lista l = controller.obtenerListaPorId(idLista);
 		for(Video v: l.getVideos()) {
 			if(v.getId()==id_video) {
 				assertEquals(id_video,v.getId());
@@ -49,8 +49,8 @@ public class testListaController {
 	@Test
 	public void testQuitarVideo() {
 		int id_video = 1;
-		controller.quitarVideo(id_video, 29);
-		Lista l = controller.obtenerListaPorId(29);
+		controller.quitarVideo(id_video, idLista);
+		Lista l = controller.obtenerListaPorId(idLista);
 		for(Video v: l.getVideos()) {
 			if(v.getId()==id_video) {
 				assertNotEquals(id_video,v.getId());
@@ -79,12 +79,12 @@ public class testListaController {
 
 	@Test
 	public void testTieneLista() {
-		assertTrue(controller.tieneLista("juliob", "someName"));
+		assertTrue(controller.tieneLista("kairoh", "Nostalgia"));
 	}
 
 	@Test
 	public void testObtenerListaPorId() {
-		assertNotNull(controller.obtenerListaPorId(29));
+		assertNotNull(controller.obtenerListaPorId(idLista));
 	}
 
 }
