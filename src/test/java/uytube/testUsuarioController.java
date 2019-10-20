@@ -2,7 +2,7 @@ package uytube;
 
 import static org.junit.Assert.*;
 
-// al parecer no hay que cambiar nada
+// al parecer no hay que cambiar nada ojo con la nueva bd si cambia algo 
 // dejar de seguir  y seguir, hay que cambiar  el usuario que se agrega si no no funciona, para cada funcion una pareja de usuarios diferentes, el de dejar de seguir que sea realmente que deje de seguir, el de seguir puede ser cualqueira a cualquiera. 
 import java.util.ArrayList;
 import java.util.List;
