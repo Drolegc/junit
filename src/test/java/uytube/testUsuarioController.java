@@ -33,7 +33,7 @@ public class testUsuarioController {
 		assertEquals(UsuarioTest.getComentario(),ControllerComentario.getcomentario((long)44).getComentario()); // 
 		
 		
-		Usuario user = new Usuario(, nombre, apellido, correo, password, fdate, fileName);
+		Usuario user = new Usuario(, "test", "junit", "test@test.com", "test", fdate, fileName);
 		Canal canal = new Canal(canalName, canalDescription, canalPrivacity, user);
 		user.addCanal(canal);
 		controller.crearUsuario(user, canal);*/
