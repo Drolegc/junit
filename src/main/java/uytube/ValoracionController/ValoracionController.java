@@ -22,7 +22,7 @@ public class ValoracionController implements IValoracion {
 		
 	
 	public boolean existeValoracion(int idvid, String nick) {
-		boolean exists = mana.getSessionManager().createSQLQuery("select 1 where exists (select * from ValoracionVideo as vl where vl.video_id=:nombre and vl.usuario_nickname=:nickname)").setParameter("nombre", idvid).setParameter("nickname", nick).uniqueResult() != null;
+		boolean exists = mana.getSessionManager().createSQLQuery("select 1 where exists (select * from ValoracionVideo as vl where vl.video.id=:nombre and vl.usuario.nickname=:nickname)").setParameter("nombre", idvid).setParameter("nickname", nick).uniqueResult() != null;
 		return exists;
 	}
 	

@@ -2,6 +2,7 @@ package uytube;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -115,7 +116,9 @@ public class testModeloUsuario {
 
 	@Test
 	public void testSetFnacimiento() {
-		fail("Not yet implemented");
+		Usuario user = ControllerUsuario.consultarUsuario("cachilas");
+		user.setFnacimiento(new Date());
+		assertNotNull(user.getFnacimiento());
 	}
 
 	@Test

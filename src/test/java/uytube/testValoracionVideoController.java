@@ -26,10 +26,10 @@ public class testValoracionVideoController {
 
 		ValoracionVideo valoracionTest = new ValoracionVideo();
 		valoracionTest = controllerValoracion.traerValoracion(7, "sergiop");
-		valoracionTest.setValoracion(-1); // le pongo de prepo -1 (dislike)
+		valoracionTest.setValoracion(valoracionTest.getValoracion()*(-1)); // le pongo de prepo -1 (dislike) //Leandro: Cambiado por tomar el contrario al que tenia
 		controllerValoracion.valorarVideo(valoracionTest); //valoro el video, mando a bd
 
-		assertEquals(valoracionTest.getValoracion(),controllerValoracion.traerValoracion(7, "sergiop").getValoracion()); // si se subió bien, esto deberia ser TRUE=EQUALS
+		assertEquals(valoracionTest.getValoracion(),controllerValoracion.traerValoracion(7, "sergiop").getValoracion()); // si se subiï¿½ bien, esto deberia ser TRUE=EQUALS
 	}
 
 	@Test
@@ -44,12 +44,12 @@ public class testValoracionVideoController {
 
 	@Test
 	public void testValoracionActual() {
-		assertEquals(1,controllerValoracion.valoracionActual(7));
+		assertEquals(1,controllerValoracion.valoracionActual(8));
 	}
 
 	@Test
 	public void testListaValoracionesVideo() {
-		assertNotNull(controllerValoracion.listaValoracionesVideo(7));
+		assertNotNull(controllerValoracion.listaValoracionesVideo(8));
 	}
 
 }

@@ -1,5 +1,5 @@
 package uytube;
-//comentario 32 y video "Thriller" en la prueba de respuestas, se usa el comentario id 36 tel video inauguracion estadio peñarol de tony pacheco y se ingreso una respuesta quedo con id 44
+//comentario 32 y video "Thriller" en la prueba de respuestas, se usa el comentario id 36 tel video inauguracion estadio peï¿½arol de tony pacheco y se ingreso una respuesta quedo con id 44
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -39,10 +39,10 @@ public class testComentarioController {
 	@Test
 	public void testAgregarRespuesta() {
 		Comentario RespuestaTest = new Comentario();
-		RespuestaTest = ControllerComentario.getcomentario((long)44);
+		RespuestaTest = ControllerComentario.getcomentario((long)32);
 		RespuestaTest.setComentario("prueba junit");
 		ControllerComentario.AgregarComentario(RespuestaTest);
-		assertEquals(RespuestaTest.getComentario(),ControllerComentario.getcomentario((long)44).getComentario()); // 
+		assertEquals(RespuestaTest.getComentario(),ControllerComentario.getcomentario((long)32).getComentario()); // 
 	}
 
 	@Test
